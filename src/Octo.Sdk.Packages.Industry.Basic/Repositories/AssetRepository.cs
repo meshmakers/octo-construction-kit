@@ -1,3 +1,8 @@
+using GraphQL;
+using Meshmakers.Common.Shared;
+using Meshmakers.Octo.Common.Shared;
+using Meshmakers.Octo.Common.Shared.DataTransferObjects;
+using Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 using Meshmakers.Octo.Sdk.ServiceClient.AssetRepositoryServices.Tenants;
 
 namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.Repositories;
@@ -11,16 +16,33 @@ public class AssetRepository : IAssetRepository
         _tenantClient = tenantClient;
     }
     
-    // public async Task<PagedResult<RtEquipmentDto>> GetFirstPhotovoltaic(string tenantId)
-    // {
-    //     ArgumentValidation.ValidateString(nameof(tenantId), tenantId);
-    //
-    //     var getQuery = new GraphQLRequest
-    //     {
-    //         Query = GraphQl.GetPhotovoltaics,
-    //     };
-    //
-    //     var result = await _tenantClient.SendQueryAsync<RtEquipmentDto>(getQuery);
-    //     return new PagedResult<RtEquipmentDto>(result?.Items ?? new List<RtEquipmentDto>());
-    // }
+    public async Task<PagedResult<RtEquipmentModelDto>> GetEquipmentModelAsync(string equipmentModelName)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.GetEquipmentModelQuery,
+            Variables = new
+            {
+                equipmentModelName
+            }
+        };
+    
+        var result = await _tenantClient.SendQueryAsync<RtEquipmentModelDto>(getQuery);
+        return new PagedResult<RtEquipmentModelDto>(result?.Items ?? new List<RtEquipmentModelDto>());
+    }
+    
+    public async Task<RtEquipmentGroupDto?> GetEquipmentByGroupRtIdAsync(OctoObjectId equipmentGroupRtId)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.GetEquipmentByGroupRtIdQuery,
+            Variables = new
+            {
+                equipmentGroupRtId
+            }
+        };
+    
+        var result = await _tenantClient.SendQueryAsync<RtEquipmentGroupDto>(getQuery);
+        return result?.Items.FirstOrDefault();
+    }
 }

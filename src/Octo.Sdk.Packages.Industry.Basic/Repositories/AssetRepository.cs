@@ -45,4 +45,41 @@ public class AssetRepository : IAssetRepository
         var result = await _tenantClient.SendQueryAsync<RtEquipmentGroupDto>(getQuery);
         return result?.Items.FirstOrDefault();
     }
+    
+    public async Task<PagedResult<RtAlarmDto>?> GetAlarmsByMachineRtIdAndStateAsync(OctoObjectId machineRtId, AlarmStates alarmState)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.AlarmsByMachineRtIdAndStateQuery,
+            Variables = new
+            {
+                machineRtId,
+                alarmState = (int)alarmState
+            }
+        };
+    
+        var result = await _tenantClient.SendQueryAsync<RtEquipmentMachine>(getQuery);
+        var equipmentMachine = result?.Items.SingleOrDefault();
+        if (equipmentMachine == null)
+        {
+            return null;
+        }
+        
+        return new PagedResult<RtAlarmDto>(equipmentMachine.AlarmChildren?.Items ?? new List<RtAlarmDto>());
+    }
+    
+    public async Task<PagedResult<RtAlarmDto>> GetAlarmByRtIdQueryAsync(OctoObjectId alarmRtId)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.GetAlarmByRtIdQuery,
+            Variables = new
+            {
+                alarmRtId
+            }
+        };
+    
+        var result = await _tenantClient.SendQueryAsync<RtAlarmDto>(getQuery);
+        return new PagedResult<RtAlarmDto>(result?.Items ?? new List<RtAlarmDto>());
+    }
 }

@@ -64,4 +64,51 @@ internal static class GraphQl
                 }
               }
             }";
+
+    public const string AlarmsByMachineRtIdAndStateQuery = @"
+      query($machineRtId: OctoObjectIdType!, $alarmState: SimpleScalarType!) {
+        meshmakersEquipmentMachineConnection(rtId: $machineRtId) {
+          items {
+            rtId
+            children {
+              meshmakersAlarmConnection(
+                fieldFilter: [
+                  {
+                    attributeName: ""state""
+                    operator: EQUALS
+                    comparisonValue: $alarmState
+                  }
+                ]
+              ) {
+                items {
+                  rtId
+                  rtCreationDateTime
+                  receivedDateTime
+                  message
+                  state
+                  clearedDateTime
+                  acknowledgedDateTime
+                }
+              }
+            }
+          }
+        }
+      }
+    ";
+
+    public const String GetAlarmByRtIdQuery = @"
+      query($alarmRtId: OctoObjectIdType!) {
+        meshmakersAlarmConnection(rtId: $alarmRtId) {
+          items {
+            rtId
+            rtCreationDateTime
+            receivedDateTime
+            message
+            state
+            clearedDateTime
+            acknowledgedDateTime
+          }
+        }
+      }
+    ";
 }

@@ -1,6 +1,6 @@
 using Meshmakers.Octo.Sdk.ServiceClient.AssetRepositoryServices.Tenants;
 
-namespace Meshmakers.Octo.Common.Shared.DataTransferObjects;
+namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 
 public class RtEquipmentModelDto: QlRtEntityDtoWithAssociations
 {

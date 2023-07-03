@@ -1,4 +1,4 @@
-namespace Meshmakers.Octo.Common.Shared.DataTransferObjects;
+namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 
 public class RtAlarmDto : RtEventDto
 {

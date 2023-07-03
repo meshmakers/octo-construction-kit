@@ -1,6 +1,6 @@
 using Meshmakers.Octo.Sdk.ServiceClient.AssetRepositoryServices.Tenants;
 
-namespace Meshmakers.Octo.Common.Shared.Repositories;
+namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.Repositories;
 
 public class AssetRepository : IAssetRepository
 {

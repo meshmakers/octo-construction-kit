@@ -2,7 +2,7 @@ using Meshmakers.Octo.Sdk.ServiceClient.AssetRepositoryServices.Tenants;
 
 // ReSharper disable ClassNeverInstantiated.Global
 
-namespace Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
+namespace Meshmakers.Octo.Common.Shared.DataTransferObjects;
 
 public class RtEquipmentDto : QlRtEntityDtoWithAssociations
 {

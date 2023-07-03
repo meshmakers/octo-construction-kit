@@ -1,4 +1,4 @@
-namespace Octo.Sdk.Packages.Industry.Basic.Repositories;
+namespace Meshmakers.Octo.Common.Shared.Repositories;
 
 public interface IAssetRepository
 {

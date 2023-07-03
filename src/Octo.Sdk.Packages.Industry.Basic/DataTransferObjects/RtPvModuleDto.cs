@@ -1,6 +1,4 @@
-using Meshmakers.Octo.Common.Shared.DataTransferObjects;
-
-namespace Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
+namespace Meshmakers.Octo.Common.Shared.DataTransferObjects;
 
 public class RtPvModuleDto : RtEntityDto
 {

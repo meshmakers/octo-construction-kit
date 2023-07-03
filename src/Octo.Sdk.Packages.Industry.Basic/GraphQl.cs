@@ -1,4 +1,4 @@
-namespace Octo.Sdk.Packages.Industry.Basic;
+namespace Meshmakers.Octo.Common.Shared;
 
 internal static class GraphQl
 {

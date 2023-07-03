@@ -46,6 +46,30 @@
       "associations": [
 
       ]
+    },
+    {
+      "ckId": "Meshmakers.Events.Comment",
+      "ckDerivedId": "System.Entity",
+      "isFinal": true,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Events.ReceivedDateTime",
+          "name": "ReceivedDateTime"
+        },
+        {
+          "id": "Meshmakers.Events.Message",
+          "name": "Comment"
+        }
+      ],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Event",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
     }
   ]
 }

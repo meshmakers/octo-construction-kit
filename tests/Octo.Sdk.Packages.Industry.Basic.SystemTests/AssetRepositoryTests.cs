@@ -35,7 +35,6 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
         var equipmentGroup = await assetRepository.GetEquipmentByGroupRtIdAsync(new OctoObjectId("64a2b55a84c7869c60270d1a"));
         Assert.NotNull(equipmentGroup);
-        Assert.Single(equipmentGroup.InjectionMouldingMachineChildren.Items);
-        Assert.Equal(2, equipmentGroup.MillingMachineChildren.Items.Count());
+        Assert.Equal(3, equipmentGroup.MachinesChildren.Items.Count());
     }
 }

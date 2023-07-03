@@ -6,10 +6,6 @@ namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 
 public class RtEquipmentDto : QlRtEntityDtoWithAssociations
 {
-    public string Manufacturer { get; set; } = null!;
-    public string ModelNumber { get; set; } = null!;
-    public string SerialNumber { get; set; } = null!;
-    
     [QlConnection("children", "meshmakersAlarmConnection")]
     public QlItemsContainer<RtAlarmDto>? AlarmChildren { get; set; } = null!;
     

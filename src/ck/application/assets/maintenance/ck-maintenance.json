@@ -1,7 +1,7 @@
 {
   "entities": [
     {
-      "ckId": "Meshmakers.Equipment.InjectionMoulding",
+      "ckId": "Meshmakers.Equipment.Machine",
       "ckDerivedId": "Meshmakers.Equipment",
       "isFinal": true,
       "isAbstract": false,
@@ -21,26 +21,6 @@
       ],
       "associations": [
 
-      ]
-    },
-    {
-      "ckId": "Meshmakers.Equipment.MillingMachine",
-      "ckDerivedId": "Meshmakers.Equipment",
-      "isFinal": true,
-      "isAbstract": false,
-      "attributes": [
-        {
-          "id": "Meshmakers.TechDesc.Identification.Manufacturer",
-          "name": "Manufacturer"
-        },
-        {
-          "id": "Meshmakers.TechDesc.Identification.ModelNumber",
-          "name": "ModelNumber"
-        },
-        {
-          "id": "Meshmakers.TechDesc.Identification.SerialNumber",
-          "name": "SerialNumber"
-        }
       ]
     }
   ]

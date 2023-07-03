@@ -43,7 +43,7 @@
     },
     {
       "rtId": "64a2b64c3da56d342f1c3880",
-      "ckId": "Meshmakers.Equipment.InjectionMoulding",
+      "ckId": "Meshmakers.Equipment.Machine",
       "attributes": [
         {
           "id": "Meshmakers.Designation",
@@ -68,7 +68,7 @@
     },
     {
       "rtId": "64a2b66286eb404602d82503",
-      "ckId": "Meshmakers.Equipment.MillingMachine",
+      "ckId": "Meshmakers.Equipment.Machine",
       "attributes": [
         {
           "id": "Meshmakers.Designation",
@@ -93,7 +93,7 @@
     },
     {
       "rtId": "64a2b6c3bbf4aa537f812b62",
-      "ckId": "Meshmakers.Equipment.MillingMachine",
+      "ckId": "Meshmakers.Equipment.Machine",
       "attributes": [
         {
           "id": "Meshmakers.Designation",
@@ -142,7 +142,7 @@
         }
       ],
       "associations": [
-        { "roleId": "System.ParentChild", "targetRtId": "64a2b64c3da56d342f1c3880", "targetCkId": "Meshmakers.Equipment.InjectionMoulding" }
+        { "roleId": "System.ParentChild", "targetRtId": "64a2b64c3da56d342f1c3880", "targetCkId": "Meshmakers.Equipment.Machine" }
       ]
     },
     {
@@ -171,7 +171,7 @@
         }
       ],
       "associations": [
-        { "roleId": "System.ParentChild", "targetRtId": "64a2b66286eb404602d82503", "targetCkId": "Meshmakers.Equipment.MillingMachine" }
+        { "roleId": "System.ParentChild", "targetRtId": "64a2b66286eb404602d82503", "targetCkId": "Meshmakers.Equipment.Machine" }
       ]
     },
     {
@@ -200,7 +200,7 @@
         }
       ],
       "associations": [
-        { "roleId": "System.ParentChild", "targetRtId": "64a2b6c3bbf4aa537f812b62", "targetCkId": "Meshmakers.Equipment.MillingMachine" }
+        { "roleId": "System.ParentChild", "targetRtId": "64a2b6c3bbf4aa537f812b62", "targetCkId": "Meshmakers.Equipment.Machine" }
       ]
     }
   ]

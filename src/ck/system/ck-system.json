@@ -1,0 +1,468 @@
+{
+  "associationRoles": [
+    {
+      "id": "System.ParentChild",
+      "inboundName": "Children",
+      "outboundName": "Parent"
+    }
+  ],
+  "attributes": [
+    {
+      "id": "Meshmakers.Designation",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Description",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.CommunicationAdapter.Type",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Communication.LastSeen",
+      "valueType": "DateTime"
+    },
+    {
+      "id": "Meshmakers.CommunicationAdapter.Deployment.ImageName",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.CommunicationAdapter.Deployment.ImageVersion",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.CommunicationPool.Name",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.CommunicationAdapter.State",
+      "valueType": "Int",
+      "selectionValues": [
+        {
+          "key": 0,
+          "name": "Created"
+        },
+        {
+          "key": 1,
+          "name": "Pending"
+        },
+        {
+          "key": 2,
+          "name": "Deployed"
+        },
+        {
+          "key": 3,
+          "name": "Offline"
+        },
+        {
+          "key": 4,
+          "name": "Online"
+        },
+        {
+          "key": 5,
+          "name": "DeploymentError"
+        },
+        {
+          "key": 6,
+          "name": "ConfigurationError"
+        }
+      ]
+    },
+    {
+      "id": "Meshmakers.CommunicationPool.State",
+      "valueType": "Int",
+      "selectionValues": [
+        {
+          "key": 0,
+          "name": "Created"
+        },
+        {
+          "key": 1,
+          "name": "Pending"
+        },
+        {
+          "key": 2,
+          "name": "Deployed"
+        },
+        {
+          "key": 3,
+          "name": "Offline"
+        },
+        {
+          "key": 4,
+          "name": "Online"
+        },
+        {
+          "key": 5,
+          "name": "DeploymentError"
+        },
+        {
+          "key": 6,
+          "name": "ConfigurationError"
+        }
+      ]
+    },
+    {
+      "id": "Meshmakers.Socket.Mapping.Configuration",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Plug.Mapping.Configuration",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Plug.Mapping.Reference.Id",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Plug.Mapping.Reference.CkId",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Plug.Mapping.Reference.AttributeId",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Events.State",
+      "valueType": "Int",
+      "selectionValues": [
+        {
+          "key": 0,
+          "name": "Received"
+        },
+        {
+          "key": 1,
+          "name": "Cleared"
+        },
+        {
+          "key": 2,
+          "name": "Active"
+        },
+        {
+          "key": 3,
+          "name": "Acknowledged"
+        }
+      ]
+    },
+    {
+      "id": "Meshmakers.Events.Message",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Events.ReceivedDateTime",
+      "valueType": "DateTime"
+    },
+    {
+      "id": "Meshmakers.Events.ClearedDateTime",
+      "valueType": "DateTime"
+    },
+    {
+      "id": "Meshmakers.Events.AcknowledgedDateTime",
+      "valueType": "DateTime"
+    }
+  ],
+  "entities": [
+    {
+      "ckId": "Meshmakers.Equipment.Model",
+      "ckDerivedId": "System.Entity",
+      "isFinal": false,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "name": "Designation"
+        },
+        {
+          "id": "Meshmakers.Description",
+          "name": "Description"
+        }
+      ],
+      "associations": []
+    },
+    {
+      "ckId": "Meshmakers.Equipment.Group",
+      "ckDerivedId": "System.Entity",
+      "isFinal": false,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "name": "Designation"
+        },
+        {
+          "id": "Meshmakers.Description",
+          "name": "Description"
+        }
+      ],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Equipment.Model",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
+    },
+    {
+      "ckId": "Meshmakers.Equipment",
+      "ckDerivedId": "System.Entity",
+      "isFinal": false,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "name": "Designation"
+        },
+        {
+          "id": "Meshmakers.Description",
+          "name": "Description"
+        }
+      ],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Equipment.Group",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
+    },
+    {
+      "ckId": "Meshmakers.Asset",
+      "ckDerivedId": "Meshmakers.Equipment",
+      "isFinal": false,
+      "isAbstract": false,
+      "attributes": [],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Equipment",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
+    },
+    {
+      "ckId": "Meshmakers.Asset.Part",
+      "ckDerivedId": "Meshmakers.Equipment",
+      "isFinal": true,
+      "isAbstract": false,
+      "attributes": [],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Asset",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
+    },
+    {
+      "ckId": "Meshmakers.Asset.Component",
+      "ckDerivedId": "Meshmakers.Equipment",
+      "isFinal": true,
+      "isAbstract": false,
+      "attributes": [],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Asset.Part",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
+    },
+    {
+      "ckId": "Meshmakers.CommunicationPool",
+      "ckDerivedId": "System.Entity",
+      "isFinal": true,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Communication.LastSeen",
+          "name": "LastSeen"
+        },
+        {
+          "id": "Meshmakers.CommunicationPool.State",
+          "name": "State"
+        },
+        {
+          "id": "Meshmakers.CommunicationPool.Name",
+          "name": "Name"
+        }
+      ],
+      "associations": []
+    },
+    {
+      "ckId": "Meshmakers.CommunicationAdapter",
+      "ckDerivedId": "System.Entity",
+      "isFinal": false,
+      "isAbstract": true,
+      "enableChangeStreamPreAndPostImages": true,
+      "attributes": [
+        {
+          "id": "Meshmakers.Communication.LastSeen",
+          "name": "LastSeen"
+        },
+        {
+          "id": "Meshmakers.CommunicationAdapter.State",
+          "name": "State"
+        },
+        {
+          "id": "Meshmakers.CommunicationAdapter.Type",
+          "name": "Type"
+        },
+        {
+          "id": "Meshmakers.CommunicationAdapter.Deployment.ImageName",
+          "name": "ImageName"
+        },
+        {
+          "id": "Meshmakers.CommunicationAdapter.Deployment.ImageVersion",
+          "name": "ImageVersion"
+        }
+      ],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.CommunicationPool",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
+    },
+    {
+      "ckId": "Meshmakers.Plug",
+      "ckDerivedId": "Meshmakers.CommunicationAdapter",
+      "isFinal": true,
+      "isAbstract": false,
+      "enableChangeStreamPreAndPostImages": true,
+      "attributes": [
+        {
+          "id": "Meshmakers.Plug.Mapping.Configuration",
+          "name": "Configuration"
+        }
+      ],
+      "associations": []
+    },
+    {
+      "ckId": "Meshmakers.Plug.Group",
+      "ckDerivedId": "System.Entity",
+      "isFinal": true,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "name": "Designation"
+        },
+        {
+          "id": "Meshmakers.Description",
+          "name": "Description"
+        }
+      ],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Plug",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
+    },
+    {
+      "ckId": "Meshmakers.Plug.Mapping",
+      "ckDerivedId": "System.Entity",
+      "isFinal": true,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "name": "Designation"
+        },
+        {
+          "id": "Meshmakers.Plug.Mapping.Reference.Id",
+          "name": "ReferenceId"
+        },
+        {
+          "id": "Meshmakers.Plug.Mapping.Reference.CkId",
+          "name": "ReferenceCkId"
+        },
+        {
+          "id": "Meshmakers.Plug.Mapping.Reference.AttributeId",
+          "name": "ReferenceAttributeId"
+        },
+        {
+          "id": "Meshmakers.Plug.Mapping.Configuration",
+          "name": "Configuration"
+        }
+      ],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Plug.Group",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
+    },
+    {
+      "ckId": "Meshmakers.Socket",
+      "ckDerivedId": "Meshmakers.CommunicationAdapter",
+      "isFinal": true,
+      "isAbstract": false,
+      "enableChangeStreamPreAndPostImages": true,
+      "attributes": [
+        {
+          "id": "Meshmakers.Socket.Mapping.Configuration",
+          "name": "Configuration"
+        }
+      ],
+      "associations": []
+    },
+    {
+      "ckId": "Meshmakers.Event",
+      "ckDerivedId": "System.Entity",
+      "isFinal": true,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Events.ReceivedDateTime",
+          "name": "ReceivedDateTime"
+        },
+        {
+          "id": "Meshmakers.Events.Message",
+          "name": "Message"
+        }
+      ],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Equipment",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
+    },
+    {
+      "ckId": "Meshmakers.Alarm",
+      "ckDerivedId": "Meshmakers.Event",
+      "isFinal": true,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Events.State",
+          "name": "State"
+        },
+        {
+          "id": "Meshmakers.Events.ClearedDateTime",
+          "name": "ClearedDateTime"
+        },
+        {
+          "id": "Meshmakers.Events.AcknowledgedDateTime",
+          "name": "AcknowledgedDateTime"
+        }
+      ],
+      "associations": []
+    }
+  ]
+}

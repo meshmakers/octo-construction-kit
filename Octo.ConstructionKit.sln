@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Basic", "src\Octo.Sdk.Packages.Industry.Basic\Octo.Sdk.Packages.Industry.Basic.csproj", "{B0C88792-847F-42C6-8907-01B52DF4F859}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0C88792-847F-42C6-8907-01B52DF4F859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0C88792-847F-42C6-8907-01B52DF4F859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0C88792-847F-42C6-8907-01B52DF4F859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0C88792-847F-42C6-8907-01B52DF4F859}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

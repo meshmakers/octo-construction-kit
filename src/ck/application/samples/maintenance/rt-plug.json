@@ -1,0 +1,61 @@
+{
+  "entities": [
+    {
+      "rtId": "64a2b7bd162d703d9bb0f330",
+      "ckId": "Meshmakers.CommunicationPool",
+      "attributes": [
+        {
+          "id": "Meshmakers.CommunicationPool.State",
+          "value": 1
+        },
+        {
+          "id": "Meshmakers.CommunicationPool.Name",
+          "value": "local"
+        }
+      ],
+      "associations": []
+    },
+    {
+      "rtId": "64a2b7c72d5ac4ea4d8fea48",
+      "ckId": "Meshmakers.Plug",
+      "attributes": [
+        {
+          "id": "Meshmakers.CommunicationAdapter.State",
+          "value": 1
+        },
+        {
+          "id": "Meshmakers.CommunicationAdapter.Type",
+          "value": "Meshmakers.Plugs.Zenon"
+        },
+        {
+          "id": "Meshmakers.Plug.Mapping.Configuration",
+          "value": "{ }"
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "64a2b7bd162d703d9bb0f330", "targetCkId": "Meshmakers.CommunicationPool" }
+      ]
+    },
+    {
+      "rtId": "64a2b81dc72c3838dc95b08c",
+      "ckId": "Meshmakers.Plug",
+      "attributes": [
+        {
+          "id": "Meshmakers.CommunicationAdapter.State",
+          "value": 1
+        },
+        {
+          "id": "Meshmakers.CommunicationAdapter.Type",
+          "value": "Meshmakers.Plugs.IsPro-Ng"
+        },
+        {
+          "id": "Meshmakers.Plug.Mapping.Configuration",
+          "value": "{  }"
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "64a2b7bd162d703d9bb0f330", "targetCkId": "Meshmakers.CommunicationPool" }
+      ]
+    }
+  ]
+}

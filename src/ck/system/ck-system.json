@@ -201,6 +201,12 @@
           "targetCkId": "Meshmakers.Equipment.Model",
           "inboundMultiplicity": "N",
           "outboundMultiplicity": "ZeroOrOne"
+        },
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Equipment.Group",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
         }
       ]
     },
@@ -463,6 +469,30 @@
         }
       ],
       "associations": []
+    },
+    {
+      "ckId": "Meshmakers.Events.Comment",
+      "ckDerivedId": "System.Entity",
+      "isFinal": true,
+      "isAbstract": false,
+      "attributes": [
+        {
+          "id": "Meshmakers.Events.ReceivedDateTime",
+          "name": "ReceivedDateTime"
+        },
+        {
+          "id": "Meshmakers.Events.Message",
+          "name": "Comment"
+        }
+      ],
+      "associations": [
+        {
+          "roleId": "System.ParentChild",
+          "targetCkId": "Meshmakers.Event",
+          "inboundMultiplicity": "N",
+          "outboundMultiplicity": "ZeroOrOne"
+        }
+      ]
     }
   ]
 }

@@ -41,6 +41,14 @@
         {
           "id": "Meshmakers.Events.AcknowledgedDateTime",
           "name": "AcknowledgedDateTime"
+        },
+        {
+          "id": "Meshmakers.Events.Group",
+          "name": "Group"
+        },
+        {
+          "id": "Meshmakers.Events.Classification",
+          "name": "Classification"
         }
       ],
       "associations": [

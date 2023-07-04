@@ -139,6 +139,62 @@
       ]
     },
     {
+      "id": "Meshmakers.Events.Group",
+      "valueType": "Int",
+      "selectionValues": [
+        {
+          "key": 0,
+          "name": "Low"
+        },
+        {
+          "key": 1,
+          "name": "Medium"
+        },
+        {
+          "key": 2,
+          "name": "High"
+        }
+      ]
+    },
+    {
+      "id": "Meshmakers.Events.Classification",
+      "valueType": "Int",
+      "selectionValues": [
+        {
+          "key": 0,
+          "name": "Unclassified"
+        },
+        {
+          "key": 1,
+          "name": "Electrical"
+        },
+        {
+          "key": 2,
+          "name": "Mechanical"
+        },
+        {
+          "key": 3,
+          "name": "Leakage"
+        },
+        {
+          "key": 4,
+          "name": "Quality/Loss of performance"
+        },
+        {
+          "key": 5,
+          "name": "Risk of accidents/safety/environment"
+        },
+        {
+          "key": 6,
+          "name": "Software/Control"
+        },
+        {
+          "key": 7,
+          "name": "Optimization"
+        }
+      ]
+    },
+    {
       "id": "Meshmakers.Events.Message",
       "valueType": "String"
     },

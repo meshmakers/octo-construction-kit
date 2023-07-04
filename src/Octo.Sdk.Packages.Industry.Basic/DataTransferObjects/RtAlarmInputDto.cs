@@ -16,4 +16,10 @@ public class RtAlarmInputDto : RtEventInputDto
     
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public RtAssociationInputDto[]? Parent { get; set; }
+    
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public AlarmGroups? Group { get; set; }
+    
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public AlarmClassification? Classification { get; set; }
 }

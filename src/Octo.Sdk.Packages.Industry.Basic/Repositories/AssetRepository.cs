@@ -1,5 +1,4 @@
 using GraphQL;
-using Meshmakers.Common.Shared;
 using Meshmakers.Octo.Common.Shared;
 using Meshmakers.Octo.Common.Shared.DataTransferObjects;
 using Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
@@ -111,5 +110,95 @@ public class AssetRepository : IAssetRepository
     
         var result = await _tenantClient.SendMutationAsync<IEnumerable<RtAlarmDto>>(getQuery);
         return new PagedResult<RtAlarmDto>(result);
+    }
+    
+    public async Task<PagedResult<RtEquipmentModelDto>> CreateEquipmentModelsAsync(IEnumerable<RtEquipmentModelInputDto> modelEntities)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.CreateEquipmentModel,
+            Variables = new
+            {
+                modelEntities
+            }
+        };
+    
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentModelDto>>(getQuery);
+        return new PagedResult<RtEquipmentModelDto>(result);
+    }
+    
+    public async Task<PagedResult<RtEquipmentModelDto>> UpdateEquipmentModelsAsync(IEnumerable<MutationDto<RtEquipmentModelInputDto>> modelEntities)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.UpdateEquipmentModel,
+            Variables = new
+            {
+                modelEntities
+            }
+        };
+    
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentModelDto>>(getQuery);
+        return new PagedResult<RtEquipmentModelDto>(result);
+    }
+    
+    public async Task<PagedResult<RtEquipmentGroupDto>> CreateEquipmentGroupsAsync(IEnumerable<RtEquipmentGroupInputDto> groupEntities)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.CreateEquipmentGroup,
+            Variables = new
+            {
+                groupEntities
+            }
+        };
+    
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentGroupDto>>(getQuery);
+        return new PagedResult<RtEquipmentGroupDto>(result);
+    }
+    
+    public async Task<PagedResult<RtEquipmentGroupDto>> UpdateEquipmentGroupsAsync(IEnumerable<MutationDto<RtEquipmentGroupInputDto>> groupEntities)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.UpdateEquipmentGroup,
+            Variables = new
+            {
+                groupEntities
+            }
+        };
+    
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentGroupDto>>(getQuery);
+        return new PagedResult<RtEquipmentGroupDto>(result);
+    }
+    
+    public async Task<PagedResult<RtEquipmentMachine>> CreateEquipmentMachinesAsync(IEnumerable<RtEquipmentMachineInputDto> machineEntities)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.CreateEquipmentMachine,
+            Variables = new
+            {
+                machineEntities
+            }
+        };
+    
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentMachine>>(getQuery);
+        return new PagedResult<RtEquipmentMachine>(result);
+    }
+    
+    public async Task<PagedResult<RtEquipmentMachine>> UpdateEquipmentMachinesAsync(IEnumerable<MutationDto<RtEquipmentMachineInputDto>> machineEntities)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.UpdateEquipmentMachine,
+            Variables = new
+            {
+                machineEntities
+            }
+        };
+    
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentMachine>>(getQuery);
+        return new PagedResult<RtEquipmentMachine>(result);
     }
 }

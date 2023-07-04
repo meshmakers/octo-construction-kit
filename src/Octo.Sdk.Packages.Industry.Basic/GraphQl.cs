@@ -139,4 +139,70 @@ internal static class GraphQl
         }
       }
     ";
+
+    public const string CreateEquipmentModel = @"
+      mutation($modelEntities: [MeshmakersEquipmentModelInput]!) {
+        createMeshmakersEquipmentModels(entities: $modelEntities) {
+          rtId
+          designation
+          description    
+        }
+      }
+    ";
+    
+    public const string UpdateEquipmentModel = @"
+      mutation($modelEntities: [UpdateMeshmakersEquipmentModelInput]!) {
+        updateMeshmakersEquipmentModels(entities: $modelEntities) {
+          rtId
+          designation
+          description    
+        }
+      }
+    ";
+    
+    public const string CreateEquipmentGroup = @"
+      mutation($groupEntities: [MeshmakersEquipmentGroupInput]!) {
+        createMeshmakersEquipmentGroups(entities: $groupEntities) {
+          rtId
+          designation
+          description    
+        }
+      }
+    ";
+    
+    public const string UpdateEquipmentGroup = @"
+      mutation($groupEntities: [UpdateMeshmakersEquipmentGroupInput]!) {
+        updateMeshmakersEquipmentGroups(entities: $groupEntities) {
+          rtId
+          designation
+          description    
+        }
+      }
+    ";
+
+    public const string CreateEquipmentMachine = @"
+      mutation($machineEntities: [MeshmakersEquipmentMachineInput]!) {
+        createMeshmakersEquipmentMachines(entities: $machineEntities) {
+          rtId
+          designation
+          description
+          manufacturer
+          modelNumber
+          serialNumber
+        }
+      }
+    ";
+    
+    public const string UpdateEquipmentMachine = @"
+      mutation($machineEntities: [UpdateMeshmakersEquipmentMachineInput]!) {
+        updateMeshmakersEquipmentMachines(entities: $machineEntities) {
+          rtId
+          designation
+          description
+          manufacturer
+          modelNumber
+          serialNumber
+        }
+      }
+    ";
 }

@@ -1,4 +1,5 @@
-﻿using Meshmakers.Octo.Common.Shared;
+﻿using System.Globalization;
+using Meshmakers.Octo.Common.Shared;
 using Meshmakers.Octo.Common.Shared.DataTransferObjects;
 using Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 using Meshmakers.Octo.Sdk.Packages.Industry.Basic.Repositories;
@@ -123,5 +124,169 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         Assert.Equal(1, result.List.Count);
         Assert.NotNull(result.List.First().RtId);
         Assert.Equal(message, result.List.First().Message);
+    }
+
+
+    [Fact]
+    public async void TestCreateModel()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var modelEntities = new List<RtEquipmentModelInputDto>
+        {
+            new()
+            {
+                Description = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                Designation = "Hi test",
+            }
+        };
+
+
+        var result = await assetRepository.CreateEquipmentModelsAsync(modelEntities);
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List.First().RtId);
+        Assert.Equal("Hi test", result.List.First().Designation);
+    }
+
+    [Fact]
+    public async void TestUpdateModel()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+        var message = Guid.NewGuid().ToString();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var modelEntities = new List<MutationDto<RtEquipmentModelInputDto>>
+        {
+            new()
+            {
+                RtId = new OctoObjectId("64a2b2e4e1ee56e262e83d98"),
+                Item = new RtEquipmentModelInputDto
+                {
+                    Description = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                    Designation = message
+                }
+            }
+        };
+
+
+        var result = await assetRepository.UpdateEquipmentModelsAsync(modelEntities);
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List.First().RtId);
+        Assert.Equal(message, result.List.First().Designation);
+    }
+
+    [Fact]
+    public async void TestCreateGroup()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var groupEntities = new List<RtEquipmentGroupInputDto>
+        {
+            new()
+            {
+                Description = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                Designation = "Hi test",
+                Parent = new[]
+                {
+                    new RtAssociationInputDto
+                        { ModOption = AssociationModOptionsDto.Create, Target = new RtEntityId("Meshmakers.Equipment.Model", new OctoObjectId("64a2b2e4e1ee56e262e83d98")) }
+                }
+            }
+        };
+
+
+        var result = await assetRepository.CreateEquipmentGroupsAsync(groupEntities);
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List.First().RtId);
+        Assert.Equal("Hi test", result.List.First().Designation);
+    }
+
+    [Fact]
+    public async void TestUpdateGroup()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+        var message = Guid.NewGuid().ToString();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var groupEntities = new List<MutationDto<RtEquipmentGroupInputDto>>
+        {
+            new()
+            {
+                RtId = new OctoObjectId("64a2b2ff83f510d627206cfe"),
+                Item = new RtEquipmentGroupInputDto
+                {
+                    Description = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                    Designation = message
+                }
+            }
+        };
+
+
+        var result = await assetRepository.UpdateEquipmentGroupsAsync(groupEntities);
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List.First().RtId);
+        Assert.Equal(message, result.List.First().Designation);
+    }
+    
+    [Fact]
+    public async void TestCreateMachine()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var machineEntities = new List<RtEquipmentMachineInputDto>
+        {
+            new()
+            {
+                Description = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                Designation = "Hi test",
+                Parent = new[]
+                {
+                    new RtAssociationInputDto
+                        { ModOption = AssociationModOptionsDto.Create, Target = new RtEntityId("Meshmakers.Equipment.Group", new OctoObjectId("64a2b55a84c7869c60270d1a")) }
+                }
+            }
+        };
+
+
+        var result = await assetRepository.CreateEquipmentMachinesAsync(machineEntities);
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List.First().RtId);
+        Assert.Equal("Hi test", result.List.First().Designation);
+    }
+
+    [Fact]
+    public async void TestUpdateMachine()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+        var message = Guid.NewGuid().ToString();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var machineEntities = new List<MutationDto<RtEquipmentMachineInputDto>>
+        {
+            new()
+            {
+                RtId = new OctoObjectId("64a2b6c3bbf4aa537f812b62"),
+                Item = new RtEquipmentMachineInputDto
+                {
+                    Description = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                    Designation = message
+                }
+            }
+        };
+
+
+        var result = await assetRepository.UpdateEquipmentMachinesAsync(machineEntities);
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List.First().RtId);
+        Assert.Equal(message, result.List.First().Designation);
     }
 }

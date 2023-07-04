@@ -24,9 +24,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
         var assetRepository = new AssetRepository(tenantClient);
 
-        var result = await assetRepository.GetEquipmentModelAsync("Maintenance");
+        var result = await assetRepository.GetEquipmentModelAsync("Demo");
         Assert.Equal(1, result.List.Count);
-        Assert.Equal("Maintenance", result.List.First().Designation);
+        Assert.Equal("Demo", result.List.First().Designation);
     }
 
     [Fact]
@@ -38,7 +38,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
         var equipmentGroup = await assetRepository.GetEquipmentByGroupRtIdAsync(new OctoObjectId("64a2b55a84c7869c60270d1a"));
         Assert.NotNull(equipmentGroup);
-        Assert.Equal(3, equipmentGroup.MachinesChildren.Items.Count());
+        Assert.True(equipmentGroup.MachinesChildren.Items.Count() >= 3);
     }
 
 

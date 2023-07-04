@@ -82,4 +82,34 @@ public class AssetRepository : IAssetRepository
         var result = await _tenantClient.SendQueryAsync<RtAlarmDto>(getQuery);
         return new PagedResult<RtAlarmDto>(result?.Items ?? new List<RtAlarmDto>());
     }
+    
+    public async Task<PagedResult<RtAlarmDto>> CreateAlarmsAsync(IEnumerable<RtAlarmInputDto> alarmEntities)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.CreateAlarmsMutation,
+            Variables = new
+            {
+                alarmEntities
+            }
+        };
+    
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtAlarmDto>>(getQuery);
+        return new PagedResult<RtAlarmDto>(result);
+    }
+    
+    public async Task<PagedResult<RtAlarmDto>> UpdateAlarmsAsync(IEnumerable<MutationDto<RtAlarmInputDto>> alarmEntities)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.UpdateAlarmsMutation,
+            Variables = new
+            {
+                alarmEntities
+            }
+        };
+    
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtAlarmDto>>(getQuery);
+        return new PagedResult<RtAlarmDto>(result);
+    }
 }

@@ -1,4 +1,5 @@
 ﻿using Meshmakers.Octo.Common.Shared;
+using Meshmakers.Octo.Common.Shared.DataTransferObjects;
 using Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 using Meshmakers.Octo.Sdk.Packages.Industry.Basic.Repositories;
 using Xunit;
@@ -13,8 +14,8 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     {
         _tenantFixture = tenantFixture;
     }
-    
-    
+
+
     [Fact]
     public async void TestGetEquipmentModelAsync()
     {
@@ -26,7 +27,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         Assert.Equal(1, result.List.Count);
         Assert.Equal("Maintenance", result.List.First().Designation);
     }
-    
+
     [Fact]
     public async void TestGetEquipmentByGroupRtIdAsync()
     {
@@ -38,8 +39,8 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         Assert.NotNull(equipmentGroup);
         Assert.Equal(3, equipmentGroup.MachinesChildren.Items.Count());
     }
-    
-        
+
+
     [Fact]
     public async void TestGetAlarmsByMachineRtIdAsync()
     {
@@ -47,11 +48,12 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
         var assetRepository = new AssetRepository(tenantClient);
 
-        var result = await assetRepository.GetAlarmsByMachineRtIdAndStateAsync(new OctoObjectId("64a2b64c3da56d342f1c3880"), AlarmStates.Received);
+        var result = await assetRepository.GetAlarmsByMachineRtIdAndStateAsync(new OctoObjectId("64a2b64c3da56d342f1c3880"),
+            AlarmStates.Received);
         Assert.Equal(1, result.List.Count);
         Assert.Equal(AlarmStates.Received, result.List.First().State);
     }
-    
+
     [Fact]
     public async void TestGetAlarmByRtIdQueryAsync()
     {
@@ -62,5 +64,64 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         var result = await assetRepository.GetAlarmByRtIdQueryAsync(new OctoObjectId("64a2c3ee53e42e7e7eaa25e2"));
         Assert.Equal(1, result.List.Count);
         Assert.Equal(new OctoObjectId("64a2c3ee53e42e7e7eaa25e2"), result.List.First().RtId);
+    }
+
+    [Fact]
+    public async void TestCreateAlarm()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var alarmList = new List<RtAlarmInputDto>
+        {
+            new()
+            {
+                ReceivedDateTime = DateTime.UtcNow,
+                Message = "Hi test",
+                Parent = new[]
+                {
+                    new RtAssociationInputDto
+                    {
+                        ModOption = AssociationModOptionsDto.Create, Target = new RtEntityId("Meshmakers.Equipment.Machine",
+                            new OctoObjectId("64a2b6c3bbf4aa537f812b62"))
+                    }
+                }
+            }
+        };
+
+
+        var result = await assetRepository.CreateAlarmsAsync(alarmList);
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List.First().RtId);
+        Assert.Equal("Hi test", result.List.First().Message);
+    }
+
+    [Fact]
+    public async void TestUpdateAlarm()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+        var message = Guid.NewGuid().ToString();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var alarmList = new List<MutationDto<RtAlarmInputDto>>
+        {
+            new()
+            {
+                RtId = new OctoObjectId("64a2c3ee53e42e7e7eaa25e2"),
+                Item = new RtAlarmInputDto
+                {
+                    ClearedDateTime = DateTime.UtcNow,
+                    Message = message
+                }
+            }
+        };
+
+
+        var result = await assetRepository.UpdateAlarmsAsync(alarmList);
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List.First().RtId);
+        Assert.Equal(message, result.List.First().Message);
     }
 }

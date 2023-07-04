@@ -111,4 +111,32 @@ internal static class GraphQl
         }
       }
     ";
+
+    public const string CreateAlarmsMutation = @"
+      mutation($alarmEntities: [MeshmakersAlarmInput]!) {
+        createMeshmakersAlarms(entities: $alarmEntities) {
+          rtId
+          rtCreationDateTime
+          receivedDateTime
+          message
+          state
+          clearedDateTime
+          acknowledgedDateTime
+        }
+      }
+    ";
+
+    public const string UpdateAlarmsMutation = @"
+      mutation($alarmEntities: [UpdateMeshmakersAlarmInput]!) {
+        updateMeshmakersAlarms(entities: $alarmEntities) {
+          rtId
+          rtCreationDateTime
+          receivedDateTime
+          message
+          state
+          clearedDateTime
+          acknowledgedDateTime
+        }
+      }
+    ";
 }

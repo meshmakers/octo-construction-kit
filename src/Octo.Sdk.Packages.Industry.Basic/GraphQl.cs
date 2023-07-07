@@ -89,6 +89,8 @@ internal static class GraphQl
                   state
                   clearedDateTime
                   acknowledgedDateTime
+                  group
+                  classification
                 }
               }
             }
@@ -97,7 +99,7 @@ internal static class GraphQl
       }
     ";
 
-    public const String GetAlarmByRtIdQuery = @"
+    public const string GetAlarmByRtIdQuery = @"
       query($alarmRtId: OctoObjectIdType!) {
         meshmakersAlarmConnection(rtId: $alarmRtId) {
           items {
@@ -126,6 +128,8 @@ internal static class GraphQl
             state
             clearedDateTime
             acknowledgedDateTime
+            group
+            classification
           }
         }
       }
@@ -142,6 +146,8 @@ internal static class GraphQl
           state
           clearedDateTime
           acknowledgedDateTime
+          group
+          classification
         }
       }
     ";
@@ -157,6 +163,8 @@ internal static class GraphQl
           state
           clearedDateTime
           acknowledgedDateTime
+          group
+          classification
         }
       }
     ";

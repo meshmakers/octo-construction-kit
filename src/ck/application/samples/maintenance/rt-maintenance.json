@@ -140,6 +140,14 @@
         {
           "id": "Meshmakers.Events.AcknowledgedDateTime",
           "value": null
+        },
+        {
+          "id": "Meshmakers.Events.Group",
+          "value": 0
+        },
+        {
+          "id": "Meshmakers.Events.Classification",
+          "value": 1
         }
       ],
       "associations": [
@@ -170,6 +178,14 @@
         {
           "id": "Meshmakers.Events.AcknowledgedDateTime",
           "value": null
+        },
+        {
+          "id": "Meshmakers.Events.Group",
+          "value": 1
+        },
+        {
+          "id": "Meshmakers.Events.Classification",
+          "value": 2
         }
       ],
       "associations": [
@@ -200,6 +216,14 @@
         {
           "id": "Meshmakers.Events.AcknowledgedDateTime",
           "value": null
+        },
+        {
+          "id": "Meshmakers.Events.Group",
+          "value": 2
+        },
+        {
+          "id": "Meshmakers.Events.Classification",
+          "value": 3
         }
       ],
       "associations": [

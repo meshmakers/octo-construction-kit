@@ -82,6 +82,7 @@ internal static class GraphQl
               ) {
                 items {
                   rtId
+                  rtWellKnownName
                   rtCreationDateTime
                   receivedDateTime
                   message
@@ -101,6 +102,24 @@ internal static class GraphQl
         meshmakersAlarmConnection(rtId: $alarmRtId) {
           items {
             rtId
+            rtWellKnownName
+            rtCreationDateTime
+            receivedDateTime
+            message
+            state
+            clearedDateTime
+            acknowledgedDateTime
+          }
+        }
+      }
+    ";
+
+    public const string GetAlarmByWellKnownNameQuery = @"
+      query($foreignKeyNames: SimpleScalarType!) {
+        meshmakersAlarmConnection(fieldFilter: [{attributeName: ""rtWellKnownName"", operator: IN, comparisonValue:$foreignKeyNames}]) {
+          items {
+            rtId
+            rtWellKnownName
             rtCreationDateTime
             receivedDateTime
             message
@@ -116,6 +135,7 @@ internal static class GraphQl
       mutation($alarmEntities: [MeshmakersAlarmInput]!) {
         createMeshmakersAlarms(entities: $alarmEntities) {
           rtId
+          rtWellKnownName
           rtCreationDateTime
           receivedDateTime
           message
@@ -130,6 +150,7 @@ internal static class GraphQl
       mutation($alarmEntities: [UpdateMeshmakersAlarmInput]!) {
         updateMeshmakersAlarms(entities: $alarmEntities) {
           rtId
+          rtWellKnownName
           rtCreationDateTime
           receivedDateTime
           message

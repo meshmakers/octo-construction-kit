@@ -82,6 +82,23 @@ public class AssetRepository : IAssetRepository
         return new PagedResult<RtAlarmDto>(result?.Items ?? new List<RtAlarmDto>());
     }
     
+    public async Task<PagedResult<RtAlarmDto>> GetAlarmByWellKnownName(IEnumerable<string> foreignKeyNameList)
+    {
+        var foreignKeyNames = string.Join(',', foreignKeyNameList);
+        
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.GetAlarmByWellKnownNameQuery,
+            Variables = new
+            {
+                foreignKeyNames
+            }
+        };
+    
+        var result = await _tenantClient.SendQueryAsync<RtAlarmDto>(getQuery);
+        return new PagedResult<RtAlarmDto>(result?.Items ?? new List<RtAlarmDto>());
+    }
+    
     public async Task<PagedResult<RtAlarmDto>> CreateAlarmsAsync(IEnumerable<RtAlarmInputDto> alarmEntities)
     {
         var getQuery = new GraphQLRequest

@@ -66,6 +66,21 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         Assert.Equal(1, result.List.Count);
         Assert.Equal(new OctoObjectId("64a2c3ee53e42e7e7eaa25e2"), result.List.First().RtId);
     }
+    
+    [Fact]
+    public async void TestGetAlarmByWellKnownNameAsync()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var list = new List<string> { "alarmTest1", "alarmTest2", "alarmTest3" };
+        var result = await assetRepository.GetAlarmByWellKnownName(list);
+        Assert.Equal(3, result.List.Count);
+        Assert.Contains(result.List, dto => dto.RtId == new OctoObjectId("64a2c3ee53e42e7e7eaa25e2"));
+        Assert.Contains(result.List, dto => dto.RtId == new OctoObjectId("64a2c3b3015933f66e1f240b"));
+        Assert.Contains(result.List, dto => dto.RtId == new OctoObjectId("64a2c3ad1254d840838bbd09"));
+    }
 
     [Fact]
     public async void TestCreateAlarm()
@@ -74,10 +89,13 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
         var assetRepository = new AssetRepository(tenantClient);
 
+        var wellKnown = Guid.NewGuid().ToString();
+
         var alarmList = new List<RtAlarmInputDto>
         {
             new()
             {
+                RtWellKnownName = wellKnown,
                 ReceivedDateTime = DateTime.UtcNow,
                 Message = "Hi test",
                 Parent = new[]
@@ -96,6 +114,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         Assert.Equal(1, result.List.Count);
         Assert.NotNull(result.List.First().RtId);
         Assert.Equal("Hi test", result.List.First().Message);
+        Assert.Equal(wellKnown, result.List.First().RtWellKnownName);
     }
 
     [Fact]

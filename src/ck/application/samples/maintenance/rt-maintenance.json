@@ -119,6 +119,7 @@
     {
       "rtId": "64a2c3ad1254d840838bbd09",
       "ckId": "Meshmakers.Alarm",
+      "rtWellKnownName": "alarmTest3",
       "attributes": [
         {
           "id": "Meshmakers.Events.State",
@@ -148,6 +149,7 @@
     {
       "rtId": "64a2c3b3015933f66e1f240b",
       "ckId": "Meshmakers.Alarm",
+      "rtWellKnownName": "alarmTest2",
       "attributes": [
         {
           "id": "Meshmakers.Events.State",
@@ -177,6 +179,7 @@
     {
       "rtId": "64a2c3ee53e42e7e7eaa25e2",
       "ckId": "Meshmakers.Alarm",
+      "rtWellKnownName": "alarmTest1",
       "attributes": [
         {
           "id": "Meshmakers.Events.State",

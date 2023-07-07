@@ -84,7 +84,7 @@ public class AssetRepository : IAssetRepository
     
     public async Task<PagedResult<RtAlarmDto>> GetAlarmByWellKnownName(IEnumerable<string> foreignKeyNameList)
     {
-        var foreignKeyNames = string.Join(',', foreignKeyNameList);
+        var foreignKeyNames = string.Join(",", foreignKeyNameList);
         
         var getQuery = new GraphQLRequest
         {

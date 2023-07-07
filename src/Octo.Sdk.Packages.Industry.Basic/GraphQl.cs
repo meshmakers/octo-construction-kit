@@ -91,6 +91,9 @@ internal static class GraphQl
                   acknowledgedDateTime
                   group
                   classification
+                  alarmCause
+                  reactivatedDateTime
+                  reactivatedCount
                 }
               }
             }
@@ -111,6 +114,11 @@ internal static class GraphQl
             state
             clearedDateTime
             acknowledgedDateTime
+            group
+            classification
+            alarmCause
+            reactivatedDateTime
+            reactivatedCount
           }
         }
       }
@@ -130,6 +138,9 @@ internal static class GraphQl
             acknowledgedDateTime
             group
             classification
+            alarmCause
+            reactivatedDateTime
+            reactivatedCount
           }
         }
       }
@@ -148,6 +159,9 @@ internal static class GraphQl
           acknowledgedDateTime
           group
           classification
+          alarmCause
+          reactivatedDateTime
+          reactivatedCount
         }
       }
     ";
@@ -165,6 +179,9 @@ internal static class GraphQl
           acknowledgedDateTime
           group
           classification
+          alarmCause
+          reactivatedDateTime
+          reactivatedCount
         }
       }
     ";

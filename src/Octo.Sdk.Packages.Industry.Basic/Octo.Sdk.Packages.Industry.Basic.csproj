@@ -10,8 +10,8 @@
         <PackageProjectUrl>https://www.meshmakers.io</PackageProjectUrl>
         <RepositoryUrl>https://github.com/meshmakers/octomesh</RepositoryUrl>
         <RootNamespace>Meshmakers.Octo.Sdk.Packages.Industry.Basic</RootNamespace>
-        <TargetFramework>net7.0</TargetFramework>
         <ImplicitUsings>true</ImplicitUsings>
+        <TargetFrameworks>net7.0;netstandard2.0</TargetFrameworks>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -43,7 +43,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="0.0.2307.3001" />
+      <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="0.0.2307.7002" />
     </ItemGroup>
 
 </Project>

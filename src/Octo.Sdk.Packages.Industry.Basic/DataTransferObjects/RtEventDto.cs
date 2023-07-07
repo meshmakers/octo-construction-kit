@@ -6,4 +6,7 @@ public class RtEventDto : RtEntityDto
 {
     public DateTime? ReceivedDateTime { get; set; }
     public string? Message { get; set; }
+    
+    public EventGroups? Group { get; set; }
+    public EventClassification? Classification { get; set; }
 }

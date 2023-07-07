@@ -1,6 +1,6 @@
 namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 
-public enum AlarmClassification
+public enum EventClassification
 {
     Unclassified = 0,
     Electrical = 1,

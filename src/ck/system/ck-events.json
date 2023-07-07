@@ -13,6 +13,14 @@
         {
           "id": "Meshmakers.Events.Message",
           "name": "Message"
+        },
+        {
+          "id": "Meshmakers.Events.Group",
+          "name": "Group"
+        },
+        {
+          "id": "Meshmakers.Events.Classification",
+          "name": "Classification"
         }
       ],
       "associations": [
@@ -43,12 +51,16 @@
           "name": "AcknowledgedDateTime"
         },
         {
-          "id": "Meshmakers.Events.Group",
-          "name": "Group"
+          "id": "Meshmakers.Events.AlarmCause",
+          "name": "AlarmCause"
         },
         {
-          "id": "Meshmakers.Events.Classification",
-          "name": "Classification"
+          "id": "Meshmakers.Events.ReactivatedDateTime",
+          "name": "ReactivatedDateTime"
+        },
+        {
+          "id": "Meshmakers.Events.ReactivatedCount",
+          "name": "ReactivatedCount"
         }
       ],
       "associations": [

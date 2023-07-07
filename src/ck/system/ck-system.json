@@ -146,7 +146,7 @@
       ]
     },
     {
-      "id": "Meshmakers.Events.Group",
+      "id": "Meshmakers.Events.Classification",
       "valueType": "Int",
       "selectionValues": [
         {
@@ -164,7 +164,7 @@
       ]
     },
     {
-      "id": "Meshmakers.Events.Classification",
+      "id": "Meshmakers.Events.Group",
       "valueType": "Int",
       "selectionValues": [
         {
@@ -216,6 +216,18 @@
     {
       "id": "Meshmakers.Events.AcknowledgedDateTime",
       "valueType": "DateTime"
+    },
+    {
+      "id": "Meshmakers.Events.ReactivatedDateTime",
+      "valueType": "DateTime"
+    },
+    {
+      "id": "Meshmakers.Events.AlarmCause",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Events.ReactivatedCount",
+      "valueType": "Int"
     }
   ],
   "entities": [
@@ -494,6 +506,14 @@
         {
           "id": "Meshmakers.Events.Message",
           "name": "Message"
+        },
+        {
+          "id": "Meshmakers.Events.Group",
+          "name": "Group"
+        },
+        {
+          "id": "Meshmakers.Events.Classification",
+          "name": "Classification"
         }
       ],
       "associations": [
@@ -524,12 +544,16 @@
           "name": "AcknowledgedDateTime"
         },
         {
-          "id": "Meshmakers.Events.Group",
-          "name": "Group"
+          "id": "Meshmakers.Events.AlarmCause",
+          "name": "AlarmCause"
         },
         {
-          "id": "Meshmakers.Events.Classification",
-          "name": "Classification"
+          "id": "Meshmakers.Events.ReactivatedDateTime",
+          "name": "ReactivatedDateTime"
+        },
+        {
+          "id": "Meshmakers.Events.ReactivatedCount",
+          "name": "ReactivatedCount"
         }
       ],
       "associations": []

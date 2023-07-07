@@ -139,7 +139,7 @@
       ]
     },
     {
-      "id": "Meshmakers.Events.Group",
+      "id": "Meshmakers.Events.Classification",
       "valueType": "Int",
       "selectionValues": [
         {
@@ -157,7 +157,7 @@
       ]
     },
     {
-      "id": "Meshmakers.Events.Classification",
+      "id": "Meshmakers.Events.Group",
       "valueType": "Int",
       "selectionValues": [
         {
@@ -209,6 +209,18 @@
     {
       "id": "Meshmakers.Events.AcknowledgedDateTime",
       "valueType": "DateTime"
+    },
+    {
+      "id": "Meshmakers.Events.ReactivatedDateTime",
+      "valueType": "DateTime"
+    },
+    {
+      "id": "Meshmakers.Events.AlarmCause",
+      "valueType": "String"
+    },
+    {
+      "id": "Meshmakers.Events.ReactivatedCount",
+      "valueType": "Int"
     }
   ]
 }

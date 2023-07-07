@@ -17,13 +17,14 @@ public class RtAlarmInputDto : RtEventInputDto
     public DateTime? AcknowledgedDateTime { get; set; }
     
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public DateTime? ReactivatedDateTime { get; set; }
+
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public string? AlarmCause { get; set; }
+
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public int? ReactivatedCount { get; set; }
+
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public RtAssociationInputDto[]? Parent { get; set; }
-    
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    [JsonConverter(typeof(NewtonEnumValueConverter))]
-    public AlarmGroups? Group { get; set; }
-    
-    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    [JsonConverter(typeof(NewtonEnumValueConverter))]
-    public AlarmClassification? Classification { get; set; }
 }

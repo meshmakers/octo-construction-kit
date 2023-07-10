@@ -8,7 +8,7 @@ public class RtEquipmentGroupDto: QlRtEntityDtoWithAssociations
     public string? Description { get; set; }
     
     [QlConnection("children", "meshmakersEquipmentMachineConnection")]
-    public QlItemsContainer<RtEquipmentMachine>? MachinesChildren { get; set; }
+    public QlItemsContainer<RtEquipmentMachineDto>? MachinesChildren { get; set; }
     
     
     [QlConnection("children", "meshmakersEquipmentGroupConnection")]

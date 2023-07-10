@@ -309,36 +309,37 @@ internal static class GraphQl
       ";
     
     public const string GetMachinesAndAlarmsByGroup = @"
-    query($groupRtId:OctoObjectIdType!,$fromDateTime:SimpleScalarType!,$toDateTime:SimpleScalarType!,$groupBy:String!) {
-      meshmakersEquipmentGroupConnection(rtId: $groupRtId) {
-        items {
-          rtId
-          designation
-          children {
-            meshmakersEquipmentMachineConnection {
-              items {
-                rtId
-                designation
-                children {
-                  meshmakersAlarmConnection(
-                    fieldFilter: [
-                      {
-                        attributeName: ""rtChangedDateTime""
-                        operator: GREATER_THAN
-                        comparisonValue: $fromDateTime
-                      },
-                      {
-                        attributeName: ""rtChangedDateTime""
-                        operator: LESS_THAN
-                        comparisonValue: $toDateTime
+      query($groupRtId:OctoObjectIdType!,$fromDateTime:SimpleScalarType!,$toDateTime:SimpleScalarType!,$groupBy:String!) {
+        meshmakersEquipmentGroupConnection(rtId: $groupRtId) {
+          items {
+            rtId
+            designation
+            children {
+              meshmakersEquipmentMachineConnection {
+                items {
+                  rtId
+                  designation
+                  children {
+                    meshmakersAlarmConnection(
+                      fieldFilter: [
+                        {
+                          attributeName: ""rtChangedDateTime""
+                          operator: GREATER_THAN
+                          comparisonValue: $fromDateTime
+                        },
+                        {
+                          attributeName: ""rtChangedDateTime""
+                          operator: LESS_THAN
+                          comparisonValue: $toDateTime
+                        }
+                      ]
+                      groupBy: { attributeNames: [$groupBy] }
+                    ) {
+      					      totalCount
+                      groupings {
+                        keys
+                        count
                       }
-                    ]
-                    groupBy: { attributeNames: [$groupBy] }
-                  ) {
-      					    totalCount
-                    groupings {
-                      keys
-                      count
                     }
                   }
                 }
@@ -347,6 +348,45 @@ internal static class GraphQl
           }
         }
       }
-    }
-  ";
+   ";
+
+    public const string GetAlarmsByMachine = @"
+     query(
+        $machineRtId: OctoObjectIdType!
+        $fromDateTime: SimpleScalarType!
+        $toDateTime: SimpleScalarType!
+        $groupBy: String!
+      ) {
+        meshmakersEquipmentMachineConnection(rtId: $machineRtId) {
+          items {
+            rtId
+            designation
+            children {
+              meshmakersAlarmConnection(
+                fieldFilter: [
+                  {
+                    attributeName: ""rtChangedDateTime""
+                    operator: GREATER_THAN
+                    comparisonValue: $fromDateTime
+                  }
+                  {
+                    attributeName: ""rtChangedDateTime""
+                    operator: LESS_THAN
+                    comparisonValue: $toDateTime
+                  }
+                ]
+                groupBy: { attributeNames: [$groupBy] }
+              ) {
+                totalCount
+
+                groupings {
+                  keys
+                  count
+                }
+              }
+            }
+          }
+        }
+      }
+    ";
 }

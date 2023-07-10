@@ -72,7 +72,7 @@ public class AssetRepository : IAssetRepository
             }
         };
     
-        var result = await _tenantClient.SendQueryAsync<RtEquipmentMachine>(getQuery);
+        var result = await _tenantClient.SendQueryAsync<RtEquipmentMachineDto>(getQuery);
         var equipmentMachine = result?.Items?.SingleOrDefault();
         if (equipmentMachine == null)
         {
@@ -204,7 +204,7 @@ public class AssetRepository : IAssetRepository
         return new PagedResult<RtEquipmentGroupDto>(result);
     }
     
-    public async Task<PagedResult<RtEquipmentMachine>> CreateEquipmentMachinesAsync(IEnumerable<RtEquipmentMachineInputDto> machineEntities)
+    public async Task<PagedResult<RtEquipmentMachineDto>> CreateEquipmentMachinesAsync(IEnumerable<RtEquipmentMachineInputDto> machineEntities)
     {
         var getQuery = new GraphQLRequest
         {
@@ -215,11 +215,11 @@ public class AssetRepository : IAssetRepository
             }
         };
     
-        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentMachine>>(getQuery);
-        return new PagedResult<RtEquipmentMachine>(result);
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentMachineDto>>(getQuery);
+        return new PagedResult<RtEquipmentMachineDto>(result);
     }
     
-    public async Task<PagedResult<RtEquipmentMachine>> UpdateEquipmentMachinesAsync(IEnumerable<MutationDto<RtEquipmentMachineInputDto>> machineEntities)
+    public async Task<PagedResult<RtEquipmentMachineDto>> UpdateEquipmentMachinesAsync(IEnumerable<MutationDto<RtEquipmentMachineInputDto>> machineEntities)
     {
         var getQuery = new GraphQLRequest
         {
@@ -230,8 +230,8 @@ public class AssetRepository : IAssetRepository
             }
         };
     
-        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentMachine>>(getQuery);
-        return new PagedResult<RtEquipmentMachine>(result);
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentMachineDto>>(getQuery);
+        return new PagedResult<RtEquipmentMachineDto>(result);
     }
 
     public async Task<PagedResult<RtEventCommentDto>> CreateAlarmCommentAsync(IEnumerable<RtEventCommentInputDto> commentEntities)
@@ -280,5 +280,23 @@ public class AssetRepository : IAssetRepository
 
         var result = await _tenantClient.SendQueryAsync<RtEquipmentGroupDto>(getQuery);
         return new PagedResult<RtEquipmentGroupDto>(result?.Items ?? new List<RtEquipmentGroupDto>());
+    }
+    
+    public async Task<PagedResult<RtEquipmentMachineDto>> GetAlarmsByMachineRtIdAsync(OctoObjectId machineRtId, DateTime fromDateTime, DateTime toDateTime, string groupBy)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.GetAlarmsByMachine,
+            Variables = new 
+            {
+                machineRtId,
+                fromDateTime,
+                toDateTime,
+                groupBy
+            }
+        };
+
+        var result = await _tenantClient.SendQueryAsync<RtEquipmentMachineDto>(getQuery);
+        return new PagedResult<RtEquipmentMachineDto>(result?.Items ?? new List<RtEquipmentMachineDto>());
     }
 }

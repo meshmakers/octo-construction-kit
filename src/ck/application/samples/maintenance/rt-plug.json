@@ -56,6 +56,27 @@
       "associations": [
         { "roleId": "System.ParentChild", "targetRtId": "64a2b7bd162d703d9bb0f330", "targetCkId": "Meshmakers.CommunicationPool" }
       ]
+    },
+    {
+      "rtId": "64ac19945a7c4fd9e788c137",
+      "ckId": "Meshmakers.Socket",
+      "attributes": [
+        {
+          "id": "Meshmakers.CommunicationAdapter.State",
+          "value": 1
+        },
+        {
+          "id": "Meshmakers.CommunicationAdapter.Type",
+          "value": "Meshmakers.Sockets.Grafana"
+        },
+        {
+          "id": "Meshmakers.Socket.Mapping.Configuration",
+          "value": "{  }"
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "64a2b7bd162d703d9bb0f330", "targetCkId": "Meshmakers.CommunicationPool" }
+      ]
     }
   ]
 }

@@ -82,7 +82,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
     [Fact]
-    public async void TestGetAlarmsByMachineRtIdAsync()
+    public async void TestGetAlarmsByMachineRtIdAndStateAsync()
     {
         var tenantClient = _tenantFixture.GetTenantClient();
 
@@ -134,6 +134,20 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         Assert.NotNull(result.List?.First()?.MachinesChildren?.Items?.First()?.AlarmChildren?.Groupings);
     }
 
+    [Fact]
+    public async void TestGetAlarmsByMachineRtIdAsync()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var result = await assetRepository.GetAlarmsByMachineRtIdAsync(new OctoObjectId("64a2b64c3da56d342f1c3880"),
+            DateTime.MinValue, DateTime.MaxValue, "group");
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List.First().AlarmChildren?.Groupings);
+    }
+
+    
     [Fact]
     public async void TestCreateAlarm()
     {

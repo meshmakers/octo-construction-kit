@@ -22,9 +22,9 @@ public interface IAssetRepository
     Task<PagedResult<RtEquipmentModelDto>> UpdateEquipmentModelsAsync(IEnumerable<MutationDto<RtEquipmentModelInputDto>> modelEntities);
     Task<PagedResult<RtEquipmentGroupDto>> CreateEquipmentGroupsAsync(IEnumerable<RtEquipmentGroupInputDto> groupEntities);
     Task<PagedResult<RtEquipmentGroupDto>> UpdateEquipmentGroupsAsync(IEnumerable<MutationDto<RtEquipmentGroupInputDto>> groupEntities);
-    Task<PagedResult<RtEquipmentMachine>> CreateEquipmentMachinesAsync(IEnumerable<RtEquipmentMachineInputDto> machineEntities);
+    Task<PagedResult<RtEquipmentMachineDto>> CreateEquipmentMachinesAsync(IEnumerable<RtEquipmentMachineInputDto> machineEntities);
 
-    Task<PagedResult<RtEquipmentMachine>>
+    Task<PagedResult<RtEquipmentMachineDto>>
         UpdateEquipmentMachinesAsync(IEnumerable<MutationDto<RtEquipmentMachineInputDto>> machineEntities);
 
     Task<PagedResult<RtEventCommentDto>> CreateAlarmCommentAsync(IEnumerable<RtEventCommentInputDto> alarmComments);
@@ -32,4 +32,7 @@ public interface IAssetRepository
     
     Task<PagedResult<RtEquipmentGroupDto>> GetMachinesAndAlarmsByGroupRtIdAsync(OctoObjectId groupRtId, DateTime fromDateTime, DateTime toDateTime,
         string groupBy);
+
+    Task<PagedResult<RtEquipmentMachineDto>> GetAlarmsByMachineRtIdAsync(OctoObjectId machineRtId, DateTime fromDateTime,
+        DateTime toDateTime, string groupBy);
 }

@@ -29,7 +29,22 @@ public class AssetRepository : IAssetRepository
         var result = await _tenantClient.SendQueryAsync<RtEquipmentModelDto>(getQuery);
         return new PagedResult<RtEquipmentModelDto>(result?.Items ?? new List<RtEquipmentModelDto>());
     }
+
+    public async Task<RtEquipmentGroupDto?> GetGroupsByGroupRtIdAsync(OctoObjectId equipmentGroupRtId)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.GetEquipmentGroupsOfGroupRtId,
+            Variables = new
+            {
+                equipmentGroupRtId
+            }
+        };
     
+        var result = await _tenantClient.SendQueryAsync<RtEquipmentGroupDto>(getQuery);
+        return result?.Items.FirstOrDefault();
+    }
+
     public async Task<RtEquipmentGroupDto?> GetEquipmentByGroupRtIdAsync(OctoObjectId equipmentGroupRtId)
     {
         var getQuery = new GraphQLRequest

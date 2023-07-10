@@ -9,12 +9,6 @@ internal static class GraphQl
             rtId
             designation
             children {
-              meshmakersEquipmentGroupConnection {
-                items {
-                  rtId
-                  designation         
-                }
-              }
               meshmakersEquipmentMachineConnection {
                 items {
                   rtId
@@ -28,6 +22,25 @@ internal static class GraphQl
       }
     ";
 
+    public const string GetEquipmentGroupsOfGroupRtId = @"
+      query($groupRtId: OctoObjectIdType!) {
+        meshmakersEquipmentGroupConnection(rtId: $groupRtId) {
+          items {
+            rtId
+            designation
+            children {
+              meshmakersEquipmentGroupConnection {
+                items {
+                  rtId
+                  designation         
+                }
+              }
+            }
+          }
+        }
+      }
+    ";
+    
     public const string GetEquipmentModelQuery = @"
            query($equipmentModelName: SimpleScalarType!) {
               meshmakersEquipmentModelConnection(

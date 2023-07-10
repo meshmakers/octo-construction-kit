@@ -23,8 +23,8 @@ internal static class GraphQl
     ";
 
     public const string GetEquipmentGroupsOfGroupRtId = @"
-      query($groupRtId: OctoObjectIdType!) {
-        meshmakersEquipmentGroupConnection(rtId: $groupRtId) {
+      query($equipmentGroupRtId: OctoObjectIdType!) {
+        meshmakersEquipmentGroupConnection(rtId: $equipmentGroupRtId) {
           items {
             rtId
             designation

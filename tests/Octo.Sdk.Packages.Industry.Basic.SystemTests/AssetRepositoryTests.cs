@@ -16,6 +16,45 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         _tenantFixture = tenantFixture;
     }
 
+    [Fact]
+    public async void TestCreateAlarmCommentAsync()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var result = await assetRepository.CreateAlarmCommentAsync(new[]
+        {
+            new RtEventCommentInputDto
+            {
+                ReceivedDateTime = DateTime.UtcNow,
+                Comment = "Test comment",
+                Parent = new[]
+                {
+                    new RtAssociationInputDto()
+                    {
+                        Target = new RtEntityId("Meshmakers.Alarm", new OctoObjectId("64a2c3ad1254d840838bbd09")),
+                        ModOption = AssociationModOptionsDto.Create
+                    }
+                }
+            }
+        });
+        
+        Assert.NotNull(result);
+        Assert.True(result.TotalCount == 1);
+    }
+
+    [Fact]
+    public async void TestGetAlarmCommentsAsync()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+        var assetRepository = new AssetRepository(tenantClient);
+        
+        var result = await assetRepository.GetCommentsForAlarmAsync("64a2c3ad1254d840838bbd09");
+        
+        Assert.NotNull(result);
+        Assert.True(result?.AlarmComments?.Items?.Count() > 1);
+    }
+
 
     [Fact]
     public async void TestGetEquipmentModelAsync()

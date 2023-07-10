@@ -26,4 +26,7 @@ public interface IAssetRepository
 
     Task<PagedResult<RtEquipmentMachine>>
         UpdateEquipmentMachinesAsync(IEnumerable<MutationDto<RtEquipmentMachineInputDto>> machineEntities);
+
+    Task<PagedResult<RtEventCommentDto>> CreateAlarmCommentAsync(IEnumerable<RtEventCommentInputDto> alarmComments);
+    Task<RtAlarmWithCommentsDto?> GetCommentsForAlarmAsync(string alarmId);
 }

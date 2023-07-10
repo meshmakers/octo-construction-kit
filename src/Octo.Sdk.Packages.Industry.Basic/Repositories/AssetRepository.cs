@@ -233,4 +233,34 @@ public class AssetRepository : IAssetRepository
         var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEquipmentMachine>>(getQuery);
         return new PagedResult<RtEquipmentMachine>(result);
     }
+
+    public async Task<PagedResult<RtEventCommentDto>> CreateAlarmCommentAsync(IEnumerable<RtEventCommentInputDto> commentEntities)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.CreateAlarmComment,
+            Variables = new
+            {
+                commentEntities
+            }
+        };
+    
+        var result = await _tenantClient.SendMutationAsync<IEnumerable<RtEventCommentDto>>(getQuery);
+        return new PagedResult<RtEventCommentDto>(result);
+    }
+
+    public async Task<RtAlarmWithCommentsDto?> GetCommentsForAlarmAsync(string alarmId)
+    {
+        var getQuery = new GraphQLRequest()
+        {
+            Query = GraphQl.GetAlarmComments,
+            Variables = new
+            {
+                rtId = alarmId
+            }
+        };
+
+        var result = await _tenantClient.SendQueryAsync<RtAlarmWithCommentsDto>(getQuery);
+        return result?.Items.FirstOrDefault() ?? null;
+    }
 }

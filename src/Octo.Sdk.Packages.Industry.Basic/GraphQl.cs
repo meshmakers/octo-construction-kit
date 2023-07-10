@@ -270,4 +270,41 @@ internal static class GraphQl
         }
       }
     ";
+
+    public const string CreateAlarmComment = @"
+        mutation($commentEntities: [MeshmakersEventsCommentInput]!) {
+          createMeshmakersEventsComments(entities: $commentEntities) {
+            rtId
+            comment
+            rtCreationDateTime
+            parent {
+              meshmakersAlarmConnection {
+                items {
+                  rtId
+                }
+              }
+            }
+          }
+        }
+      ";
+    
+    public const string GetAlarmComments = @"
+        query getAlarmComments($rtId: OctoObjectIdType!) {
+          meshmakersAlarmConnection(rtId: $rtId) {
+            items {
+              rtId
+              rtWellKnownName
+              children {
+                meshmakersEventsCommentConnection {
+                  items {
+                    rtId
+                    comment,
+                    receivedDateTime
+                  }
+                }
+              }
+            }
+          }
+        }
+      ";
 }

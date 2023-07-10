@@ -49,10 +49,10 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         var tenantClient = _tenantFixture.GetTenantClient();
         var assetRepository = new AssetRepository(tenantClient);
         
-        var result = await assetRepository.GetCommentsForAlarmAsync("64a2c3ad1254d840838bbd09");
+        var result = await assetRepository.GetCommentsForAlarmByRtIdAsync("64a2c3ad1254d840838bbd09");
         
         Assert.NotNull(result);
-        Assert.True(result?.AlarmComments?.Items?.Count() > 1);
+        Assert.True(result.AlarmComments?.Items?.Count() > 1);
     }
 
 
@@ -77,7 +77,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
         var equipmentGroup = await assetRepository.GetEquipmentByGroupRtIdAsync(new OctoObjectId("64a2b55a84c7869c60270d1a"));
         Assert.NotNull(equipmentGroup);
-        Assert.True(equipmentGroup.MachinesChildren.Items.Count() >= 3);
+        Assert.True(equipmentGroup.MachinesChildren?.Items?.Count() >= 3);
     }
 
 
@@ -90,8 +90,8 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
         var result = await assetRepository.GetAlarmsByMachineRtIdAndStateAsync(new OctoObjectId("64a2b64c3da56d342f1c3880"),
             AlarmStates.Received);
-        Assert.Equal(1, result.List.Count);
-        Assert.Equal(AlarmStates.Received, result.List.First().State);
+        Assert.Equal(1, result?.List.Count);
+        Assert.Equal(AlarmStates.Received, result?.List.First().State);
     }
 
     [Fact]
@@ -119,6 +119,19 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         Assert.Contains(result.List, dto => dto.RtId == new OctoObjectId("64a2c3ee53e42e7e7eaa25e2"));
         Assert.Contains(result.List, dto => dto.RtId == new OctoObjectId("64a2c3b3015933f66e1f240b"));
         Assert.Contains(result.List, dto => dto.RtId == new OctoObjectId("64a2c3ad1254d840838bbd09"));
+    }
+    
+    [Fact]
+    public async void TestGetMachinesAndAlarmsByGroupRtIdAsync()
+    {
+        var tenantClient = _tenantFixture.GetTenantClient();
+
+        var assetRepository = new AssetRepository(tenantClient);
+
+        var result = await assetRepository.GetMachinesAndAlarmsByGroupRtIdAsync(new OctoObjectId("64a2b55a84c7869c60270d1a"),
+            DateTime.MinValue, DateTime.MaxValue, "group");
+        Assert.Equal(1, result.List.Count);
+        Assert.NotNull(result.List?.First()?.MachinesChildren?.Items?.First()?.AlarmChildren?.Groupings);
     }
 
     [Fact]

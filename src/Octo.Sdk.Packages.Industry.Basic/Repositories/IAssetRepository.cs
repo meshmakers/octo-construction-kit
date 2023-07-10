@@ -28,5 +28,8 @@ public interface IAssetRepository
         UpdateEquipmentMachinesAsync(IEnumerable<MutationDto<RtEquipmentMachineInputDto>> machineEntities);
 
     Task<PagedResult<RtEventCommentDto>> CreateAlarmCommentAsync(IEnumerable<RtEventCommentInputDto> alarmComments);
-    Task<RtAlarmWithCommentsDto?> GetCommentsForAlarmAsync(string alarmId);
+    Task<RtAlarmWithCommentsDto?> GetCommentsForAlarmByRtIdAsync(string alarmRtId);
+    
+    Task<PagedResult<RtEquipmentGroupDto>> GetMachinesAndAlarmsByGroupRtIdAsync(OctoObjectId groupRtId, DateTime fromDateTime, DateTime toDateTime,
+        string groupBy);
 }

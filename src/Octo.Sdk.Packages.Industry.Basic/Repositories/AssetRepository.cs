@@ -42,7 +42,7 @@ public class AssetRepository : IAssetRepository
         };
     
         var result = await _tenantClient.SendQueryAsync<RtEquipmentGroupDto>(getQuery);
-        return result?.Items.FirstOrDefault();
+        return result?.Items?.FirstOrDefault();
     }
 
     public async Task<RtEquipmentGroupDto?> GetEquipmentByGroupRtIdAsync(OctoObjectId equipmentGroupRtId)
@@ -57,7 +57,7 @@ public class AssetRepository : IAssetRepository
         };
     
         var result = await _tenantClient.SendQueryAsync<RtEquipmentGroupDto>(getQuery);
-        return result?.Items.FirstOrDefault();
+        return result?.Items?.FirstOrDefault();
     }
     
     public async Task<PagedResult<RtAlarmDto>?> GetAlarmsByMachineRtIdAndStateAsync(OctoObjectId machineRtId, AlarmStates alarmState)
@@ -73,7 +73,7 @@ public class AssetRepository : IAssetRepository
         };
     
         var result = await _tenantClient.SendQueryAsync<RtEquipmentMachine>(getQuery);
-        var equipmentMachine = result?.Items.SingleOrDefault();
+        var equipmentMachine = result?.Items?.SingleOrDefault();
         if (equipmentMachine == null)
         {
             return null;
@@ -249,18 +249,36 @@ public class AssetRepository : IAssetRepository
         return new PagedResult<RtEventCommentDto>(result);
     }
 
-    public async Task<RtAlarmWithCommentsDto?> GetCommentsForAlarmAsync(string alarmId)
+    public async Task<RtAlarmWithCommentsDto?> GetCommentsForAlarmByRtIdAsync(string alarmRtId)
     {
         var getQuery = new GraphQLRequest()
         {
             Query = GraphQl.GetAlarmComments,
             Variables = new
             {
-                rtId = alarmId
+                rtId = alarmRtId
             }
         };
 
         var result = await _tenantClient.SendQueryAsync<RtAlarmWithCommentsDto>(getQuery);
-        return result?.Items.FirstOrDefault() ?? null;
+        return result?.Items?.FirstOrDefault() ?? null;
+    }
+    
+    public async Task<PagedResult<RtEquipmentGroupDto>> GetMachinesAndAlarmsByGroupRtIdAsync(OctoObjectId groupRtId, DateTime fromDateTime, DateTime toDateTime, string groupBy)
+    {
+        var getQuery = new GraphQLRequest
+        {
+            Query = GraphQl.GetMachinesAndAlarmsByGroup,
+            Variables = new 
+            {
+                groupRtId,
+                fromDateTime,
+                toDateTime,
+                groupBy
+            }
+        };
+
+        var result = await _tenantClient.SendQueryAsync<RtEquipmentGroupDto>(getQuery);
+        return new PagedResult<RtEquipmentGroupDto>(result?.Items ?? new List<RtEquipmentGroupDto>());
     }
 }

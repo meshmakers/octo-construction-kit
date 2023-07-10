@@ -43,7 +43,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="0.0.2307.7002" />
+      <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="0.0.2307.10005" />
     </ItemGroup>
 
 </Project>

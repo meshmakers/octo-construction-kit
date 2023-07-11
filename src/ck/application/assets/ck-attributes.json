@@ -53,6 +53,10 @@
     {
       "id": "Meshmakers.TechDesc.ApparentPower",
       "valueType": "Double"
+    },
+    {
+      "id": "Meshmakers.TechDesc.OperatingHoursCounter",
+      "valueType": "Int"
     }
   ]
 }

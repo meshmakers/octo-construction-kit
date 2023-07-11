@@ -12,8 +12,12 @@ internal static class GraphQl
               meshmakersEquipmentMachineConnection {
                 items {
                   rtId
+                  designation
+                  description
                   manufacturer
                   modelNumber
+                  serialNumber
+                  operatingHoursCounter
                 }
               }
             }
@@ -68,9 +72,13 @@ internal static class GraphQl
                               children {
                                 meshmakersEquipmentMachineConnection {
                                   items {
-                                    rtId
+                                   rtId
+                                    designation
+                                    description
                                     manufacturer
                                     modelNumber
+                                    serialNumber
+                                    operatingHoursCounter
                                   }
                                 }
                               }
@@ -254,6 +262,7 @@ internal static class GraphQl
           manufacturer
           modelNumber
           serialNumber
+          operatingHoursCounter
         }
       }
     ";
@@ -267,6 +276,7 @@ internal static class GraphQl
           manufacturer
           modelNumber
           serialNumber
+          operatingHoursCounter
         }
       }
     ";

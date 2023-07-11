@@ -54,6 +54,10 @@
     {
       "id": "Meshmakers.TechDesc.ApparentPower",
       "valueType": "Double"
+    },
+    {
+      "id": "Meshmakers.TechDesc.OperatingHoursCounter",
+      "valueType": "Int"
     }
   ],
   "entities": [
@@ -163,6 +167,10 @@
         {
           "id": "Meshmakers.TechDesc.Identification.SerialNumber",
           "name": "SerialNumber"
+        },
+        {
+          "id": "Meshmakers.TechDesc.OperatingHoursCounter",
+          "name": "OperatingHoursCounter"
         }
       ],
       "associations": []

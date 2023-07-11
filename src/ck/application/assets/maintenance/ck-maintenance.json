@@ -17,6 +17,10 @@
         {
           "id": "Meshmakers.TechDesc.Identification.SerialNumber",
           "name": "SerialNumber"
+        },
+        {
+          "id": "Meshmakers.TechDesc.OperatingHoursCounter",
+          "name": "OperatingHoursCounter"
         }
       ],
       "associations": [

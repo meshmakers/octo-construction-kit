@@ -12,4 +12,7 @@ public class RtEquipmentMachineInputDto : RtEquipmentInputDto
     
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
     public string? SerialNumber { get; set; }
+    
+    [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+    public int OperatingHoursCounter { get; set; } = 0;
 }

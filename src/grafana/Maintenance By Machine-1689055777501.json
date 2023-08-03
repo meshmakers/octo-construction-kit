@@ -1,0 +1,700 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "id": 123125,
+      "title": "Row title",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "grafana-simple-json-datasource",
+        "uid": "b0711b1a-13b0-4b47-b163-6f4c845e98c8"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 0,
+        "y": 1
+      },
+      "id": 123126,
+      "options": {
+        "displayLabels": [
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-simple-json-datasource",
+            "uid": "b0711b1a-13b0-4b47-b163-6f4c845e98c8"
+          },
+          "refId": "A",
+          "target": "$Machine",
+          "type": "table"
+        }
+      ],
+      "title": "Classification",
+      "transformations": [],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-simple-json-datasource",
+        "uid": "b07fcd47-63ca-45d0-b90c-45f6457d6277"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 5,
+        "y": 1
+      },
+      "id": 123127,
+      "options": {
+        "displayLabels": [
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-simple-json-datasource",
+            "uid": "b07fcd47-63ca-45d0-b90c-45f6457d6277"
+          },
+          "refId": "A",
+          "target": "$Machine",
+          "type": "table"
+        }
+      ],
+      "title": "Groups",
+      "transformations": [],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-simple-json-datasource",
+        "uid": "f632043c-abb4-4f8c-991e-36f78499fc67"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            }
+          },
+          "mappings": []
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 10,
+        "y": 1
+      },
+      "id": 123130,
+      "options": {
+        "displayLabels": [
+          "value"
+        ],
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "pieType": "pie",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "/.*/",
+          "values": false
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-simple-json-datasource",
+            "uid": "f632043c-abb4-4f8c-991e-36f78499fc67"
+          },
+          "refId": "A",
+          "target": "$Machine",
+          "type": "table"
+        }
+      ],
+      "title": "States",
+      "transformations": [],
+      "type": "piechart"
+    },
+    {
+      "datasource": {
+        "type": "fifemon-graphql-datasource",
+        "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 15,
+        "y": 1
+      },
+      "id": 123129,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "sum"
+          ],
+          "fields": "/^reactivatedCount$/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "meshmakersEquipmentMachineConnection.items.0.children.meshmakersAlarmConnection.items",
+          "datasource": {
+            "type": "fifemon-graphql-datasource",
+            "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+          },
+          "endTimePath": "endTime",
+          "groupBy": "",
+          "queryText": "query {\n  meshmakersEquipmentMachineConnection(rtId: \"$Machine\") {\n    items {\n      children {\n        meshmakersAlarmConnection(fieldFilter: [{attributeName:\"rtChangedDateTime\", operator: GREATER_THAN, comparisonValue:\"${__from:date:iso}\"}]) {\n          items {\n            reactivatedCount\n          }\n        }\n      }\n    }\n  }\n}\n",
+          "refId": "A",
+          "timePath": ""
+        }
+      ],
+      "title": "Reactivated",
+      "transformations": [],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "fifemon-graphql-datasource",
+        "uid": "a82c7812-746a-4425-9983-7c6b6b9fc8e9"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 19,
+        "y": 1
+      },
+      "id": 3,
+      "links": [],
+      "options": {
+        "maxItems": 30,
+        "query": "",
+        "showHeadings": true,
+        "showRecentlyViewed": false,
+        "showSearch": false,
+        "showStarred": true,
+        "tags": []
+      },
+      "pluginVersion": "9.5.3",
+      "tags": [],
+      "targets": [
+        {
+          "datasource": {
+            "type": "fifemon-graphql-datasource",
+            "uid": "a82c7812-746a-4425-9983-7c6b6b9fc8e9"
+          },
+          "refId": "A"
+        }
+      ],
+      "title": "Dashboards",
+      "type": "dashlist"
+    },
+    {
+      "datasource": {
+        "type": "fifemon-graphql-datasource",
+        "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "custom": {
+            "align": "left",
+            "cellOptions": {
+              "type": "color-text"
+            },
+            "filterable": true,
+            "inspect": false
+          },
+          "mappings": [],
+          "noValue": "-",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "text",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "State"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "dark-red",
+                        "index": 0,
+                        "text": "Received"
+                      },
+                      "1": {
+                        "color": "dark-orange",
+                        "index": 1,
+                        "text": "Cleared"
+                      },
+                      "2": {
+                        "color": "dark-red",
+                        "index": 2,
+                        "text": "Active"
+                      },
+                      "3": {
+                        "color": "dark-green",
+                        "index": 3,
+                        "text": "Acknowledged"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Group"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "index": 0,
+                        "text": "Unclassified"
+                      },
+                      "1": {
+                        "index": 1,
+                        "text": "Electrical"
+                      },
+                      "2": {
+                        "index": 2,
+                        "text": "Mechanical"
+                      },
+                      "3": {
+                        "index": 3,
+                        "text": "Leakage"
+                      },
+                      "4": {
+                        "index": 4,
+                        "text": "Quality/Loss of performance"
+                      },
+                      "5": {
+                        "index": 5,
+                        "text": "Risk of accidents/safety/environment"
+                      },
+                      "6": {
+                        "index": 6,
+                        "text": "Software/Control"
+                      },
+                      "7": {
+                        "index": 7,
+                        "text": "Optimization"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Classification"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "options": {
+                      "0": {
+                        "color": "text",
+                        "index": 0,
+                        "text": "Low"
+                      },
+                      "1": {
+                        "color": "dark-blue",
+                        "index": 1,
+                        "text": "Medium"
+                      },
+                      "2": {
+                        "color": "dark-red",
+                        "index": 2,
+                        "text": "High"
+                      }
+                    },
+                    "type": "value"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Count Reactivated"
+            },
+            "properties": [
+              {
+                "id": "custom.cellOptions",
+                "value": {
+                  "type": "gauge"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 11,
+        "w": 24,
+        "x": 0,
+        "y": 9
+      },
+      "id": 123124,
+      "options": {
+        "cellHeight": "sm",
+        "footer": {
+          "countRows": false,
+          "enablePagination": true,
+          "fields": [],
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true,
+        "sortBy": [
+          {
+            "desc": true,
+            "displayName": "Classification"
+          }
+        ]
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "aliasBy": "",
+          "annotationTags": "",
+          "annotationText": "",
+          "annotationTitle": "",
+          "constant": 6.5,
+          "dataPath": "meshmakersEquipmentMachineConnection.items.0.children.meshmakersAlarmConnection.items",
+          "datasource": {
+            "type": "fifemon-graphql-datasource",
+            "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+          },
+          "endTimePath": "endTime",
+          "groupBy": "",
+          "queryText": "query {\n  meshmakersEquipmentMachineConnection(rtId: \"$Machine\") {\n    items {\n      children {\n        meshmakersAlarmConnection(fieldFilter: [{attributeName:\"rtChangedDateTime\", operator: GREATER_THAN, comparisonValue:\"${__from:date:iso}\"}]) {\n          items {\n            message\n            state\n            receivedDateTime\n            clearedDateTime\n            reactivatedDateTime\n            acknowledgedDateTime\n            reactivatedCount\n            group\n            classification\n            alarmCause\n          }\n        }\n      }\n    }\n  }\n}\n",
+          "refId": "A",
+          "timePath": "Time"
+        }
+      ],
+      "title": "Maintenance Events",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {},
+            "indexByName": {},
+            "renameByName": {
+              "acknowledgedDateTime": "Acknowledged",
+              "alarmCause": "Cause",
+              "classification": "Classification",
+              "clearedDateTime": "Cleared",
+              "group": "Group",
+              "message": "Message",
+              "reactivatedCount": "Count Reactivated",
+              "reactivatedDateTime": "Reactivated",
+              "receivedDateTime": "Received",
+              "state": "State"
+            }
+          }
+        }
+      ],
+      "type": "table"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "Location 1",
+          "value": "64a2b2ff83f510d627206cfe"
+        },
+        "datasource": {
+          "type": "fifemon-graphql-datasource",
+          "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+        },
+        "definition": "query {\n  meshmakersEquipmentModelConnection(fieldFilter:[{attributeName:\"designation\", operator:EQUALS, comparisonValue:\"Maintenance\"}]) {\n    items {\n      designation\n      children {\n        meshmakersEquipmentGroupConnection {\n          items {\n            __value:rtId\n            __text:designation\n           \n          }\n        }\n      }\n    }\n  }\n} (meshmakersEquipmentModelConnection.items.0.children.meshmakersEquipmentGroupConnection.items)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Site",
+        "options": [],
+        "query": {
+          "dataPath": "meshmakersEquipmentModelConnection.items.0.children.meshmakersEquipmentGroupConnection.items",
+          "queryText": "query {\n  meshmakersEquipmentModelConnection(fieldFilter:[{attributeName:\"designation\", operator:EQUALS, comparisonValue:\"Maintenance\"}]) {\n    items {\n      designation\n      children {\n        meshmakersEquipmentGroupConnection {\n          items {\n            __value:rtId\n            __text:designation\n           \n          }\n        }\n      }\n    }\n  }\n}"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "Line 1",
+          "value": "64a2b55a84c7869c60270d1a"
+        },
+        "datasource": {
+          "type": "fifemon-graphql-datasource",
+          "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+        },
+        "definition": "query {\n  meshmakersEquipmentGroupConnection(rtId:\"${Site}\") {\n    items {      \n      children {\n        meshmakersEquipmentGroupConnection {\n          items {\n            __value:rtId\n            __text:designation\n          }\n        }\n      }\n    }\n  }\n}\n (meshmakersEquipmentGroupConnection.items.0.children.meshmakersEquipmentGroupConnection.items)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Line",
+        "options": [],
+        "query": {
+          "dataPath": "meshmakersEquipmentGroupConnection.items.0.children.meshmakersEquipmentGroupConnection.items",
+          "queryText": "query {\n  meshmakersEquipmentGroupConnection(rtId:\"${Site}\") {\n    items {      \n      children {\n        meshmakersEquipmentGroupConnection {\n          items {\n            __value:rtId\n            __text:designation\n          }\n        }\n      }\n    }\n  }\n}\n"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "Fräsmaschine 1",
+          "value": "64a2b66286eb404602d82503"
+        },
+        "datasource": {
+          "type": "fifemon-graphql-datasource",
+          "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+        },
+        "definition": "query {\n  meshmakersEquipmentGroupConnection(rtId:\"${Line}\") {\n    items {      \n      children {\n        meshmakersEquipmentMachineConnection {\n          items {\n            __value:rtId\n            __text:designation\n          }\n        }\n      }\n    }\n  }\n} (meshmakersEquipmentGroupConnection.items.0.children.meshmakersEquipmentMachineConnection.items)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Machine",
+        "options": [],
+        "query": {
+          "dataPath": "meshmakersEquipmentGroupConnection.items.0.children.meshmakersEquipmentMachineConnection.items",
+          "queryText": "query {\n  meshmakersEquipmentGroupConnection(rtId:\"${Line}\") {\n    items {      \n      children {\n        meshmakersEquipmentMachineConnection {\n          items {\n            __value:rtId\n            __text:designation\n          }\n        }\n      }\n    }\n  }\n}"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "hidden": false,
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ],
+    "time_options": [
+      "5m",
+      "15m",
+      "1h",
+      "6h",
+      "12h",
+      "24h",
+      "2d",
+      "7d",
+      "30d"
+    ],
+    "type": "timepicker"
+  },
+  "timezone": "browser",
+  "title": "Maintenance By Machine",
+  "uid": "ac371215-9b60-4963-9a55-95aa77c3dcf2",
+  "version": 38,
+  "weekStart": ""
+}

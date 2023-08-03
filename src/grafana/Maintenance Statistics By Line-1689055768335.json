@@ -1,0 +1,406 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 2,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "grafana-simple-json-datasource",
+        "uid": "d31b25c3-8b92-4b0a-97b9-4cc0ca9a17c2"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Machine",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-simple-json-datasource",
+            "uid": "d31b25c3-8b92-4b0a-97b9-4cc0ca9a17c2"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "$Line",
+          "type": "table"
+        }
+      ],
+      "title": "By classification",
+      "transformations": [],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-simple-json-datasource",
+        "uid": "edf34e9f-32fc-4906-99f5-333a102205c2"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Machine",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-simple-json-datasource",
+            "uid": "edf34e9f-32fc-4906-99f5-333a102205c2"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "$Line",
+          "type": "table"
+        }
+      ],
+      "title": "By group",
+      "transformations": [],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "grafana-simple-json-datasource",
+        "uid": "e984cc2a-af7b-4795-a1f6-9f76363444a9"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "fillOpacity": 80,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineWidth": 1,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "short"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "barRadius": 0,
+        "barWidth": 0.97,
+        "fullHighlight": false,
+        "groupWidth": 0.7,
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "orientation": "auto",
+        "showValue": "never",
+        "stacking": "none",
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        },
+        "xField": "Machine",
+        "xTickLabelRotation": 0,
+        "xTickLabelSpacing": 0
+      },
+      "pluginVersion": "9.5.3",
+      "targets": [
+        {
+          "datasource": {
+            "type": "grafana-simple-json-datasource",
+            "uid": "e984cc2a-af7b-4795-a1f6-9f76363444a9"
+          },
+          "rawQuery": true,
+          "refId": "A",
+          "target": "$Line",
+          "type": "table"
+        }
+      ],
+      "title": "By state",
+      "transformations": [],
+      "type": "barchart"
+    },
+    {
+      "datasource": {
+        "type": "fifemon-graphql-datasource",
+        "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 20,
+        "y": 8
+      },
+      "id": 3,
+      "options": {
+        "maxItems": 10,
+        "query": "",
+        "showHeadings": true,
+        "showRecentlyViewed": false,
+        "showSearch": false,
+        "showStarred": true,
+        "tags": []
+      },
+      "pluginVersion": "9.5.3",
+      "title": "Dashboards",
+      "type": "dashlist"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 38,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "current": {
+          "selected": false,
+          "text": "Location 1",
+          "value": "64a2b2ff83f510d627206cfe"
+        },
+        "datasource": {
+          "type": "fifemon-graphql-datasource",
+          "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+        },
+        "definition": "query {\n  meshmakersEquipmentModelConnection(fieldFilter:[{attributeName:\"designation\", operator:EQUALS, comparisonValue:\"Maintenance\"}]) {\n    items {\n      designation\n      children {\n        meshmakersEquipmentGroupConnection {\n          items {\n            __value:rtId\n            __text:designation\n           \n          }\n        }\n      }\n    }\n  }\n} (meshmakersEquipmentModelConnection.items.0.children.meshmakersEquipmentGroupConnection.items)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Site",
+        "options": [],
+        "query": {
+          "dataPath": "meshmakersEquipmentModelConnection.items.0.children.meshmakersEquipmentGroupConnection.items",
+          "queryText": "query {\n  meshmakersEquipmentModelConnection(fieldFilter:[{attributeName:\"designation\", operator:EQUALS, comparisonValue:\"Maintenance\"}]) {\n    items {\n      designation\n      children {\n        meshmakersEquipmentGroupConnection {\n          items {\n            __value:rtId\n            __text:designation\n           \n          }\n        }\n      }\n    }\n  }\n}"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "Line 1",
+          "value": "64a2b55a84c7869c60270d1a"
+        },
+        "datasource": {
+          "type": "fifemon-graphql-datasource",
+          "uid": "fe4633cb-4416-4d3d-9a95-b0aa04ae872a"
+        },
+        "definition": "query {\n  meshmakersEquipmentGroupConnection(rtId:\"${Site}\") {\n    items {      \n      children {\n        meshmakersEquipmentGroupConnection {\n          items {\n            __value:rtId\n            __text:designation\n          }\n        }\n      }\n    }\n  }\n}\n (meshmakersEquipmentGroupConnection.items.0.children.meshmakersEquipmentGroupConnection.items)",
+        "hide": 0,
+        "includeAll": false,
+        "multi": false,
+        "name": "Line",
+        "options": [],
+        "query": {
+          "dataPath": "meshmakersEquipmentGroupConnection.items.0.children.meshmakersEquipmentGroupConnection.items",
+          "queryText": "query {\n  meshmakersEquipmentGroupConnection(rtId:\"${Site}\") {\n    items {      \n      children {\n        meshmakersEquipmentGroupConnection {\n          items {\n            __value:rtId\n            __text:designation\n          }\n        }\n      }\n    }\n  }\n}\n"
+        },
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {},
+  "timezone": "",
+  "title": "Maintenance Statistics By Line",
+  "uid": "cf7aa53f-e7ea-40f8-be01-857a4995a60d",
+  "version": 19,
+  "weekStart": ""
+}

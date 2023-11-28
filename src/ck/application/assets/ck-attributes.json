@@ -57,6 +57,28 @@
     {
       "id": "Meshmakers.TechDesc.OperatingHoursCounter",
       "valueType": "Int"
+    },
+    {
+      "id": "Meshmakers.TechDesc.StandStillCounter",
+      "valueType": "Int"
+    },
+    {
+      "id": "Meshmakers.Maintenance.State",
+      "valueType": "Int",
+      "selectionValues": [
+        {
+          "key": 0,
+          "name": "Off"
+        },
+        {
+          "key": 1,
+          "name": "On"
+        },
+        {
+          "key": 2,
+          "name": "Error"
+        }
+      ]
     }
   ]
 }

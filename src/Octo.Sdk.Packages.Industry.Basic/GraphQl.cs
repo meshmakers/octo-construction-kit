@@ -18,6 +18,8 @@ internal static class GraphQl
                   modelNumber
                   serialNumber
                   operatingHoursCounter
+                  standStillCounter
+                  state
                 }
               }
             }
@@ -79,6 +81,8 @@ internal static class GraphQl
                                     modelNumber
                                     serialNumber
                                     operatingHoursCounter
+                                    standStillCounter
+                                    state
                                   }
                                 }
                               }
@@ -263,6 +267,8 @@ internal static class GraphQl
           modelNumber
           serialNumber
           operatingHoursCounter
+          standStillCounter
+          state
         }
       }
     ";

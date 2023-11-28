@@ -21,11 +21,17 @@
         {
           "id": "Meshmakers.TechDesc.OperatingHoursCounter",
           "name": "OperatingHoursCounter"
+        },
+        {
+          "id": "Meshmakers.TechDesc.StandStillCounter",
+          "name": "StandStillCounter"
+        },
+        {
+          "id": "Meshmakers.Maintenance.State",
+          "name": "State"
         }
       ],
-      "associations": [
-
-      ]
+      "associations": []
     }
   ]
 }

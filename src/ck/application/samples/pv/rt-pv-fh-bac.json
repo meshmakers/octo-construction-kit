@@ -1,0 +1,131 @@
+{
+  "entities": [
+    {
+      "rtId": "6571f8a6f0f747ad05f1b56a",
+      "ckId": "Meshmakers.Equipment.Group",
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "value": "FH BAC"
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "5fc8fc3d8b2fc75f925e21aa", "targetCkId": "Meshmakers.Equipment.Model" }
+      ]
+    },
+    {
+      "rtId": "6571facb8e5a39d3ad678cdc",
+      "ckId": "Meshmakers.Equipment.Photovoltaic",
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "value": "PV"
+        },
+        {
+          "id": "Meshmakers.TechDesc.Identification.Manufacturer",
+          "value": "HagerEnergy GmbH"
+        },
+        {
+          "id": "Meshmakers.TechDesc.Identification.ModelNumber",
+          "value": "S10"
+        },
+        {
+          "id": "Meshmakers.TechDesc.Identification.SerialNumber",
+          "value": "722102009007"
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "6571f8a6f0f747ad05f1b56a", "targetCkId": "Meshmakers.Equipment.Group" }
+      ]
+    },
+    {
+      "rtId": "6571fad2724e2a34fde3ee7a",
+      "ckId": "Meshmakers.Assets.Photovoltaic.Inverter",
+      "attributes": [
+        {
+          "id": "Meshmakers.TechDesc.Identification.Manufacturer",
+          "value": "E3DC"
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "6571facb8e5a39d3ad678cdc", "targetCkId": "Meshmakers.Equipment.Photovoltaic" }
+      ]
+    },
+    {
+      "rtId": "6571fadb813c6880aee2c837",
+      "ckId": "Meshmakers.Assets.Photovoltaic.Battery",
+      "attributes": [
+        {
+          "id": "Meshmakers.TechDesc.Pv.BatteryCapacity",
+          "value": 12
+        },
+        {
+          "id": "Meshmakers.TechDesc.Pv.BatteryStateOfCharge",
+          "value": 0
+        },
+        {
+          "id": "Meshmakers.TechDesc.Pv.BatteryPower",
+          "value": 0
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "6571facb8e5a39d3ad678cdc", "targetCkId": "Meshmakers.Equipment.Photovoltaic" }
+      ]
+    },
+    {
+      "rtId": "6571fae255e469b7744e806a",
+      "ckId": "Meshmakers.Assets.Photovoltaic.PvModules",
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "value": "Hauptgebäude"
+        },
+        {
+          "id": "Meshmakers.TechDesc.Pv.AmountOfPvModules",
+          "value": 33
+        },
+        {
+          "id": "Meshmakers.TechDesc.Pv.ProductionPower",
+          "value": 0
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "6571facb8e5a39d3ad678cdc", "targetCkId": "Meshmakers.Equipment.Photovoltaic" }
+      ]
+    },
+    {
+      "rtId": "6571fae9c308620baa10f02b",
+      "ckId": "Meshmakers.Assets.Meter",
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "value": "Netzbezug"
+        },
+        {
+          "id": "Meshmakers.TechDesc.ActivePower",
+          "value": 0
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "6571facb8e5a39d3ad678cdc", "targetCkId": "Meshmakers.Equipment.Photovoltaic" }
+      ]
+    },
+    {
+      "rtId": "6571faeec3bcaa2e57d9866f",
+      "ckId": "Meshmakers.Assets.Meter",
+      "attributes": [
+        {
+          "id": "Meshmakers.Designation",
+          "value": "Gebäudeverbrauch"
+        },
+        {
+          "id": "Meshmakers.TechDesc.ActivePower",
+          "value": 0
+        }
+      ],
+      "associations": [
+        { "roleId": "System.ParentChild", "targetRtId": "6571facb8e5a39d3ad678cdc", "targetCkId": "Meshmakers.Equipment.Photovoltaic" }
+      ]
+    }
+  ]
+}

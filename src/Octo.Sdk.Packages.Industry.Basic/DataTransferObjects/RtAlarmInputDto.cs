@@ -1,5 +1,4 @@
-using Meshmakers.Octo.Common.Shared;
-using Meshmakers.Octo.Common.Shared.DataTransferObjects;
+using Meshmakers.Octo.Communication.Contracts.DataTransferObjects;
 using Newtonsoft.Json;
 
 namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
@@ -7,7 +6,6 @@ namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 public class RtAlarmInputDto : RtEventInputDto
 {
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    [JsonConverter(typeof(NewtonEnumValueConverter))]
     public AlarmStates? State { get; set; }
     
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]

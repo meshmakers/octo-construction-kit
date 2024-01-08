@@ -4,29 +4,15 @@
         <AssemblyName>Meshmakers.Octo.Sdk.Packages.Industry.Basic</AssemblyName>
         <Description>Industry basic package of contruction kit entities</Description>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <PackageIcon>meshmakers64.png</PackageIcon>
         <PackageId>Meshmakers.Octo.Sdk.Packages.Industry.Basic</PackageId>
         <PackageLicenseFile>LICENSE</PackageLicenseFile>
         <PackageProjectUrl>https://www.meshmakers.io</PackageProjectUrl>
         <RepositoryUrl>https://github.com/meshmakers/octomesh</RepositoryUrl>
         <RootNamespace>Meshmakers.Octo.Sdk.Packages.Industry.Basic</RootNamespace>
-        <ImplicitUsings>true</ImplicitUsings>
-        <TargetFrameworks>net7.0;netstandard2.0</TargetFrameworks>
-    </PropertyGroup>
-
-    <PropertyGroup>
+        <OutputPath>..\..\bin\$(Configuration)\</OutputPath>
+        <DocumentationFile>..\..\bin\$(Configuration)\Meshmakers.Octo.Sdk.Packages.Industry.Basic.xml</DocumentationFile>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>$(NoWarn);1591</NoWarn>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-        <OutputPath>..\..\bin\Debug\</OutputPath>
-        <DocumentationFile>..\..\bin\Debug\Meshmakers.Octo.Sdk.Packages.Industry.Basic.xml</DocumentationFile>
-    </PropertyGroup>
-
-    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-        <OutputPath>..\..\bin\Release\</OutputPath>
-        <DocumentationFile>..\..\bin\Debug\Meshmakers.Octo.Sdk.Packages.Industry.Basic.xml</DocumentationFile>
     </PropertyGroup>
 
     <ItemGroup>
@@ -43,7 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="0.0.2307.10005" />
+      <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="3.0.19" />
     </ItemGroup>
 
 </Project>

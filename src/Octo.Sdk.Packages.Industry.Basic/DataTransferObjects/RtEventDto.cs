@@ -1,4 +1,4 @@
-using Meshmakers.Octo.Common.Shared.DataTransferObjects;
+using Meshmakers.Octo.Communication.Contracts.DataTransferObjects;
 
 namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 

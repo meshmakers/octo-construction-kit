@@ -1,4 +1,3 @@
-using Meshmakers.Octo.Common.Shared;
 using Newtonsoft.Json;
 
 namespace Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
@@ -21,6 +20,5 @@ public class RtEquipmentMachineInputDto : RtEquipmentInputDto
     public int? StandStillCounter { get; set; }
     
     [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
-    [JsonConverter(typeof(NewtonEnumValueConverter))]
     public MachineState? State { get; set; }
 }

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Basic.SystemTests", "tests\Octo.Sdk.Packages.Industry.Basic.SystemTests\Octo.Sdk.Packages.Industry.Basic.SystemTests.csproj", "{ACE14157-8D7C-48BD-BB39-129494C18264}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ConstructionKits", "ConstructionKits", "{BFB00BCB-76B9-4AAF-A330-4442351363D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

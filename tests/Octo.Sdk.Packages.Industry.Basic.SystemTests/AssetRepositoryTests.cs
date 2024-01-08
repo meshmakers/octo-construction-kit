@@ -1,6 +1,7 @@
 ﻿using System.Globalization;
-using Meshmakers.Octo.Common.Shared;
-using Meshmakers.Octo.Common.Shared.DataTransferObjects;
+using Meshmakers.Octo.Communication.Contracts.DataTransferObjects;
+using Meshmakers.Octo.ConstructionKit.Contracts;
+using Meshmakers.Octo.Runtime.Contracts;
 using Meshmakers.Octo.Sdk.Packages.Industry.Basic.DataTransferObjects;
 using Meshmakers.Octo.Sdk.Packages.Industry.Basic.Repositories;
 using Xunit;
@@ -64,7 +65,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         var assetRepository = new AssetRepository(tenantClient);
 
         var result = await assetRepository.GetEquipmentModelAsync("Demo");
-        Assert.Equal(1, result.List.Count);
+        Assert.Single(result.List);
         Assert.Equal("Demo", result.List.First().Designation);
     }
 
@@ -102,7 +103,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
         var assetRepository = new AssetRepository(tenantClient);
 
         var result = await assetRepository.GetAlarmByRtIdQueryAsync(new OctoObjectId("64a2c3ee53e42e7e7eaa25e2"));
-        Assert.Equal(1, result.List.Count);
+        Assert.Single(result.List);
         Assert.Equal(new OctoObjectId("64a2c3ee53e42e7e7eaa25e2"), result.List.First().RtId);
     }
     
@@ -130,7 +131,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
         var result = await assetRepository.GetMachinesAndAlarmsByGroupRtIdAsync(new OctoObjectId("64a2b55a84c7869c60270d1a"),
             DateTime.MinValue, DateTime.MaxValue, "group");
-        Assert.Equal(1, result.List.Count);
+        Assert.Single(result.List);
         Assert.NotNull(result.List?.First()?.MachinesChildren?.Items?.First()?.AlarmChildren?.Groupings);
     }
 
@@ -143,7 +144,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
         var result = await assetRepository.GetAlarmsByMachineRtIdAsync(new OctoObjectId("64a2b64c3da56d342f1c3880"),
             DateTime.MinValue, DateTime.MaxValue, "group");
-        Assert.Equal(1, result.List.Count);
+        Assert.Single(result.List);
         Assert.NotNull(result.List.First().AlarmChildren?.Groupings);
     }
 
@@ -177,8 +178,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
         var result = await assetRepository.CreateAlarmsAsync(alarmList);
-        Assert.Equal(1, result.List.Count);
-        Assert.NotNull(result.List.First().RtId);
+        Assert.Single(result.List);
         Assert.Equal("Hi test", result.List.First().Message);
         Assert.Equal(wellKnown, result.List.First().RtWellKnownName);
     }
@@ -206,8 +206,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
         var result = await assetRepository.UpdateAlarmsAsync(alarmList);
-        Assert.Equal(1, result.List.Count);
-        Assert.NotNull(result.List.First().RtId);
+        Assert.Single(result.List);
         Assert.Equal(message, result.List.First().Message);
     }
 
@@ -230,8 +229,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
         var result = await assetRepository.CreateEquipmentModelsAsync(modelEntities);
-        Assert.Equal(1, result.List.Count);
-        Assert.NotNull(result.List.First().RtId);
+        Assert.Single(result.List);
         Assert.Equal("Hi test", result.List.First().Designation);
     }
 
@@ -258,8 +256,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
         var result = await assetRepository.UpdateEquipmentModelsAsync(modelEntities);
-        Assert.Equal(1, result.List.Count);
-        Assert.NotNull(result.List.First().RtId);
+        Assert.Single(result.List);
         Assert.Equal(message, result.List.First().Designation);
     }
 
@@ -286,8 +283,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
         var result = await assetRepository.CreateEquipmentGroupsAsync(groupEntities);
-        Assert.Equal(1, result.List.Count);
-        Assert.NotNull(result.List.First().RtId);
+        Assert.Single(result.List);
         Assert.Equal("Hi test", result.List.First().Designation);
     }
 
@@ -314,8 +310,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
         var result = await assetRepository.UpdateEquipmentGroupsAsync(groupEntities);
-        Assert.Equal(1, result.List.Count);
-        Assert.NotNull(result.List.First().RtId);
+        Assert.Single(result.List);
         Assert.Equal(message, result.List.First().Designation);
     }
     
@@ -342,8 +337,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
         var result = await assetRepository.CreateEquipmentMachinesAsync(machineEntities);
-        Assert.Equal(1, result.List.Count);
-        Assert.NotNull(result.List.First().RtId);
+        Assert.Single(result.List);
         Assert.Equal("Hi test", result.List.First().Designation);
     }
 
@@ -370,8 +364,7 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
         var result = await assetRepository.UpdateEquipmentMachinesAsync(machineEntities);
-        Assert.Equal(1, result.List.Count);
-        Assert.NotNull(result.List.First().RtId);
+        Assert.Single(result.List);
         Assert.Equal(message, result.List.First().Designation);
     }
 }

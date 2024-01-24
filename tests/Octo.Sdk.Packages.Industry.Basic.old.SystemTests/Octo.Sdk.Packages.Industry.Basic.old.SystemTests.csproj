@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyName>Octo.Sdk.Packages.Industry.Basic.SystemTests</AssemblyName>
         <IsPackable>false</IsPackable>
         <PackageProjectUrl>https://www.meshmakers.io</PackageProjectUrl>
         <RepositoryUrl>https://github.com/meshmakers/octomesh</RepositoryUrl>
         <RootNamespace>Octo.Sdk.Packages.Industry.Basic.SystemTests</RootNamespace>
+        <PackageId>Octo.Sdk.Packages.Industry.Basic.old.SystemTests</PackageId>
     </PropertyGroup>
 
     <ItemGroup>
@@ -36,7 +36,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Octo.Sdk.Packages.Industry.Basic\Octo.Sdk.Packages.Industry.Basic.csproj" />
+      <ProjectReference Include="..\..\src\Octo.Sdk.Packages.Industry.Basic.old\Octo.Sdk.Packages.Industry.Basic.old.csproj" />
     </ItemGroup>
 
 </Project>

@@ -1,0 +1,25 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: TechDesc.Identification.Manufacturer
+  valueType: String
+  description: manufacturer name
+  metaData:
+    - key: semanticId
+      value: "0173-1#02-AAO677#002"
+      description: legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation
+
+- id: TechDesc.Identification.ModelNumber
+  valueType: String
+  description: fabrication number
+  metaData:
+    - key: semanticId
+      value: "0173-1#02-AAO674#004"
+      description: alphanumeric character sequence assigned to a fabricated product, which allows the date, time and circumstances of fabrication to be traced
+
+- id: TechDesc.Identification.SerialNumber
+  valueType: String
+  description: Serial number
+  metaData:
+    - key: semanticId
+      value: "0173-1#02-AAM556#002"
+      description: Unique combination of numbers and letters used to identify the device once it has been manufactured

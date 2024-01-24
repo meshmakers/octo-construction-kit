@@ -1,11 +1,11 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 enums:
-- enumId: SampleEnum
+- enumId: State
   useFlags: false
   values:
   - key: 0
-    name: Name0
+    name: Off
   - key: 1
-    name: Name1
+    name: On
   - key: 2
-    name: Name2
+    name: Error

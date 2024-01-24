@@ -1,0 +1,11 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: OperatingHoursCounter
+  valueType: Int
+
+- id: StandStillCounter
+  valueType: Int
+
+- id: State
+  valueType: Enum
+  valueCkEnumId: IndustryBasic/State

@@ -1,0 +1,17 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Machine
+  derivedFromCkTypeId: Basic/Asset
+  attributes:
+  - id: IndustryBasic/TechDesc.Identification.Manufacturer
+    name: Manufacturer
+  - id: IndustryBasic/TechDesc.Identification.ModelNumber
+    name: ModelNumber
+  - id: IndustryBasic/TechDesc.Identification.SerialNumber
+    name: SerialNumber
+  - id: IndustryBasic/OperatingHoursCounter
+    name: OperatingHours
+  - id: IndustryBasic/StandStillCounter
+    name: StandStillCounter
+  - id: IndustryBasic/State
+    name: State

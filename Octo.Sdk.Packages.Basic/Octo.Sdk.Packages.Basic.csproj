@@ -20,4 +20,10 @@
     <ItemGroup>
       <None Remove="ConstructionKit\types\EquipmentModel.yaml" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ConstructionKit\attributes\" />
+      <Folder Include="ConstructionKit\enums\" />
+      <Folder Include="ConstructionKit\records\" />
+    </ItemGroup>
 </Project>

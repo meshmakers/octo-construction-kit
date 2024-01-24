@@ -8,4 +8,8 @@ enums:
   - key: 1
     name: On
   - key: 2
+    name: Unknown
+  - key: 3
     name: Error
+  - key: 4
+    name: Idle

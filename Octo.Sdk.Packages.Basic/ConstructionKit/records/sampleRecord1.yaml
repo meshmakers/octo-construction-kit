@@ -1,0 +1,6 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: SampleRecord
+  attributes:
+  - id: Basic/SampleAttribute1
+    name: MyAttribute

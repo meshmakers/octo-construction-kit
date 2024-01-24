@@ -1,0 +1,58 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-compiled.schema.json
+types:
+- typeId: Asset
+  derivedFromCkTypeId: Basic/Equipment
+  associations:
+  - id: Basic/RelatedEquipment
+    targetCkTypeId: Basic/EquipmentGroup
+- isCollectionRoot: true
+  typeId: NamedEntity
+  derivedFromCkTypeId: System/Entity
+  isAbstract: true
+  attributes:
+  - id: System/Name
+    name: Name
+  - id: System/Description
+    name: Description
+- typeId: EquipmentGroup
+  derivedFromCkTypeId: Basic/NamedEntity
+  associations:
+  - id: System/ParentChild
+    targetCkTypeId: Basic/EquipmentModel
+  - id: System/ParentChild
+    targetCkTypeId: Basic/EquipmentGroup
+- typeId: EquipmentModel
+  derivedFromCkTypeId: Basic/NamedEntity
+- typeId: Equipment
+  derivedFromCkTypeId: Basic/NamedEntity
+  isAbstract: true
+  associations:
+  - id: System/ParentChild
+    targetCkTypeId: Basic/EquipmentGroup
+associationRoles:
+- id: RelatedEquipment
+  inboundName: RelatesTo
+  outboundName: RelatesFrom
+  inboundMultiplicity: N
+  outboundMultiplicity: N
+attributes:
+- id: SampleAttribute1
+  valueType: String
+records:
+- recordId: SampleRecord
+  attributes:
+  - id: Basic/SampleAttribute1
+    name: MyAttribute
+enums:
+- enumId: SampleEnum
+  useFlags: false
+  values:
+  - key: 0
+    name: Name0
+  - key: 1
+    name: Name1
+  - key: 2
+    name: Name2
+modelId: Basic
+dependencies:
+- System

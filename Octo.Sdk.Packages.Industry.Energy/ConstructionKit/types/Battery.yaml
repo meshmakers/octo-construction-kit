@@ -1,0 +1,32 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Battery
+  derivedFromCkTypeId: IndustryBasic/Machine
+  attributes:
+  - id: IndustryEnergy/Voltage
+    name: Voltage
+    isOptional: true
+  - id: IndustryEnergy/Ampere
+    name: Ampere
+  - id: IndustryEnergy/Power
+    name: Power
+  - id: IndustryEnergy/Energy
+    name: Energy.Imported
+    isOptional: true
+  - id: IndustryEnergy/Energy
+    name: Energy.Exported
+    isOptional: true
+  - id: IndustryEnergy/SoC
+    name: SoC
+  - id: IndustryEnergy/SoH
+    name: SoH
+    isOptional: true
+  - id: IndustryEnergy/NumofCycles
+    name: NumofCycles
+    isOptional: true
+  - id: IndustryEnergy/Capacity
+    name: Capacity
+    isOptional: true
+  - id: Basic/Temperature
+    name: Temperature
+    isOptional: true

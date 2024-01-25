@@ -1,0 +1,27 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: EnergyMeter
+  derivedFromCkTypeId: IndustryBasic/Machine
+  attributes:
+  - id: IndustryEnergy/Voltage
+    name: Voltage
+    isOptional: true
+  - id: IndustryEnergy/Ampere
+    name: Ampere
+  - id: IndustryEnergy/Power
+    name: Power
+  - id: IndustryEnergy/ApparentPower
+    name: Power.Apparent
+    isOptional: true
+  - id: IndustryEnergy/ReactivePower
+    name: Power.Reactive
+    isOptional: true
+  - id: IndustryEnergy/Energy
+    name: Energy.Imported
+    isOptional: true
+  - id: IndustryEnergy/Energy
+    name: Energy.Exported
+    isOptional: true
+  - id: IndustryEnergy/Frequency
+    name: Frequency
+    isOptional: true

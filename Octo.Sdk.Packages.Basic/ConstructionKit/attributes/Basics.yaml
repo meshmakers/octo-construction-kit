@@ -1,0 +1,7 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Temperature
+    valueType: Double
+    metaData:
+      - key: Unit
+        value: "°C"

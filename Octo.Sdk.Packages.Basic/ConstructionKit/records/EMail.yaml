@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: EMail
+  attributes:
+    - id: Basic/EMailAddress
+      name: EMail
+    - id: Basic/EMailPublicKey
+      name: PublicKey
+      isOptional: true
+    - id: Basic/EMailTypeOfEmailAddress
+      name: TypeOfEMail
+      isOptional: true
+    - id: Basic/EMailTypeOfPublickKey
+      name: TypeOfPublicKey
+      isOptional: true

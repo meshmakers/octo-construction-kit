@@ -1,0 +1,11 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: Marking
+  attributes:
+    - id: System/Name
+      name: Name
+    - id: System/File
+      name: File
+    - id: System/Description
+      name: AdditionalText
+      isOptional: true

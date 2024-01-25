@@ -1,0 +1,25 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Nameplate
+  derivedFromCkTypeId: System/Entity
+  attributes:
+    - id: Basic/NamePlate.ManufacturerName
+      name: ManufacturerName
+    - id: Basic/NamePlate.ManufacturerProductDesignation
+      name: ManufacturerProductDesignation
+    - id: Basic/NamePlate.Address
+      name: Address
+      isOptional: true
+    - id: Basic/NamePlate.ManufacturerProductFamily
+      name: ManufacturerProductFamily
+    - id: Basic/NamePlate.SerialNumber
+      name: SerialNumber
+      isOptional: true
+    - id: Basic/NamePlate.YearOfConstruction
+      name: YearOfConstruction
+    - id: Basic/NamePlate.Markings
+      name: Markings
+      isOptional: true
+    - id: Basic/NamePlate.AssetSpecificProperties
+      name: AssetSpecificProperties
+      isOptional: true

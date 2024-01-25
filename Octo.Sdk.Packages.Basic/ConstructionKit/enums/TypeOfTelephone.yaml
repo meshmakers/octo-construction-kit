@@ -1,0 +1,29 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: TypeOfTelephoneEnhanced
+  useFlags: false
+  values:
+  - key: 1
+    name: Office
+  - key: 2
+    name: OfficeMobile
+  - key: 3
+    name: Secretary
+  - key: 4
+    name: Substitute
+  - key: 5
+    name: Home
+  - key: 6
+    name: PrivateMobile
+  
+- enumId: TypeOfTelephoneBasic
+  useFlags: false
+  values:
+    - key: 1
+      name: Office
+    - key: 3
+      name: Secretary
+    - key: 4
+      name: Substitute
+    - key: 5
+      name: Home

@@ -11,16 +11,16 @@ types:
   - id: IndustryEnergy/Power
     name: Power
   - id: IndustryEnergy/ApparentPower
-    name: Power.Apparent
+    name: ApparentPower
     isOptional: true
   - id: IndustryEnergy/ReactivePower
-    name: Power.Reactive
+    name: ReactivePower
     isOptional: true
-  - id: IndustryEnergy/Energy
-    name: Energy.Imported
+  - id: IndustryEnergy/ImportedEnergy
+    name: ImportedEnergy
     isOptional: true
-  - id: IndustryEnergy/Energy
-    name: Energy.Exported
+  - id: IndustryEnergy/ExportedEnergy
+    name: ExportedEnergy
     isOptional: true
   - id: IndustryEnergy/Frequency
     name: Frequency

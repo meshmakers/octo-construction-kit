@@ -1,11 +1,11 @@
-$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
-types:
-- typeId: Inverter
-  derivedFromCkTypeId: IndustryBasic/Machine
-  attributes:
-  - id: Sample1/SampleAttribute1
-    name: MyAttribute
-  - id: Sample1/SampleAttribute2
-    name: MyRecord
-  - id: Sample1/SampleAttribute3
-    name: MyEnum
+#$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+#types:
+#- typeId: Inverter
+#  derivedFromCkTypeId: IndustryBasic/Machine
+#  attributes:
+#  - id: Sample1/SampleAttribute1
+#    name: MyAttribute
+#  - id: Sample1/SampleAttribute2
+#    name: MyRecord
+#  - id: Sample1/SampleAttribute3
+#    name: MyEnum

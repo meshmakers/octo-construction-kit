@@ -10,11 +10,11 @@ types:
     name: Ampere
   - id: IndustryEnergy/Power
     name: Power
-  - id: IndustryEnergy/Energy
-    name: Energy.Imported
+  - id: IndustryEnergy/ImportedEnergy
+    name: ImportedEnergy
     isOptional: true
-  - id: IndustryEnergy/Energy
-    name: Energy.Exported
+  - id: IndustryEnergy/ExportedEnergy
+    name: ExportedEnergy
     isOptional: true
   - id: IndustryEnergy/SoC
     name: SoC

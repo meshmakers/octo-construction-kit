@@ -42,10 +42,17 @@ attributes:
       value: "Hz"
     - key: Decimals
       value: 2
-- id: Energy
+- id: ImportedEnergy
   valueType: Double
   metaData:
     - key: Unit
       value: "kWh"
     - key: Decimals
       value: 2
+- id: ExportedEnergy
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "kWh"
+    - key: Decimals
+      value: 2      

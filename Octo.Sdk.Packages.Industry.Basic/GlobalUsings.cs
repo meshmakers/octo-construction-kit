@@ -1,1 +1,1 @@
-global using Meshmakers.Octo.Runtime.Contracts.RepositoryEntities;
+global using Octo.Sdk.Packages.Basic.ConstructionKit.Generated.Basic.v1;

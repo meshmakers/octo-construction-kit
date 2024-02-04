@@ -13,6 +13,8 @@
         <DocumentationFile>..\..\bin\$(Configuration)\Meshmakers.Octo.Sdk.Packages.Industry.Basic.xml</DocumentationFile>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <NoWarn>$(NoWarn);1591</NoWarn>
+        <Configurations>Debug;Release;DebugL</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
@@ -29,7 +31,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="3.0.35" />
+      <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="$(OctoVersion)" />
     </ItemGroup>
 
 </Project>

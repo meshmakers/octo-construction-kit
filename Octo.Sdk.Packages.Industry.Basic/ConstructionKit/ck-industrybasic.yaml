@@ -1,0 +1,42 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-compiled.schema.json
+types:
+- typeId: Machine
+  derivedFromCkTypeId: Basic-1.0.0/Asset-1.0.0
+  attributes:
+  - id: Basic-1.0.0/NamePlate-1.0.0
+    name: NamePlate
+  - id: IndustryBasic-1.0.0/OperatingHoursCounter-1.0.0
+    name: OperatingHours
+    isOptional: true
+  - id: IndustryBasic-1.0.0/StandStillCounter-1.0.0
+    name: StandStillCounter
+    isOptional: true
+  - id: IndustryBasic-1.0.0/State-1.0.0
+    name: State
+associationRoles: []
+attributes:
+- id: OperatingHoursCounter
+  valueType: Int
+- id: StandStillCounter
+  valueType: Int
+- id: State
+  valueType: Enum
+  valueCkEnumId: IndustryBasic-1.0.0/State-1.0.0
+records: []
+enums:
+- enumId: State
+  useFlags: false
+  values:
+  - key: 0
+    name: Off
+  - key: 1
+    name: On
+  - key: 2
+    name: Unknown
+  - key: 3
+    name: Error
+  - key: 4
+    name: Idle
+modelId: IndustryBasic
+dependencies:
+- Basic

@@ -6,11 +6,13 @@
         <RepositoryUrl>https://github.com/meshmakers/octomesh</RepositoryUrl>
         <RootNamespace>Octo.Sdk.Packages.Industry.Basic.SystemTests</RootNamespace>
         <PackageId>Octo.Sdk.Packages.Industry.Basic.old.SystemTests</PackageId>
+        <Configurations>Debug;Release;DebugL</Configurations>
+        <Platforms>AnyCPU</Platforms>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="FakeItEasy" Version="8.1.0" />
-        <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="3.0.118" />
+        <PackageReference Include="Meshmakers.Octo.Sdk.ServiceClient" Version="$(OctoVersion)" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.1" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />

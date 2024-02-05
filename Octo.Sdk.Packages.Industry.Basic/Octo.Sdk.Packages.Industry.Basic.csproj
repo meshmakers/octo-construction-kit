@@ -21,4 +21,8 @@
       <Folder Include="ConstructionKit\associations\" />
       <Folder Include="ConstructionKit\records\" />
     </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="ConstructionKit\ck-industrybasic.cache.json" />
+    </ItemGroup>
 </Project>

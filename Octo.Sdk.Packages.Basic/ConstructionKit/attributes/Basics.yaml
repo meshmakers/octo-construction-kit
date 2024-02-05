@@ -5,3 +5,5 @@ attributes:
     metaData:
       - key: Unit
         value: "°C"
+  - id: File
+    valueType: String

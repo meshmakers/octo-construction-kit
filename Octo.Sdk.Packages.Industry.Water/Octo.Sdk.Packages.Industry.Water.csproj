@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <LangVersion>latestmajor</LangVersion>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>true</ImplicitUsings>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="3.0.28.0"/>
+        <PackageReference Include="Meshmakers.Octo.ConstructionKit.SourceGeneration" OutputItemType="Analyzer" ReferenceOutputAssembly="false" Version="3.0.28.0"/>
+        <PackageReference Include="Meshmakers.Octo.ConstructionKit.MsBuildTasks" Version="3.0.28.0" PrivateAssets="all"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ConstructionKitFolder Include="ConstructionKit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ConstructionKit\associations\" />
+    </ItemGroup>
+</Project>

@@ -1,5 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
-- id: SampleAttribute3
-  valueType: Enum
-  valueCkEnumId: Sample1/SampleEnum
+  - id: PhaseInfo
+    valueType: Record
+    valueCkEnumId: IndustryEnergy/PhaseInfo
+  

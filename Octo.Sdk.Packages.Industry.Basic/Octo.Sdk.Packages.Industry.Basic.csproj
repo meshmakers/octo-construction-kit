@@ -8,13 +8,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="3.0.28.0"/>
-        <PackageReference Include="Meshmakers.Octo.ConstructionKit.SourceGeneration" OutputItemType="Analyzer" ReferenceOutputAssembly="false" Version="3.0.28.0"/>
-        <PackageReference Include="Meshmakers.Octo.ConstructionKit.MsBuildTasks" Version="3.0.28.0" PrivateAssets="all"/>
+        <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="3.0.118" />
+        <PackageReference Include="Meshmakers.Octo.ConstructionKit.SourceGeneration" OutputItemType="Analyzer" ReferenceOutputAssembly="false" Version="3.0.118" />
+        <PackageReference Include="Meshmakers.Octo.ConstructionKit.MsBuildTasks" Version="3.0.118" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup>
-        <ConstructionKitFolder Include="ConstructionKit"/>
+        <ConstructionKitFolder Include="ConstructionKit" />
     </ItemGroup>
 
     <ItemGroup>

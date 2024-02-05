@@ -3,9 +3,33 @@ types:
 - typeId: Inverter
   derivedFromCkTypeId: IndustryBasic/Machine
   attributes:
-  - id: Sample1/SampleAttribute1
-    name: MyAttribute
-  - id: Sample1/SampleAttribute2
-    name: MyRecord
-  - id: Sample1/SampleAttribute3
-    name: MyEnum
+    - id: IndustryEnergy/Voltage
+      name: DCVoltage
+      isOptional: true
+    - id: IndustryEnergy/Ampere
+      name: DCAmpere
+    - id: IndustryEnergy/Voltage
+      name: Voltage
+      isOptional: true
+    - id: IndustryEnergy/Ampere
+      name: Ampere
+    - id: IndustryEnergy/Power
+      name: MaximumPower
+    - id: IndustryEnergy/Power
+      name: Power
+    - id: IndustryBasic/State
+      name: State
+    - id: IndustryEnergy/PhaseInfo
+      name: AC.L1
+      isOptional: true
+    - id: IndustryEnergy/PhaseInfo
+      name: AC.L2
+      isOptional: true
+    - id: IndustryEnergy/PhaseInfo
+      name: AC.L3
+      isOptional: true
+  associations:
+    - id: System/ParentChild
+      targetCkTypeId: IndustryEnergy/Photovoltaic
+    - id: System/ParentChild
+      targetCkTypeId: IndustryBasic/Machine

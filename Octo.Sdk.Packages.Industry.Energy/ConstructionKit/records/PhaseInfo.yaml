@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: PhaseInfo
+  attributes:
+    - id: IndustryEnergy/Voltage
+      name: Voltage
+      isOptional: true
+    - id: IndustryEnergy/Ampere
+      name: Ampere
+    - id: IndustryEnergy/Power
+      name: Power
+    - id: IndustryEnergy/Frequency
+      name: Frequency
+      isOptional: true

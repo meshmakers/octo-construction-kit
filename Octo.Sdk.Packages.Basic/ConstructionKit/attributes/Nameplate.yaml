@@ -1,5 +1,10 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
+  - id: NamePlate
+    valueType: Record
+    valueCkRecordId: Basic/NamePlate
+    
+        
   - id: NamePlate.ManufacturerName
     valueType: String
     metaData:
@@ -40,14 +45,14 @@ attributes:
         description: "Year as completion date of object"
   - id: NamePlate.Markings
     valueType: RecordArray
-    valueCkRecordId: Basic/Markings
+    valueCkRecordId: Basic/Marking
     metaData:
       - key: semanticId
         value: ""
         description: ""
   - id: NamePlate.AssetSpecificProperties
     valueType: RecordArray
-    valueCkRecordId: Basic/Markings
+    valueCkRecordId: Basic/Marking
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO856#002"

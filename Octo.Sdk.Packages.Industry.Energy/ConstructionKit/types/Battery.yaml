@@ -30,3 +30,6 @@ types:
   - id: Basic/Temperature
     name: Temperature
     isOptional: true
+  associations:
+    - id: System/ParentChild
+      targetCkTypeId: IndustryEnergy/Inverter

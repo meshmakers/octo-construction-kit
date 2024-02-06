@@ -57,6 +57,3 @@ attributes:
       - key: semanticId
         value: "0173-1#02-AAO856#002"
         description: "guideline, stipulation or legislation used for determining conformity"
-  - id: NamePlate
-    valueType: Record
-    valueCkRecordId: Basic/Nameplate

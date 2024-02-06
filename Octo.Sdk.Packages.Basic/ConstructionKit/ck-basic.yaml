@@ -1,10 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-compiled.schema.json
 types:
-- typeId: Asset
-  derivedFromCkTypeId: Basic-1.0.0/Equipment-1.0.0
-  associations:
-  - id: Basic-1.0.0/RelatedEquipment-1.0.0
-    targetCkTypeId: Basic-1.0.0/EquipmentGroup-1.0.0
 - isCollectionRoot: true
   typeId: NamedEntity
   derivedFromCkTypeId: System-1.0.0/Entity-1.0.0
@@ -41,101 +36,6 @@ associationRoles:
   inboundMultiplicity: N
   outboundMultiplicity: N
 attributes:
-- id: AddressDepartment
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO127#003
-    description: administrative section within an organisation where a business partner is located
-- id: AddressStreet
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO128#002
-    description: street name and house number
-- id: AddressZipcode
-  valueType: Int
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO129#002
-    description: ZIP code of address
-- id: AddressPOBox
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO130#002
-    description: P.O. box number
-- id: AddressZipOfPOBox
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO131#002
-    description: ZIP code of P.O. box address
-- id: AddressCityTown
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO132#002
-    description: town or city
-- id: AddressStateCounty
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO133#002
-    description: federal state a part of a state
-- id: AddressNationalCode
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO134#002
-    description: 'code of a country Note: Country codes defined accord. to DIN EN ISO 3166-1'
-- id: AddressVATnumber
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO135#002
-    description: VAT identification number of the business partner
-- id: AddressRemarks
-  valueType: StringArray
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO202#003
-    description: plain text characterizing address information for which there is no property
-- id: AddressOfAdditionalLink
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAQ326#002
-    description: web site address where information about the product or contact is given
-- id: AddressPhone
-  valueType: Record
-  valueCkRecordId: Basic-1.0.0/PhoneNumber-1.0.0
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAQ833#005
-    description: Phone number including type
-- id: AddressFax
-  valueType: Record
-  valueCkRecordId: Basic-1.0.0/FaxNumber-1.0.0
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAQ834#005
-    description: Fax number including type
-- id: AddressEMail
-  valueType: Record
-  valueCkRecordId: Basic-1.0.0/EMail-1.0.0
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAQ836#005
-    description: E-mail address and encryption method
-- id: Temperature
-  valueType: Double
-  metaData:
-  - key: Unit
-    value: °C
-- id: File
-  valueType: String
-- id: EMailAddress
 - id: TelephoneNumber
   valueType: String
   metaData:
@@ -156,13 +56,13 @@ attributes:
   - key: semanticId
     value: 0173-1#02-AAO196#003
     description: characterization of a telephone according to its location or usage
-- id: File
-  valueType: Binary
 - id: Temperature
   valueType: Double
   metaData:
   - key: Unit
     value: °C
+- id: File
+  valueType: String
 - id: AddressDepartment
   valueType: String
   metaData:
@@ -250,109 +150,6 @@ attributes:
   - key: semanticId
     value: 0173-1#02-AAQ836#005
     description: E-mail address and encryption method
-- id: NamePlate.ManufacturerName
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO677#002
-    description: legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation
-- id: NamePlate.ManufacturerProductDesignation
-  valueType: String
-  description: Manufacturer Product Description
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAW338#001
-    description: Short description of the product (short text)
-- id: NamePlate.Address
-  valueType: Record
-  valueCkRecordId: Basic-1.0.0/Address-1.0.0
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAQ832#005
-    description: Address information of a business partner
-- id: NamePlate.ManufacturerProductFamily
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAU731#001
-    description: 2nd level of a 3 level manufacturer specific product hierarchy
-- id: NamePlate.SerialNumber
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAM556#002
-    description: unique combination of numbers and letters used to identify the device once it has been manufactured
-- id: NamePlate.YearOfConstruction
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAP906#001
-    description: Year as completion date of object
-- id: NamePlate.Markings
-  valueType: RecordArray
-  valueCkRecordId: Basic-1.0.0/Marking-1.0.0
-  metaData:
-  - key: semanticId
-    value: ''
-    description: ''
-- id: NamePlate.AssetSpecificProperties
-  valueType: RecordArray
-  valueCkRecordId: Basic-1.0.0/Marking-1.0.0
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO856#002
-    description: guideline, stipulation or legislation used for determining conformity
-- id: NamePlate
-  valueType: Record
-  valueCkRecordId: Basic-1.0.0/Nameplate-1.0.0
-- id: EMailAddress
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO198#002
-    description: electronic mail address of a business partner
-- id: EMailPublicKey
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO200#002
-    description: public part of an unsymmetrical key pair to sign or encrypt text or messages
-- id: EMailTypeOfEmailAddress
-  valueType: Enum
-  valueCkEnumId: Basic-1.0.0/TypeOfTelephoneBasic-1.0.0
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO199#003
-    description: characterization of an e-mail address according to its location or usage
-- id: EMailTypeOfPublickKey
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO201#002
-    description: characterization of a public key according to its encryption process
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO198#002
-    description: electronic mail address of a business partner
-- id: EMailPublicKey
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO200#002
-    description: public part of an unsymmetrical key pair to sign or encrypt text or messages
-- id: EMailTypeOfEmailAddress
-  valueType: Enum
-  valueCkEnumId: Basic-1.0.0/TypeOfTelephoneBasic-1.0.0
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO199#003
-    description: characterization of an e-mail address according to its location or usage
-- id: EMailTypeOfPublickKey
-  valueType: String
-  metaData:
-  - key: semanticId
-    value: 0173-1#02-AAO201#002
-    description: characterization of a public key according to its encryption process
 - id: NamePlate
   valueType: Record
   valueCkRecordId: Basic-1.0.0/NamePlate-1.0.0
@@ -408,27 +205,55 @@ attributes:
   - key: semanticId
     value: 0173-1#02-AAO856#002
     description: guideline, stipulation or legislation used for determining conformity
-- id: TelephoneNumber
+- id: EMailAddress
   valueType: String
   metaData:
   - key: semanticId
-    value: 0173-1#02-AAO136#002
-    description: complete telephone number to be called to reach a business partner
-- id: TypeOfTelephoneEnhanced
-  valueType: Enum
-  valueCkEnumId: Basic-1.0.0/TypeOfTelephoneEnhanced-1.0.0
+    value: 0173-1#02-AAO198#002
+    description: electronic mail address of a business partner
+- id: EMailPublicKey
+  valueType: String
   metaData:
   - key: semanticId
-    value: 0173-1#02-AAO137#003
-    description: characterization of a telephone according to its location or usage
-- id: TypeOfTelephoneBasic
+    value: 0173-1#02-AAO200#002
+    description: public part of an unsymmetrical key pair to sign or encrypt text or messages
+- id: EMailTypeOfEmailAddress
   valueType: Enum
   valueCkEnumId: Basic-1.0.0/TypeOfTelephoneBasic-1.0.0
   metaData:
   - key: semanticId
-    value: 0173-1#02-AAO196#003
-    description: characterization of a telephone according to its location or usage
+    value: 0173-1#02-AAO199#003
+    description: characterization of an e-mail address according to its location or usage
+- id: EMailTypeOfPublickKey
+  valueType: String
+  metaData:
+  - key: semanticId
+    value: 0173-1#02-AAO201#002
+    description: characterization of a public key according to its encryption process
 records:
+- recordId: PhoneNumber
+  attributes:
+  - id: Basic-1.0.0/TelephoneNumber-1.0.0
+    name: Number
+  - id: Basic-1.0.0/TypeOfTelephoneEnhanced-1.0.0
+    name: Type
+    isOptional: true
+- recordId: FaxNumber
+  attributes:
+  - id: Basic-1.0.0/TelephoneNumber-1.0.0
+    name: Number
+  - id: Basic-1.0.0/TypeOfTelephoneBasic-1.0.0
+    name: Type
+    isOptional: true
+- recordId: Marking
+  attributes:
+  - id: System-1.0.0/Name-1.0.0
+    name: Name
+  - id: Basic-1.0.0/File-1.0.0
+    name: File
+  - id: System-1.0.0/Description-1.0.0
+    name: AdditionalText
+    isOptional: true
 - recordId: Address
   attributes:
   - id: Basic-1.0.0/AddressDepartment-1.0.0
@@ -469,28 +294,6 @@ records:
   - id: Basic-1.0.0/AddressEMail-1.0.0
     name: EMail
     isOptional: true
-- recordId: EMail
-  attributes:
-  - id: Basic-1.0.0/EMailAddress-1.0.0
-    name: EMail
-  - id: Basic-1.0.0/EMailPublicKey-1.0.0
-    name: PublicKey
-    isOptional: true
-  - id: Basic-1.0.0/EMailTypeOfEmailAddress-1.0.0
-    name: TypeOfEMail
-    isOptional: true
-  - id: Basic-1.0.0/EMailTypeOfPublickKey-1.0.0
-    name: TypeOfPublicKey
-    isOptional: true
-- recordId: Marking
-  attributes:
-  - id: System-1.0.0/Name-1.0.0
-    name: Name
-  - id: Basic-1.0.0/File-1.0.0
-    name: File
-  - id: System-1.0.0/Description-1.0.0
-    name: AdditionalText
-    isOptional: true
 - recordId: NamePlate
   attributes:
   - id: Basic-1.0.0/NamePlate.ManufacturerName-1.0.0
@@ -513,26 +316,23 @@ records:
   - id: Basic-1.0.0/NamePlate.AssetSpecificProperties-1.0.0
     name: AssetSpecificProperties
     isOptional: true
-- recordId: PhoneNumber
+- recordId: EMail
   attributes:
-  - id: Basic-1.0.0/TelephoneNumber-1.0.0
-    name: Number
-  - id: Basic-1.0.0/TypeOfTelephoneEnhanced-1.0.0
-    name: Type
+  - id: Basic-1.0.0/EMailAddress-1.0.0
+    name: EMail
+  - id: Basic-1.0.0/EMailPublicKey-1.0.0
+    name: PublicKey
     isOptional: true
-- recordId: FaxNumber
-  attributes:
-  - id: Basic-1.0.0/TelephoneNumber-1.0.0
-    name: Number
-  - id: Basic-1.0.0/TypeOfTelephoneBasic-1.0.0
-    name: Type
+  - id: Basic-1.0.0/EMailTypeOfEmailAddress-1.0.0
+    name: TypeOfEMail
+    isOptional: true
+  - id: Basic-1.0.0/EMailTypeOfPublickKey-1.0.0
+    name: TypeOfPublicKey
     isOptional: true
 enums:
 - enumId: TypeOfTelephoneEnhanced
   useFlags: false
   values:
-  - key: 0
-    name: Name0
   - key: 1
     name: Office
   - key: 2

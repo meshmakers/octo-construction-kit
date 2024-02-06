@@ -18,9 +18,9 @@ types:
       
       
 - typeId: Photovoltaic.Module
-  derivedFromCkTypeId: Basic/Machine
+  derivedFromCkTypeId: IndustryBasic/Machine
   attributes:
-    - id: IndustryEnergy/Power
+    - id: IndustryEnergy/PeakPower
       name: PeakPower
     - id: IndustryEnergy/Power
       name: Power

@@ -3,30 +3,28 @@ types:
 - typeId: Inverter
   derivedFromCkTypeId: IndustryBasic/Machine
   attributes:
-    - id: IndustryEnergy/Voltage
+    - id: IndustryEnergy/DCVoltage
       name: DCVoltage
       isOptional: true
-    - id: IndustryEnergy/Ampere
+    - id: IndustryEnergy/DCAmpere
       name: DCAmpere
     - id: IndustryEnergy/Voltage
       name: Voltage
       isOptional: true
     - id: IndustryEnergy/Ampere
       name: Ampere
-    - id: IndustryEnergy/Power
+    - id: IndustryEnergy/MaximumPower
       name: MaximumPower
     - id: IndustryEnergy/Power
       name: Power
-    - id: IndustryBasic/State
-      name: State
-    - id: IndustryEnergy/PhaseInfo
-      name: AC.L1
+    - id: IndustryEnergy/PhaseInfoL1
+      name: ACL1
       isOptional: true
-    - id: IndustryEnergy/PhaseInfo
-      name: AC.L2
+    - id: IndustryEnergy/PhaseInfoL2
+      name: ACL2
       isOptional: true
-    - id: IndustryEnergy/PhaseInfo
-      name: AC.L3
+    - id: IndustryEnergy/PhaseInfoL3
+      name: ACL3
       isOptional: true
   associations:
     - id: System/ParentChild

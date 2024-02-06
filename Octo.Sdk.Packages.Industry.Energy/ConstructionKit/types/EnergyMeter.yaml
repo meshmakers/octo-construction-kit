@@ -25,12 +25,12 @@ types:
   - id: IndustryEnergy/Frequency
     name: Frequency
     isOptional: true
-  - id: IndustryEnergy/PhaseInfo
-    name: AC.L1
+  - id: IndustryEnergy/PhaseInfoL1
+    name: ACL1
     isOptional: true
-  - id: IndustryEnergy/PhaseInfo
-    name: AC.L2
+  - id: IndustryEnergy/PhaseInfoL2
+    name: ACL2
     isOptional: true
-  - id: IndustryEnergy/PhaseInfo
-    name: AC.L3
+  - id: IndustryEnergy/PhaseInfoL3
+    name: ACL3
     isOptional: true

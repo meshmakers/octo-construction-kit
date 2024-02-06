@@ -1,6 +1,6 @@
-$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
-records:
-- recordId: SampleRecord
-  attributes:
-  - id: Sample1/SampleAttribute1
-    name: MyAttribute
+#$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+#records:
+#- recordId: SampleRecord
+#  attributes:
+#  - id: Sample1/SampleAttribute1
+#    name: MyAttribute

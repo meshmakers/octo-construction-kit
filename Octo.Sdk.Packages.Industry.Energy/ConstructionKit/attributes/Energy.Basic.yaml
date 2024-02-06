@@ -7,6 +7,13 @@ attributes:
       value: "V"
     - key: Decimals
       value: 2
+- id: DCVoltage
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "V"
+    - key: Decimals
+      value: 2      
 - id: Ampere
   valueType: Double
   metaData:
@@ -14,7 +21,28 @@ attributes:
       value: "A"
     - key: Decimals
       value: 2
+- id: DCAmpere
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "A"
+    - key: Decimals
+      value: 2      
 - id: Power
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "kW"
+    - key: Decimals
+      value: 2
+- id: MaximumPower
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "kW"
+    - key: Decimals
+      value: 2    
+- id: PeakPower
   valueType: Double
   metaData:
     - key: Unit
@@ -55,4 +83,4 @@ attributes:
     - key: Unit
       value: "kWh"
     - key: Decimals
-      value: 2      
+      value: 2 

@@ -3,20 +3,20 @@ types:
 - typeId: WaterMeter
   derivedFromCkTypeId: IndustryBasic/Machine
   attributes:
-  - id: Water/Volume
+  - id: ${thisModel}/NetVolume
     name: NetVolume
-  - id: Water/Volume
+  - id: ${thisModel}/Volume
     name: Volume
     isOptional: true
-  - id: Water/Volume
+  - id: ${thisModel}/ReverseVolume
     name: ReverseVolume
     isOptional: true
-  - id: Basic/Temperature
+  - id: Basic/AvgTemperature
     name: AvgWaterTemperature
     isOptional: true
-  - id: Basic/Temperature
+  - id: Basic/MinTemperature
     name: MinWaterTemperature
     isOptional: true
-  - id: Basic/Temperature
+  - id: Basic/MaxTemperature
     name: MaxWaterTemperature
     isOptional: true

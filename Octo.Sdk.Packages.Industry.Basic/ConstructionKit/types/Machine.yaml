@@ -5,11 +5,11 @@ types:
   attributes:
   - id: Basic/NamePlate
     name: NamePlate
-  - id: IndustryBasic/OperatingHoursCounter
+  - id: ${thisModel}/OperatingHoursCounter
     name: OperatingHours
     isOptional: true
-  - id: IndustryBasic/StandStillCounter
+  - id: ${thisModel}/StandStillCounter
     name: StandStillCounter
     isOptional: true
-  - id: IndustryBasic/State
+  - id: ${thisModel}/State
     name: State

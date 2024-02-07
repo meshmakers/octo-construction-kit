@@ -2,21 +2,49 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-compiled.schema.json
 types:
 - typeId: WaterMeter
   derivedFromCkTypeId: IndustryBasic-1.0.0/Machine-1.0.0
+  attributes:
+  - id: IndustryWater-1.0.0/NetVolume-1.0.0
+    name: NetVolume
+  - id: IndustryWater-1.0.0/Volume-1.0.0
+    name: Volume
+    isOptional: true
+  - id: IndustryWater-1.0.0/ReverseVolume-1.0.0
+    name: ReverseVolume
+    isOptional: true
+  - id: Basic-1.0.0/AvgTemperature-1.0.0
+    name: AvgWaterTemperature
+    isOptional: true
+  - id: Basic-1.0.0/MinTemperature-1.0.0
+    name: MinWaterTemperature
+    isOptional: true
+  - id: Basic-1.0.0/MaxTemperature-1.0.0
+    name: MaxWaterTemperature
+    isOptional: true
 associationRoles: []
 attributes:
-- id: SampleAttribute1
-  valueType: String
+- id: Volume
+  valueType: Double
+  metaData:
+  - key: Unit
+    value: l
+  - key: Decimals
+    value: 2
+- id: NetVolume
+  valueType: Double
+  metaData:
+  - key: Unit
+    value: l
+  - key: Decimals
+    value: 2
+- id: ReverseVolume
+  valueType: Double
+  metaData:
+  - key: Unit
+    value: l
+  - key: Decimals
+    value: 2
 records: []
-enums:
-- enumId: SampleEnum
-  useFlags: false
-  values:
-  - key: 0
-    name: Name0
-  - key: 1
-    name: Name1
-  - key: 2
-    name: Name2
+enums: []
 modelId: IndustryWater
 dependencies:
 - IndustryBasic

@@ -19,9 +19,4 @@
       <ProjectReference Include="..\Octo.Sdk.Packages.Industry.Basic\Octo.Sdk.Packages.Industry.Basic.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="ConstructionKit\enums\" />
-      <Folder Include="ConstructionKit\records\" />
-    </ItemGroup>
-
 </Project>

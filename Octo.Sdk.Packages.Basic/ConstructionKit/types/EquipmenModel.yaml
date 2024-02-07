@@ -1,4 +1,4 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: EquipmentModel
-  derivedFromCkTypeId: Basic/NamedEntity
+  derivedFromCkTypeId: ${thisModel}/NamedEntity

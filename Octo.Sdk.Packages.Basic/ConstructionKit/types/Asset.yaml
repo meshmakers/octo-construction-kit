@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Asset
-  derivedFromCkTypeId: Basic/Equipment
+  derivedFromCkTypeId: ${thisModel}/Equipment
   associations:
-    - id: Basic/RelatedEquipment
-      targetCkTypeId: Basic/EquipmentGroup
+    - id: ${thisModel}/RelatedEquipment
+      targetCkTypeId: ${thisModel}/EquipmentGroup

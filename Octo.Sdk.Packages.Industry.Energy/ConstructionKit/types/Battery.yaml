@@ -3,28 +3,28 @@ types:
 - typeId: Battery
   derivedFromCkTypeId: IndustryBasic/Machine
   attributes:
-  - id: IndustryEnergy/Voltage
+  - id: ${thisModel}/Voltage
     name: Voltage
     isOptional: true
-  - id: IndustryEnergy/Ampere
+  - id: ${thisModel}/Ampere
     name: Ampere
-  - id: IndustryEnergy/Power
+  - id: ${thisModel}/Power
     name: Power
-  - id: IndustryEnergy/ImportedEnergy
+  - id: ${thisModel}/ImportedEnergy
     name: ImportedEnergy
     isOptional: true
-  - id: IndustryEnergy/ExportedEnergy
+  - id: ${thisModel}/ExportedEnergy
     name: ExportedEnergy
     isOptional: true
-  - id: IndustryEnergy/SoC
+  - id: ${thisModel}/SoC
     name: SoC
-  - id: IndustryEnergy/SoH
+  - id: ${thisModel}/SoH
     name: SoH
     isOptional: true
-  - id: IndustryEnergy/NumofCycles
+  - id: ${thisModel}/NumofCycles
     name: NumofCycles
     isOptional: true
-  - id: IndustryEnergy/Capacity
+  - id: ${thisModel}/Capacity
     name: Capacity
     isOptional: true
   - id: Basic/Temperature
@@ -32,4 +32,4 @@ types:
     isOptional: true
   associations:
     - id: System/ParentChild
-      targetCkTypeId: IndustryEnergy/Inverter
+      targetCkTypeId: ${thisModel}/Inverter

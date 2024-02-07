@@ -3,34 +3,34 @@ types:
 - typeId: EnergyMeter
   derivedFromCkTypeId: IndustryBasic/Machine
   attributes:
-  - id: IndustryEnergy/Voltage
+  - id: ${thisModel}/Voltage
     name: Voltage
     isOptional: true
-  - id: IndustryEnergy/Ampere
+  - id: ${thisModel}/Ampere
     name: Ampere
-  - id: IndustryEnergy/Power
+  - id: ${thisModel}/Power
     name: Power
-  - id: IndustryEnergy/ApparentPower
+  - id: ${thisModel}/ApparentPower
     name: ApparentPower
     isOptional: true
-  - id: IndustryEnergy/ReactivePower
+  - id: ${thisModel}/ReactivePower
     name: ReactivePower
     isOptional: true
-  - id: IndustryEnergy/ImportedEnergy
+  - id: ${thisModel}/ImportedEnergy
     name: ImportedEnergy
     isOptional: true
-  - id: IndustryEnergy/ExportedEnergy
+  - id: ${thisModel}/ExportedEnergy
     name: ExportedEnergy
     isOptional: true
-  - id: IndustryEnergy/Frequency
+  - id: ${thisModel}/Frequency
     name: Frequency
     isOptional: true
-  - id: IndustryEnergy/PhaseInfoL1
+  - id: ${thisModel}/PhaseInfoL1
     name: ACL1
     isOptional: true
-  - id: IndustryEnergy/PhaseInfoL2
+  - id: ${thisModel}/PhaseInfoL2
     name: ACL2
     isOptional: true
-  - id: IndustryEnergy/PhaseInfoL3
+  - id: ${thisModel}/PhaseInfoL3
     name: ACL3
     isOptional: true

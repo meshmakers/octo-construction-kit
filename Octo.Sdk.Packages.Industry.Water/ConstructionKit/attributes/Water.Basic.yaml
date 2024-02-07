@@ -7,3 +7,17 @@ attributes:
       value: "l"
     - key: Decimals
       value: 2
+- id: NetVolume
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "l"
+    - key: Decimals
+      value: 2
+- id: ReverseVolume
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "l"
+    - key: Decimals
+      value: 2      

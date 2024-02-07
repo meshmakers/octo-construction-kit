@@ -5,5 +5,20 @@ attributes:
     metaData:
       - key: Unit
         value: "°C"
+  - id: MaxTemperature
+    valueType: Double
+    metaData:
+      - key: Unit
+        value: "°C"
+  - id: MinTemperature
+    valueType: Double
+    metaData:
+      - key: Unit
+        value: "°C"      
+  - id: AvgTemperature
+    valueType: Double
+    metaData:
+      - key: Unit
+        value: "°C"
   - id: File
     valueType: String

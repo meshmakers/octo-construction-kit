@@ -61,6 +61,21 @@ attributes:
   metaData:
   - key: Unit
     value: °C
+- id: MaxTemperature
+  valueType: Double
+  metaData:
+  - key: Unit
+    value: °C
+- id: MinTemperature
+  valueType: Double
+  metaData:
+  - key: Unit
+    value: °C
+- id: AvgTemperature
+  valueType: Double
+  metaData:
+  - key: Unit
+    value: °C
 - id: File
   valueType: String
 - id: AddressDepartment
@@ -224,7 +239,7 @@ attributes:
   - key: semanticId
     value: 0173-1#02-AAO199#003
     description: characterization of an e-mail address according to its location or usage
-- id: EMailTypeOfPublickKey
+- id: EMailTypeOfPublicKey
   valueType: String
   metaData:
   - key: semanticId
@@ -326,7 +341,7 @@ records:
   - id: Basic-1.0.0/EMailTypeOfEmailAddress-1.0.0
     name: TypeOfEMail
     isOptional: true
-  - id: Basic-1.0.0/EMailTypeOfPublickKey-1.0.0
+  - id: Basic-1.0.0/EMailTypeOfPublicKey-1.0.0
     name: TypeOfPublicKey
     isOptional: true
 enums:

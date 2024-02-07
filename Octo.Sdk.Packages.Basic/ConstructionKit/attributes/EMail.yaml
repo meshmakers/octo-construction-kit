@@ -19,7 +19,7 @@ attributes:
       - key: semanticId
         value: "0173-1#02-AAO199#003"
         description: "characterization of an e-mail address according to its location or usage"
-  - id: EMailTypeOfPublickKey
+  - id: EMailTypeOfPublicKey
     valueType: String
     metaData:
       - key: semanticId

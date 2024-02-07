@@ -1,4 +1,9 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
-- id: SampleAttribute1
-  valueType: String
+- id: Volume
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "l"
+    - key: Decimals
+      value: 2

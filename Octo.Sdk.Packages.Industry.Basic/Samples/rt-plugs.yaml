@@ -1,0 +1,51 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - System.Communication
+entities:
+  - rtId: 64a2b7bd162d703d9bb0f330
+    ckTypeId: System.Communication/CommunicationPool
+    attributes:
+      - id: System.Communication/PoolState
+        value: 1
+      - id: System/Name
+        value: local
+    associations: []
+  - rtId: 64a2b7c72d5ac4ea4d8fea48
+    ckTypeId: System.Communication/Plug
+    attributes:
+      - id: System.Communication/AdapterState
+        value: 1
+      - id: System.Communication/AdapterType
+        value: Meshmakers.Plugs.Zenon
+      - id: System.Communication/MappingConfiguration
+        value: "{ }"
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 64a2b7bd162d703d9bb0f330
+        targetCkTypeId: System.Communication/CommunicationPool
+  - rtId: 64a2b81dc72c3838dc95b08c
+    ckTypeId: System.Communication/Plug
+    attributes:
+      - id: System.Communication/AdapterState
+        value: 1
+      - id: System.Communication/AdapterType
+        value: Meshmakers.Plugs.IsPro-Ng
+      - id: System.Communication/MappingConfiguration
+        value: "{  }"
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 64a2b7bd162d703d9bb0f330
+        targetCkTypeId: System.Communication/CommunicationPool
+  - rtId: 64ac19945a7c4fd9e788c137
+    ckTypeId: System.Communication/Socket
+    attributes:
+      - id: System.Communication/AdapterState
+        value: 1
+      - id: System.Communication/AdapterType
+        value: Meshmakers.Sockets.Grafana
+      - id: System.Communication/MappingConfiguration
+        value: "{  }"
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 64a2b7bd162d703d9bb0f330
+        targetCkTypeId: System.Communication/CommunicationPool

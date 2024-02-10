@@ -22,13 +22,6 @@ types:
     isOptional: true
 associationRoles: []
 attributes:
-- id: Volume
-  valueType: Double
-  metaData:
-  - key: Unit
-    value: l
-  - key: Decimals
-    value: 2
 - id: NetVolume
   valueType: Double
   metaData:
@@ -37,6 +30,13 @@ attributes:
   - key: Decimals
     value: 2
 - id: ReverseVolume
+  valueType: Double
+  metaData:
+  - key: Unit
+    value: l
+  - key: Decimals
+    value: 2
+- id: Volume
   valueType: Double
   metaData:
   - key: Unit

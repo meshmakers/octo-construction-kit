@@ -25,22 +25,12 @@ entities:
     attributes:
       - id: System/Name
         value: PV
-      - id: Basic/NamePlate
-        value: 
-          ckRecordId: Basic/NamePlate
-          attributes:
-            - id: Basic/NamePlate.ManufacturerName
-              value: HagerEnergy GmbH
-            - id: Basic/NamePlate.ManufacturerProductDesignation
-              value: S10
-            - id: Basic/NamePlate.SerialNumber
-              value: 722102009007
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ab
         targetCkTypeId: Basic/EquipmentGroup
         
-  - rtId: 64a2b66286eb404602d82503
+  - rtId: 5fc8fda18b2fc75f925e21ad
     ckTypeId: IndustryEnergy/Inverter
     attributes:
       - id: System/Name
@@ -50,7 +40,11 @@ entities:
           ckRecordId: Basic/NamePlate
           attributes:
             - id: Basic/NamePlate.ManufacturerName
-              value: E3DC
+              value: HagerEnergy GmbH
+            - id: Basic/NamePlate.ManufacturerProductDesignation
+              value: S10
+            - id: Basic/NamePlate.SerialNumber
+              value: 722102009007
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac

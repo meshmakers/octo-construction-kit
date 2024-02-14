@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Machine
+  derivedFromCkTypeId: Basic/Asset
+  attributes:
+  - id: Basic/NamePlate
+    name: NamePlate
+  - id: ${thisModel}/OperatingHoursCounter
+    name: OperatingHours
+    isOptional: true
+  - id: ${thisModel}/StandStillCounter
+    name: StandStillCounter
+    isOptional: true
+  - id: ${thisModel}/State
+    name: State

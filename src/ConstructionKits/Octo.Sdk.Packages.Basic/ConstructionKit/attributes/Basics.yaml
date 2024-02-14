@@ -1,0 +1,32 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Temperature
+    valueType: Double
+    metaData:
+      - key: Unit
+        value: "°C"
+      - key: Type
+        value: Current
+  - id: MinTemperature
+    valueType: Double
+    metaData:
+      - key: Unit
+        value: "°C"
+      - key: Type
+        value: Minimum
+  - id: MaxTemperature
+    valueType: Double
+    metaData:
+      - key: Unit
+        value: "°C"
+      - key: Type
+        value: Maximum
+  - id: AvgTemperature
+    valueType: Double
+    metaData:
+      - key: Unit
+        value: "°C"
+      - key: Type
+        value: Avergae
+  - id: File
+    valueType: String

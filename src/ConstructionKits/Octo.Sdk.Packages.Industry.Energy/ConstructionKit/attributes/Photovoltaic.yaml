@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: PhaseInfoL1
+    valueType: Record
+    valueCkRecordId: ${thisModel}/PhaseInfo
+  - id: PhaseInfoL2
+    valueType: Record
+    valueCkRecordId: ${thisModel}/PhaseInfo
+  - id: PhaseInfoL3
+    valueType: Record
+    valueCkRecordId: ${thisModel}/PhaseInfo      
+  - id: NumOfModules
+    valueType: Int
+    

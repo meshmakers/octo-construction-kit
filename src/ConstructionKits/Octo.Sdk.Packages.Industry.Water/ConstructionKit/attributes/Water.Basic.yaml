@@ -1,0 +1,29 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: Volume
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "l"
+    - key: Decimals
+      value: 2
+    - key: Type
+      value: Current
+- id: NetVolume
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "l"
+    - key: Decimals
+      value: 2
+    - key: Type
+      value: Net
+- id: ReverseVolume
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "l"
+    - key: Decimals
+      value: 2
+    - key: Type
+      value: Reverse

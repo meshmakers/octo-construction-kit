@@ -128,6 +128,8 @@ attributes:
   metaData:
   - key: Unit
     value: °C
+  - key: Type
+    value: Avergae
 - id: EMailAddress
   valueType: String
   metaData:
@@ -160,11 +162,15 @@ attributes:
   metaData:
   - key: Unit
     value: °C
+  - key: Type
+    value: Maximum
 - id: MinTemperature
   valueType: Double
   metaData:
   - key: Unit
     value: °C
+  - key: Type
+    value: Minimum
 - id: NamePlate
   valueType: Record
   valueCkRecordId: Basic-1.0.0/NamePlate-1.0.0
@@ -231,6 +237,8 @@ attributes:
   metaData:
   - key: Unit
     value: °C
+  - key: Type
+    value: Current
 - id: TypeOfTelephoneBasic
   valueType: Enum
   valueCkEnumId: Basic-1.0.0/TypeOfTelephoneBasic-1.0.0

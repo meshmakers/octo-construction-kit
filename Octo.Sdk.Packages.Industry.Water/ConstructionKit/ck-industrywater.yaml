@@ -29,6 +29,8 @@ attributes:
     value: l
   - key: Decimals
     value: 2
+  - key: Type
+    value: Net
 - id: ReverseVolume
   valueType: Double
   metaData:
@@ -36,6 +38,8 @@ attributes:
     value: l
   - key: Decimals
     value: 2
+  - key: Type
+    value: Reverse
 - id: Volume
   valueType: Double
   metaData:
@@ -43,6 +47,8 @@ attributes:
     value: l
   - key: Decimals
     value: 2
+  - key: Type
+    value: Current
 records: []
 enums: []
 modelId: IndustryWater

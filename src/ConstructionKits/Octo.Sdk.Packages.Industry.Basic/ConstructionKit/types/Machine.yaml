@@ -5,6 +5,7 @@ types:
   attributes:
   - id: Basic/NamePlate
     name: NamePlate
+    isOptional: true
   - id: ${thisModel}/OperatingHoursCounter
     name: OperatingHours
     isOptional: true

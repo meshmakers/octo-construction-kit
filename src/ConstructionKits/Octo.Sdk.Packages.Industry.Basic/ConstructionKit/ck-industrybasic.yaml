@@ -5,6 +5,7 @@ types:
   attributes:
   - id: Basic-1.0.0/NamePlate-1.0.0
     name: NamePlate
+    isOptional: true
   - id: IndustryBasic-1.0.0/OperatingHoursCounter-1.0.0
     name: OperatingHours
     isOptional: true

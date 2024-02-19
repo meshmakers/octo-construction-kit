@@ -1,0 +1,28 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+
+- id: Message
+  valueType: String
+
+- id: Event_Alarm_State
+  valueType: Enum
+  valueCkEnumId: ${thisModel}/Event_Alarm_State
+- id: Event_Alarm_Type
+  valueType: Enum
+  valueCkEnumId: ${thisModel}/Event_Alarm_Type
+- id: Event_Alarm_Source
+  valueType: Enum
+  valueCkEnumId: ${thisModel}/Event_Alarm_Source
+- id: Event_Alarm_Group
+  valueType: String
+  defaultValues:
+    - "Low"
+    - "Medium"
+    - "High"
+- id: Event_Alarm_Cause
+  valueType: String
+  isDataStream: true
+- id: Event_Alarm_ReactivatedCount
+  valueType: Int
+  defaultValues:
+    - 0

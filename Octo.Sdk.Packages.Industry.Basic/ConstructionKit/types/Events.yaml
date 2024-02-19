@@ -1,0 +1,28 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Event
+  derivedFromCkTypeId: Basic/NamedEntity
+  attributes:
+  - id: Basic/Time
+    name: Time
+  - id: ${thisModel}/Message
+    name: Message
+  associations:
+    - id: ${thisModel}/EventSource
+      targetCkTypeId: Basic/Asset
+
+- typeId: Alarm
+  derivedFromCkTypeId: IndustryBasic/Event
+  attributes:
+    - id: ${thisModel}/Event_Alarm_State
+      name: State
+    - id: ${thisModel}/Event_Alarm_Type
+      name: Type
+    - id: ${thisModel}/Event_Alarm_Source
+      name: Source
+    - id: ${thisModel}/Event_Alarm_Group
+      name: Group
+    - id: ${thisModel}/Event_Alarm_Cause
+      name: Cause
+    - id: ${thisModel}/Event_Alarm_ReactivatedCount
+      name: ReactivatedCount

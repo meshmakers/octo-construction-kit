@@ -27,6 +27,10 @@ attributes:
       - key: Unit
         value: "°C"
       - key: Type
-        value: Avergae
+        value: Average
+        
   - id: File
-    valueType: String
+    valueType: Binary
+    
+  - id: Time
+    valueType: DateTime

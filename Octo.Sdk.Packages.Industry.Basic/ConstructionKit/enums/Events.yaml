@@ -1,0 +1,74 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: Event_Alarm_State
+  useFlags: false
+  values:
+  - key: 0
+    name: Normal
+    description: "The normal state should not use an audible indication. The normal state visual indication should be the same as indications without alarms."
+  - key: 1
+    name: Unacknowledged
+    description: "The unacknowledged alarm state should use both an audible indication and visual indication. The audible indication should be silenced with a silence action or acknowledge action by the operator. The visual indication should be clearly distinguishable from the normal state indication by using colours and symbols (e.g., shape or text). The visual indication for an unacknowledged alarm should include a blinking element. There are some environments in which an audible indication is not an effective indicator of unacknowledged alarms."
+  - key: 2
+    name: Acknowledged
+    description: "The acknowledged alarm state should not use an audible indication. The acknowledged alarm state visual indication should be clearly distinguishable from the normal state indication by using symbols (e.g., shape or text), and should be identical in colour to the unacknowledged alarm indication. A blinking element should not be used in the visual indication for an acknowledged alarm."
+  - key: 3
+    name: Return-To-Normal
+    description: "The return-to-normal unacknowledged state should not use an audible indication. The return to-normal unacknowledged state visual indication may be the same as the normal state or it may indicate an unacknowledged status with a blinking element."
+  - key: 4
+    name: Shelved
+    description: "The shelved alarm state should be visually indicated in the HMI. The visual indication for a shelved alarm should not include a blinking element. The shelved alarm state indication should be distinct. No audible indication should be used to identify shelved alarms."
+  - key: 5
+    name: Suppressed-By-Design
+    description: "The suppressed-by-design alarm state should be visually indicated in the HMI. The visual indication for an alarm suppressed by design should not include a blinking element. The suppressed-by-design alarm state indication should be distinct from the unacknowledged and acknowledged state indications. No audible indication should be used to identify alarms suppressed by design."
+  - key: 6
+    name: Out-Of-Service
+    description: "The out-of-service alarm state should be visually indicated in the HMI. The visual indication for an out-of-service alarm should not include a blinking element. The out-of-service alarm state indication should be distinct from the unacknowledged and acknowledged state indications. No audible indication should be used to identify out-of-service alarms."
+
+- enumId: Event_Alarm_Type
+  useFlags: true
+  values:
+    - key: 0
+      name: Absolute
+    - key: 1
+      name: Deviation
+    - key: 2
+      name: Rate-Of-Change
+    - key: 3
+      name: Discrepancy
+    - key: 4
+      name: Calculated
+    - key: 5
+      name: Recipe-Driven
+    - key: 6
+      name: Bit-Pattern
+    - key: 7
+      name: Controller-Output
+    - key: 8
+      name: System_Diagnostic
+    - key: 9
+      name: Instrument_Diagnostic
+    - key: 10
+      name: Adjustable
+    - key: 11
+      name: Adaptive
+    - key: 12
+      name: Re-Alarming
+    - key: 13
+      name: Statistical
+    - key: 14
+      name: First-Out
+    - key: 15
+      name: Bad-Measurement
+      
+- enumId: Event_Alarm_Source
+  useFlags: true
+  values:
+    - key: 0
+      name: Field_Device
+    - key: 1
+      name: Control_System
+    - key: 2
+      name: HMI
+    - key: 3
+      name: Internal

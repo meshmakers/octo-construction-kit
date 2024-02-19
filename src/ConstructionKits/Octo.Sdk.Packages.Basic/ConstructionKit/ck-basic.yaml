@@ -129,7 +129,7 @@ attributes:
   - key: Unit
     value: °C
   - key: Type
-    value: Avergae
+    value: Average
 - id: EMailAddress
   valueType: String
   metaData:
@@ -156,7 +156,7 @@ attributes:
     value: 0173-1#02-AAO201#002
     description: characterization of a public key according to its encryption process
 - id: File
-  valueType: String
+  valueType: Binary
 - id: MaxTemperature
   valueType: Double
   metaData:
@@ -239,6 +239,8 @@ attributes:
     value: °C
   - key: Type
     value: Current
+- id: Time
+  valueType: DateTime
 - id: TypeOfTelephoneBasic
   valueType: Enum
   valueCkEnumId: Basic-1.0.0/TypeOfTelephoneBasic-1.0.0

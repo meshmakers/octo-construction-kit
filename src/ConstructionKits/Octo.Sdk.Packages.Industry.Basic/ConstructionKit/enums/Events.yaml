@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 enums:
-- enumId: Event_Alarm_State
+- enumId: EventAlarmState
   useFlags: false
   values:
   - key: 0
@@ -13,19 +13,19 @@ enums:
     name: Acknowledged
     description: "The acknowledged alarm state should not use an audible indication. The acknowledged alarm state visual indication should be clearly distinguishable from the normal state indication by using symbols (e.g., shape or text), and should be identical in colour to the unacknowledged alarm indication. A blinking element should not be used in the visual indication for an acknowledged alarm."
   - key: 3
-    name: Return-To-Normal
+    name: ReturnToNormal
     description: "The return-to-normal unacknowledged state should not use an audible indication. The return to-normal unacknowledged state visual indication may be the same as the normal state or it may indicate an unacknowledged status with a blinking element."
   - key: 4
     name: Shelved
     description: "The shelved alarm state should be visually indicated in the HMI. The visual indication for a shelved alarm should not include a blinking element. The shelved alarm state indication should be distinct. No audible indication should be used to identify shelved alarms."
   - key: 5
-    name: Suppressed-By-Design
+    name: SuppressedByDesign
     description: "The suppressed-by-design alarm state should be visually indicated in the HMI. The visual indication for an alarm suppressed by design should not include a blinking element. The suppressed-by-design alarm state indication should be distinct from the unacknowledged and acknowledged state indications. No audible indication should be used to identify alarms suppressed by design."
   - key: 6
-    name: Out-Of-Service
+    name: OutOfService
     description: "The out-of-service alarm state should be visually indicated in the HMI. The visual indication for an out-of-service alarm should not include a blinking element. The out-of-service alarm state indication should be distinct from the unacknowledged and acknowledged state indications. No audible indication should be used to identify out-of-service alarms."
 
-- enumId: Event_Alarm_Type
+- enumId: EventAlarmType
   useFlags: true
   values:
     - key: 0
@@ -33,41 +33,41 @@ enums:
     - key: 1
       name: Deviation
     - key: 2
-      name: Rate-Of-Change
+      name: RateOfChange
     - key: 3
       name: Discrepancy
     - key: 4
       name: Calculated
     - key: 5
-      name: Recipe-Driven
+      name: RecipeDriven
     - key: 6
-      name: Bit-Pattern
+      name: BitPattern
     - key: 7
-      name: Controller-Output
+      name: ControllerOutput
     - key: 8
-      name: System_Diagnostic
+      name: SystemDiagnostic
     - key: 9
-      name: Instrument_Diagnostic
+      name: InstrumentDiagnostic
     - key: 10
       name: Adjustable
     - key: 11
       name: Adaptive
     - key: 12
-      name: Re-Alarming
+      name: ReAlarming
     - key: 13
       name: Statistical
     - key: 14
-      name: First-Out
+      name: FirstOut
     - key: 15
-      name: Bad-Measurement
+      name: BadMeasurement
       
-- enumId: Event_Alarm_Source
+- enumId: EventAlarmSource
   useFlags: true
   values:
     - key: 0
-      name: Field_Device
+      name: FieldDevice
     - key: 1
-      name: Control_System
+      name: ControlSystem
     - key: 2
       name: HMI
     - key: 3

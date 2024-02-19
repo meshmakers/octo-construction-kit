@@ -14,15 +14,15 @@ types:
 - typeId: Alarm
   derivedFromCkTypeId: IndustryBasic/Event
   attributes:
-    - id: ${thisModel}/Event_Alarm_State
+    - id: ${thisModel}/EventAlarmState
       name: State
-    - id: ${thisModel}/Event_Alarm_Type
+    - id: ${thisModel}/EventAlarmType
       name: Type
-    - id: ${thisModel}/Event_Alarm_Source
+    - id: ${thisModel}/EventAlarmSource
       name: Source
-    - id: ${thisModel}/Event_Alarm_Group
+    - id: ${thisModel}/EventAlarmGroup
       name: Group
-    - id: ${thisModel}/Event_Alarm_Cause
+    - id: ${thisModel}/EventAlarmCause
       name: Cause
-    - id: ${thisModel}/Event_Alarm_ReactivatedCount
+    - id: ${thisModel}/EventAlarmReactivatedCount
       name: ReactivatedCount

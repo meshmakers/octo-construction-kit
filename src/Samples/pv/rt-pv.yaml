@@ -1,0 +1,104 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - IndustryEnergy
+entities:
+  - rtId: 5fc8fc3d8b2fc75f925e21aa
+    ckTypeId: Basic/EquipmentModel
+    attributes:
+      - id: System/Name
+        value: Demo PV
+      - id: System/Description
+        value: Sample Data for photovoltaic demo
+  - rtId: 5fc8fda18b2fc75f925e21ab
+    ckTypeId: Basic/EquipmentGroup
+    attributes:
+      - id: System/Name
+        value: Firmianstraße 31a
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fc3d8b2fc75f925e21aa
+        targetCkTypeId: Basic/EquipmentModel
+
+
+  - rtId: 5fc8fda18b2fc75f925e21ac
+    ckTypeId: IndustryEnergy/Photovoltaic
+    attributes:
+      - id: System/Name
+        value: PV
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fda18b2fc75f925e21ab
+        targetCkTypeId: Basic/EquipmentGroup
+        
+  - rtId: 5fc8fda18b2fc75f925e21ad
+    ckTypeId: IndustryEnergy/Inverter
+    attributes:
+      - id: System/Name
+        value: E3DC
+      - id: Basic/NamePlate
+        value:
+          ckRecordId: Basic/NamePlate
+          attributes:
+            - id: Basic/NamePlate.ManufacturerName
+              value: HagerEnergy GmbH
+            - id: Basic/NamePlate.ManufacturerProductDesignation
+              value: S10
+            - id: Basic/NamePlate.SerialNumber
+              value: 722102009007
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fda18b2fc75f925e21ac
+        targetCkTypeId: IndustryEnergy/Photovoltaic
+        
+  - rtId: 5fc8fda18b2fc75f925e21ae
+    ckTypeId: IndustryEnergy/Battery
+    attributes:
+      - id: IndustryEnergy/Capacity
+        value: 12        
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fda18b2fc75f925e21ac
+        targetCkTypeId: IndustryEnergy/Photovoltaic
+        
+  - rtId: 5fc8fda18b2fc75f925e21af
+    ckTypeId: IndustryEnergy/Photovoltaic.Module
+    attributes:
+      - id: System/Name
+        value: Hauptgebäude
+      - id: IndustryEnergy/PeakPower
+        value: 13068
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fda18b2fc75f925e21ac
+        targetCkTypeId: IndustryEnergy/Photovoltaic
+          
+  - rtId: 5fc8fda18b2fc75f925e21c0
+    ckTypeId: IndustryEnergy/Photovoltaic.Module
+    attributes:
+      - id: System/Name
+        value: Nebengebäude
+      - id: IndustryEnergy/PeakPower
+        value: 1584
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fda18b2fc75f925e21ac
+        targetCkTypeId: IndustryEnergy/Photovoltaic
+          
+  - rtId: 5fc8fda18b2fc75f925e21c1
+    ckTypeId: IndustryEnergy/EnergyMeter
+    attributes:
+      - id: System/Name
+        value: Netzbezug
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fda18b2fc75f925e21ac
+        targetCkTypeId: IndustryEnergy/Photovoltaic
+  - rtId: 5fc8fda18b2fc75f925e21c2
+    ckTypeId: IndustryEnergy/EnergyMeter
+    attributes:
+      - id: System/Name
+        value: Gebäudeverbrauch
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fda18b2fc75f925e21ac
+        targetCkTypeId: IndustryEnergy/Photovoltaic           

@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: State
+  useFlags: false
+  values:
+  - key: 0
+    name: Off
+  - key: 1
+    name: On
+  - key: 2
+    name: Unknown
+  - key: 3
+    name: Error
+  - key: 4
+    name: Idle

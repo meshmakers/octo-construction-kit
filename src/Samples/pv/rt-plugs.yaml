@@ -1,0 +1,190 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - System.Communication
+entities:
+  - rtId: 5fc8fc3d8b2fc75f925e21af
+    ckTypeId: System.Communication/CommunicationPool
+    attributes:
+      - id: System/Name
+        value: k8sfirmianstrasse
+    associations: []
+  - rtId: 5fc8fc3d8b2fc75f925e21ba
+    ckTypeId: System.Communication/Plug
+    attributes:
+      - id: System.Communication/AdapterType
+        value: Meshmakers.Plugs.Modbus
+      - id: System.Communication/MappingConfiguration
+        value: "{ \"server\": \"192.168.13.31\" }"
+      - id: System.Communication/Deployment.ImageName
+        value: meshmakers/octo-communication-plug-modbus      
+      - id: System.Communication/Deployment.ImageVersion
+        value: "999.0.0.0"
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fc3d8b2fc75f925e21af
+        targetCkTypeId: System.Communication/CommunicationPool
+        
+  # Mapping of plug
+  - rtId: 5fc8fc3d8b2fc75f925e21bb
+    ckTypeId: System.Communication/PlugGroup
+    attributes:
+      - id: System/Name
+        value: General
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fc3d8b2fc75f925e21ba
+        targetCkTypeId: System.Communication/Plug        
+        
+  - rtId: 5fc8fc3d8b2fc75f925e21bc
+    ckTypeId: System.Communication/PlugMapping
+    attributes:
+      - id: System/Name
+        value: Power Battery
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fc3d8b2fc75f925e21bb
+        targetCkTypeId: System.Communication/PlugGroup
+      - roleId: System.Communication/Stream
+        targetRtId: 5fc8fda18b2fc75f925e21ae
+        targetCkTypeId: IndustryEnergy/Battery
+        targetCkAttributeIds:
+          - IndustryEnergy/Power
+        attributes:
+          - id: System.Communication/MappingConfiguration
+            value: "{ \"register\": 69, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }"
+    
+  - rtId: 5fc8fc3d8b2fc75f925e21bd
+    ckTypeId: System.Communication/PlugMapping
+    attributes:
+      - id: System/Name
+        value: Power PV
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fc3d8b2fc75f925e21bb
+        targetCkTypeId: System.Communication/PlugGroup
+      - roleId: System.Communication/Stream
+        targetRtId: 5fc8fda18b2fc75f925e21af
+        targetCkTypeId: IndustryEnergy/Photovoltaic.Module
+        targetCkAttributeIds:
+          - IndustryEnergy/Power
+        attributes:
+          - id: System.Communication/MappingConfiguration
+            value: "{ \"register\": 67, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }" 
+            
+  - rtId: 5fc8fc3d8b2fc75f925e21be
+    ckTypeId: System.Communication/PlugMapping
+    attributes:
+      - id: System/Name
+        value: Battery-SOC
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fc3d8b2fc75f925e21bb
+        targetCkTypeId: System.Communication/PlugGroup
+      - roleId: System.Communication/Stream
+        targetRtId: 5fc8fda18b2fc75f925e21ae
+        targetCkTypeId: IndustryEnergy/Battery
+        targetCkAttributeIds:
+          - IndustryEnergy/SoC
+        attributes:
+          - id: System.Communication/MappingConfiguration
+            value: "{ \"register\": 82, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }"
+            
+  - rtId: 5fc8fc3d8b2fc75f925e21bf
+    ckTypeId: System.Communication/PlugMapping
+    attributes:
+      - id: System/Name
+        value: Power Consumption
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fc3d8b2fc75f925e21bb
+        targetCkTypeId: System.Communication/PlugGroup
+      - roleId: System.Communication/Stream
+        targetRtId: 5fc8fda18b2fc75f925e21c2
+        targetCkTypeId: IndustryEnergy/EnergyMeter
+        targetCkAttributeIds:
+          - IndustryEnergy/Power
+        attributes:
+          - id: System.Communication/MappingConfiguration
+            value: "{ \"register\": 71, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }"         
+            
+  - rtId: 5fc8fc3d8b2fc75f925e21c0
+    ckTypeId: System.Communication/PlugMapping
+    attributes:
+      - id: System/Name
+        value: Net Consumption
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fda18b2fc75f925e21c1
+        targetCkTypeId: System.Communication/PlugGroup
+      - roleId: System.Communication/Stream
+        targetRtId: 5fc8fda18b2fc75f925e21c2
+        targetCkTypeId: IndustryEnergy/EnergyMeter
+        targetCkAttributeIds: 
+          - IndustryEnergy/Power
+        attributes:
+          - id: System.Communication/MappingConfiguration
+            value: "{ \"register\": 73, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }"
+            
+  - rtId: 5fc8fc3d8b2fc75f925e21c5
+    ckTypeId: System.Communication/PlugMapping
+    attributes:
+      - id: System/Name
+        value: Production Additional PV
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fda18b2fc75f925e21c1
+        targetCkTypeId: System.Communication/PlugGroup
+      - roleId: System.Communication/Stream
+        targetRtId: 5fc8fda18b2fc75f925e21c0
+        targetCkTypeId: IndustryEnergy/Photovoltaic.Module
+        targetCkAttributeIds:
+          - IndustryEnergy/Power
+        attributes:
+          - id: System.Communication/MappingConfiguration
+            value: "{ \"register\": 75, \"registerType\": 3, \"pollingInterval\": \"00:00:05\", \"scaleInputMin\": 0, \"scaleInputMax\": -10000, \"scaleOutputMin\": 0, \"scaleOutputMax\": 10000 }"     
+  # ---end mapping
+
+
+#  - rtId: 5fc8fc3d8b2fc75f925e21c1
+#    ckTypeId: System.Communication/Plug
+#    attributes:
+#      - id: System.Communication/AdapterType
+#        value: Meshmakers.Plugs.Modbus
+#      - id: System.Communication/MappingConfiguration
+#        value: "{ \"server\": \"192.168.13.30\" }"
+#      - id: System.Communication/Deployment.ImageName
+#        value: meshmakers/octo-communication-plug-modbus
+#      - id: System.Communication/Deployment.ImageVersion
+#        value: "999.0.0.0"
+#    associations:
+#      - roleId: System/ParentChild
+#        targetRtId: 5fc8fc3d8b2fc75f925e21af
+#        targetCkTypeId: System.Communication/CommunicationPool
+#
+#  # Mapping of plug
+#  - rtId: 5fc8fc3d8b2fc75f925e21c2
+#    ckTypeId: System.Communication/PlugGroup
+#    attributes:
+#      - id: System/Name
+#        value: General
+#    associations:
+#      - roleId: System/ParentChild
+#        targetRtId: 5fc8fc3d8b2fc75f925e21c1
+#        targetCkTypeId: System.Communication/Plug    
+#
+#  - rtId: 5fc8fc3d8b2fc75f925e21c3
+#    ckTypeId: System.Communication/PlugMapping
+#    attributes:
+#      - id: System/Name
+#        value: Outside temperature (AZ30-BT23)
+#    associations:
+#      - roleId: System/ParentChild
+#        targetRtId: 5fc8fc3d8b2fc75f925e21c2
+#        targetCkTypeId: System.Communication/PlugGroup
+#      - roleId: System.Communication/Stream
+#        targetRtId: 5fc8fda18b2fc75f925e21ae
+#        targetCkTypeId: IndustryEnergy/Battery
+#        targetAttributeId: IndustryEnergy/Power
+#        attributes:
+#          - id: System.Communication/MappingConfiguration
+#            value: "{ \"register\": 107, \"registerType\": 4, \"pollingInterval\": \"00:01:00\" }"

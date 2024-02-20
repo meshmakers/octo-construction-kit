@@ -156,7 +156,7 @@ attributes:
     value: 0173-1#02-AAO201#002
     description: characterization of a public key according to its encryption process
 - id: File
-  valueType: Binary
+  valueType: BinaryLinked
 - id: MaxTemperature
   valueType: Double
   metaData:

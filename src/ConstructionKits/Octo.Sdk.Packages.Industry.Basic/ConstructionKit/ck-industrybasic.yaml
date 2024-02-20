@@ -41,7 +41,7 @@ types:
     name: State
 associationRoles:
 - id: EventSource
-  inboundName: Source
+  inboundName: EventSource
   outboundName: Events
   inboundMultiplicity: N
   outboundMultiplicity: ZeroOrOne

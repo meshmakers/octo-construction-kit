@@ -30,7 +30,7 @@ attributes:
         value: Average
         
   - id: File
-    valueType: Binary
+    valueType: BinaryLinked
     
   - id: Time
     valueType: DateTime

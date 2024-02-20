@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 associationRoles:
   - id: EventSource
-    inboundName: Source
+    inboundName: EventSource
     outboundName: Events
     inboundMultiplicity: N
     outboundMultiplicity: ZeroOrOne

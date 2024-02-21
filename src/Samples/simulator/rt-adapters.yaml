@@ -1,0 +1,38 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - System.Communication
+entities:
+  - rtId: 65d5c447b420da3fb12381bb
+    ckTypeId: System.Communication/CommunicationPool
+    attributes:
+      - id: System/Name
+        value: simulation
+    associations: []
+  - rtId: 65d5c447b420da3fb12381bc
+    ckTypeId: System.Communication/CommunicationAdapter
+    attributes:
+      - id: System.Communication/AdapterType
+        value: Meshmakers.Plugs.Simulator
+      - id: System.Communication/AdapterConfiguration
+        value: "{ \"interval\": \"00:00:10\" }"
+      - id: System.Communication/Deployment.ImageName
+        value: meshmakers/octo-communication-plug-simulation      
+      - id: System.Communication/Deployment.ImageVersion
+        value: "999.0.0.0"
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 65d5c447b420da3fb12381bb
+        targetCkTypeId: System.Communication/CommunicationPool
+        
+    # Data pipelines of plug
+  - rtId: 65d5c447b420da3fb12381bd
+    ckTypeId: System.Communication/DataPipeline
+    attributes:
+      - id: System/Name
+        value: Simulation Pipeline
+      - id: System.Communication/AdapterPipelineConfiguration
+        value: "{\"extracts\":[{\"type\":\"Simulation@1\",\"simulations\":[{\"propertyName\":\"Sinus\"},{\"propertyName\":\"Constant_6\",\"simulationTypes\":2,\"parameter1\":6},{\"propertyName\":\"Triangle\",\"simulationTypes\":1}],\"description\":\"Simulates data\"}],\"transformations\":[{\"type\":\"TransformByPath@1\",\"transformations\":[{\"sourcePath\":\"$.Sinus\",\"targetPropertyName\":\"Sinus5\",\"transforms\":[{\"type\":\"LinearScaler@1\",\"scaleInputMin\":0,\"scaleInputMax\":1,\"scaleOutputMin\":0,\"scaleOutputMax\":1000}]},{\"sourcePath\":\"$.Constant_6\",\"targetPropertyName\":\"Constant\",\"transforms\":[{\"type\":\"LinearScaler@1\",\"scaleInputMin\":0,\"scaleInputMax\":10,\"scaleOutputMin\":0,\"scaleOutputMax\":1000}]}],\"description\":\"Transform object node\"}],\"loads\":[{\"type\":\"PublishToDistributionEventHub@1\",\"description\":\"Load to event hub\"}]}"
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 65d5c447b420da3fb12381bc
+        targetCkTypeId: System.Communication/CommunicationAdapter        

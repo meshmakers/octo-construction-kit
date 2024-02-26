@@ -15,10 +15,6 @@ attributes:
   valueCkEnumId: ${thisModel}/EventAlarmSource
 - id: EventAlarmGroup
   valueType: String
-  defaultValues:
-    - "Low"
-    - "Medium"
-    - "High"
 - id: EventAlarmCause
   valueType: String
   isDataStream: true

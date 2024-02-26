@@ -11,6 +11,10 @@ types:
     name: Source
   - id: IndustryBasic-1.0.0/EventAlarmGroup-1.0.0
     name: Group
+    autoCompleteValues:
+    - Low
+    - Medium
+    - High
   - id: IndustryBasic-1.0.0/EventAlarmCause-1.0.0
     name: Cause
   - id: IndustryBasic-1.0.0/EventAlarmReactivatedCount-1.0.0
@@ -51,10 +55,6 @@ attributes:
   isDataStream: true
 - id: EventAlarmGroup
   valueType: String
-  defaultValues:
-  - Low
-  - Medium
-  - High
 - id: EventAlarmReactivatedCount
   valueType: Int
   defaultValues:

@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Basic", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Energy", "src\ConstructionKits\Octo.Sdk.Packages.Industry.Energy\Octo.Sdk.Packages.Industry.Energy.csproj", "{2C6D46AF-C457-4653-9877-C6FF2C5B2C3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Water", "src\ConstructionKits\Octo.Sdk.Packages.Industry.Water\Octo.Sdk.Packages.Industry.Water.csproj", "{B95AFF48-E45A-4F90-B782-0A5A19471A0B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Fluid", "src\ConstructionKits\Octo.Sdk.Packages.Industry.Fluid\Octo.Sdk.Packages.Industry.Fluid.csproj", "{B95AFF48-E45A-4F90-B782-0A5A19471A0B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

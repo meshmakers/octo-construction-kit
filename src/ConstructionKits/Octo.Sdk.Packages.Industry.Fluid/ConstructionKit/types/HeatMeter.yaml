@@ -1,0 +1,22 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: HeatMeter
+  derivedFromCkTypeId: IndustryBasic/Machine
+  attributes:
+  - id: ${thisModel}/Volume
+    name: Volume
+    isOptional: true
+  - id: ${thisModel}/Flow
+    name: Flow
+    isOptional: true
+  - id: IndustryBasic/Power
+    name: Power
+    isOptional: true
+  - id: IndustryBasic/ImportedEnergy
+    name: ImportedEnergy
+  - id: Basic/MinTemperature
+    name: ReturnTemperature
+    isOptional: true
+  - id: Basic/MaxTemperature
+    name: FlowTemperature
+    isOptional: true

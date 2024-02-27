@@ -7,9 +7,9 @@ types:
 - typeId: Photovoltaic.String
   derivedFromCkTypeId: Basic/Asset
   attributes:
-    - id: IndustryEnergy/NumOfModules
+    - id: ${thisModel}/NumOfModules
       name: NumOfModules
-    - id: IndustryEnergy/Power
+    - id: IndustryBasic/Power
       name: Power
       isOptional: true
   associations:
@@ -20,9 +20,9 @@ types:
 - typeId: Photovoltaic.Module
   derivedFromCkTypeId: IndustryBasic/Machine
   attributes:
-    - id: IndustryEnergy/PeakPower
+    - id: ${thisModel}/PeakPower
       name: PeakPower
-    - id: IndustryEnergy/Power
+    - id: IndustryBasic/Power
       name: Power
       isOptional: true
   associations:

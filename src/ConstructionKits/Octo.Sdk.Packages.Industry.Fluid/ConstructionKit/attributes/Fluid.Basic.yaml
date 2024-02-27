@@ -27,3 +27,10 @@ attributes:
       value: 2
     - key: Type
       value: Reverse
+- id: Flow
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "m³/h"
+    - key: Decimals
+      value: 2

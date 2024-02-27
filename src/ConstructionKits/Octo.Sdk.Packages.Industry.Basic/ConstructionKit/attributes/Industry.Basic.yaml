@@ -8,4 +8,19 @@ attributes:
 
 - id: State
   valueType: Enum
-  valueCkEnumId: IndustryBasic/State
+  valueCkEnumId: ${thisModel}/State
+
+- id: Power
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "kW"
+    - key: Decimals
+      value: 2
+- id: ImportedEnergy
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "kWh"
+    - key: Decimals
+      value: 2

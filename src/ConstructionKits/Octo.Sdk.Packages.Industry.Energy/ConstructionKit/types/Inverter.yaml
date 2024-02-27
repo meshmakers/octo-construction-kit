@@ -15,7 +15,7 @@ types:
       name: Ampere
     - id: ${thisModel}/MaximumPower
       name: MaximumPower
-    - id: ${thisModel}/Power
+    - id: IndustryBasic/Power
       name: Power
     - id: ${thisModel}/PhaseInfoL1
       name: ACL1

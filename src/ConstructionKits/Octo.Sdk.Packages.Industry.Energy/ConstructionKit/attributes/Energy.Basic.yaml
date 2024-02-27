@@ -27,14 +27,7 @@ attributes:
     - key: Unit
       value: "A"
     - key: Decimals
-      value: 2      
-- id: Power
-  valueType: Double
-  metaData:
-    - key: Unit
-      value: "kW"
-    - key: Decimals
-      value: 2
+      value: 2 
 - id: MaximumPower
   valueType: Double
   metaData:
@@ -68,13 +61,6 @@ attributes:
   metaData:
     - key: Unit
       value: "Hz"
-    - key: Decimals
-      value: 2
-- id: ImportedEnergy
-  valueType: Double
-  metaData:
-    - key: Unit
-      value: "kWh"
     - key: Decimals
       value: 2
 - id: ExportedEnergy

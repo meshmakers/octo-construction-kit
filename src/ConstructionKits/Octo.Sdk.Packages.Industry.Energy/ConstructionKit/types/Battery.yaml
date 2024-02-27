@@ -8,9 +8,9 @@ types:
     isOptional: true
   - id: ${thisModel}/Ampere
     name: Ampere
-  - id: ${thisModel}/Power
+  - id: IndustryBasic/Power
     name: Power
-  - id: ${thisModel}/ImportedEnergy
+  - id: IndustryBasic/ImportedEnergy
     name: ImportedEnergy
     isOptional: true
   - id: ${thisModel}/ExportedEnergy

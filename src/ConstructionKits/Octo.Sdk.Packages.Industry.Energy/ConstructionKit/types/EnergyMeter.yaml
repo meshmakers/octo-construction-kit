@@ -8,7 +8,7 @@ types:
     isOptional: true
   - id: ${thisModel}/Ampere
     name: Ampere
-  - id: ${thisModel}/Power
+  - id: IndustryBasic/Power
     name: Power
   - id: ${thisModel}/ApparentPower
     name: ApparentPower
@@ -16,7 +16,7 @@ types:
   - id: ${thisModel}/ReactivePower
     name: ReactivePower
     isOptional: true
-  - id: ${thisModel}/ImportedEnergy
+  - id: IndustryBasic/ImportedEnergy
     name: ImportedEnergy
     isOptional: true
   - id: ${thisModel}/ExportedEnergy

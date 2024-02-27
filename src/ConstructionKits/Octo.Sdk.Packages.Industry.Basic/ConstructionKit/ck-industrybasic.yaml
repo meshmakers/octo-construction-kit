@@ -68,10 +68,24 @@ attributes:
 - id: EventAlarmType
   valueType: Enum
   valueCkEnumId: IndustryBasic-1.0.0/EventAlarmType-1.0.0
+- id: ImportedEnergy
+  valueType: Double
+  metaData:
+  - key: Unit
+    value: kWh
+  - key: Decimals
+    value: 2
 - id: Message
   valueType: String
 - id: OperatingHoursCounter
   valueType: Int
+- id: Power
+  valueType: Double
+  metaData:
+  - key: Unit
+    value: kW
+  - key: Decimals
+    value: 2
 - id: StandStillCounter
   valueType: Int
 - id: State

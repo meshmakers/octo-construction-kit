@@ -1,0 +1,11 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: WasteMeter
+  derivedFromCkTypeId: Basic/Asset
+  attributes:
+    - id: ${thisModel}/Weight
+      name: Weight
+    - id: ${thisModel}/TareWeight
+      name: TareWeight
+    - id: ${thisModel}/GrossWeight
+      name: GrossWeight

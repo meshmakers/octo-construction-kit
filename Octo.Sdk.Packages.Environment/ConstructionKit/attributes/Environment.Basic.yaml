@@ -1,0 +1,29 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: Weight
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "t"
+    - key: Decimals
+      value: 2
+    - key: Type
+      value: net
+- id: TareWeight
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "t"
+    - key: Decimals
+      value: 2
+    - key: Type
+      value: tare
+- id: GrossWeight
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "t"
+    - key: Decimals
+      value: 2
+    - key: Type
+      value: gross

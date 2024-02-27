@@ -5,19 +5,19 @@
         <LangVersion>latestmajor</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>true</ImplicitUsings>
-        <Configurations>Debug;Release;DebugL</Configurations>
-        <Platforms>AnyCPU</Platforms>
-        <RootNamespace>Octo.Sdk.Packages.Industry.Water</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="3.0.159" />
+        <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="3.0.164.0"/>
         <PackageReference Include="Meshmakers.Octo.ConstructionKit.SourceGeneration" OutputItemType="Analyzer" ReferenceOutputAssembly="false" Version="3.0.164" />
         <PackageReference Include="Meshmakers.Octo.ConstructionKit.MsBuildTasks" Version="3.0.164" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Octo.Sdk.Packages.Industry.Basic\Octo.Sdk.Packages.Industry.Basic.csproj" />
+        <ConstructionKitFolder Include="ConstructionKit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\src\ConstructionKits\Octo.Sdk.Packages.Basic\Octo.Sdk.Packages.Basic.csproj" />
+    </ItemGroup>
 </Project>

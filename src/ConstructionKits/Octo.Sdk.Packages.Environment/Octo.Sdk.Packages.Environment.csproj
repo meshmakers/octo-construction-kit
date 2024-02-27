@@ -10,13 +10,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="$(OctoVersion)" />
+        <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="$(OctoVersion)"/>
         <PackageReference Include="Meshmakers.Octo.ConstructionKit.SourceGeneration" OutputItemType="Analyzer" ReferenceOutputAssembly="false" Version="$(OctoVersion)" />
         <PackageReference Include="Meshmakers.Octo.ConstructionKit.MsBuildTasks" Version="$(OctoVersion)" PrivateAssets="all" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Octo.Sdk.Packages.Industry.Basic\Octo.Sdk.Packages.Industry.Basic.csproj" />
+        <ConstructionKitFolder Include="ConstructionKit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Octo.Sdk.Packages.Industry.Basic\Octo.Sdk.Packages.Industry.Basic.csproj" />
+    </ItemGroup>
 </Project>

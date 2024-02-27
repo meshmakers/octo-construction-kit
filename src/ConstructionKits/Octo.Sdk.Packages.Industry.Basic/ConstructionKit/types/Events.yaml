@@ -22,6 +22,10 @@ types:
       name: Source
     - id: ${thisModel}/EventAlarmGroup
       name: Group
+      autoCompleteValues:
+        - "Low"
+        - "Medium"
+        - "High"
     - id: ${thisModel}/EventAlarmCause
       name: Cause
     - id: ${thisModel}/EventAlarmReactivatedCount

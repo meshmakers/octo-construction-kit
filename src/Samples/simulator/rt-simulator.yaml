@@ -1,0 +1,33 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - IndustryEnergy
+entities:
+  - rtId: 65dc6d24cc529cdc46c84fca
+    ckTypeId: Basic/EquipmentModel
+    attributes:
+      - id: System/Name
+        value: Simulator
+      - id: System/Description
+        value: Simple simulation data from simulator plug
+  - rtId: 65dc6d24cc529cdc46c84fcb
+    ckTypeId: Basic/EquipmentGroup
+    attributes:
+      - id: System/Name
+        value: Simulator1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 65dc6d24cc529cdc46c84fca
+        targetCkTypeId: Basic/EquipmentModel
+
+
+  - rtId: 65dc6d24cc529cdc46c84fcc
+    ckTypeId: IndustryEnergy/EnergyMeter
+    attributes:
+      - id: System/Name
+        value: EnergyMeter1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 65dc6d24cc529cdc46c84fcb
+        targetCkTypeId: Basic/EquipmentGroup
+        
+    

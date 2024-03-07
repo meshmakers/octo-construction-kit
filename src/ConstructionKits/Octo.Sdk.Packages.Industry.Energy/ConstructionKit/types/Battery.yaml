@@ -1,16 +1,16 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Battery
-  derivedFromCkTypeId: IndustryBasic/Machine
+  derivedFromCkTypeId: Industry.Basic/Machine
   attributes:
   - id: ${thisModel}/Voltage
     name: Voltage
     isOptional: true
   - id: ${thisModel}/Ampere
     name: Ampere
-  - id: IndustryBasic/Power
+  - id: Industry.Basic/Power
     name: Power
-  - id: IndustryBasic/ImportedEnergy
+  - id: Industry.Basic/ImportedEnergy
     name: ImportedEnergy
     isOptional: true
   - id: ${thisModel}/ExportedEnergy

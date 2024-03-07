@@ -48,9 +48,9 @@ entities:
 #        targetCkTypeId: System.Communication/PlugGroup
 #      - roleId: System.Communication/Stream
 #        targetRtId: 5fc8fda18b2fc75f925e21ae
-#        targetCkTypeId: IndustryEnergy/Battery
+#        targetCkTypeId: Industry.Energy/Battery
 #        targetCkAttributeIds:
-#          - IndustryEnergy/Power
+#          - Industry.Energy/Power
 #        attributes:
 #          - id: System.Communication/MappingConfiguration
 #            value: "{ \"register\": 69, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }"
@@ -66,9 +66,9 @@ entities:
 #        targetCkTypeId: System.Communication/PlugGroup
 #      - roleId: System.Communication/Stream
 #        targetRtId: 5fc8fda18b2fc75f925e21af
-#        targetCkTypeId: IndustryEnergy/Photovoltaic.Module
+#        targetCkTypeId: Industry.Energy/Photovoltaic.Module
 #        targetCkAttributeIds:
-#          - IndustryEnergy/Power
+#          - Industry.Energy/Power
 #        attributes:
 #          - id: System.Communication/MappingConfiguration
 #            value: "{ \"register\": 67, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }" 
@@ -84,9 +84,9 @@ entities:
 #        targetCkTypeId: System.Communication/PlugGroup
 #      - roleId: System.Communication/Stream
 #        targetRtId: 5fc8fda18b2fc75f925e21ae
-#        targetCkTypeId: IndustryEnergy/Battery
+#        targetCkTypeId: Industry.Energy/Battery
 #        targetCkAttributeIds:
-#          - IndustryEnergy/SoC
+#          - Industry.Energy/SoC
 #        attributes:
 #          - id: System.Communication/MappingConfiguration
 #            value: "{ \"register\": 82, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }"
@@ -102,9 +102,9 @@ entities:
 #        targetCkTypeId: System.Communication/PlugGroup
 #      - roleId: System.Communication/Stream
 #        targetRtId: 5fc8fda18b2fc75f925e21c2
-#        targetCkTypeId: IndustryEnergy/EnergyMeter
+#        targetCkTypeId: Industry.Energy/EnergyMeter
 #        targetCkAttributeIds:
-#          - IndustryEnergy/Power
+#          - Industry.Energy/Power
 #        attributes:
 #          - id: System.Communication/MappingConfiguration
 #            value: "{ \"register\": 71, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }"         
@@ -120,9 +120,9 @@ entities:
 #        targetCkTypeId: System.Communication/PlugGroup
 #      - roleId: System.Communication/Stream
 #        targetRtId: 5fc8fda18b2fc75f925e21c2
-#        targetCkTypeId: IndustryEnergy/EnergyMeter
+#        targetCkTypeId: Industry.Energy/EnergyMeter
 #        targetCkAttributeIds: 
-#          - IndustryEnergy/Power
+#          - Industry.Energy/Power
 #        attributes:
 #          - id: System.Communication/MappingConfiguration
 #            value: "{ \"register\": 73, \"registerType\": 3, \"pollingInterval\": \"00:00:05\" }"
@@ -138,9 +138,9 @@ entities:
 #        targetCkTypeId: System.Communication/PlugGroup
 #      - roleId: System.Communication/Stream
 #        targetRtId: 5fc8fda18b2fc75f925e21c0
-#        targetCkTypeId: IndustryEnergy/Photovoltaic.Module
+#        targetCkTypeId: Industry.Energy/Photovoltaic.Module
 #        targetCkAttributeIds:
-#          - IndustryEnergy/Power
+#          - Industry.Energy/Power
 #        attributes:
 #          - id: System.Communication/MappingConfiguration
 #            value: "{ \"register\": 75, \"registerType\": 3, \"pollingInterval\": \"00:00:05\", \"scaleInputMin\": 0, \"scaleInputMax\": -10000, \"scaleOutputMin\": 0, \"scaleOutputMax\": 10000 }"     
@@ -185,8 +185,8 @@ entities:
 #        targetCkTypeId: System.Communication/PlugGroup
 #      - roleId: System.Communication/Stream
 #        targetRtId: 5fc8fda18b2fc75f925e21ae
-#        targetCkTypeId: IndustryEnergy/Battery
-#        targetAttributeId: IndustryEnergy/Power
+#        targetCkTypeId: Industry.Energy/Battery
+#        targetAttributeId: Industry.Energy/Power
 #        attributes:
 #          - id: System.Communication/MappingConfiguration
 #            value: "{ \"register\": 107, \"registerType\": 4, \"pollingInterval\": \"00:01:00\" }"

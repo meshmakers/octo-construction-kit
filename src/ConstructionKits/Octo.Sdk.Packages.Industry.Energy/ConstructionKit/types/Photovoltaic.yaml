@@ -9,22 +9,22 @@ types:
   attributes:
     - id: ${thisModel}/NumOfModules
       name: NumOfModules
-    - id: IndustryBasic/Power
+    - id: Industry.Basic/Power
       name: Power
       isOptional: true
   associations:
     - id: System/ParentChild
-      targetCkTypeId: IndustryEnergy/Inverter
+      targetCkTypeId: Industry.Energy/Inverter
       
       
 - typeId: Photovoltaic.Module
-  derivedFromCkTypeId: IndustryBasic/Machine
+  derivedFromCkTypeId: Industry.Basic/Machine
   attributes:
     - id: ${thisModel}/PeakPower
       name: PeakPower
-    - id: IndustryBasic/Power
+    - id: Industry.Basic/Power
       name: Power
       isOptional: true
   associations:
     - id: System/ParentChild
-      targetCkTypeId: IndustryEnergy/Photovoltaic.String
+      targetCkTypeId: Industry.Energy/Photovoltaic.String

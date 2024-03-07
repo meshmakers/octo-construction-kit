@@ -12,7 +12,7 @@ types:
       targetCkTypeId: Basic/Asset
 
 - typeId: Alarm
-  derivedFromCkTypeId: IndustryBasic/Event
+  derivedFromCkTypeId: Industry.Basic/Event
   attributes:
     - id: ${thisModel}/EventAlarmState
       name: State

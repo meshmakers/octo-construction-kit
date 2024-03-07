@@ -1,18 +1,18 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-compiled.schema.json
 types:
 - typeId: HeatMeter
-  derivedFromCkTypeId: IndustryBasic-1.0.0/Machine-1.0.0
+  derivedFromCkTypeId: Industry.Basic-1.0.0/Machine-1.0.0
   attributes:
-  - id: IndustryFluid-1.0.0/Volume-1.0.0
+  - id: Industry.Fluid-1.0.0/Volume-1.0.0
     name: Volume
     isOptional: true
-  - id: IndustryFluid-1.0.0/Flow-1.0.0
+  - id: Industry.Fluid-1.0.0/Flow-1.0.0
     name: Flow
     isOptional: true
-  - id: IndustryBasic-1.0.0/Power-1.0.0
+  - id: Industry.Basic-1.0.0/Power-1.0.0
     name: Power
     isOptional: true
-  - id: IndustryBasic-1.0.0/ImportedEnergy-1.0.0
+  - id: Industry.Basic-1.0.0/ImportedEnergy-1.0.0
     name: ImportedEnergy
   - id: Basic-1.0.0/MinTemperature-1.0.0
     name: ReturnTemperature
@@ -21,14 +21,14 @@ types:
     name: FlowTemperature
     isOptional: true
 - typeId: WaterMeter
-  derivedFromCkTypeId: IndustryBasic-1.0.0/Machine-1.0.0
+  derivedFromCkTypeId: Industry.Basic-1.0.0/Machine-1.0.0
   attributes:
-  - id: IndustryFluid-1.0.0/NetVolume-1.0.0
+  - id: Industry.Fluid-1.0.0/NetVolume-1.0.0
     name: NetVolume
-  - id: IndustryFluid-1.0.0/Volume-1.0.0
+  - id: Industry.Fluid-1.0.0/Volume-1.0.0
     name: Volume
     isOptional: true
-  - id: IndustryFluid-1.0.0/ReverseVolume-1.0.0
+  - id: Industry.Fluid-1.0.0/ReverseVolume-1.0.0
     name: ReverseVolume
     isOptional: true
   - id: Basic-1.0.0/AvgTemperature-1.0.0
@@ -78,6 +78,6 @@ attributes:
     value: Current
 records: []
 enums: []
-modelId: IndustryFluid
+modelId: Industry.Fluid
 dependencies:
-- IndustryBasic
+- Industry.Basic

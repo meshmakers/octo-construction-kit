@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - IndustryEnergy
+  - Industry.Energy
 entities:
   - rtId: 5fc8fc3d8b2fc75f925e21aa
     ckTypeId: Basic/EquipmentModel
@@ -21,7 +21,7 @@ entities:
 
 
   - rtId: 5fc8fda18b2fc75f925e21ac
-    ckTypeId: IndustryEnergy/Photovoltaic
+    ckTypeId: Industry.Energy/Photovoltaic
     attributes:
       - id: System/Name
         value: PV
@@ -31,7 +31,7 @@ entities:
         targetCkTypeId: Basic/EquipmentGroup
         
   - rtId: 5fc8fda18b2fc75f925e21ad
-    ckTypeId: IndustryEnergy/Inverter
+    ckTypeId: Industry.Energy/Inverter
     attributes:
       - id: System/Name
         value: E3DC
@@ -48,57 +48,57 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: IndustryEnergy/Photovoltaic
+        targetCkTypeId: Industry.Energy/Photovoltaic
         
   - rtId: 5fc8fda18b2fc75f925e21ae
-    ckTypeId: IndustryEnergy/Battery
+    ckTypeId: Industry.Energy/Battery
     attributes:
-      - id: IndustryEnergy/Capacity
+      - id: Industry.Energy/Capacity
         value: 12        
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: IndustryEnergy/Photovoltaic
+        targetCkTypeId: Industry.Energy/Photovoltaic
         
   - rtId: 5fc8fda18b2fc75f925e21af
-    ckTypeId: IndustryEnergy/Photovoltaic.Module
+    ckTypeId: Industry.Energy/Photovoltaic.Module
     attributes:
       - id: System/Name
         value: Hauptgebäude
-      - id: IndustryEnergy/PeakPower
+      - id: Industry.Energy/PeakPower
         value: 13068
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: IndustryEnergy/Photovoltaic
+        targetCkTypeId: Industry.Energy/Photovoltaic
           
   - rtId: 5fc8fda18b2fc75f925e21c0
-    ckTypeId: IndustryEnergy/Photovoltaic.Module
+    ckTypeId: Industry.Energy/Photovoltaic.Module
     attributes:
       - id: System/Name
         value: Nebengebäude
-      - id: IndustryEnergy/PeakPower
+      - id: Industry.Energy/PeakPower
         value: 1584
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: IndustryEnergy/Photovoltaic
+        targetCkTypeId: Industry.Energy/Photovoltaic
           
   - rtId: 5fc8fda18b2fc75f925e21c1
-    ckTypeId: IndustryEnergy/EnergyMeter
+    ckTypeId: Industry.Energy/EnergyMeter
     attributes:
       - id: System/Name
         value: Netzbezug
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: IndustryEnergy/Photovoltaic
+        targetCkTypeId: Industry.Energy/Photovoltaic
   - rtId: 5fc8fda18b2fc75f925e21c2
-    ckTypeId: IndustryEnergy/EnergyMeter
+    ckTypeId: Industry.Energy/EnergyMeter
     attributes:
       - id: System/Name
         value: Gebäudeverbrauch
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: IndustryEnergy/Photovoltaic           
+        targetCkTypeId: Industry.Energy/Photovoltaic           

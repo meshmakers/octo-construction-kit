@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Inverter
-  derivedFromCkTypeId: IndustryBasic/Machine
+  derivedFromCkTypeId: Industry.Basic/Machine
   attributes:
     - id: ${thisModel}/DCVoltage
       name: DCVoltage
@@ -15,7 +15,7 @@ types:
       name: Ampere
     - id: ${thisModel}/MaximumPower
       name: MaximumPower
-    - id: IndustryBasic/Power
+    - id: Industry.Basic/Power
       name: Power
     - id: ${thisModel}/PhaseInfoL1
       name: ACL1
@@ -30,4 +30,4 @@ types:
     - id: System/ParentChild
       targetCkTypeId: ${thisModel}/Photovoltaic
     - id: System/ParentChild
-      targetCkTypeId: IndustryBasic/Machine
+      targetCkTypeId: Industry.Basic/Machine

@@ -1,125 +1,125 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-compiled.schema.json
 types:
 - typeId: Battery
-  derivedFromCkTypeId: IndustryBasic-1.0.0/Machine-1.0.0
+  derivedFromCkTypeId: Industry.Basic-1.0.0/Machine-1.0.0
   associations:
   - id: System-1.0.0/ParentChild-1.0.0
-    targetCkTypeId: IndustryEnergy-1.0.0/Inverter-1.0.0
+    targetCkTypeId: Industry.Energy-1.0.0/Inverter-1.0.0
   attributes:
-  - id: IndustryEnergy-1.0.0/Voltage-1.0.0
+  - id: Industry.Energy-1.0.0/Voltage-1.0.0
     name: Voltage
     isOptional: true
-  - id: IndustryEnergy-1.0.0/Ampere-1.0.0
+  - id: Industry.Energy-1.0.0/Ampere-1.0.0
     name: Ampere
-  - id: IndustryBasic-1.0.0/Power-1.0.0
+  - id: Industry.Basic-1.0.0/Power-1.0.0
     name: Power
-  - id: IndustryBasic-1.0.0/ImportedEnergy-1.0.0
+  - id: Industry.Basic-1.0.0/ImportedEnergy-1.0.0
     name: ImportedEnergy
     isOptional: true
-  - id: IndustryEnergy-1.0.0/ExportedEnergy-1.0.0
+  - id: Industry.Energy-1.0.0/ExportedEnergy-1.0.0
     name: ExportedEnergy
     isOptional: true
-  - id: IndustryEnergy-1.0.0/SoC-1.0.0
+  - id: Industry.Energy-1.0.0/SoC-1.0.0
     name: SoC
-  - id: IndustryEnergy-1.0.0/SoH-1.0.0
+  - id: Industry.Energy-1.0.0/SoH-1.0.0
     name: SoH
     isOptional: true
-  - id: IndustryEnergy-1.0.0/NumofCycles-1.0.0
+  - id: Industry.Energy-1.0.0/NumofCycles-1.0.0
     name: NumofCycles
     isOptional: true
-  - id: IndustryEnergy-1.0.0/Capacity-1.0.0
+  - id: Industry.Energy-1.0.0/Capacity-1.0.0
     name: Capacity
     isOptional: true
   - id: Basic-1.0.0/Temperature-1.0.0
     name: Temperature
     isOptional: true
 - typeId: EnergyMeter
-  derivedFromCkTypeId: IndustryBasic-1.0.0/Machine-1.0.0
+  derivedFromCkTypeId: Industry.Basic-1.0.0/Machine-1.0.0
   attributes:
-  - id: IndustryEnergy-1.0.0/Voltage-1.0.0
+  - id: Industry.Energy-1.0.0/Voltage-1.0.0
     name: Voltage
     isOptional: true
-  - id: IndustryEnergy-1.0.0/Ampere-1.0.0
+  - id: Industry.Energy-1.0.0/Ampere-1.0.0
     name: Ampere
-  - id: IndustryBasic-1.0.0/Power-1.0.0
+  - id: Industry.Basic-1.0.0/Power-1.0.0
     name: Power
-  - id: IndustryEnergy-1.0.0/ApparentPower-1.0.0
+  - id: Industry.Energy-1.0.0/ApparentPower-1.0.0
     name: ApparentPower
     isOptional: true
-  - id: IndustryEnergy-1.0.0/ReactivePower-1.0.0
+  - id: Industry.Energy-1.0.0/ReactivePower-1.0.0
     name: ReactivePower
     isOptional: true
-  - id: IndustryBasic-1.0.0/ImportedEnergy-1.0.0
+  - id: Industry.Basic-1.0.0/ImportedEnergy-1.0.0
     name: ImportedEnergy
     isOptional: true
-  - id: IndustryEnergy-1.0.0/ExportedEnergy-1.0.0
+  - id: Industry.Energy-1.0.0/ExportedEnergy-1.0.0
     name: ExportedEnergy
     isOptional: true
-  - id: IndustryEnergy-1.0.0/Frequency-1.0.0
+  - id: Industry.Energy-1.0.0/Frequency-1.0.0
     name: Frequency
     isOptional: true
-  - id: IndustryEnergy-1.0.0/PhaseInfoL1-1.0.0
+  - id: Industry.Energy-1.0.0/PhaseInfoL1-1.0.0
     name: ACL1
     isOptional: true
-  - id: IndustryEnergy-1.0.0/PhaseInfoL2-1.0.0
+  - id: Industry.Energy-1.0.0/PhaseInfoL2-1.0.0
     name: ACL2
     isOptional: true
-  - id: IndustryEnergy-1.0.0/PhaseInfoL3-1.0.0
+  - id: Industry.Energy-1.0.0/PhaseInfoL3-1.0.0
     name: ACL3
     isOptional: true
 - typeId: Inverter
-  derivedFromCkTypeId: IndustryBasic-1.0.0/Machine-1.0.0
+  derivedFromCkTypeId: Industry.Basic-1.0.0/Machine-1.0.0
   associations:
   - id: System-1.0.0/ParentChild-1.0.0
-    targetCkTypeId: IndustryEnergy-1.0.0/Photovoltaic-1.0.0
+    targetCkTypeId: Industry.Energy-1.0.0/Photovoltaic-1.0.0
   - id: System-1.0.0/ParentChild-1.0.0
-    targetCkTypeId: IndustryBasic-1.0.0/Machine-1.0.0
+    targetCkTypeId: Industry.Basic-1.0.0/Machine-1.0.0
   attributes:
-  - id: IndustryEnergy-1.0.0/DCVoltage-1.0.0
+  - id: Industry.Energy-1.0.0/DCVoltage-1.0.0
     name: DCVoltage
     isOptional: true
-  - id: IndustryEnergy-1.0.0/DCAmpere-1.0.0
+  - id: Industry.Energy-1.0.0/DCAmpere-1.0.0
     name: DCAmpere
-  - id: IndustryEnergy-1.0.0/Voltage-1.0.0
+  - id: Industry.Energy-1.0.0/Voltage-1.0.0
     name: Voltage
     isOptional: true
-  - id: IndustryEnergy-1.0.0/Ampere-1.0.0
+  - id: Industry.Energy-1.0.0/Ampere-1.0.0
     name: Ampere
-  - id: IndustryEnergy-1.0.0/MaximumPower-1.0.0
+  - id: Industry.Energy-1.0.0/MaximumPower-1.0.0
     name: MaximumPower
-  - id: IndustryBasic-1.0.0/Power-1.0.0
+  - id: Industry.Basic-1.0.0/Power-1.0.0
     name: Power
-  - id: IndustryEnergy-1.0.0/PhaseInfoL1-1.0.0
+  - id: Industry.Energy-1.0.0/PhaseInfoL1-1.0.0
     name: ACL1
     isOptional: true
-  - id: IndustryEnergy-1.0.0/PhaseInfoL2-1.0.0
+  - id: Industry.Energy-1.0.0/PhaseInfoL2-1.0.0
     name: ACL2
     isOptional: true
-  - id: IndustryEnergy-1.0.0/PhaseInfoL3-1.0.0
+  - id: Industry.Energy-1.0.0/PhaseInfoL3-1.0.0
     name: ACL3
     isOptional: true
 - typeId: Photovoltaic
   derivedFromCkTypeId: Basic-1.0.0/Asset-1.0.0
 - typeId: Photovoltaic.Module
-  derivedFromCkTypeId: IndustryBasic-1.0.0/Machine-1.0.0
+  derivedFromCkTypeId: Industry.Basic-1.0.0/Machine-1.0.0
   associations:
   - id: System-1.0.0/ParentChild-1.0.0
-    targetCkTypeId: IndustryEnergy-1.0.0/Photovoltaic.String-1.0.0
+    targetCkTypeId: Industry.Energy-1.0.0/Photovoltaic.String-1.0.0
   attributes:
-  - id: IndustryEnergy-1.0.0/PeakPower-1.0.0
+  - id: Industry.Energy-1.0.0/PeakPower-1.0.0
     name: PeakPower
-  - id: IndustryBasic-1.0.0/Power-1.0.0
+  - id: Industry.Basic-1.0.0/Power-1.0.0
     name: Power
     isOptional: true
 - typeId: Photovoltaic.String
   derivedFromCkTypeId: Basic-1.0.0/Asset-1.0.0
   associations:
   - id: System-1.0.0/ParentChild-1.0.0
-    targetCkTypeId: IndustryEnergy-1.0.0/Inverter-1.0.0
+    targetCkTypeId: Industry.Energy-1.0.0/Inverter-1.0.0
   attributes:
-  - id: IndustryEnergy-1.0.0/NumOfModules-1.0.0
+  - id: Industry.Energy-1.0.0/NumOfModules-1.0.0
     name: NumOfModules
-  - id: IndustryBasic-1.0.0/Power-1.0.0
+  - id: Industry.Basic-1.0.0/Power-1.0.0
     name: Power
     isOptional: true
 associationRoles: []
@@ -199,13 +199,13 @@ attributes:
     value: 2
 - id: PhaseInfoL1
   valueType: Record
-  valueCkRecordId: IndustryEnergy-1.0.0/PhaseInfo-1.0.0
+  valueCkRecordId: Industry.Energy-1.0.0/PhaseInfo-1.0.0
 - id: PhaseInfoL2
   valueType: Record
-  valueCkRecordId: IndustryEnergy-1.0.0/PhaseInfo-1.0.0
+  valueCkRecordId: Industry.Energy-1.0.0/PhaseInfo-1.0.0
 - id: PhaseInfoL3
   valueType: Record
-  valueCkRecordId: IndustryEnergy-1.0.0/PhaseInfo-1.0.0
+  valueCkRecordId: Industry.Energy-1.0.0/PhaseInfo-1.0.0
 - id: ReactivePower
   valueType: Double
   metaData:
@@ -235,17 +235,17 @@ attributes:
 records:
 - recordId: PhaseInfo
   attributes:
-  - id: IndustryEnergy-1.0.0/Voltage-1.0.0
+  - id: Industry.Energy-1.0.0/Voltage-1.0.0
     name: Voltage
     isOptional: true
-  - id: IndustryEnergy-1.0.0/Ampere-1.0.0
+  - id: Industry.Energy-1.0.0/Ampere-1.0.0
     name: Ampere
-  - id: IndustryBasic-1.0.0/Power-1.0.0
+  - id: Industry.Basic-1.0.0/Power-1.0.0
     name: Power
-  - id: IndustryEnergy-1.0.0/Frequency-1.0.0
+  - id: Industry.Energy-1.0.0/Frequency-1.0.0
     name: Frequency
     isOptional: true
 enums: []
-modelId: IndustryEnergy
+modelId: Industry.Energy
 dependencies:
-- IndustryBasic
+- Industry.Basic

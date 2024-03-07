@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - IndustryEnergy
+  - Industry.Energy
 entities:
   - rtId: 65dc6d24cc529cdc46c84fca
     ckTypeId: Basic/EquipmentModel
@@ -21,7 +21,7 @@ entities:
 
 
   - rtId: 65dc6d24cc529cdc46c84fcc
-    ckTypeId: IndustryEnergy/EnergyMeter
+    ckTypeId: Industry.Energy/EnergyMeter
     attributes:
       - id: System/Name
         value: EnergyMeter1

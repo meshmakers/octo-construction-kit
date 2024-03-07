@@ -1,33 +1,33 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-compiled.schema.json
 types:
 - typeId: Alarm
-  derivedFromCkTypeId: IndustryBasic-1.0.0/Event-1.0.0
+  derivedFromCkTypeId: Industry.Basic-1.0.0/Event-1.0.0
   attributes:
-  - id: IndustryBasic-1.0.0/EventAlarmState-1.0.0
+  - id: Industry.Basic-1.0.0/EventAlarmState-1.0.0
     name: State
-  - id: IndustryBasic-1.0.0/EventAlarmType-1.0.0
+  - id: Industry.Basic-1.0.0/EventAlarmType-1.0.0
     name: Type
-  - id: IndustryBasic-1.0.0/EventAlarmSource-1.0.0
+  - id: Industry.Basic-1.0.0/EventAlarmSource-1.0.0
     name: Source
-  - id: IndustryBasic-1.0.0/EventAlarmGroup-1.0.0
+  - id: Industry.Basic-1.0.0/EventAlarmGroup-1.0.0
     name: Group
     autoCompleteValues:
     - Low
     - Medium
     - High
-  - id: IndustryBasic-1.0.0/EventAlarmCause-1.0.0
+  - id: Industry.Basic-1.0.0/EventAlarmCause-1.0.0
     name: Cause
-  - id: IndustryBasic-1.0.0/EventAlarmReactivatedCount-1.0.0
+  - id: Industry.Basic-1.0.0/EventAlarmReactivatedCount-1.0.0
     name: ReactivatedCount
 - typeId: Event
   derivedFromCkTypeId: Basic-1.0.0/NamedEntity-1.0.0
   associations:
-  - id: IndustryBasic-1.0.0/EventSource-1.0.0
+  - id: Industry.Basic-1.0.0/EventSource-1.0.0
     targetCkTypeId: Basic-1.0.0/Asset-1.0.0
   attributes:
   - id: Basic-1.0.0/Time-1.0.0
     name: Time
-  - id: IndustryBasic-1.0.0/Message-1.0.0
+  - id: Industry.Basic-1.0.0/Message-1.0.0
     name: Message
 - typeId: Machine
   derivedFromCkTypeId: Basic-1.0.0/Asset-1.0.0
@@ -35,13 +35,13 @@ types:
   - id: Basic-1.0.0/NamePlate-1.0.0
     name: NamePlate
     isOptional: true
-  - id: IndustryBasic-1.0.0/OperatingHoursCounter-1.0.0
+  - id: Industry.Basic-1.0.0/OperatingHoursCounter-1.0.0
     name: OperatingHours
     isOptional: true
-  - id: IndustryBasic-1.0.0/StandStillCounter-1.0.0
+  - id: Industry.Basic-1.0.0/StandStillCounter-1.0.0
     name: StandStillCounter
     isOptional: true
-  - id: IndustryBasic-1.0.0/State-1.0.0
+  - id: Industry.Basic-1.0.0/State-1.0.0
     name: State
 associationRoles:
 - id: EventSource
@@ -61,13 +61,13 @@ attributes:
   - 0
 - id: EventAlarmSource
   valueType: Enum
-  valueCkEnumId: IndustryBasic-1.0.0/EventAlarmSource-1.0.0
+  valueCkEnumId: Industry.Basic-1.0.0/EventAlarmSource-1.0.0
 - id: EventAlarmState
   valueType: Enum
-  valueCkEnumId: IndustryBasic-1.0.0/EventAlarmState-1.0.0
+  valueCkEnumId: Industry.Basic-1.0.0/EventAlarmState-1.0.0
 - id: EventAlarmType
   valueType: Enum
-  valueCkEnumId: IndustryBasic-1.0.0/EventAlarmType-1.0.0
+  valueCkEnumId: Industry.Basic-1.0.0/EventAlarmType-1.0.0
 - id: ImportedEnergy
   valueType: Double
   metaData:
@@ -90,7 +90,7 @@ attributes:
   valueType: Int
 - id: State
   valueType: Enum
-  valueCkEnumId: IndustryBasic-1.0.0/State-1.0.0
+  valueCkEnumId: Industry.Basic-1.0.0/State-1.0.0
 records: []
 enums:
 - enumId: EventAlarmSource
@@ -176,6 +176,6 @@ enums:
     name: Error
   - key: 4
     name: Idle
-modelId: IndustryBasic
+modelId: Industry.Basic
 dependencies:
 - Basic

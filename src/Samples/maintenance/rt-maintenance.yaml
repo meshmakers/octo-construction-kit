@@ -29,7 +29,7 @@ entities:
         targetRtId: 64a2b2ff83f510d627206cfe
         targetCkTypeId: Basic/EquipmentGroup
   - rtId: 64a2b64c3da56d342f1c3880
-    ckTypeId: IndustryBasic/Machine
+    ckTypeId: Industry.Basic/Machine
     attributes:
       - id: System/Name
         value: Spritzguss 1
@@ -48,7 +48,7 @@ entities:
         targetRtId: 64a2b55a84c7869c60270d1a
         targetCkTypeId: Basic/EquipmentGroup
   - rtId: 64a2b66286eb404602d82503
-    ckTypeId: IndustryBasic/Machine
+    ckTypeId: Industry.Basic/Machine
     attributes:
       - id: System/Name
         value: Fräsmaschine 1
@@ -67,7 +67,7 @@ entities:
         targetRtId: 64a2b55a84c7869c60270d1a
         targetCkTypeId: Basic/EquipmentGroup
   - rtId: 64a2b6c3bbf4aa537f812b62
-    ckTypeId: IndustryBasic/Machine
+    ckTypeId: Industry.Basic/Machine
     attributes:
       - id: System/Name
         value: Fräsmaschine 2

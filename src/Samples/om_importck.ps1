@@ -1,4 +1,4 @@
-octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Basic/ConstructionKit/ck-basic.yaml -w
-octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Basic/ConstructionKit/ck-industry.basic.yaml -w
-octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Energy/ConstructionKit/ck-industry.energy.yaml -w
-octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/ConstructionKit/ck-industry.fluid.yaml -w
+octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Basic/bin/Release/net8.0/octo-ck-libraries/Octo.Sdk.Packages.Basic/out/ck-basic.yaml -w
+octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Basic/bin/Release/net8.0/octo-ck-libraries/Octo.Sdk.Packages.Industry.Basic/out/ck-industry.basic.yaml -w
+octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Energy/bin/Release/net8.0/octo-ck-libraries/Octo.Sdk.Packages.Industry.Energy/out/ck-industry.energy.yaml -w
+octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/bin/Release/net8.0/octo-ck-libraries/Octo.Sdk.Packages.Industry.Fluid/out/ck-industry.fluid.yaml -w

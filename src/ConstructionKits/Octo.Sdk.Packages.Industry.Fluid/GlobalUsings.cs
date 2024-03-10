@@ -1,2 +1,1 @@
-global using Octo.Sdk.Packages.Industry.Basic.ConstructionKit.Generated.Industry.Basic.v1;
-global using Octo.Sdk.Packages.Basic.ConstructionKit.Generated.Basic.v1;
+global using Octo.Sdk.Packages.Industry.Basic.Generated.Industry.Basic.v1;

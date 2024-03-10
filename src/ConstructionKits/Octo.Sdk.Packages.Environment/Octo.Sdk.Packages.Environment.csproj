@@ -7,6 +7,7 @@
         <ImplicitUsings>true</ImplicitUsings>
         <Configurations>Debug;Release;DebugL</Configurations>
         <Platforms>AnyCPU</Platforms>
+        <OctoPublishCkModel>true</OctoPublishCkModel>
     </PropertyGroup>
 
     <ItemGroup>
@@ -16,7 +17,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ConstructionKitFolder Include="ConstructionKit"/>
+        <ConstructionKitFolder Visible="false" Include="$(MSBuildProjectDirectory)\ConstructionKit"/>
     </ItemGroup>
 
     <ItemGroup>

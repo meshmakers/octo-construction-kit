@@ -8,6 +8,7 @@
         <Configurations>Debug;Release;DebugL</Configurations>
         <Platforms>AnyCPU</Platforms>
         <RootNamespace>Octo.Sdk.Packages.Industry.Water</RootNamespace>
+        <OctoPublishCkModel>true</OctoPublishCkModel>
     </PropertyGroup>
 
     <ItemGroup>
@@ -18,6 +19,10 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Octo.Sdk.Packages.Industry.Basic\Octo.Sdk.Packages.Industry.Basic.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ConstructionKitFolder Visible="false" Include="$(MSBuildProjectDirectory)\ConstructionKit"/>
     </ItemGroup>
 
 </Project>

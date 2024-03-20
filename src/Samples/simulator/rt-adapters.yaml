@@ -3,13 +3,13 @@ dependencies:
   - System.Communication
 entities:
   - rtId: 65d5c447b420da3fb12381bb
-    ckTypeId: System.Communication/CommunicationPool
+    ckTypeId: System.Communication/Pool
     attributes:
       - id: System/Name
         value: simulation
     associations: []
   - rtId: 65d5c447b420da3fb12381bc
-    ckTypeId: System.Communication/CommunicationAdapter
+    ckTypeId: System.Communication/EdgeAdapter
     attributes:
       - id: System/Name
         value: Simulation Demo Adapter       
@@ -24,7 +24,7 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bb
-        targetCkTypeId: System.Communication/CommunicationPool
+        targetCkTypeId: System.Communication/Pool
         
     # Data pipelines of plug
   - rtId: 65d5c447b420da3fb12381bd
@@ -32,11 +32,24 @@ entities:
     attributes:
       - id: System/Name
         value: Simulation Pipeline
-      - id: System.Communication/AdapterPipelineConfiguration
+  - rtId: 65d5c447b420da3fb12381be
+    ckTypeId: System.Communication/EdgePipeline
+    attributes:
+      - id: System.Communication/PipelineDefinition
         value: "transformations:\n- type: Simulation@1\n  simulations:\n  - propertyName: Sinus\n  - propertyName: Constant_6\n    simulationTypes: 2\n    parameter1: 6\n  - propertyName: Triangle\n    simulationTypes: 1\n  description: Simulates data\n- type: SelectByPath@1\n  transformations:\n  - sourcePath: \"$.Sinus\"\n    targetPropertyName: Sinus5\n    transformations:\n    - type: LinearScaler@1\n      scaleInputMin: 0\n      scaleInputMax: 1\n      scaleOutputMin: 0\n      scaleOutputMax: 1000\n  - sourcePath: \"$.Constant_6\"\n    targetPropertyName: Constant\n    transformations:\n    - type: LinearScaler@1\n      scaleInputMin: 0\n      scaleInputMax: 10\n      scaleOutputMin: 0\n      scaleOutputMax: 1000\n  description: Transform object node\n- type: Project@1\n  fields:\n  - path: \"$.Sinus\"\n  - path: \"$.Constant_6\"\n- type: PublishToDistributionEventHub@1\n  description: Load to event hub\n"
-      - id: System.Communication/RetrieverPipelineConfiguration
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 65d5c447b420da3fb12381bd
+        targetCkTypeId: System.Communication/DataPipeline
+      - roleId: System.Communication/Executes
+        targetRtId: 65d5c447b420da3fb12381bc
+        targetCkTypeId: System.Communication/EdgeAdapter   
+  - rtId: 65d5c447b420da3fb12381bf
+    ckTypeId: System.Communication/MeshPipeline
+    attributes:
+      - id: System.Communication/PipelineDefinition
         value: "transformations: \n  - type: RetrieveFromMessage@1\n    description: Retrieve from distributed event hub message\n  - type: GetRtEntitiesById@1\n    targetPropertyName: EnergyMeterResult\n    ckTypeId: Industry.Energy-1.0.0/EnergyMeter-1.0.0\n    rtIds: \n      - 65dc6d24cc529cdc46c84fcc\n    description: Retrieve RtEntity if exists\n  - type: CreateUpdateInfo@1\n    targetPropertyName: _UpdateItems\n    appendToTargetPropertyName: true\n    rtId: 65dc6d24cc529cdc46c84fcc\n    ckTypeId: Industry.Energy-1.0.0/EnergyMeter-1.0.0\n    attributeUpdates: \n      - attributeName: Voltage\n        attributeValueType: Double\n        valuePath: $.Sinus5\n    description: update\n  - type: ApplyChanges@1\n    targetPropertyName: _UpdateItems\n  - type: EnrichWithMongoDataNode@1\n    path: $._UpdateItems\n    targetPropertyName: _UpdateItems\n    appendToTargetPropertyName: true\n    rtId: 65dc6d24cc529cdc46c84fcc\n    ckTypeId: Industry.Energy-1.0.0/EnergyMeter-1.0.0\n    attributeUpdates: \n      - attributeName: Power\n        attributeValueType: Double\n        valuePath: $.Power\n      - attributeName: Ampere\n        attributeValueType: Double\n        valuePath: $.Ampere\n    description: update\n  - type: SaveInTimeSeries@1\n"
     associations:
       - roleId: System/ParentChild
-        targetRtId: 65d5c447b420da3fb12381bc
-        targetCkTypeId: System.Communication/CommunicationAdapter        
+        targetRtId: 65d5c447b420da3fb12381bd
+        targetCkTypeId: System.Communication/DataPipeline

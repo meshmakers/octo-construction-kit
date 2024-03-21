@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: Voltage
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "V"
@@ -9,6 +10,7 @@ attributes:
       value: 2
 - id: DCVoltage
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "V"
@@ -16,6 +18,7 @@ attributes:
       value: 2      
 - id: Ampere
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "A"
@@ -23,6 +26,7 @@ attributes:
       value: 2
 - id: DCAmpere
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "A"

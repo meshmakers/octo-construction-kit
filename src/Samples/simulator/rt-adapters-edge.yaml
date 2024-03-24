@@ -53,3 +53,6 @@ entities:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bd
         targetCkTypeId: System.Communication/DataPipeline
+      - roleId: System.Communication/Executes
+        targetRtId: 66004fda527ac79a03ecedd7
+        targetCkTypeId: System.Communication/MeshAdapter        

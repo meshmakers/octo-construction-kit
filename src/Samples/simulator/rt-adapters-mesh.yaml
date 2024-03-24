@@ -1,0 +1,12 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - System.Communication
+entities:
+  - rtId: 66004fda527ac79a03ecedd7
+    ckTypeId: System.Communication/MeshAdapter
+    attributes:
+      - id: System/Name
+        value: meshtest Adapter       
+      - id: System.Communication/AdapterType
+        value: Meshmakers.Adapters.Mesh.Generic
+      

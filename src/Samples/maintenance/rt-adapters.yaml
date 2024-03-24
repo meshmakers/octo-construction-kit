@@ -3,13 +3,13 @@ dependencies:
   - System.Communication
 entities:
   - rtId: 64a2b7bd162d703d9bb0f330
-    ckTypeId: System.Communication/CommunicationPool
+    ckTypeId: System.Communication/Pool
     attributes:
       - id: System/Name
         value: local
     associations: []
   - rtId: 64a2b7c72d5ac4ea4d8fea48
-    ckTypeId: System.Communication/CommunicationAdapter
+    ckTypeId: System.Communication/EdgeAdapter
     attributes:
       - id: System.Communication/AdapterType
         value: Meshmakers.Plugs.Zenon
@@ -18,9 +18,9 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 64a2b7bd162d703d9bb0f330
-        targetCkTypeId: System.Communication/CommunicationPool
+        targetCkTypeId: System.Communication/Pool
   - rtId: 64a2b81dc72c3838dc95b08c
-    ckTypeId: System.Communication/CommunicationAdapter
+    ckTypeId: System.Communication/EdgeAdapter
     attributes:
       - id: System.Communication/AdapterType
         value: Meshmakers.Plugs.IsPro-Ng
@@ -29,9 +29,9 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 64a2b7bd162d703d9bb0f330
-        targetCkTypeId: System.Communication/CommunicationPool
+        targetCkTypeId: System.Communication/Pool
   - rtId: 64ac19945a7c4fd9e788c137
-    ckTypeId: System.Communication/CommunicationAdapter
+    ckTypeId: System.Communication/Communication
     attributes:
       - id: System.Communication/AdapterType
         value: Meshmakers.Sockets.Grafana
@@ -40,4 +40,4 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 64a2b7bd162d703d9bb0f330
-        targetCkTypeId: System.Communication/CommunicationPool
+        targetCkTypeId: System.Communication/Pool

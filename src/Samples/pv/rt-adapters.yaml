@@ -3,13 +3,13 @@ dependencies:
   - System.Communication
 entities:
   - rtId: 5fc8fc3d8b2fc75f925e21af
-    ckTypeId: System.Communication/CommunicationPool
+    ckTypeId: System.Communication/Pool
     attributes:
       - id: System/Name
         value: k8sfirmianstrasse
     associations: []
   - rtId: 5fc8fc3d8b2fc75f925e21ba
-    ckTypeId: System.Communication/CommunicationAdapter
+    ckTypeId: System.Communication/EdgeAdapter
     attributes:
       - id: System.Communication/AdapterType
         value: Meshmakers.Plugs.Modbus
@@ -22,7 +22,7 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fc3d8b2fc75f925e21af
-        targetCkTypeId: System.Communication/CommunicationPool
+        targetCkTypeId: System.Communication/Pool
         
   # Mapping of plug
   - rtId: 5fc8fc3d8b2fc75f925e21bb
@@ -30,12 +30,10 @@ entities:
     attributes:
       - id: System/Name
         value: General
-      - id: System.Communication/AdapterPipelineConfiguration
-        value: ""
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fc3d8b2fc75f925e21ba
-        targetCkTypeId: System.Communication/CommunicationAdapter        
+        targetCkTypeId: System.Communication/EdgeAdapter        
 #        
 #  - rtId: 5fc8fc3d8b2fc75f925e21bc
 #    ckTypeId: System.Communication/PlugMapping
@@ -148,7 +146,7 @@ entities:
 
 
 #  - rtId: 5fc8fc3d8b2fc75f925e21c1
-#    ckTypeId: System.Communication/CommunicationAdapter
+#    ckTypeId: System.Communication/EdgeAdapter
 #    attributes:
 #      - id: System.Communication/AdapterType
 #        value: Meshmakers.Plugs.Modbus
@@ -161,7 +159,7 @@ entities:
 #    associations:
 #      - roleId: System/ParentChild
 #        targetRtId: 5fc8fc3d8b2fc75f925e21af
-#        targetCkTypeId: System.Communication/CommunicationPool
+#        targetCkTypeId: System.Communication/Pool
 #
 #  # Mapping of plug
 #  - rtId: 5fc8fc3d8b2fc75f925e21c2

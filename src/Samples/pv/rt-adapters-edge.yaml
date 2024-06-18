@@ -11,6 +11,8 @@ entities:
   - rtId: 5fc8fc3d8b2fc75f925e21ba
     ckTypeId: System.Communication/EdgeAdapter
     attributes:
+      - id: System/Name
+        value: Modbus PV
       - id: System.Communication/AdapterType
         value: Meshmakers.Plugs.Modbus
       - id: System.Communication/AdapterConfiguration

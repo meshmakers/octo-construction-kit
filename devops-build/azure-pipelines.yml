@@ -2,21 +2,29 @@ name: $(MajorVersion).$(MinorVersion).$(date:yyMM).$(DayOfMonth)$(rev:rrr)
 
 trigger:
   batch: true
-  tags:
-    include:
-      - 'r*'
   branches:
+    include:
+      - dev/*
+      - main
+  tags:
     exclude:
-      - dev
-
+      - '*'
+      
 variables:
-  buildConfiguration: 'Release'
-  buildPlatform: 'any cpu'
-  solutionFile: "Octo.ConstructionKit.sln"
-  isRelease: true #$[startsWith(variables['Build.SourceBranch'], 'refs/tags/r')]
-  MajorVersion: 0
-  MinorVersion: 0
-
+  - group: ApiKeys
+  - name: solutionFile
+    value: 'Octo.ConstructionKit.sln'
+  - name: isRelease
+    value: ${{ startsWith(variables['Build.SourceBranch'], 'refs/tags/r') }}
+  - name: buildConfiguration
+    value: 'Release'
+  - name: buildPlatform
+    value: 'any cpu'
+  - name: MajorVersion
+    value: '0'
+  - name: MinorVersion
+    value: '0'
+    
 stages:
  - stage: Build
    jobs:
@@ -25,6 +33,9 @@ stages:
       pool:
         name: Gerald-Local-Linux
       steps:
+      - checkout: self
+        clean: true
+        submodules: true
       - task: PowerShell@2
         inputs:
           targetType: 'inline'
@@ -44,16 +55,16 @@ stages:
               Write-Host "##vso[build.updatebuildnumber]$buildNumber"
             }
         displayName: 'Set build number'
-      - checkout: self
-        clean: true
-        submodules: true
       - template: setversion.yml
       - task: DotNetCoreCLI@2
         displayName: 'Build'
         inputs:
           command: 'build'
           projects:  $(SolutionFile)
-          arguments: '--configuration $(BuildConfiguration)'
+          arguments: '--configuration $(BuildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer)'
+          publishWebProjects: false
+          zipAfterPublish: false
+          modifyOutputPath: false
       - task: DotNetCoreCLI@2
         displayName: 'Test'
         inputs:
@@ -87,13 +98,5 @@ stages:
         displayName: 'Publish Artifact: local'
         inputs:
           ArtifactName: local
-      - task: DotNetCoreCLI@2
-        displayName: Push Nuget Package
-        condition: eq(variables.isRelease, true)
-        inputs:
-          command: custom
-          custom: nuget
-          arguments: >
-             push $(Build.ArtifactStagingDirectory)/**/*.nupkg
-             -s https://api.nuget.org/v3/index.json
-             -k $(NuGetApiKey)           
+      - template: push-nuget-package.yml           
+

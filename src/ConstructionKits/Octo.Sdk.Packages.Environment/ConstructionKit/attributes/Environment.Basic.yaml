@@ -27,3 +27,8 @@ attributes:
       value: 2
     - key: Type
       value: gross
+- id: GoalText
+  valueType: String
+- id: GoalState
+  valueCkEnumId: ${thisModel}/GoalState
+  valueType: Enum

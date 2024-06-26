@@ -17,6 +17,7 @@ attributes:
       value: "kW"
     - key: Decimals
       value: 2
+  isDataStream: true
 - id: ImportedEnergy
   valueType: Double
   metaData:

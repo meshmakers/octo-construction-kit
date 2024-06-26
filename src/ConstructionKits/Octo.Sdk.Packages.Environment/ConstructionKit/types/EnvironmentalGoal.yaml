@@ -1,0 +1,12 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: EnvironmentalGoal
+    derivedFromCkTypeId: Basic/NamedEntity
+    attributes:
+      - id: ${thisModel}/GoalText
+        name: GoalText
+      - id: ${thisModel}/GoalState
+        name: GoalStatus
+    associations:
+      - id: System/ParentChild
+        targetCkTypeId: Basic/EquipmentGroup

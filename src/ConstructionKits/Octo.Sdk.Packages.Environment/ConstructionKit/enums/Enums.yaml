@@ -1,0 +1,9 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: GoalState
+    useFlags: false
+    values:
+      - key: 1
+        name: OnTrack
+      - key: 2
+        name: OffTrack

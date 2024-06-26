@@ -10,7 +10,7 @@ entities:
       - id: System.Communication/AdapterType
         value: Meshmakers.Plugs.zenon
       - id: System.Communication/AdapterConfiguration
-        value: "{\"variables\":[\"VAR1\",\"VAR2\",\"VAR3"\]}"
+        value: "{\"variables\":[\"VAR1\",\"VAR2\",\"VAR3\"]}"
         
     # Data pipelines of plug
   - rtId: 65d5c447b420da3fb12381bd

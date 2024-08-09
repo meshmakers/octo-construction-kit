@@ -14,6 +14,15 @@ steps:
         **/*Fluid.csproj
       arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
 
+  - task: DotNetCoreCLI@2
+    condition: ${{ eq(parameters.GenerateDocumentation, 'true') }}
+    displayName: 'Build EnergyCk Documentation'
+    inputs:
+      command: 'build'
+      projects: |
+        **/*Energy.csproj
+      arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
+
   - task: CopyFiles@2
     condition: ${{ eq(parameters.GenerateDocumentation, 'true') }}
     displayName: 'Copy Files from $(Build.SourcesDirectory)/**/octo-ck-libraries/**/out/**/*.md to $(build.artifactstagingdirectory)'

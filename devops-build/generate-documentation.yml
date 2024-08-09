@@ -12,7 +12,6 @@ steps:
         **/*Basic.csproj
         **/*Environment.csproj
         **/*Fluid.csproj
- #       **/*Energy.csproj
       arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
 
   - task: CopyFiles@2

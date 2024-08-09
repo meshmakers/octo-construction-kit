@@ -26,7 +26,7 @@ entities:
         targetRtId: 5fc8fc3d8b2fc75f925e21af
         targetCkTypeId: System.Communication/Pool
         
-  # Mapping of plug
+  # Data pipelines including mesh and edge pipelines
   - rtId: 5fc8fc3d8b2fc75f925e21bb
     ckTypeId: System.Communication/DataPipeline
     attributes:
@@ -36,3 +36,78 @@ entities:
       - roleId: System/ParentChild
         targetRtId: 5fc8fc3d8b2fc75f925e21ba
         targetCkTypeId: System.Communication/EdgeAdapter        
+  - rtId: 66b07d2995797e1617fd3164
+    ckTypeId: System.Communication/EdgePipeline
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fc3d8b2fc75f925e21bb
+        targetCkTypeId: System.Communication/DataPipeline
+        attributes: []
+    attributes:
+      - id: System.Communication/DeploymentState
+        value: 2
+      - id: System/Name
+        value: Edge Pipeline
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/PipelineDefinition
+        value: >-
+          transformations:
+          - type: ReadModbusRegister@1
+            serverConfigurations:
+              - server: 192.168.14.31
+                mappings:
+                - register: 69
+                  valueType: UINT16
+                  registerType: ReadHoldingRegister
+                  targetPath: batteryPower
+                - register: 67
+                  valueType: UINT16
+                  registerType: ReadHoldingRegister
+                  targetPath: productionPower
+                - register: 75
+                  valueType: INT32
+                  registerType: ReadHoldingRegister
+                  targetPath: additionalProductionPower        
+                - register: 82
+                  valueType: UINT16
+                  registerType: ReadHoldingRegister
+                  targetPath: batteryStateOfCharge
+                - register: 71
+                  valueType: INT32
+                  registerType: ReadHoldingRegister
+                  targetPath: $.meter.consumption
+                - register: 73
+                  valueType: INT32
+                  registerType: ReadHoldingRegister
+                  targetPath: $.meter.net
+              - server: 192.168.14.30
+                mappings:
+                - register: 107
+                  valueType: UINT16
+                  registerType: ReadInputRegister
+                  targetPath: outsideTemperature_AZ30-BT23 
+          - type: LinearScaler@1
+            sourcePath: $.additionalProductionPower
+            targetPropertyName: additionalProductionPower
+            scaleInputMin: 0
+            scaleInputMax: -10000
+            scaleOutputMin: 0
+            scaleOutputMax: 10000
+          - type: PublishToDistributionEventHub@1
+            description: Publish to event hub
+  - rtId: 66b07d2995797e1617fd3167
+    ckTypeId: System.Communication/MeshPipeline
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 5fc8fc3d8b2fc75f925e21bb
+        targetCkTypeId: System.Communication/DataPipeline
+    attributes:
+      - id: System.Communication/DeploymentState
+        value: 0
+      - id: System/Name
+        value: Mesh Pipeline
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/PipelineDefinition
+        value: "transformations:\n- type: RetrieveFromMessage@1\n  description: Retrieve from distributed event hub message\n- type: CreateUpdateInfo@1\n  description: update main building\n  targetPropertyName: _UpdateItems\n  appendToTargetPropertyName: true\n  rtId: 5fc8fda18b2fc75f925e21af\n  ckTypeId: Industry.Energy/Photovoltaic.Module\n  attributeUpdates:\n  - attributeName: peakPower\n    attributeValueType: Double\n    valuePath: $.productionPower\n- type: CreateUpdateInfo@1\n  description: update outer building\n  targetPropertyName: _UpdateItems\n  appendToTargetPropertyName: true\n  rtId: 5fc8fda18b2fc75f925e21c0\n  ckTypeId: Industry.Energy/Photovoltaic.Module\n  attributeUpdates:\n  - attributeName: peakPower\n    attributeValueType: Double\n    valuePath: $.additionalProductionPower\n- type: CreateUpdateInfo@1\n  description: update battery\n  targetPropertyName: _UpdateItems\n  appendToTargetPropertyName: true\n  rtId: 5fc8fda18b2fc75f925e21ae\n  ckTypeId: Industry.Energy/Battery\n  attributeUpdates:\n  - attributeName: power\n    attributeValueType: Double\n    valuePath: $.batteryPower\n  - attributeName: soC\n    attributeValueType: Int\n    valuePath: $.batteryStateOfCharge\n- type: CreateUpdateInfo@1\n  description: update net\n  targetPropertyName: _UpdateItems\n  appendToTargetPropertyName: true\n  rtId: 5fc8fda18b2fc75f925e21c1\n  ckTypeId: Industry.Energy/EnergyMeter\n  attributeUpdates:\n  - attributeName: power\n    attributeValueType: Double\n    valuePath: $.meter.net\n- type: CreateUpdateInfo@1\n  description: update consumption\n  targetPropertyName: _UpdateItems\n  appendToTargetPropertyName: true\n  rtId: 5fc8fda18b2fc75f925e21c2\n  ckTypeId: Industry.Energy/EnergyMeter\n  attributeUpdates:\n  - attributeName: power\n    attributeValueType: Double\n    valuePath: $.meter.consumption    \n- type: ApplyChanges@1\n  targetPropertyName: _UpdateItems    "

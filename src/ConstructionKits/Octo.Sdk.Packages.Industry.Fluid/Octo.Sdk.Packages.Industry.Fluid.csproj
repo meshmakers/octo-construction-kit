@@ -9,7 +9,6 @@
         <Platforms>AnyCPU</Platforms>
         <RootNamespace>Octo.Sdk.Packages.Industry.Water</RootNamespace>
         <OctoPublishCkModel>true</OctoPublishCkModel>
-        <OctoGenerateCkDocumentation Condition="$(OctoGenerateCkDocumentation) == ''">false</OctoGenerateCkDocumentation>
     </PropertyGroup>
 
     <ItemGroup>

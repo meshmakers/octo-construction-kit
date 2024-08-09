@@ -8,12 +8,7 @@ steps:
     displayName: 'Generate Documentation'
     inputs:
       command: 'build'
-      projects: |
-        **/Octo.Sdk.Packages.Basic.csproj
-        **/Octo.Sdk.Packages.Environment.csproj
-        **/Octo.Sdk.Packages.Industry.Basic.csproj
-        **/Octo.Sdk.Packages.Industry.Energy.csproj
-        **/Octo.Sdk.Packages.Industry.Fluid.csproj
+      projects: '**/*Basic.csproj'
       arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
 
   - task: CopyFiles@2

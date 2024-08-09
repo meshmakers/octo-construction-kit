@@ -10,7 +10,6 @@ steps:
       command: 'build'
       projects: |
         **/*Basic.csproj
-        **/*Energy.csproj
         **/*Environment.csproj
         **/*Fluid.csproj
       arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'

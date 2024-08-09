@@ -25,7 +25,7 @@ variables:
   - name: MinorVersion
     value: '0'
   - name: generateDocumentation
-    value: 'false'
+    value: 'true'
     
 stages:
  - stage: Build

@@ -1,0 +1,26 @@
+﻿parameters:
+  - name: GenerateDocumentation
+    type: boolean
+
+steps:
+  - task: DotNetCoreCLI@2
+    condition: ${{ eq(parameters.GenerateDocumentation, 'true') }}
+    displayName: 'Generate Documentation'
+    inputs:
+      command: 'build'
+      projects: |
+        **/Octo.Sdk.Packages.Basic.csproj
+        **/Octo.Sdk.Packages.Environment.csproj
+        **/Octo.Sdk.Packages.Industry.Basic.csproj
+        **/Octo.Sdk.Packages.Industry.Energy.csproj
+        **/Octo.Sdk.Packages.Industry.Fluid.csproj
+      arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
+
+  - task: CopyFiles@2
+    condition: ${{ eq(parameters.GenerateDocumentation, 'true') }}
+    displayName: 'Copy Files from $(Build.SourcesDirectory)/**/octo-ck-libraries/**/out/**/*.md to $(build.artifactstagingdirectory)'
+    inputs:
+      SourceFolder: $(Build.SourcesDirectory)
+      Contents: |
+        /**/octo-ck-libraries/**/out/**/*.md
+      TargetFolder: $(build.artifactstagingdirectory)

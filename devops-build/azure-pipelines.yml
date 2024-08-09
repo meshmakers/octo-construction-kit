@@ -58,15 +58,15 @@ stages:
             }
         displayName: 'Set build number'
       - template: setversion.yml
-      #- task: DotNetCoreCLI@2
-       # displayName: 'Build'
-        #inputs:
-         # command: 'build'
-          #projects:  $(SolutionFile)
-          #arguments: '--configuration $(BuildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer)'
-          #publishWebProjects: false
-          #zipAfterPublish: false
-          #modifyOutputPath: false
+      - task: DotNetCoreCLI@2
+        displayName: 'Build'
+        inputs:
+          command: 'build'
+          projects:  $(SolutionFile)
+          arguments: '--configuration $(BuildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer)'
+          publishWebProjects: false
+          zipAfterPublish: false
+          modifyOutputPath: false
       - task: DotNetCoreCLI@2
         displayName: 'Test'
         inputs:

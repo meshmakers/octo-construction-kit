@@ -8,7 +8,10 @@ steps:
     displayName: 'Generate Documentation'
     inputs:
       command: 'build'
-      projects: '**/*Basic.csproj'
+      projects: |
+        **/*Basic.csproj
+        **/*Environment.csproj
+        **/*Fluid.csproj
       arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
 
   - task: CopyFiles@2

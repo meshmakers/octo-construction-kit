@@ -26,7 +26,13 @@ variables:
     value: '0'
   - name: generateDocumentation
     value: 'true'
-    
+  - name: documentationContext
+    value:
+      - '**/*Basic.csproj'
+      - '**/*Environment.csproj'
+      - '**/*Fluid.csproj'
+      - '**/*Energy.csproj'
+
 stages:
  - stage: Build
    jobs:
@@ -80,7 +86,7 @@ stages:
               Set-Content $(build.artifactstagingdirectory)/versioninfo.txt $(Build.BuildNumber)
       - template: generate-documentation.yml
         parameters:
-          GenerateDocumentation: ${{ variables.generateDocumentation }}
+          DocumentationContext: ${{ variables.documentationContext }}
       - task: PublishBuildArtifacts@1
         displayName: 'Publish Artifact: local'
         inputs:

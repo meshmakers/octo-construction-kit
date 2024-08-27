@@ -3,12 +3,13 @@
     type: object
 
 steps:
-  - task: DotNetCoreCLI@2
-    displayName: 'Generate Documentation'
-    inputs:
-      command: 'build'
-      projects: ${{ parameters.DocumentationContext }}
-      arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
+  - ${{ each parameter in DocumentationContext }}:
+    - task: DotNetCoreCLI@2
+      displayName: 'Generate Documentation'
+      inputs:
+        command: 'build'
+        projects: ${{ parameters.DocumentationContext }}
+        arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
 
   - task: CopyFiles@2
     displayName: 'Copy Files from $(Build.SourcesDirectory)/**/octo-ck-libraries/**/out/**/*.md to $(build.artifactstagingdirectory)'

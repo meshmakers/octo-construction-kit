@@ -27,7 +27,7 @@ variables:
   - name: generateDocumentation
     value: 'true'
   - name: documentationContext
-    value:
+    values:
       - '**/*Basic.csproj'
       - '**/*Environment.csproj'
       - '**/*Fluid.csproj'

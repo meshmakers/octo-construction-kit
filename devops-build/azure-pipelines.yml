@@ -79,6 +79,7 @@ stages:
               New-Item $(build.artifactstagingdirectory)/versioninfo.txt
               Set-Content $(build.artifactstagingdirectory)/versioninfo.txt $(Build.BuildNumber)
       - template: generate-documentation.yml
+        condition: eq(variables.generateDocumentation, 'true')
         parameters:
           ConstructionKits:
             - '**/*Basic.csproj'

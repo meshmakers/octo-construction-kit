@@ -1,14 +1,15 @@
 ﻿parameters:
-  - name: DocumentationContext
+  - name: ConstructionKits
     type: object
+    default: [ ]
 
 steps:
-  - ${{ each parameter in DocumentationContext }}:
+  - ${{ each ConstructionKit in parameters.ConstructionKits }}:
     - task: DotNetCoreCLI@2
       displayName: 'Generate Documentation'
       inputs:
         command: 'build'
-        projects: ${{ parameters.DocumentationContext }}
+        projects: ${{ ConstructionKit }}
         arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
 
   - task: CopyFiles@2

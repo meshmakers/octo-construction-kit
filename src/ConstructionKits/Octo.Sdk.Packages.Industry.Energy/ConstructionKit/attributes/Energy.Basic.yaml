@@ -34,6 +34,7 @@ attributes:
       value: 2 
 - id: MaximumPower
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "kW"
@@ -41,6 +42,7 @@ attributes:
       value: 2    
 - id: PeakPower
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "kW"
@@ -48,6 +50,7 @@ attributes:
       value: 2
 - id: ReactivePower
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "kVAr"
@@ -55,6 +58,7 @@ attributes:
       value: 2
 - id: ApparentPower
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "kVA"
@@ -62,6 +66,7 @@ attributes:
       value: 2
 - id: Frequency
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "Hz"
@@ -69,6 +74,7 @@ attributes:
       value: 2
 - id: ExportedEnergy
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "kWh"

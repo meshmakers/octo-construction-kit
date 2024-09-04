@@ -3,24 +3,28 @@ attributes:
 - id: SoC
   valueType: Int
   description: "State of Charge"
+  isDataStream: true
   metaData:
     - key: Unit
       value: "%"
 - id: SoH
   valueType: Int
   description: "State of Health"
+  isDataStream: true
   metaData:
     - key: Unit
       value: "%"
 - id: NumofCycles
   valueType: Int
   description: "Number of full loading cycles since production"
+  isDataStream: true
   metaData:
     - key: Unit
       value: ""
 - id: Capacity
   valueType: Double
   description: "Total Capacity which the battery can store"
+  isDataStream: true
   metaData:
     - key: Unit
       value: "kWh"

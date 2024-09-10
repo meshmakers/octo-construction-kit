@@ -45,7 +45,7 @@ stages:
         inputs:
           command: 'build'
           projects:  $(SolutionFile)
-          arguments: '--configuration $(BuildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer)'
+          arguments: '--configuration $(BuildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer) /p: GenerateDocumentation=$(generateDocumentation)'
           publishWebProjects: false
           zipAfterPublish: false
           modifyOutputPath: false
@@ -78,7 +78,7 @@ stages:
           script: |
               New-Item $(build.artifactstagingdirectory)/versioninfo.txt
               Set-Content $(build.artifactstagingdirectory)/versioninfo.txt $(Build.BuildNumber)
-      - ${{ if eq(variables.generateDocumentation, true) }}:
+      - ${{ if eq(variables.generateDocumentation, false) }}:
           - template: generate-documentation.yml
             parameters:
              ConstructionKits:

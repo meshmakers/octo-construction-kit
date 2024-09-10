@@ -11,6 +11,13 @@ steps:
         command: 'build'
         projects: ${{ ConstructionKit }}
         arguments: '--configuration Release /p:OctoGenerateCkDocumentation=true'
+    - task: PowerShell@2
+      displayName: 'Delay for 5 seconds'
+      inputs:
+        targetType: 'inline'
+        script: |
+          Write-Host "Delay for 5 seconds"
+          Start-Sleep -s 5
 
   - task: CopyFiles@2
     displayName: 'Copy Files from $(Build.SourcesDirectory)/**/octo-ck-libraries/**/out/**/*.md to $(build.artifactstagingdirectory)'

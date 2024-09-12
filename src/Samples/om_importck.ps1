@@ -13,3 +13,4 @@ octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Basic/bin
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Energy/bin/$configuration/net8.0/octo-ck-libraries/Octo.Sdk.Packages.Industry.Energy/out/ck-industry.energy.yaml -w
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/bin/$configuration/net8.0/octo-ck-libraries/Octo.Sdk.Packages.Industry.Fluid/out/ck-industry.fluid.yaml -w
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Environment/bin/$configuration/net8.0/octo-ck-libraries/Octo.Sdk.Packages.Environment/out/ck-environment.yaml -w
+octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Demo/bin/$configuration/net8.0/octo-ck-libraries/Octo.Sdk.Demo/out/ck-octosdkdemo.yaml -w

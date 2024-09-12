@@ -1,0 +1,27 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Customer
+  derivedFromCkTypeId: Basic/Asset
+  attributes:
+  - id: ${thisModel}/FirstName
+    name: FirstName
+  - id: ${thisModel}/LastName
+    name: LastName
+  - id: ${thisModel}/CompanyName
+    name: CompanyName
+  - id: ${thisModel}/Street
+    name: Street
+  - id: ${thisModel}/PostalCode
+    name: PostalCode
+  - id: ${thisModel}/City
+    name: City    
+  - id: ${thisModel}/Country
+    name: Country
+  - id: ${thisModel}/EMailAddress
+    name: EMailAddress
+  - id: ${thisModel}/DateOfBirth
+    name: DateOfBirth
+  - id: ${thisModel}/PhoneNumberMobile
+    name: PhoneNumberMobile
+  - id: ${thisModel}/PhoneNumberLandLine
+    name: PhoneNumberLandLine      

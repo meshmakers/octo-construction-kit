@@ -9,6 +9,7 @@ types:
     name: LastName
   - id: ${thisModel}/CompanyName
     name: CompanyName
+    isOptional: true
   - id: ${thisModel}/Street
     name: Street
   - id: ${thisModel}/PostalCode
@@ -19,9 +20,13 @@ types:
     name: Country
   - id: ${thisModel}/EMailAddress
     name: EMailAddress
+    isOptional: true
   - id: ${thisModel}/DateOfBirth
     name: DateOfBirth
+    isOptional: true
   - id: ${thisModel}/PhoneNumberMobile
     name: PhoneNumberMobile
+    isOptional: true
   - id: ${thisModel}/PhoneNumberLandLine
-    name: PhoneNumberLandLine      
+    name: PhoneNumberLandLine
+    isOptional: true

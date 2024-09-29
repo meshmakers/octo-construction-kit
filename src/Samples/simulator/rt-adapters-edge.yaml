@@ -13,10 +13,8 @@ entities:
     attributes:
       - id: System/Name
         value: Simulation Demo Adapter       
-      - id: System.Communication/AdapterType
-        value: Meshmakers.Plugs.Simulator
       - id: System.Communication/AdapterConfiguration
-        value: "{ \"interval\": \"00:00:10\" }"
+        value: ""
       - id: System.Communication/Deployment.ImageName
         value: meshmakers/octo-communication-plug-simulation      
       - id: System.Communication/Deployment.ImageVersion
@@ -36,7 +34,46 @@ entities:
     ckTypeId: System.Communication/EdgePipeline
     attributes:
       - id: System.Communication/PipelineDefinition
-        value: "transformations:\n- type: Simulation@1\n  simulations:\n  - propertyName: Sinus\n  - propertyName: Constant_6\n    simulationTypes: 2\n    parameter1: 6\n  - propertyName: Triangle\n    simulationTypes: 1\n  description: Simulates data\n- type: SelectByPath@1\n  transformations:\n  - sourcePath: \"$.Sinus\"\n    targetPropertyName: Sinus5\n    transformations:\n    - type: LinearScaler@1\n      scaleInputMin: 0\n      scaleInputMax: 1\n      scaleOutputMin: 0\n      scaleOutputMax: 1000\n  - sourcePath: \"$.Constant_6\"\n    targetPropertyName: Constant\n    transformations:\n    - type: LinearScaler@1\n      scaleInputMin: 0\n      scaleInputMax: 10\n      scaleOutputMin: 0\n      scaleOutputMax: 1000\n  description: Transform object node\n- type: Project@1\n  fields:\n  - path: \"$.Sinus\"\n  - path: \"$.Constant_6\"\n- type: PublishToDistributionEventHub@1\n  description: Load to event hub\n"
+        value: >-
+          triggers:
+            - type: FromPolling@1
+              interval: 00:00:10
+          transformations:
+            - type: Simulation@1
+              description: Simulates data
+              simulations:
+                - targetPath: Sinus
+                  simulatorKey: Math.Sinus
+                - targetPath: Constant_6
+                  simulatorKey: Math.Constant
+                  configuration: "{ amplitude: 6}"
+                - targetPath: Triangle
+                  simulatorKey: Math.Triangle
+            - type: SelectByPath@1
+              description: Transform object node
+              selectPath:
+                - path: "$.Sinus"
+                  targetPath: Sinus5
+                  transformations:
+                    - type: LinearScaler@1
+                      scaleInputMin: 0
+                      scaleInputMax: 1
+                      scaleOutputMin: 0
+                      scaleOutputMax: 1000
+                - path: "$.Constant_6"
+                  targetPath: Constant
+                  transformations:
+                    - type: LinearScaler@1
+                      scaleInputMin: 0
+                      scaleInputMax: 10
+                      scaleOutputMin: 0
+                      scaleOutputMax: 1000
+            - type: Project@1
+              fields:
+                - path: "$.Sinus"
+                - path: "$.Constant_6"
+            - type: ToPipelineDataEvent@1
+              description: Load to event hub
     associations:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bd
@@ -48,7 +85,47 @@ entities:
     ckTypeId: System.Communication/MeshPipeline
     attributes:
       - id: System.Communication/PipelineDefinition
-        value: "transformations: \n  - type: RetrieveFromMessage@1\n    description: Retrieve from distributed event hub message\n  - type: GetRtEntitiesById@1\n    targetPropertyName: EnergyMeterResult\n    ckTypeId: Industry.Energy-1.0.0/EnergyMeter-1.0.0\n    rtIds: \n      - 65dc6d24cc529cdc46c84fcc\n    description: Retrieve RtEntity if exists\n  - type: CreateUpdateInfo@1\n    targetPropertyName: _UpdateItems\n    appendToTargetPropertyName: true\n    rtId: 65dc6d24cc529cdc46c84fcc\n    ckTypeId: Industry.Energy-1.0.0/EnergyMeter-1.0.0\n    attributeUpdates: \n      - attributeName: Voltage\n        attributeValueType: Double\n        valuePath: $.Sinus5\n    description: update\n  - type: ApplyChanges@1\n    targetPropertyName: _UpdateItems\n  - type: EnrichWithMongoData@1\n    path: $._UpdateItems\n    targetPropertyName: _UpdateItems\n    appendToTargetPropertyName: true\n    rtId: 65dc6d24cc529cdc46c84fcc\n    ckTypeId: Industry.Energy-1.0.0/EnergyMeter-1.0.0\n    attributeUpdates: \n      - attributeName: Power\n        attributeValueType: Double\n        valuePath: $.Power\n      - attributeName: Ampere\n        attributeValueType: Double\n        valuePath: $.Ampere\n    description: update\n  - type: SaveInTimeSeries@1\n"
+        value: >-
+          triggers:
+            - type: FromPipelineDataEvent@1
+              description: Retrieve from distributed event hub message
+          transformations: 
+            - type: CreateUpdateInfo@1
+              description: Update consumption firmianstraße
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append    
+              rtId: 65dc6d24cc529cdc46c84fd4
+              ckTypeId: OctoSdkDemo/MeteringPoint
+              attributeUpdates: 
+                - attributeName: MeterReading
+                  attributeValueType: Double
+                  valuePath: $.Sinus5
+            - type: CreateUpdateInfo@1
+              description: Update production firmianstraße
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append    
+              rtId: 65dc6d24cc529cdc46c84fd5
+              ckTypeId: OctoSdkDemo/MeteringPoint
+              attributeUpdates: 
+                - attributeName: MeterReading
+                  attributeValueType: Double
+                  valuePath: $.Constant        
+            - type: ApplyChanges@1
+              path: $._updateItems
+            - type: EnrichWithMongoData@1
+              path: $._updateItems
+              targetPath: $._updateItems
+              targetValueKind: Simple
+              targetValueWriteMode: Overwrite
+              rtId: 65dc6d24cc529cdc46c84fd4
+              ckTypeId: OctoSdkDemo/MeteringPoint
+              attributeUpdates: 
+                - attributeName: MeteringPointNumber
+                  attributeValueType: String
+                  valuePath: $.meteringPointNumber
+              description: update
     associations:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bd

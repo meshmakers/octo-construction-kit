@@ -7,8 +7,6 @@ entities:
     attributes:
       - id: System/Name
         value: Zenon Sample PlugIn     
-      - id: System.Communication/AdapterType
-        value: Meshmakers.Plugs.zenon
       - id: System.Communication/AdapterConfiguration
         value: "{\"variables\":[\"VAR1\",\"VAR2\",\"VAR3\"]}"
         
@@ -22,7 +20,12 @@ entities:
     ckTypeId: System.Communication/MeshPipeline
     attributes:
       - id: System.Communication/PipelineDefinition
-        value: "transformations: \n  - type: RetrieveFromMessage@1\n    description: Retrieve from distributed event hub message\n  - type: GetRtEntitiesById@1\n    targetPropertyName: EnergyMeterResult\n    ckTypeId: Industry.Energy-1.0.0/EnergyMeter-1.0.0\n    rtIds: \n      - 65dc6d24cc529cdc46c84fcc\n    description: Retrieve RtEntity if exists\n  - type: CreateUpdateInfo@1\n    targetPropertyName: _UpdateItems\n    appendToTargetPropertyName: true\n    rtId: 65dc6d24cc529cdc46c84fcc\n    ckTypeId: Industry.Energy-1.0.0/EnergyMeter-1.0.0\n    attributeUpdates: \n      - attributeName: Voltage\n        attributeValueType: Double\n        valuePath: $.Sinus5\n    description: update\n  - type: ApplyChanges@1\n    targetPropertyName: _UpdateItems\n  - type: EnrichWithMongoDataNode@1\n    path: $._UpdateItems\n    targetPropertyName: _UpdateItems\n    appendToTargetPropertyName: true\n    rtId: 65dc6d24cc529cdc46c84fcc\n    ckTypeId: Industry.Energy-1.0.0/EnergyMeter-1.0.0\n    attributeUpdates: \n      - attributeName: Power\n        attributeValueType: Double\n        valuePath: $.Power\n      - attributeName: Ampere\n        attributeValueType: Double\n        valuePath: $.Ampere\n    description: update\n  - type: SaveInTimeSeries@1\n"
+        value: >-
+          triggers:
+            - type: FromPipelineDataEvent@1
+              description: Retrieve from distributed event hub message
+          transformations:
+            - type: PrintDebug@1
     associations:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bd
@@ -31,9 +34,12 @@ entities:
     ckTypeId: System.Communication/EdgePipeline
     attributes:
       - id: System.Communication/PipelineDefinition
-        value: "transformations:
-           - type: PublishToDistributionEventHub@1
-             description: Load to event hub"
+        value: >-
+          transformations: 
+            - type: ReadZenonVariables@1
+              description: Read data from zenon 
+            - type: PublishToDistributionEventHub@1
+              description: Load to event hub
     associations:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bd

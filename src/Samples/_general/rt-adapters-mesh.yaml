@@ -7,6 +7,5 @@ entities:
     attributes:
       - id: System/Name
         value: meshtest Adapter       
-      - id: System.Communication/AdapterType
-        value: Meshmakers.Adapters.Mesh.Generic
+
       

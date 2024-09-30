@@ -9,3 +9,6 @@ types:
     name: MeterReading
   - id: ${thisModel}/OperatingStatus
     name: OperatingStatus
+  - id: ${thisModel}/NetworkOperator
+    name: NetworkOperator
+    isOptional: true

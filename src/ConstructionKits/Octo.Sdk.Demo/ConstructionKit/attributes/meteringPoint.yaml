@@ -6,4 +6,7 @@ attributes:
     valueType: Int
   - id: OperatingStatus
     valueCkEnumId: ${thisModel}/OperatingStatus
-    valueType: Enum    
+    valueType: Enum
+  - id: NetworkOperator
+    valueCkEnumId: ${thisModel}/NetworkOperator
+    valueType: Enum 

@@ -132,4 +132,59 @@ entities:
         targetCkTypeId: System.Communication/DataPipeline
       - roleId: System.Communication/Executes
         targetRtId: 66004fda527ac79a03ecedd7
+        targetCkTypeId: System.Communication/MeshAdapter
+  - rtId: 66f8fff6a51682210fac440a
+    ckTypeId: System.Communication/DataPipeline
+    attributes:
+      - id: System/Name
+        value: triggertest
+      - id: System/Description
+  - rtId: 66f8fff6a51682210fac440b
+    ckTypeId: System.Communication/MeshPipeline
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: 66f8fff6a51682210fac440a
+        targetCkTypeId: System.Communication/DataPipeline
+      - roleId: System.Communication/Executes
+        targetRtId: 66004fda527ac79a03ecedd7
         targetCkTypeId: System.Communication/MeshAdapter        
+    attributes:
+      - id: System/Name
+        value: Mesh Pipeline
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/PipelineDefinition
+        value: >-
+          triggers:
+            - type: FromPipelineTriggerEvent@1
+          transformations:
+            - type: Simulation@1
+              simulations:
+                - targetPath: $.goal
+                  simulatorKey: Text.Lorem.Word
+                  configuration: "{count:4}"
+                - targetPath: $.name
+                  simulatorKey: Text.Lorem.Word
+                  configuration: "{count:1}"        
+            - type: CreateUpdateInfo@1
+              targetPath: _updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append    
+              updateKind: INSERT
+              ckTypeId: Environment/EnvironmentalGoal
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.name      
+                - attributeName: GoalText
+                  attributeValueType: String
+                  valuePath: $.goal
+                - attributeName: GoalStatus
+                  attributeValueType: Enum
+                  value: OnTrack 
+            - type: Project@1
+              fields:
+              - path: $.goal
+            - type: ApplyChanges@1
+              path: _updateItems
+      

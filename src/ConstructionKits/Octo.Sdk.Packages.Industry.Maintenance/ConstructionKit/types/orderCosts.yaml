@@ -1,0 +1,20 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: OrderCosts
+    derivedFromCkTypeId: System/Entity
+    attributes:
+      - id: ${thisModel}/TotalCosts
+        name: TotalCosts
+      - id: ${thisModel}/InternalCosts
+        name: InternalCosts
+      - id: ${thisModel}/ExternalCosts
+        name: ExternalCosts
+      - id: ${thisModel}/MaterialCosts
+        name: MaterialCosts
+      - id: ${thisModel}/AggregationType
+        name: AggregationType
+      - id: ${thisModel}/AggregationDate
+        name: AggregationDate
+    associations:
+      - id: System/ParentChild
+        targetCkTypeId: ${thisModel}/Order

@@ -1,0 +1,9 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: CostType
+  derivedFromCkTypeId: System/Entity
+  attributes:
+    - id: ${thisModel}/AccountNumber
+      name: AccountNumber  
+    - id: ${thisModel}/CostCategory
+      name: CostCategory

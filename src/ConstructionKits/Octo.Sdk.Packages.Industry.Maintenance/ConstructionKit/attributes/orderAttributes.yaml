@@ -1,0 +1,37 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: OrderNumber
+    valueType: String
+  - id: CostCategory
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/CostCategory
+  - id: OrderPriority
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/OrderPriority
+  - id: PlannedCosts
+    valueType: Double
+  - id: ActualCosts
+    valueType: Double
+  - id: ProjectNumber
+    valueType: String
+  - id: TotalCosts
+    valueType: Double
+  - id: InternalCosts
+    valueType: Double
+  - id: ExternalCosts
+    valueType: Double
+  - id: MaterialCosts
+    valueType: Double
+  - id: AggregationType
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/AggregationType  
+  - id: AggregationDate
+    valueType: DateTime
+  - id: FeedbackNumber
+    valueType: String
+  - id: StartDateTime
+    valueType: DateTime
+  - id: EndDateTime
+    valueType: DateTime
+
+  

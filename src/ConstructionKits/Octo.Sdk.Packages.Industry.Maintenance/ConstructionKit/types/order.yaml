@@ -1,0 +1,27 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Order
+  derivedFromCkTypeId: Basic/Asset
+  attributes:
+    - id: ${thisModel}/OrderNumber
+      name: OrderNumber
+    - id: ${thisModel}/ServiceType
+      name: ServiceType
+    - id: ${thisModel}/OrderType
+      name: OrderType
+    - id: ${thisModel}/CreatedAt
+      name: CreatedAt
+    - id: ${thisModel}/OrderText
+      name: OrderText
+      isOptional: true
+    - id: ${thisModel}/OrderPriority
+      name: OrderPriority
+    - id: ${thisModel}/PlannedCosts
+      name: PlannedCosts
+      isOptional: true
+    - id: ${thisModel}/ActualCosts
+      name: ActualCosts
+      isOptional: true
+    - id: ${thisModel}/ProjectNumber
+      name: ProjectNumber
+      isOptional: true

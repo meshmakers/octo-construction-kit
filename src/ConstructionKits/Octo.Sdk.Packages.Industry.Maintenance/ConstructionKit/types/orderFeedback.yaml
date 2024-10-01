@@ -1,0 +1,13 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: OrderFeedback
+  derivedFromCkTypeId: System/Entity
+  attributes:
+    - id: ${thisModel}/FeedbackNumber
+      name: FeedbackNumber
+    - id: ${thisModel}/StartDateTime
+      name: StartDateTime
+    - id: ${thisModel}/EndDateTime
+      name: EndDateTime
+      isOptional: true
+

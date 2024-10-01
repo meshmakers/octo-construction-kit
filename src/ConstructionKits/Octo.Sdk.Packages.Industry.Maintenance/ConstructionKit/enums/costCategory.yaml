@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: CostCategory
+  values:
+  - key: 0
+    name: Material
+  - key: 1
+    name: External   
+  - key: 2
+    name: Internal   

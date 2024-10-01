@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: AccountNumber
+  valueType: String
+- id: ServiceType
+  valueType: Enum
+  valueCkEnumId: ${thisModel}/ServiceType  
+- id: OrderType
+  valueType: Enum
+  valueCkEnumId: ${thisModel}/OrderType
+- id: CreatedAt
+  valueType: DateTime
+- id: OrderText
+  valueType: String
+  

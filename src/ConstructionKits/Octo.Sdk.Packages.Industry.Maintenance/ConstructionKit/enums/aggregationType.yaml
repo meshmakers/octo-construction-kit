@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: AggregationType
+  values:
+  - key: 0
+    name: Week
+  - key: 1
+    name: Month
+  - key: 2
+    name: FiscalYear    

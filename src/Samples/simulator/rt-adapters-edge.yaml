@@ -12,11 +12,11 @@ entities:
     ckTypeId: System.Communication/EdgeAdapter
     attributes:
       - id: System/Name
-        value: Simulation Demo Adapter       
+        value: Simulation       
       - id: System.Communication/AdapterConfiguration
         value: ""
       - id: System.Communication/Deployment.ImageName
-        value: meshmakers/octo-communication-plug-simulation      
+        value: meshmakers/octo-communication-adapter-simulation     
       - id: System.Communication/Deployment.ImageVersion
         value: "999.0.0.0"
     associations:

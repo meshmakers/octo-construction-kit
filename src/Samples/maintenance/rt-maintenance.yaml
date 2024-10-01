@@ -3,31 +3,31 @@ dependencies:
   - Basic
 entities:
   - rtId: 64a2b2e4e1ee56e262e83d98
-    ckTypeId: Basic/EquipmentModel
+    ckTypeId: Basic/Tree
     attributes:
       - id: System/Name
         value: Maintenance
       - id: System/Description
         value: Sample Data for maintenance demo
   - rtId: 64a2b2ff83f510d627206cfe
-    ckTypeId: Basic/EquipmentGroup
+    ckTypeId: Basic/TreeNode
     attributes:
       - id: System/Name
         value: Location 1
     associations:
       - roleId: System/ParentChild
         targetRtId: 64a2b2e4e1ee56e262e83d98
-        targetCkTypeId: Basic/EquipmentModel
+        targetCkTypeId: Basic/Tree
 
   - rtId: 64a2b55a84c7869c60270d1a
-    ckTypeId: Basic/EquipmentGroup
+    ckTypeId: Basic/TreeNode
     attributes:
       - id: System/Name
         value: Line 1
     associations:
       - roleId: System/ParentChild
         targetRtId: 64a2b2ff83f510d627206cfe
-        targetCkTypeId: Basic/EquipmentGroup
+        targetCkTypeId: Basic/TreeNode
   - rtId: 64a2b64c3da56d342f1c3880
     ckTypeId: Industry.Basic/Machine
     attributes:
@@ -46,7 +46,7 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 64a2b55a84c7869c60270d1a
-        targetCkTypeId: Basic/EquipmentGroup
+        targetCkTypeId: Basic/TreeNode
   - rtId: 64a2b66286eb404602d82503
     ckTypeId: Industry.Basic/Machine
     attributes:
@@ -65,7 +65,7 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 64a2b55a84c7869c60270d1a
-        targetCkTypeId: Basic/EquipmentGroup
+        targetCkTypeId: Basic/TreeNode
   - rtId: 64a2b6c3bbf4aa537f812b62
     ckTypeId: Industry.Basic/Machine
     attributes:
@@ -84,4 +84,4 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 64a2b55a84c7869c60270d1a
-        targetCkTypeId: Basic/EquipmentGroup          
+        targetCkTypeId: Basic/TreeNode          

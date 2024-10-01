@@ -9,4 +9,4 @@ types:
         name: GoalStatus
     associations:
       - id: System/ParentChild
-        targetCkTypeId: Basic/EquipmentGroup
+        targetCkTypeId: Basic/TreeNode

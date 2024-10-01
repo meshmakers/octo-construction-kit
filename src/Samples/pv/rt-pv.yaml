@@ -3,21 +3,21 @@ dependencies:
   - Industry.Energy
 entities:
   - rtId: 5fc8fc3d8b2fc75f925e21aa
-    ckTypeId: Basic/EquipmentModel
+    ckTypeId: Basic/Tree
     attributes:
       - id: System/Name
         value: Demo PV
       - id: System/Description
         value: Sample Data for photovoltaic demo
   - rtId: 5fc8fda18b2fc75f925e21ab
-    ckTypeId: Basic/EquipmentGroup
+    ckTypeId: Basic/TreeNode
     attributes:
       - id: System/Name
         value: Firmianstraße 31a
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fc3d8b2fc75f925e21aa
-        targetCkTypeId: Basic/EquipmentModel
+        targetCkTypeId: Basic/Tree
 
 
   - rtId: 5fc8fda18b2fc75f925e21ac
@@ -28,7 +28,7 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ab
-        targetCkTypeId: Basic/EquipmentGroup
+        targetCkTypeId: Basic/TreeNode
         
   - rtId: 5fc8fda18b2fc75f925e21ad
     ckTypeId: Industry.Energy/Inverter

@@ -1,8 +1,9 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
-- typeId: Equipment
+- typeId: TreeNode
   derivedFromCkTypeId: ${thisModel}/NamedEntity
-  isAbstract: true
   associations:
     - id: System/ParentChild
-      targetCkTypeId: ${thisModel}/EquipmentGroup
+      targetCkTypeId: ${thisModel}/Tree
+    - id: System/ParentChild
+      targetCkTypeId: ${thisModel}/TreeNode

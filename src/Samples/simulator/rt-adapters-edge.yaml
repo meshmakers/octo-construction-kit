@@ -94,7 +94,8 @@ entities:
               description: Update consumption firmianstraße
               targetPath: $._updateItems
               targetValueKind: Array
-              targetValueWriteMode: Append    
+              targetValueWriteMode: Append
+              updateKind: UPDATE
               rtId: 65dc6d24cc529cdc46c84fd4
               ckTypeId: OctoSdkDemo/MeteringPoint
               attributeUpdates: 
@@ -105,7 +106,8 @@ entities:
               description: Update production firmianstraße
               targetPath: $._updateItems
               targetValueKind: Array
-              targetValueWriteMode: Append    
+              targetValueWriteMode: Append
+              updateKind: UPDATE
               rtId: 65dc6d24cc529cdc46c84fd5
               ckTypeId: OctoSdkDemo/MeteringPoint
               attributeUpdates: 

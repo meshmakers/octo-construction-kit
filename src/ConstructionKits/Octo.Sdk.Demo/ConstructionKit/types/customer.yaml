@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Customer
-  derivedFromCkTypeId: Basic/Asset
+  derivedFromCkTypeId: System/Entity
   attributes:
   - id: ${thisModel}/FirstName
     name: FirstName

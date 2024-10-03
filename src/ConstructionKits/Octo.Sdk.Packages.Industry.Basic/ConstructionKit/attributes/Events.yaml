@@ -13,8 +13,9 @@ attributes:
 - id: EventAlarmSource
   valueType: Enum
   valueCkEnumId: ${thisModel}/EventAlarmSource
-- id: EventAlarmGroup
-  valueType: String
+- id: EventAlarmPriority
+  valueType: Enum
+  valueCkEnumId: ${thisModel}/EventAlarmPriority
 - id: EventAlarmCause
   valueType: String
   isDataStream: true

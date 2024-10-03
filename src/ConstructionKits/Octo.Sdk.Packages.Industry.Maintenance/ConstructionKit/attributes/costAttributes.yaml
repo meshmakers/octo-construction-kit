@@ -12,4 +12,6 @@ attributes:
   valueType: DateTime
 - id: OrderText
   valueType: String
+- id: JournalValue
+  valueType: Double  
   

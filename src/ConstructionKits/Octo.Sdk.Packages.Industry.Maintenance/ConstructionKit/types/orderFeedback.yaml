@@ -10,4 +10,6 @@ types:
     - id: ${thisModel}/EndDateTime
       name: EndDateTime
       isOptional: true
-
+  associations:
+    - id: ${thisModel}/ReportingEmployee
+      targetCkTypeId: ${thisModel}/Employee

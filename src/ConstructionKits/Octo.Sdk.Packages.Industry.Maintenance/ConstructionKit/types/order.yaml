@@ -14,8 +14,6 @@ types:
     - id: ${thisModel}/OrderText
       name: OrderText
       isOptional: true
-    - id: ${thisModel}/OrderPriority
-      name: OrderPriority
     - id: ${thisModel}/PlannedCosts
       name: PlannedCosts
       isOptional: true
@@ -25,3 +23,9 @@ types:
     - id: ${thisModel}/ProjectNumber
       name: ProjectNumber
       isOptional: true
+    - id: ${thisModel}/OrderState
+      name: OrderState
+      isOptional: true      
+  associations:
+    - id: ${thisModel}/RelatedEvent
+      targetCkTypeId: ${thisModel}/OrderFeedback

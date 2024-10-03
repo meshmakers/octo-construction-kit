@@ -6,9 +6,9 @@ attributes:
 - id: StandStillCounter
   valueType: Int
 
-- id: State
+- id: MachineState
   valueType: Enum
-  valueCkEnumId: ${thisModel}/State
+  valueCkEnumId: ${thisModel}/MachineState
 
 - id: Power
   valueType: Double

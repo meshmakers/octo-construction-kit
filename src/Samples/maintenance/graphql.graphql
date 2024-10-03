@@ -1,0 +1,27 @@
+mutation {
+    runtime {
+        basicTrees {
+            create(
+                entities: [
+                    {
+                        name: "Business Area"
+                        description: "Represents Business Areas (Betriebsbereiche) of the orgianization"
+                    },
+                    {
+                        name: "Functional Location"
+                        description: "Represents Functiona Locations (Technische Plätze) of the orgianization"
+                    },
+                    {
+                        name: "Workspace"
+                        description: "Represents Workspace (Arbeitsplätze) of the orgianization"
+                    }
+                ]
+            )
+            {
+                rtId
+                ckTypeId
+                name
+            }
+        }
+    }
+}

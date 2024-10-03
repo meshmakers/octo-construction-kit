@@ -12,5 +12,5 @@ types:
   - id: ${thisModel}/StandStillCounter
     name: StandStillCounter
     isOptional: true
-  - id: ${thisModel}/State
-    name: State
+  - id: ${thisModel}/MachineState
+    name: MachineState

@@ -1,74 +1,130 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 enums:
-- enumId: EventAlarmState
-  useFlags: false
-  values:
-  - key: 0
-    name: Normal
-    description: "The normal state should not use an audible indication. The normal state visual indication should be the same as indications without alarms."
-  - key: 1
-    name: Unacknowledged
-    description: "The unacknowledged alarm state should use both an audible indication and visual indication. The audible indication should be silenced with a silence action or acknowledge action by the operator. The visual indication should be clearly distinguishable from the normal state indication by using colours and symbols (e.g., shape or text). The visual indication for an unacknowledged alarm should include a blinking element. There are some environments in which an audible indication is not an effective indicator of unacknowledged alarms."
-  - key: 2
-    name: Acknowledged
-    description: "The acknowledged alarm state should not use an audible indication. The acknowledged alarm state visual indication should be clearly distinguishable from the normal state indication by using symbols (e.g., shape or text), and should be identical in colour to the unacknowledged alarm indication. A blinking element should not be used in the visual indication for an acknowledged alarm."
-  - key: 3
-    name: ReturnToNormal
-    description: "The return-to-normal unacknowledged state should not use an audible indication. The return to-normal unacknowledged state visual indication may be the same as the normal state or it may indicate an unacknowledged status with a blinking element."
-  - key: 4
-    name: Shelved
-    description: "The shelved alarm state should be visually indicated in the HMI. The visual indication for a shelved alarm should not include a blinking element. The shelved alarm state indication should be distinct. No audible indication should be used to identify shelved alarms."
-  - key: 5
-    name: SuppressedByDesign
-    description: "The suppressed-by-design alarm state should be visually indicated in the HMI. The visual indication for an alarm suppressed by design should not include a blinking element. The suppressed-by-design alarm state indication should be distinct from the unacknowledged and acknowledged state indications. No audible indication should be used to identify alarms suppressed by design."
-  - key: 6
-    name: OutOfService
-    description: "The out-of-service alarm state should be visually indicated in the HMI. The visual indication for an out-of-service alarm should not include a blinking element. The out-of-service alarm state indication should be distinct from the unacknowledged and acknowledged state indications. No audible indication should be used to identify out-of-service alarms."
+  - enumId: EventAlarmState
+    useFlags: false
+    isExtensible: false
+    description: "The state of an alarm is a measure of the alarm's current status."
+    values:
+      - key: 0
+        name: Undefined
+        description: "No state has been assigned to the alarm."
+      - key: 1
+        name: Normal
+        description: "The normal state should not use an audible indication. The normal state visual indication should be the same as indications without alarms."
+      - key: 2
+        name: Unacknowledged
+        description: "The unacknowledged alarm state should use both an audible indication and visual indication. The audible indication should be silenced with a silence action or acknowledge action by the operator. The visual indication should be clearly distinguishable from the normal state indication by using colours and symbols (e.g., shape or text). The visual indication for an unacknowledged alarm should include a blinking element. There are some environments in which an audible indication is not an effective indicator of unacknowledged alarms."
+      - key: 3
+        name: Acknowledged
+        description: "The acknowledged alarm state should not use an audible indication. The acknowledged alarm state visual indication should be clearly distinguishable from the normal state indication by using symbols (e.g., shape or text), and should be identical in colour to the unacknowledged alarm indication. A blinking element should not be used in the visual indication for an acknowledged alarm."
+      - key: 4
+        name: ReturnToNormal
+        description: "The return-to-normal unacknowledged state should not use an audible indication. The return to-normal unacknowledged state visual indication may be the same as the normal state or it may indicate an unacknowledged status with a blinking element."
+      - key: 5
+        name: Shelved
+        description: "The shelved alarm state should be visually indicated in the HMI. The visual indication for a shelved alarm should not include a blinking element. The shelved alarm state indication should be distinct. No audible indication should be used to identify shelved alarms."
+      - key: 6
+        name: SuppressedByDesign
+        description: "The suppressed-by-design alarm state should be visually indicated in the HMI. The visual indication for an alarm suppressed by design should not include a blinking element. The suppressed-by-design alarm state indication should be distinct from the unacknowledged and acknowledged state indications. No audible indication should be used to identify alarms suppressed by design."
+      - key: 7
+        name: OutOfService
+        description: "The out-of-service alarm state should be visually indicated in the HMI. The visual indication for an out-of-service alarm should not include a blinking element. The out-of-service alarm state indication should be distinct from the unacknowledged and acknowledged state indications. No audible indication should be used to identify out-of-service alarms."
 
-- enumId: EventAlarmType
-  useFlags: true
-  values:
-    - key: 0
-      name: Absolute
-    - key: 1
-      name: Deviation
-    - key: 2
-      name: RateOfChange
-    - key: 3
-      name: Discrepancy
-    - key: 4
-      name: Calculated
-    - key: 5
-      name: RecipeDriven
-    - key: 6
-      name: BitPattern
-    - key: 7
-      name: ControllerOutput
-    - key: 8
-      name: SystemDiagnostic
-    - key: 9
-      name: InstrumentDiagnostic
-    - key: 10
-      name: Adjustable
-    - key: 11
-      name: Adaptive
-    - key: 12
-      name: ReAlarming
-    - key: 13
-      name: Statistical
-    - key: 14
-      name: FirstOut
-    - key: 15
-      name: BadMeasurement
-      
-- enumId: EventAlarmSource
-  useFlags: true
-  values:
-    - key: 0
-      name: FieldDevice
-    - key: 1
-      name: ControlSystem
-    - key: 2
-      name: HMI
-    - key: 3
-      name: Internal
+  - enumId: EventAlarmType
+    useFlags: false
+    isExtensible: true
+    description: "The type of an alarm is a measure of the nature of the alarm."
+    values:
+      - key: 0
+        name: Undefined
+        description: "No type has been assigned to the alarm."
+      - key: 1
+        name: Absolute
+        description: "The alarm is based on an absolute value."
+      - key: 2
+        name: Deviation
+        description: "The alarm is based on a deviation from a set-point."
+      - key: 3
+        name: RateOfChange
+        description: "The alarm is based on the rate of change of a value."
+      - key: 4
+        name: Discrepancy
+        description: "The alarm is based on a discrepancy between two values."
+      - key: 5
+        name: Calculated
+        description: "The alarm is based on a calculated value."
+      - key: 6
+        name: RecipeDriven
+        description: "The alarm is based on a recipe-driven value."
+      - key: 7
+        name: BitPattern
+        description: "The alarm is based on a bit pattern."
+      - key: 8
+        name: ControllerOutput
+        description: "The alarm is based on a controller output."
+      - key: 9
+        name: SystemDiagnostic
+        description: "The alarm is based on a system diagnostic."
+      - key: 10
+        name: InstrumentDiagnostic
+        description: "The alarm is based on an instrument diagnostic."
+      - key: 11
+        name: Adjustable
+        description: "The alarm is based on an adjustable value."
+      - key: 12
+        name: Adaptive
+        description: "The alarm is based on an adaptive value."
+      - key: 13
+        name: ReAlarming
+        description: "The alarm is based on a re-alarming value."
+      - key: 14
+        name: Statistical
+        description: "The alarm is based on a statistical value."
+      - key: 15
+        name: FirstOut
+        description: "The alarm is based on a first-out value."
+      - key: 16
+        name: BadMeasurement
+        description: "The alarm is based on a bad measurement."
+
+  - enumId: EventAlarmSource
+    useFlags: false
+    isExtensible: true
+    description: "The source of an alarm is the entity that is responsible for the alarm."
+    values:
+      - key: 0
+        name: Undefined
+        description: "No source has been assigned to the alarm."
+      - key: 1
+        name: FieldDevice
+        description: "The alarm is generated by a field device."
+      - key: 2
+        name: ControlSystem
+        description: "The alarm is generated by a control system."
+      - key: 3
+        name: HMI
+        description: "The alarm is generated by a human-machine interface."
+      - key: 4
+        name: Internal
+        description: "The alarm is generated by an internal source."
+
+  - enumId: EventAlarmPriority
+    description: "The priority of an alarm is a measure of its importance relative to other alarms. The priority of an alarm is used to determine the order in which alarms are presented to the operator."
+    useFlags: false
+    isExtensible: true
+    values:
+      - key: 0
+        name: Undefined
+        description: "No priority has been assigned to the alarm."
+      - key: 1
+        name: Low
+        description: "The alarm is of low priority."
+      - key: 2
+        name: Medium
+        description: "The alarm is of medium priority."
+      - key: 3
+        name: High
+        description: "The alarm is of high priority."
+      - key: 4
+        name: Critical
+        description: "The alarm is of critical priority."

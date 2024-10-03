@@ -33,5 +33,7 @@ attributes:
     valueType: DateTime
   - id: EndDateTime
     valueType: DateTime
-
+  - id: OrderState
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/OrderState
   

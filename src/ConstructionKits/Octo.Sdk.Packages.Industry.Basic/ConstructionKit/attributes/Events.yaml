@@ -3,19 +3,23 @@ attributes:
 
 - id: Message
   valueType: String
-
+  isDataStream: true
 - id: EventAlarmState
   valueType: Enum
   valueCkEnumId: ${thisModel}/EventAlarmState
+  isDataStream: true
 - id: EventAlarmType
   valueType: Enum
   valueCkEnumId: ${thisModel}/EventAlarmType
+  isDataStream: true
 - id: EventAlarmSource
   valueType: Enum
   valueCkEnumId: ${thisModel}/EventAlarmSource
+  isDataStream: true
 - id: EventAlarmPriority
   valueType: Enum
   valueCkEnumId: ${thisModel}/EventAlarmPriority
+  isDataStream: true
 - id: EventAlarmCause
   valueType: String
   isDataStream: true
@@ -23,3 +27,12 @@ attributes:
   valueType: Int
   defaultValues:
     - 0
+  isDataStream: true
+- id: TagName
+  description: Tag or VariableName that is used (when available) that generated this event
+  valueType: String
+  isDataStream: true
+- id: EventCategory
+  description: Category of the event
+  valueType: String
+  isDataStream: true

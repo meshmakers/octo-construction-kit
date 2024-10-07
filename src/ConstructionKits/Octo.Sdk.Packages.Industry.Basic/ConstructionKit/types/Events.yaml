@@ -8,6 +8,12 @@ types:
     name: Time
   - id: ${thisModel}/Message
     name: Message
+  - id: ${thisModel}/TagName
+    name: TagName
+    isOptional: true
+  - id: ${thisModel}/EventCategory
+    name: Category
+    isOptional: true
   associations:
     - id: ${thisModel}/EventSource
       targetCkTypeId: Basic/Asset

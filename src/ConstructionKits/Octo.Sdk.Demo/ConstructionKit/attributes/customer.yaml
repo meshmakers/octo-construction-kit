@@ -9,7 +9,7 @@ attributes:
 - id: Street
   valueType: String
 - id: PostalCode
-  valueType: Int
+  valueType: String
 - id: City
   valueType: String
 - id: Country

@@ -2,13 +2,16 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: OperatingHoursCounter
   valueType: Int
+  isDataStream: true
 
 - id: StandStillCounter
   valueType: Int
+  isDataStream: true
 
 - id: MachineState
   valueType: Enum
   valueCkEnumId: ${thisModel}/MachineState
+  isDataStream: true
 
 - id: Power
   valueType: Double
@@ -20,6 +23,7 @@ attributes:
   isDataStream: true
 - id: ImportedEnergy
   valueType: Double
+  isDataStream: true
   metaData:
     - key: Unit
       value: "kWh"

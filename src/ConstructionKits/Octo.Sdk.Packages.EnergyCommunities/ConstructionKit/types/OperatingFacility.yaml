@@ -9,5 +9,5 @@ types:
   associations:
     - id: System/ParentChild
       targetCkTypeId: Basic/TreeNode
-    - id: System/ParentChild
+    - id: ${thisModel}/AssociatedMeters
       targetCkTypeId: ${thisModel}/MeteringPoint

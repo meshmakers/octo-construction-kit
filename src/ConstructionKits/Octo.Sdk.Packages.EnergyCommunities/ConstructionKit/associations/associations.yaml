@@ -5,3 +5,8 @@ associationRoles:
     outboundName: RelatesFrom
     inboundMultiplicity: One
     outboundMultiplicity: N
+  - id: AssociatedMeters
+    inboundName: RelatesTo
+    outboundName: RelatesFrom
+    inboundMultiplicity: One
+    outboundMultiplicity: N

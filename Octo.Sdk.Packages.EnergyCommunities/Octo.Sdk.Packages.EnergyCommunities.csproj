@@ -5,6 +5,10 @@
         <LangVersion>latestmajor</LangVersion>
         <Nullable>enable</Nullable>
         <ImplicitUsings>true</ImplicitUsings>
+        <Configurations>Debug;Release;DebugL</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <OctoPublishCkModel>true</OctoPublishCkModel>
+        <OctoGenerateCkDocumentation Condition="$(OctoGenerateCkDocumentation) == ''">false</OctoGenerateCkDocumentation>
     </PropertyGroup>
 
     <ItemGroup>

@@ -6,6 +6,8 @@ types:
   attributes:
     - id: ${thisModel}/Address
       name: Address
+    - id: ${thisModel}/FacilityType
+      name: FacilityType
   associations:
     - id: System/ParentChild
       targetCkTypeId: Basic/TreeNode

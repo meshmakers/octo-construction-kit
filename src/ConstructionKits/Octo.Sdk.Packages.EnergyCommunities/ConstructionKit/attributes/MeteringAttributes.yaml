@@ -6,6 +6,9 @@ attributes:
     valueType: Int
   - id: MeasureType
     valueType: Enum
-    valueCkEnumId: ${thisModel}/measureType
+    valueCkEnumId: ${thisModel}/MeasureType
+  - id: ProductionType
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/ProductionType
   - id: Timestamp
     valueType: DateTime

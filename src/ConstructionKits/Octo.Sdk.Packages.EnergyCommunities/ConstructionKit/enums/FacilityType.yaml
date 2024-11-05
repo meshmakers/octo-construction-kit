@@ -1,0 +1,16 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: FacilityType
+    values:
+      - key: 0
+        name: Unknown
+      - key: 1
+        name: Household
+      - key: 2
+        name: Business
+      - key: 3
+        name: Industry
+      - key: 4
+        name: PublicBuilding
+      - key: 5
+        name: Storage

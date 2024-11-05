@@ -1,0 +1,13 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: FirstName
+  valueType: String
+- id: LastName
+  valueType: String
+- id: CompanyName
+  valueType: String
+- id: Address
+  valueType: Record
+  valueCkRecordId: Basic/Address
+
+

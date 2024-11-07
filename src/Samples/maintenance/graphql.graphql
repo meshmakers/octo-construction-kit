@@ -5,15 +5,15 @@ mutation {
                 entities: [
                     {
                         name: "Business Area"
-                        description: "Represents Business Areas (Betriebsbereiche) of the orgianization"
+                        description: "Represents Business Areas (Betriebsbereiche) of the organization"
                     },
                     {
                         name: "Functional Location"
-                        description: "Represents Functiona Locations (Technische Plätze) of the orgianization"
+                        description: "Represents Functional Locations (Technische Plätze) of the organization"
                     },
                     {
                         name: "Workspace"
-                        description: "Represents Workspace (Arbeitsplätze) of the orgianization"
+                        description: "Represents Workspace (Arbeitsplätze) of the organization"
                     }
                 ]
             )

@@ -1,5 +1,7 @@
-
-octo-cli -c Config -asu "https://assets.high-value-skills.com/" -isu "https://connect.high-value-skills.com/" -bsu "https://bots.high-value-skills.com/" -tid "smcproduction"
+param (
+    [string]$tenantId = "meshtest"
+)
+octo-cli -c Config -asu "https://assets.meshmakers.cloud/" -isu "https://connect.meshmakers.cloud" -bsu "https://bots.meshmakers.cloud/" -csu "https://communication.meshmakers.cloud/" -tid $tenantId
 octo-cli -c Login -i
 
 

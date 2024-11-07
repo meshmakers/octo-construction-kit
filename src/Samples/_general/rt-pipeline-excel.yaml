@@ -19,11 +19,11 @@ entities:
       - id: System.Communication/PipelineDefinition
         value: >-
           triggers:
-          - type: FromHttpRequest@1
-            path: /import/tree
-            method: POST
+            - type: FromHttpRequest@1
+              path: /import/tree
+              method: POST
           transformations:
-          - type: ImportFromExcel@1
+            - type: ImportFromExcel@1
   - rtId: 672c67b00e12cd897b01f2d4
     ckTypeId: System.Communication/DataPipeline
     attributes:

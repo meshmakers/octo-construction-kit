@@ -19,6 +19,8 @@ entities:
   - rtId: 65d5c447b420da3fb12381bf
     ckTypeId: System.Communication/MeshPipeline
     attributes:
+      - id: System/Enabled
+        value: true       
       - id: System.Communication/PipelineDefinition
         value: >-
           triggers:
@@ -33,6 +35,8 @@ entities:
   - rtId: 65d5c447b420da3fb12381be
     ckTypeId: System.Communication/EdgePipeline
     attributes:
+      - id: System/Enabled
+        value: true
       - id: System.Communication/PipelineDefinition
         value: >-
           transformations: 

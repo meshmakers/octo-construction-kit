@@ -8,46 +8,38 @@ using Xunit;
 
 namespace Octo.Sdk.Packages.Industry.Basic.SystemTests;
 
-public class AssetRepositoryTests : IClassFixture<TenantFixture>
+public class AssetRepositoryTests(TenantFixture tenantFixture) : IClassFixture<TenantFixture>
 {
-    private readonly TenantFixture _tenantFixture;
-
-    public AssetRepositoryTests(TenantFixture tenantFixture)
-    {
-        _tenantFixture = tenantFixture;
-    }
-
     [Fact]
-    public async void TestCreateAlarmCommentAsync()
+    public async Task TestCreateAlarmCommentAsync()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
         var assetRepository = new AssetRepository(tenantClient);
 
-        var result = await assetRepository.CreateAlarmCommentAsync(new[]
-        {
+        var result = await assetRepository.CreateAlarmCommentAsync([
             new RtEventCommentInputDto
             {
                 ReceivedDateTime = DateTime.UtcNow,
                 Comment = "Test comment",
-                Parent = new[]
-                {
-                    new RtAssociationInputDto()
+                Parent =
+                [
+                    new RtAssociationInputDto
                     {
-                        Target = new RtEntityId("Meshmakers.Alarm", new OctoObjectId("64a2c3ad1254d840838bbd09")),
+                        Target = new RtEntityIdDto { CkTypeId = "Meshmakers.Alarm", RtId = new OctoObjectId("64a2c3ad1254d840838bbd09")},
                         ModOption = AssociationModOptionsDto.Create
                     }
-                }
+                ]
             }
-        });
+        ]);
         
         Assert.NotNull(result);
         Assert.True(result.TotalCount == 1);
     }
 
     [Fact]
-    public async void TestGetAlarmCommentsAsync()
+    public async Task TestGetAlarmCommentsAsync()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
         var assetRepository = new AssetRepository(tenantClient);
         
         var result = await assetRepository.GetCommentsForAlarmByRtIdAsync("64a2c3ad1254d840838bbd09");
@@ -58,9 +50,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
     [Fact]
-    public async void TestGetEquipmentModelAsync()
+    public async Task TestGetEquipmentModelAsync()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -70,9 +62,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
 
     [Fact]
-    public async void TestGetEquipmentByGroupRtIdAsync()
+    public async Task TestGetEquipmentByGroupRtIdAsync()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -83,9 +75,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
     [Fact]
-    public async void TestGetAlarmsByMachineRtIdAndStateAsync()
+    public async Task TestGetAlarmsByMachineRtIdAndStateAsync()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -96,9 +88,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
 
     [Fact]
-    public async void TestGetAlarmByRtIdQueryAsync()
+    public async Task TestGetAlarmByRtIdQueryAsync()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -108,9 +100,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
     
     [Fact]
-    public async void TestGetAlarmByWellKnownNameAsync()
+    public async Task TestGetAlarmByWellKnownNameAsync()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -123,22 +115,22 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
     
     [Fact]
-    public async void TestGetMachinesAndAlarmsByGroupRtIdAsync()
+    public async Task TestGetMachinesAndAlarmsByGroupRtIdAsync()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
         var result = await assetRepository.GetMachinesAndAlarmsByGroupRtIdAsync(new OctoObjectId("64a2b55a84c7869c60270d1a"),
             DateTime.MinValue, DateTime.MaxValue, "group");
         Assert.Single(result.List);
-        Assert.NotNull(result.List?.First()?.MachinesChildren?.Items?.First()?.AlarmChildren?.Groupings);
+        Assert.NotNull(result.List.First().MachinesChildren?.Items?.First().AlarmChildren?.Groupings);
     }
 
     [Fact]
-    public async void TestGetAlarmsByMachineRtIdAsync()
+    public async Task TestGetAlarmsByMachineRtIdAsync()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -150,9 +142,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
     
     [Fact]
-    public async void TestCreateAlarm()
+    public async Task TestCreateAlarm()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -165,14 +157,14 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
                 RtWellKnownName = wellKnown,
                 ReceivedDateTime = DateTime.UtcNow,
                 Message = "Hi test",
-                Parent = new[]
-                {
+                Parent =
+                [
                     new RtAssociationInputDto
                     {
-                        ModOption = AssociationModOptionsDto.Create, Target = new RtEntityId("Meshmakers.Equipment.Machine",
-                            new OctoObjectId("64a2b6c3bbf4aa537f812b62"))
+                        ModOption = AssociationModOptionsDto.Create, Target = new RtEntityIdDto {CkTypeId = "Meshmakers.Equipment.Machine",
+                           RtId = new OctoObjectId("64a2b6c3bbf4aa537f812b62")}
                     }
-                }
+                ]
             }
         };
 
@@ -184,9 +176,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
 
     [Fact]
-    public async void TestUpdateAlarm()
+    public async Task TestUpdateAlarm()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
         var message = Guid.NewGuid().ToString();
 
         var assetRepository = new AssetRepository(tenantClient);
@@ -212,9 +204,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
 
 
     [Fact]
-    public async void TestCreateModel()
+    public async Task TestCreateModel()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -234,9 +226,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
 
     [Fact]
-    public async void TestUpdateModel()
+    public async Task TestUpdateModel()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
         var message = Guid.NewGuid().ToString();
 
         var assetRepository = new AssetRepository(tenantClient);
@@ -261,9 +253,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
 
     [Fact]
-    public async void TestCreateGroup()
+    public async Task TestCreateGroup()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -273,11 +265,11 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
             {
                 Description = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
                 Designation = "Hi test",
-                Parent = new[]
-                {
+                Parent =
+                [
                     new RtAssociationInputDto
-                        { ModOption = AssociationModOptionsDto.Create, Target = new RtEntityId("Meshmakers.Equipment.Model", new OctoObjectId("64a2b2e4e1ee56e262e83d98")) }
-                }
+                        { ModOption = AssociationModOptionsDto.Create, Target = new RtEntityIdDto{CkTypeId = "Meshmakers.Equipment.Model", RtId = new OctoObjectId("64a2b2e4e1ee56e262e83d98")} }
+                ]
             }
         };
 
@@ -288,9 +280,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
 
     [Fact]
-    public async void TestUpdateGroup()
+    public async Task TestUpdateGroup()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
         var message = Guid.NewGuid().ToString();
 
         var assetRepository = new AssetRepository(tenantClient);
@@ -315,9 +307,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
     
     [Fact]
-    public async void TestCreateMachine()
+    public async Task TestCreateMachine()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
 
         var assetRepository = new AssetRepository(tenantClient);
 
@@ -327,11 +319,11 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
             {
                 Description = DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
                 Designation = "Hi test",
-                Parent = new[]
-                {
+                Parent =
+                [
                     new RtAssociationInputDto
-                        { ModOption = AssociationModOptionsDto.Create, Target = new RtEntityId("Meshmakers.Equipment.Group", new OctoObjectId("64a2b55a84c7869c60270d1a")) }
-                }
+                        { ModOption = AssociationModOptionsDto.Create, Target = new RtEntityIdDto{CkTypeId = "Meshmakers.Equipment.Group", RtId = new OctoObjectId("64a2b55a84c7869c60270d1a")} }
+                ]
             }
         };
 
@@ -342,9 +334,9 @@ public class AssetRepositoryTests : IClassFixture<TenantFixture>
     }
 
     [Fact]
-    public async void TestUpdateMachine()
+    public async Task TestUpdateMachine()
     {
-        var tenantClient = _tenantFixture.GetTenantClient();
+        var tenantClient = tenantFixture.GetTenantClient();
         var message = Guid.NewGuid().ToString();
 
         var assetRepository = new AssetRepository(tenantClient);

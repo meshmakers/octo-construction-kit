@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: OperatingFacility
+  derivedFromCkTypeId: System/Entity
+  description: "An Operating Facility"
+  attributes:
+    - id: ${thisModel}/Address
+      name: Address
+    - id: ${thisModel}/FacilityType
+      name: FacilityType
+  associations:
+    - id: System/ParentChild
+      targetCkTypeId: Basic/TreeNode
+    - id: ${thisModel}/AssociatedMeters
+      targetCkTypeId: ${thisModel}/MeteringPoint

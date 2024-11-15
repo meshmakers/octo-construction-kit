@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: MeteringPointNumber
+    valueType: String
+  - id: MeterReading
+    valueType: Int
+  - id: MeasureType
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/MeasureType
+  - id: ProductionType
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/ProductionType
+  - id: Timestamp
+    valueType: DateTime

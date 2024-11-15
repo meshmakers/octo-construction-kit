@@ -1,0 +1,23 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: ProductionType
+    description: "Defines what method is used to produce the energy"
+    values:
+      - key: 0
+        name: Unknown
+        description: "The production type is unknown or not defined"
+      - key: 1
+        name: Solar
+        description: "Solar power was used to produce the energy"
+      - key: 2
+        name: HEP
+        description: "Hydroelectric power was used to produce the energy"
+      - key: 3
+        name: Wind
+        description: "Wind power was used to produce the energy"
+      - key: 4
+        name: Biomass
+        description: "Biomass was used to produce the energy"
+      - key: 5
+        name: CHP
+        description: "Combined heat and power was used to produce the energy"

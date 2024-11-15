@@ -20,6 +20,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Demo", "src\Constr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Maintenance", "src\ConstructionKits\Octo.Sdk.Packages.Industry.Maintenance\Octo.Sdk.Packages.Industry.Maintenance.csproj", "{44B0EE5C-B2AA-4FAC-A53C-E36328D4EA8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.EnergyCommunities", "src\ConstructionKits\Octo.Sdk.Packages.EnergyCommunities\Octo.Sdk.Packages.EnergyCommunities.csproj", "{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,12 @@ Global
 		{44B0EE5C-B2AA-4FAC-A53C-E36328D4EA8D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{44B0EE5C-B2AA-4FAC-A53C-E36328D4EA8D}.DebugL|Any CPU.ActiveCfg = DebugL|Any CPU
 		{44B0EE5C-B2AA-4FAC-A53C-E36328D4EA8D}.DebugL|Any CPU.Build.0 = DebugL|Any CPU
+		{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}.DebugL|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}.DebugL|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5540D024-E874-436D-AD9F-A8F8D1F09AEC} = {BFB00BCB-76B9-4AAF-A330-4442351363D8}
@@ -90,5 +98,6 @@ Global
 		{3163529E-5EDF-4FAA-A4E9-EE2D370EA256} = {BFB00BCB-76B9-4AAF-A330-4442351363D8}
 		{E37B882B-70CD-451D-8395-34C1188361AB} = {BFB00BCB-76B9-4AAF-A330-4442351363D8}
 		{44B0EE5C-B2AA-4FAC-A53C-E36328D4EA8D} = {BFB00BCB-76B9-4AAF-A330-4442351363D8}
+		{48B63881-ACDE-4CCC-88BB-15469FB1E4C8} = {BFB00BCB-76B9-4AAF-A330-4442351363D8}
 	EndGlobalSection
 EndGlobal

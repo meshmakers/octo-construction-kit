@@ -1,0 +1,23 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: FacilityType
+    description: "Defines the type of Facility that holds the metering points"
+    values:
+      - key: 0
+        name: Unknown
+        description: "The facility type is unknown or not defined"
+      - key: 1
+        name: Household
+        description: "The facility type is a single household"
+      - key: 2
+        name: Business
+        description: "The facility type is a business"
+      - key: 3
+        name: Industry
+        description: "The facility type is a industry"
+      - key: 4
+        name: PublicBuilding
+        description: "The facility type is a public building e.g. schools, public offices"
+      - key: 5
+        name: Storage
+        description: "The facility type is an energy storage"

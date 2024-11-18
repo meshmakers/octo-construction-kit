@@ -12,9 +12,9 @@ types:
     name: CompanyName
   - id: ${thisModel}/Address
     name: Address
-  - id: ${thisModel}/UserLogin
+  - id: System.Identity/User
     isOptional: true
-    name: UserLogin
+    name: UserCredentials
   associations:
     - id: ${thisModel}/AssociatedFacilities
       targetCkTypeId: ${thisModel}/OperatingFacility

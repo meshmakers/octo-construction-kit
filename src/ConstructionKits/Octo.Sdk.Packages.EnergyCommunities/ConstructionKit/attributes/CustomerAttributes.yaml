@@ -9,8 +9,5 @@ attributes:
 - id: Address
   valueType: Record
   valueCkRecordId: Basic/Address
-- id: UserLogin
-  valueType: Record
-  valueCkRecordId: System.Identity/UserLogin
 
 

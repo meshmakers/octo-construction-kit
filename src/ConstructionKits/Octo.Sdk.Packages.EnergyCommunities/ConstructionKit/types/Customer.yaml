@@ -12,6 +12,9 @@ types:
     name: CompanyName
   - id: ${thisModel}/Address
     name: Address
+  - id: ${thisModel}/UserLogin
+    isOptional: true
+    name: UserLogin
   associations:
     - id: ${thisModel}/AssociatedFacilities
       targetCkTypeId: ${thisModel}/OperatingFacility

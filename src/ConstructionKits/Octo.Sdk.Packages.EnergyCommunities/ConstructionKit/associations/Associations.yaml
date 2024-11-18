@@ -10,3 +10,8 @@ associationRoles:
     outboundName: RelatesFrom
     inboundMultiplicity: One
     outboundMultiplicity: N
+  - id: AssociatedUser
+    inboundName: RelatesTo
+    outboundName: RelatesFrom
+    inboundMultiplicity: One
+    outboundMultiplicity: One

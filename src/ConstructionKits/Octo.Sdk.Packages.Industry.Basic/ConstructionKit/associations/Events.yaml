@@ -3,5 +3,5 @@ associationRoles:
   - id: EventSource
     inboundName: EventSource
     outboundName: Events
-    inboundMultiplicity: N
-    outboundMultiplicity: ZeroOrOne
+    inboundMultiplicity: ZeroOrOne
+    outboundMultiplicity: N

@@ -10,8 +10,21 @@ types:
     name: LastName
   - id: ${thisModel}/CompanyName
     name: CompanyName
+    isOptional: true
   - id: ${thisModel}/Address
     name: Address
+  - id: ${thisModel}/CustomerNumber
+    name: CustomerNumber
+  - id: ${thisModel}/CustomerUid
+    name: CustomerUid
+    isOptional: true
+  - id: ${thisModel}/CompanyRegisterNumber
+    name: CompanyRegisterNumber
+  - id: ${thisModel}/AuthenticationEmail
+    name: AuthenticationEmail
+  - id: ${thisModel}/Comment
+    name: Comment
+    isOptional: true
   associations:
     - id: ${thisModel}/AssociatedFacilities
       targetCkTypeId: ${thisModel}/OperatingFacility

@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: Consumer
+    derivedFromCkTypeId: ${thisModel}/MeteringPoint
+    description: "Consumer associated with an Operating Facility"
+    attributes:
+      - id: ${thisModel}/EnergyConsumption
+        name: EnergyConsumption

@@ -4,11 +4,5 @@ attributes:
     valueType: String
   - id: MeterReading
     valueType: Int
-  - id: MeasureType
-    valueType: Enum
-    valueCkEnumId: ${thisModel}/MeasureType
-  - id: ProductionType
-    valueType: Enum
-    valueCkEnumId: ${thisModel}/ProductionType
   - id: Timestamp
     valueType: DateTime

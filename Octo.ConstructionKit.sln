@@ -20,7 +20,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Demo", "src\Constr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Maintenance", "src\ConstructionKits\Octo.Sdk.Packages.Industry.Maintenance\Octo.Sdk.Packages.Industry.Maintenance.csproj", "{44B0EE5C-B2AA-4FAC-A53C-E36328D4EA8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.EnergyCommunities", "src\ConstructionKits\Octo.Sdk.Packages.EnergyCommunities\Octo.Sdk.Packages.EnergyCommunities.csproj", "{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.EnergyCommunity", "src\ConstructionKits\Octo.Sdk.Packages.EnergyCommunity\Octo.Sdk.Packages.EnergyCommunity.csproj", "{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

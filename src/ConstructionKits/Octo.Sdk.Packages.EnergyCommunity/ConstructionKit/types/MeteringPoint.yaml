@@ -8,10 +8,6 @@ types:
       name: MeteringPointNumber
     - id: ${thisModel}/MeterReading
       name: MeterReading
-    - id: ${thisModel}/MeasureType
-      name: MeasureType
-    - id: ${thisModel}/ProductionType
-      name: ProductionType
       isOptional: true
     - id: ${thisModel}/Timestamp
       name: Timestamp

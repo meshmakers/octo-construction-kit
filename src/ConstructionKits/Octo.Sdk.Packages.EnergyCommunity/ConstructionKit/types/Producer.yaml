@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: Producer
+    derivedFromCkTypeId: ${thisModel}/MeteringPoint
+    description: "Consumer associated with an Operating Facility"
+    attributes:
+      - id: ${thisModel}/EnergyProductionCapacity
+        name: EnergyProductionCapacity
+      - id: ${thisModel}/ProductionType
+        name: ProductionType

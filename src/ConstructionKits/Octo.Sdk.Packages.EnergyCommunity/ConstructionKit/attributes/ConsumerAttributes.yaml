@@ -3,3 +3,6 @@ attributes:
   - id: EnergyConsumption
     valueType: Double
     description: "Energy consumed per year in kWh"
+    metaData:
+      - key: Unit
+        value: "kWh"

@@ -3,6 +3,9 @@ attributes:
   - id: EnergyProductionCapacity
     valueType: Double
     description: "Maximal energy production capacity in kWp"
+    metaData:
+      - key: Unit
+        value: "kWp"
   - id: ProductionType
     valueType: Enum
     valueCkEnumId: ${thisModel}/ProductionType

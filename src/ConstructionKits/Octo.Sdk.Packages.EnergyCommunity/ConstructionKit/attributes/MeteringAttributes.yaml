@@ -2,7 +2,15 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: MeteringPointNumber
     valueType: String
+    description: "Number identifying the metering point"
   - id: MeterReading
     valueType: Int
+    description: "Reading of the meter at a given point in kWh"
+    isDataStream: true
+    metaData:
+      - key: Unit
+        value: "kWh"
   - id: Timestamp
     valueType: DateTime
+    description: "Timestamp associated with the meter reading"
+    isDataStream: true

@@ -2,17 +2,23 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: FirstName
   valueType: String
+  description: "The users first name(s)"
 - id: LastName
   valueType: String
+  description: "The users last name(s)"
 - id: CompanyName
   valueType: String
+  description: "The company's name"
 - id: Address
   valueType: Record
   valueCkRecordId: Basic/Address
+  description: "Address associated with the customer"
 - id: CustomerNumber
   valueType: String
+  description: "Internal customer number"
 - id: CustomerUid
   valueType: String
+  description: "Customer user identification"
 - id: CompanyRegisterNumber
   valueType: String
   description: "Public registry number for the legal identification of the company"

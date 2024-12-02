@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: MeteringPoint
   derivedFromCkTypeId: Basic/Asset
+  isAbstract: true
   description: "Metering Point"
   attributes:
     - id: ${thisModel}/MeteringPointNumber

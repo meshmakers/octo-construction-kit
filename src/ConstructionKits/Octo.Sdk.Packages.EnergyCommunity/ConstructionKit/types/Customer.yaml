@@ -20,7 +20,7 @@ types:
     isOptional: true
   - id: ${thisModel}/CompanyRegisterNumber
     name: CompanyRegisterNumber
-  - id: ${thisModel}/AuthenticationEmail
+  - id: Basic/EMailAddress
     name: AuthenticationEmail
   - id: ${thisModel}/Comment
     name: Comment

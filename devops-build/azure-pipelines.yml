@@ -87,7 +87,7 @@ stages:
               - '**/*Fluid.csproj'
               - '**/*Energy.csproj'
               - '**/*Maintenance.csproj'
-              - '**/*EnergyCommunities.csproj'
+              - '**/*EnergyCommunity.csproj'
       - task: PublishBuildArtifacts@1
         displayName: 'Publish Artifact: local'
         inputs:

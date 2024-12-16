@@ -32,8 +32,8 @@ types:
   - id: ${thisModel}/Comment
     name: Comment
     isOptional: true
-  - id: ${thisModel}/InvoicePeriod
-    name: InvoicePeriodCustomer
+  - id: ${thisModel}/InvoicePeriodCustomer
+    name: InvoicePeriod
   associations:
     - id: ${thisModel}/AssociatedFacilities
       targetCkTypeId: ${thisModel}/OperatingFacility

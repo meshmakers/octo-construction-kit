@@ -8,8 +8,8 @@ types:
       name: Address
     - id: ${thisModel}/FacilityType
       name: FacilityType
-    - id: ${thisModel}/InvoicePeriod
-      name: InvoicePeriodFacility
+    - id: ${thisModel}/InvoicePeriodFacility
+      name: InvoicePeriod
   associations:
     - id: System/ParentChild
       targetCkTypeId: Basic/TreeNode

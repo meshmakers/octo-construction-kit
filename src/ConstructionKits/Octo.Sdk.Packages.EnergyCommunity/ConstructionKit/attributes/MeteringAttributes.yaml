@@ -18,3 +18,7 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${thisModel}/InvoicePeriod
     description: "Invoice Period associated with the meter"
+  - id: MeterState
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/State
+    description: "The state of the metering point object"

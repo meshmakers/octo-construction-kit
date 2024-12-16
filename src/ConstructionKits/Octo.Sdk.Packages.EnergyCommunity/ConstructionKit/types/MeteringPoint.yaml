@@ -14,3 +14,5 @@ types:
       name: Timestamp
     - id: ${thisModel}/InvoicePeriodMeter
       name: InvoicePeriod
+    - id: ${thisModel}/MeterState
+      name: State  

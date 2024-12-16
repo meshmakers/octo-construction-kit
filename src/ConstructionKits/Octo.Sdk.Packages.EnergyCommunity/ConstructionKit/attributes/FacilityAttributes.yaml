@@ -7,3 +7,7 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${thisModel}/InvoicePeriod
     description: "Invoice Period associated with the facility"
+  - id: FacilityState
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/State
+    description: "The state of the facility object"

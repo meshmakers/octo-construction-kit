@@ -10,6 +10,8 @@ types:
       name: FacilityType
     - id: ${thisModel}/InvoicePeriodFacility
       name: InvoicePeriod
+    - id: ${thisModel}/FacilityState
+      name: State
   associations:
     - id: System/ParentChild
       targetCkTypeId: Basic/TreeNode

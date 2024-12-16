@@ -2,7 +2,7 @@
 attributes:
   - id: StartDate
     valueType: DateTime
-    description: "Timestamp associated with the meter reading"
+    description: "Starting time of the invoice period"
   - id: EndDate
     valueType: DateTime
-    description: "Timestamp associated with the meter reading"
+    description: "Ending time of the invoice period"

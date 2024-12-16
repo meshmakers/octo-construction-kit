@@ -12,3 +12,5 @@ types:
       isOptional: true
     - id: ${thisModel}/Timestamp
       name: Timestamp
+    - id: ${thisModel}/InvoicePeriod
+      name: InvoicePeriodMeter

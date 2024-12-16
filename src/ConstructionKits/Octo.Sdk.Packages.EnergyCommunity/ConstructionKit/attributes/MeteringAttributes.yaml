@@ -14,3 +14,7 @@ attributes:
     valueType: DateTime
     description: "Timestamp associated with the meter reading"
     isDataStream: true
+  - id: InvoicePeriodMeter
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/InvoicePeriod
+    description: "Invoice Period associated with the meter"

@@ -1,11 +1,19 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
+- id: Salutation
+  valueType: Enum
+  valueCkEnumId: ${thisModel}/Salutation
+  description: "Salutation associated with the customer"
 - id: FirstName
   valueType: String
   description: "The users first name(s)"
 - id: LastName
   valueType: String
   description: "The users last name(s)"
+- id: Title
+  valueType: Enum
+  valueCkEnumId: ${thisModel}/Title
+  description: "Title associated with the customer"
 - id: CompanyName
   valueType: String
   description: "The company's name"
@@ -25,4 +33,8 @@ attributes:
 - id: Comment
   valueType: String
   description: "Optional Comment on the user"
+- id: InvoicePeriodCustomer
+  valueType: Enum
+  valueCkEnumId: ${thisModel}/InvoicePeriod
+  description: "Invoice Period associated with the customer"
 

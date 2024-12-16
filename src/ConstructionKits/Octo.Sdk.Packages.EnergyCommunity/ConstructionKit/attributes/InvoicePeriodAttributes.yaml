@@ -1,0 +1,8 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: StartDate
+    valueType: DateTime
+    description: "Timestamp associated with the meter reading"
+  - id: EndDate
+    valueType: DateTime
+    description: "Timestamp associated with the meter reading"

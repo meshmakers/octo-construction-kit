@@ -1,0 +1,13 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: Invoice
+    derivedFromCkTypeId: System/Entity
+    description: "An invoice period"
+    attributes:
+      - id: ${thisModel}/InvoiceNumber
+        name: InvoiceNumber
+      - id: ${thisModel}/InvoiceStatus
+        name: InvoiceStatus
+    associations:
+      - id: System/ParentChild
+        targetCkTypeId: ${thisModel}/InvoicePeriod

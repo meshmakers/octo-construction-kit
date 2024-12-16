@@ -1,0 +1,14 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: InvoiceStatus
+    description: "Defines the invoice status"
+    values:
+      - key: 0
+        name: Draft
+        description: "The Invoice is a draft"
+      - key: 1
+        name: Completed
+        description: "The Invoice is completed"
+      - key: 2
+        name: Sent
+        description: "The Invoice Chas been sent"

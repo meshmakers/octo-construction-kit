@@ -33,10 +33,10 @@ attributes:
 - id: Comment
   valueType: String
   description: "Optional Comment on the user"
-- id: InvoicePeriodCustomer
+- id: InvoiceCycleCustomer
   valueType: Enum
-  valueCkEnumId: ${thisModel}/InvoicePeriod
-  description: "Invoice Period associated with the customer"
+  valueCkEnumId: ${thisModel}/InvoiceCycle
+  description: "Invoice cycle associated with the customer"
 - id: CustomerState
   valueType: Enum
   valueCkEnumId: ${thisModel}/State

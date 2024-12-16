@@ -32,8 +32,8 @@ types:
   - id: ${thisModel}/Comment
     name: Comment
     isOptional: true
-  - id: ${thisModel}/InvoicePeriodCustomer
-    name: InvoicePeriod
+  - id: ${thisModel}/InvoiceCycleCustomer
+    name: InvoiceCycle
   - id: ${thisModel}/CustomerState
     name: State  
   associations:

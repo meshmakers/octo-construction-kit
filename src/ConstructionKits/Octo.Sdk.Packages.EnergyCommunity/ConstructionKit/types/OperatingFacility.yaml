@@ -8,8 +8,6 @@ types:
       name: Address
     - id: ${thisModel}/FacilityType
       name: FacilityType
-    - id: ${thisModel}/InvoicePeriodFacility
-      name: InvoicePeriod
     - id: ${thisModel}/FacilityState
       name: State
   associations:

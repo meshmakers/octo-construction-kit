@@ -12,7 +12,7 @@ types:
       isOptional: true
     - id: ${thisModel}/Timestamp
       name: Timestamp
-    - id: ${thisModel}/InvoicePeriodMeter
-      name: InvoicePeriod
     - id: ${thisModel}/MeterState
-      name: State  
+      name: State
+    - id: ${thisModel}/DataQuality
+      name: DataQuality 

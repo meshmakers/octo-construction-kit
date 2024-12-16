@@ -5,7 +5,7 @@ enums:
     values:
       - key: 0
         name: New
-        description: "The object is just create and the state not set"
+        description: "The object is just created and the state is not set"
       - key: 1
         name: Active
         description: "The object is active and in use"

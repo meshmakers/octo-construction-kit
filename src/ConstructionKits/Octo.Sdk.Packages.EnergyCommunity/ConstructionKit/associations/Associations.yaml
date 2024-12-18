@@ -3,13 +3,13 @@ associationRoles:
   - id: AssociatedFacilities
     inboundName: RelatesTo
     outboundName: RelatesFrom
-    inboundMultiplicity: ZeroOrOne
-    outboundMultiplicity: N
+    inboundMultiplicity: N
+    outboundMultiplicity: ZeroOrOne
   - id: AssociatedMeters
     inboundName: RelatesTo
     outboundName: RelatesFrom
-    inboundMultiplicity: ZeroOrOne
-    outboundMultiplicity: N
+    inboundMultiplicity: N
+    outboundMultiplicity: ZeroOrOne
   - id: AssociatedUser
     inboundName: RelatesTo
     outboundName: RelatesFrom

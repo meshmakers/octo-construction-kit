@@ -1,0 +1,17 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: State
+    description: "Defines the state of the object"
+    values:
+      - key: 0
+        name: New
+        description: "The object is just created and the state is not set"
+      - key: 1
+        name: Active
+        description: "The object is active and in use"
+      - key: 2
+        name: Inactive
+        description: "The object is inactive but may be reactivated"
+      - key: 3
+        name: Deleted
+        description: "The object was deleted"

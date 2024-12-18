@@ -1,0 +1,8 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Price
+    valueType: Double
+    description: "The price of a given unit of energy"
+  - id: Currency
+    valueType: String
+    description: "The ISO 4217 representation of the used currency"

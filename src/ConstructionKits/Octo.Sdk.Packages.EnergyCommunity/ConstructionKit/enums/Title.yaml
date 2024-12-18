@@ -1,0 +1,15 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: Title
+    description: "The academic title of an individual"
+    isExtensible: true
+    values:
+      - key: 0
+        name: Unknown
+        description: "The title of the individual is none or unknown"
+      - key: 1
+        name: Dr
+        description: "The title of the individual is Doctor"
+      - key: 2
+        name: Prof
+        description: "The title of the individual is Professor"

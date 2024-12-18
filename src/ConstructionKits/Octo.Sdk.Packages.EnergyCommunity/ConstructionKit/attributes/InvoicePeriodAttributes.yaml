@@ -1,0 +1,8 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: StartDate
+    valueType: DateTime
+    description: "Starting time of the invoice period"
+  - id: EndDate
+    valueType: DateTime
+    description: "Ending time of the invoice period"

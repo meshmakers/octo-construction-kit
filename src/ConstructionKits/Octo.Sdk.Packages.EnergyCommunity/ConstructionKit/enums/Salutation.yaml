@@ -1,0 +1,18 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: Salutation
+    description: "Defines the salutation a Customer wishes to be addressed by"
+    isExtensible: true
+    values:
+      - key: 0
+        name: Unknown
+        description: "The salutation is unknown or not defined"
+      - key: 1
+        name: Male
+        description: "The salutation is male"
+      - key: 2
+        name: Female
+        description: "The salutation is female"
+      - key: 3
+        name: NonBinary
+        description: "The salutation is non-binary"

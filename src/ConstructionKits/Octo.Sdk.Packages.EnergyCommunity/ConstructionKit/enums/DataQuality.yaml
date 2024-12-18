@@ -1,0 +1,17 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: DataQuality
+    description: "Defines the quality of the metering data"
+    values:
+      - key: 0
+        name: Unknown
+        description: "The data quality is unknown"
+      - key: 1
+        name: L1
+        description: "The data is accurate to 15 minute meter readings"
+      - key: 2
+        name: L2
+        description: "The data is a linear interpolation of 2 known meter readings"
+      - key: 3
+        name: L3
+        description: "The data is an estimate"

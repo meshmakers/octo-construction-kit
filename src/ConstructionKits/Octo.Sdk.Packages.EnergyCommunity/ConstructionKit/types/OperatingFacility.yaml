@@ -8,6 +8,8 @@ types:
       name: Address
     - id: ${thisModel}/FacilityType
       name: FacilityType
+    - id: ${thisModel}/FacilityState
+      name: State
   associations:
     - id: System/ParentChild
       targetCkTypeId: Basic/TreeNode

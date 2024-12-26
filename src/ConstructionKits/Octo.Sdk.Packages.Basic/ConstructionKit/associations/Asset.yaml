@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 associationRoles:
   - id: RelatedClassification
-    inboundName: RelatesTo
-    outboundName: RelatesFrom
+    inboundName: RelatesFrom
     inboundMultiplicity: N
+    outboundName: RelatesTo
     outboundMultiplicity: N

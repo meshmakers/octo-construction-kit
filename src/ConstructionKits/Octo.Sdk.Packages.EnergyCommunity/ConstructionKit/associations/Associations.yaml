@@ -10,6 +10,11 @@ associationRoles:
     outboundName: RelatesFrom
     inboundMultiplicity: N
     outboundMultiplicity: ZeroOrOne
+  - id: AssociatedCustomers
+    inboundName: RelatesTo
+    outboundName: RelatesFrom
+    inboundMultiplicity: N
+    outboundMultiplicity: ZeroOrOne
   - id: AssociatedUser
     inboundName: RelatesTo
     outboundName: RelatesFrom

@@ -59,13 +59,13 @@ stages:
       - template: handle-artifacts.yml
         parameters:
           constructionKitLibraryPaths:
-            - 'src/Octo.Sdk.Demo/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Demo'          
-            - 'src/Octo.Sdk.Packages.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Basic'          
-            - 'src/Octo.Sdk.Packages.EnergyCommunity/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.EnergyCommunity'          
-            - 'src/Octo.Sdk.Packages.Environment/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Environment'          
-            - 'src/Octo.Sdk.Packages.Industry.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Basic'          
-            - 'src/Octo.Sdk.Packages.Industry.Energy/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Energy'          
-            - 'src/Octo.Sdk.Packages.Industry.Fluid/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Fluid'          
-            - 'src/Octo.Sdk.Packages.Industry.Maintenance/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Maintenance'          
+            - 'src/ConstructionKits/Octo.Sdk.Demo/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Demo'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Basic'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.EnergyCommunity/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.EnergyCommunity'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Environment/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Environment'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Basic'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Energy/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Energy'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Fluid'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Maintenance'          
       - template: push-nuget-package.yml           
 

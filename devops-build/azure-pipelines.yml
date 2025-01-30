@@ -12,20 +12,19 @@ trigger:
       
 variables:
   - group: ApiKeys
+  - group: OctoDefault
   - name: solutionFile
     value: 'Octo.ConstructionKit.sln'
-  - name: isRelease
-    value: ${{ startsWith(variables['Build.SourceBranch'], 'refs/tags/r') }}
+  - name: artifactsFrameworkVersion
+    value: 'net9.0'
   - name: buildConfiguration
     value: 'Release'
   - name: buildPlatform
-    value: 'any cpu'
-  - name: MajorVersion
-    value: '0'
-  - name: MinorVersion
-    value: '1'
-  - name: generateDocumentation
-    value: 'true'
+    value: 'Any CPU'
+  - name: isRelease
+    value: ${{ startsWith(variables['Build.SourceBranch'], 'refs/tags/r') }}
+  - name: isMain
+    value: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/main') }}    
 
 stages:
  - stage: Build
@@ -57,40 +56,16 @@ stages:
             '**/*Tests.csproj'
             !'**/*SystemTests.csproj'
           testRunTitle: 'CI'
-      - task: PublishSymbols@2
-        displayName: Publish symbols path
-        continueOnError: True
-        inputs:
-          SearchPattern: '**\bin\**\*.pdb'
-          PublishSymbols: false
-          SymbolServerType: TeamServices
-      - task: CopyFiles@2
-        displayName: 'Copy Files from $(Build.SourcesDirectory)/bin/$(BuildConfiguration)/**/*.nupkg to $(build.artifactstagingdirectory)'
-        inputs:
-          SourceFolder: $(Build.SourcesDirectory)
-          Contents: |
-            bin/$(BuildConfiguration)/**/*.nupkg
-          TargetFolder: $(build.artifactstagingdirectory)
-      - task: PowerShell@2
-        displayName: 'Create versioninfo file'
-        inputs:
-          targetType: 'inline'
-          script: |
-              New-Item $(build.artifactstagingdirectory)/versioninfo.txt
-              Set-Content $(build.artifactstagingdirectory)/versioninfo.txt $(Build.BuildNumber)
-      - ${{ if eq(variables.generateDocumentation, true) }}:
-          - template: generate-documentation.yml
-            parameters:
-             ConstructionKits:
-              - '**/*Basic.csproj'
-              - '**/*Environment.csproj'
-              - '**/*Fluid.csproj'
-              - '**/*Energy.csproj'
-              - '**/*Maintenance.csproj'
-              - '**/*EnergyCommunity.csproj'
-      - task: PublishBuildArtifacts@1
-        displayName: 'Publish Artifact: local'
-        inputs:
-          ArtifactName: local
+      - template: handle-artifacts.yml
+        parameters:
+          constructionKitLibraryPaths:
+            - 'src/ConstructionKits/Octo.Sdk.Demo/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Demo'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Basic'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.EnergyCommunity/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.EnergyCommunity'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Environment/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Environment'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Basic'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Energy/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Energy'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Fluid'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Maintenance'          
       - template: push-nuget-package.yml           
 

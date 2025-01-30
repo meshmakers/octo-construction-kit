@@ -13,7 +13,7 @@ types:
     - id: ${thisModel}/FacilityState
       name: State
   associations:
-    - id: ${thisModel}/AssociatedCustomers
+    - id: ${thisModel}/AssociatedCustomer
       targetCkTypeId: ${thisModel}/Customer
     - id: ${thisModel}/AssociatedMeters
       targetCkTypeId: ${thisModel}/MeteringPoint

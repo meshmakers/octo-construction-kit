@@ -4,6 +4,8 @@ types:
   derivedFromCkTypeId: System/Entity
   description: "An Operating Facility"
   attributes:
+    - id: ${thisModel}/FacilityName
+      name: FacilityName
     - id: ${thisModel}/Address
       name: Address
     - id: ${thisModel}/FacilityType
@@ -11,7 +13,7 @@ types:
     - id: ${thisModel}/FacilityState
       name: State
   associations:
-    - id: System/ParentChild
-      targetCkTypeId: Basic/TreeNode
+    - id: ${thisModel}/AssociatedCustomer
+      targetCkTypeId: ${thisModel}/Customer
     - id: ${thisModel}/AssociatedMeters
       targetCkTypeId: ${thisModel}/MeteringPoint

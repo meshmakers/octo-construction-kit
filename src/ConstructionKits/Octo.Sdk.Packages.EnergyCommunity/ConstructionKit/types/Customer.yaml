@@ -39,5 +39,3 @@ types:
   associations:
     - id: ${thisModel}/AssociatedFacilities
       targetCkTypeId: ${thisModel}/OperatingFacility
-   #- id: ${thisModel}/AssociatedUser
-   #   targetCkTypeId: System.Identity/User

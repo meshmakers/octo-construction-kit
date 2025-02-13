@@ -35,7 +35,4 @@ types:
   - id: ${thisModel}/InvoiceCycleCustomer
     name: InvoiceCycle
   - id: ${thisModel}/CustomerState
-    name: State  
-  associations:
-    - id: ${thisModel}/AssociatedFacilities
-      targetCkTypeId: ${thisModel}/OperatingFacility
+    name: State

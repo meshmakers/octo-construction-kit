@@ -2,11 +2,11 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 associationRoles:
   - id: AssociatedMeters
     inboundName: OperatingFacility
-    inboundMultiplicity: ZeroOrOne
+    inboundMultiplicity: One
     outboundName: Meters
     outboundMultiplicity: N
   - id: AssociatedCustomer
     inboundName: Facilities
-    inboundMultiplicity: One
+    inboundMultiplicity: N
     outboundName: Customer
-    outboundMultiplicity: ZeroOrOne
+    outboundMultiplicity: One

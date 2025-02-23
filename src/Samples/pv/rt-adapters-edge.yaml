@@ -42,8 +42,6 @@ entities:
         targetCkTypeId: System.Communication/DataPipeline
         attributes: []
     attributes:
-      - id: System.Communication/DeploymentState
-        value: 2
       - id: System/Name
         value: Edge Pipeline
       - id: System/Enabled
@@ -102,8 +100,6 @@ entities:
         targetRtId: 5fc8fc3d8b2fc75f925e21bb
         targetCkTypeId: System.Communication/DataPipeline
     attributes:
-      - id: System.Communication/DeploymentState
-        value: 0
       - id: System/Name
         value: Mesh Pipeline
       - id: System/Enabled

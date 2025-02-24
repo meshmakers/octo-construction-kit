@@ -110,19 +110,8 @@ entities:
             - type: FromPipelineDataEvent@1
               description: Retrieve from distributed event hub message
           transformations:
-            - type: Map@1
-              path: $.data
-              targetPath: "$.result"
-              selectPaths:
-                - "$.timestamp"
-                - "$.productionPower"
-                - "$.additionalProductionPower"
-                - "$.batteryPower"
-                - "$.batteryStateOfCharge"
-                - "$.net"
-                - "$.consumption"
             - type: ForEach@1
-              path: $.result
+              path: $.data
               targetPath: $.x
               transformations:
                 - type: CreateUpdateInfo@1

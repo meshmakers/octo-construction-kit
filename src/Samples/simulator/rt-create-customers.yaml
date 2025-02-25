@@ -1,0 +1,83 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies: []
+entities:
+- rtId: 66e309cd5b53add9b5cd3869
+  ckTypeId: System.Communication/DataPipeline
+  associations: []
+  attributes:
+  - id: System/Name
+    value: Create customers
+  - id: System/Description
+- rtId: 66e309cd5b53add9b5cd386a
+  ckTypeId: System.Communication/MeshPipeline
+  associations:
+  - roleId: System/ParentChild
+    targetRtId: 66e309cd5b53add9b5cd3869
+    targetCkTypeId: System.Communication/DataPipeline
+    attributes: []
+  attributes:
+  - id: System.Communication/DeploymentState
+    value: 2
+  - id: System/Name
+    value: Mesh Pipeline
+  - id: System/Enabled
+    value: true
+  - id: System.Communication/PipelineDefinition
+    value: >-
+      triggers:
+      - type: FromExecutePipelineCommand@1
+      transformations:
+      - type: For@1
+        count: 40
+        targetPath: customers
+        transformations:
+        - type: Simulation@1
+          simulations:
+          - targetPath: $.customer.firstName
+            simulatorKey: Person.FirstName
+          - targetPath: $.customer.lastName
+            simulatorKey: Person.LastName
+          - targetPath: $.customer.street
+            simulatorKey: Address.StreetName
+          - targetPath: $.customer.city
+            simulatorKey: Address.City
+          - targetPath: $.customer.zipCode
+            simulatorKey: Address.ZipCode
+          - targetPath: $.customer.country
+            simulatorKey: Address.Country  
+      - type: ForEach@1
+        path: $.customers
+        targetPath: $.x
+        transformations:
+        - type: CreateUpdateInfo@1
+          targetPath: _updateItem
+          updateKind: INSERT
+          ckTypeId: OctoSdkDemo/Customer
+          attributeUpdates:
+          - attributeName: FirstName
+            attributeValueType: String
+            valuePath: $.customer.firstName
+          - attributeName: LastName
+            attributeValueType: String
+            valuePath: $.customer.lastName
+          - attributeName: Street
+            attributeValueType: String
+            valuePath: $.customer.street
+          - attributeName: City
+            attributeValueType: String
+            valuePath: $.customer.city
+          - attributeName: PostalCode
+            attributeValueType: String
+            valuePath: $.customer.zipCode
+          - attributeName: Country
+            attributeValueType: String
+            valuePath: $.customer.country                  
+      - type: Flatten@1
+        path: $.x[*]._updateItem
+        targetPath: $._updateItems
+      - type: Project@1
+        fields:
+        - path: $.customers
+        - path: $.x
+      - type: ApplyChanges@1
+        path: _updateItems

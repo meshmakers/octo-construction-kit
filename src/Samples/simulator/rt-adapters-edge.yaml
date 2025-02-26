@@ -20,7 +20,7 @@ entities:
       - id: System.Communication/Deployment.ImageVersion
         value: "999.0.0.0"
     associations:
-      - roleId: System/ParentChild
+      - roleId: System.Communication/Manages
         targetRtId: 65d5c447b420da3fb12381bb
         targetCkTypeId: System.Communication/Pool
         

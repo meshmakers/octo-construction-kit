@@ -111,83 +111,84 @@ entities:
               description: Retrieve from distributed event hub message
           transformations:
             - type: ForEach@1
-              path: $.data
+              iterationPath: $.data
               targetPath: $.x
+              documentMode: REPLACE
+              mergePath: $._updateItems
               transformations:
                 - type: CreateUpdateInfo@1
                   description: update main building
-                  targetPath: _updateItems
+                  targetPath: $._updateItems
                   targetValueKind: Array
                   targetValueWriteMode: Append
                   updateKind: UPDATE
                   rtId: 5fc8fda18b2fc75f925e21af
                   ckTypeId: Industry.Energy/Photovoltaic.Module
-                  timestampPath: timestamp
+                  timestampPath: $.key.timestamp
                   attributeUpdates:
                     - attributeName: PeakPower
                       attributeValueType: Double
-                      valuePath: $.productionPower
+                      valuePath: $.key.productionPower
                 - type: CreateUpdateInfo@1
                   description: update outer building
-                  targetPath: _updateItems
+                  targetPath: $._updateItems
                   targetValueKind: Array
                   targetValueWriteMode: Append
                   updateKind: UPDATE
                   rtId: 5fc8fda18b2fc75f925e21c0
                   ckTypeId: Industry.Energy/Photovoltaic.Module
-                  timestampPath: timestamp
+                  timestampPath: $.key.timestamp
                   attributeUpdates:
                     - attributeName: PeakPower
                       attributeValueType: Double
-                      valuePath: $.additionalProductionPower
+                      valuePath: $.key.additionalProductionPower
                 - type: CreateUpdateInfo@1
                   description: update battery
-                  targetPath: _updateItems
+                  targetPath: $._updateItems
                   targetValueKind: Array
                   targetValueWriteMode: Append
                   updateKind: UPDATE
                   rtId: 5fc8fda18b2fc75f925e21ae
                   ckTypeId: Industry.Energy/Battery
-                  timestampPath: timestamp
+                  timestampPath: $.key.timestamp
                   attributeUpdates:
                     - attributeName: Power
                       attributeValueType: Double
-                      valuePath: $.batteryPower
+                      valuePath: $.key.batteryPower
                     - attributeName: SoC
                       attributeValueType: Int
-                      valuePath: $.batteryStateOfCharge
+                      valuePath: $.key.batteryStateOfCharge
                 - type: CreateUpdateInfo@1
                   description: update net
-                  targetPath: _updateItems
+                  targetPath: $._updateItems
                   targetValueKind: Array
                   targetValueWriteMode: Append
                   updateKind: UPDATE
                   rtId: 5fc8fda18b2fc75f925e21c1
                   ckTypeId: Industry.Energy/EnergyMeter
-                  timestampPath: timestamp
+                  timestampPath: $.key.timestamp
                   attributeUpdates:
                     - attributeName: Power
                       attributeValueType: Double
-                      valuePath: $.net
+                      valuePath: $.key.net
                 - type: CreateUpdateInfo@1
                   description: update consumption
-                  targetPath: _updateItems
+                  targetPath: $._updateItems
                   targetValueKind: Array
                   targetValueWriteMode: Append
                   updateKind: UPDATE
                   rtId: 5fc8fda18b2fc75f925e21c2
                   ckTypeId: Industry.Energy/EnergyMeter
-                  timestampPath: timestamp
+                  timestampPath: $.key.timestamp
                   attributeUpdates:
                     - attributeName: Power
                       attributeValueType: Double
-                      valuePath: $.consumption
+                      valuePath: $.key.consumption
             - type: Flatten@1
-              path: $.x[*]._updateItems[*]
+              path: $.x[*].[*]
               targetPath: $._updateItems
             - type: Project@1
               fields:
-                - path: $.data
                 - path: $.x
             - type: SaveInTimeSeries@1
               path: _updateItems

@@ -22,3 +22,4 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${thisModel}/DataQuality
     description: "The quality of the received data"
+    isDataStream: true

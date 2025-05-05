@@ -29,3 +29,5 @@ types:
   associations:
     - id: ${thisModel}/RelatedEvent
       targetCkTypeId: ${thisModel}/OrderFeedback
+    - id: Basic/RelatedClassification
+      targetCkTypeId: Basic/TreeNode

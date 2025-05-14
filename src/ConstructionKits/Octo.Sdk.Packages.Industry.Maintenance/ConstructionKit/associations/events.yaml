@@ -2,9 +2,9 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 associationRoles:
   - id: ReportingEmployee
     inboundName: OrderFeedbacks
-    inboundMultiplicity: One
+    inboundMultiplicity: N
     outboundName: Employee
-    outboundMultiplicity: N
+    outboundMultiplicity: One
   - id: RelatedCostCenter
     inboundName: JournalEntries
     inboundMultiplicity: One

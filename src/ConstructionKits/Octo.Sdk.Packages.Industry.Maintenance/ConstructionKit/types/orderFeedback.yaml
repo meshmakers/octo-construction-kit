@@ -13,3 +13,5 @@ types:
   associations:
     - id: ${thisModel}/ReportingEmployee
       targetCkTypeId: ${thisModel}/Employee
+    - id: System/ParentChild
+      targetCkTypeId: ${thisModel}/Order

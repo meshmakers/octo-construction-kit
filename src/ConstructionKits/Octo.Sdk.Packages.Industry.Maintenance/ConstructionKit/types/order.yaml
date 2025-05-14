@@ -28,6 +28,6 @@ types:
       isOptional: true      
   associations:
     - id: ${thisModel}/RelatedEvent
-      targetCkTypeId: ${thisModel}/OrderFeedback
+      targetCkTypeId: Industry.Basic/Event
     - id: Basic/RelatedClassification
       targetCkTypeId: Basic/TreeNode

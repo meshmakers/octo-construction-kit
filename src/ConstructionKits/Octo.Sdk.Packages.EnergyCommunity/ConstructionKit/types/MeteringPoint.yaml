@@ -7,17 +7,8 @@ types:
   attributes:
     - id: ${thisModel}/MeteringPointNumber
       name: MeteringPointNumber
-    - id: ${thisModel}/MeterReading
-      name: MeterReading
-      isOptional: true
-    - id: ${thisModel}/Timestamp
-      name: Timestamp
-      isOptional: true
-    - id: ${thisModel}/MeterState
+    - id: ${thisModel}/State
       name: State
-    - id: ${thisModel}/DataQuality
-      name: DataQuality 
-      isOptional: true
   associations:
     - id: System/ParentChild
       targetCkTypeId: ${thisModel}/OperatingFacility

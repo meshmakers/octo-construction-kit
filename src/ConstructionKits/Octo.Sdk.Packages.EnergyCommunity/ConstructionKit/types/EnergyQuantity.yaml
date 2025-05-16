@@ -1,0 +1,16 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: EnergyQuantity
+  derivedFromCkTypeId: System/Entity
+  isAbstract: false
+  description: "Describes a quantity of energy, such as consumption or production."
+  attributes:
+    - id: Basic/TimeRange
+      name: TimeRange
+    - id: Basic/Quantity
+      name: Quantity
+    - id: ${thisModel}/DataQuality
+      name: DataQuality 
+  associations:
+    - id: System/ParentChild
+      targetCkTypeId: ${thisModel}/MeteringPoint

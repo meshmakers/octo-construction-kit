@@ -1,0 +1,17 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: BillingDocument
+    derivedFromCkTypeId: Basic/Document
+    description: "A billing document entity that contains accounting information."
+    attributes:
+      - id: Basic/TimeRange
+        name: TimeRange
+      - id: ${thisModel}/BillingDocumentType
+        name: BillingDocumentType
+      - id: ${thisModel}/BillingDocumentState
+        name: BillingDocumentState
+      - id: ${thisModel}/GrossTotal
+        name: GrossTotal
+    associations:
+      - id: System/ParentChild
+        targetCkTypeId: ${thisModel}/Customer

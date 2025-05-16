@@ -1,0 +1,17 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: BillingCycle
+    description: "Defines the billing cycle"
+    values:
+      - key: 0
+        name: Monthly
+        description: "The billing cycle is one month"
+      - key: 1
+        name: Quarterly
+        description: "The billing cycle is one quarter"
+      - key: 2
+        name: SemiAnnually
+        description: "The billing cycle is six months"
+      - key: 3
+        name: Annually
+        description: "The billing cycle is one year"

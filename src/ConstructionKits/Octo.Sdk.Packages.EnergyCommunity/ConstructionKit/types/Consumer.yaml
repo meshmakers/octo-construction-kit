@@ -2,7 +2,8 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: Consumer
     derivedFromCkTypeId: ${thisModel}/MeteringPoint
-    description: "A metering point identified as Consumer"
+    description: "A metering point identified as consumer metering point"
     attributes:
       - id: ${thisModel}/EnergyConsumption
         name: EnergyConsumption
+        isOptional: true

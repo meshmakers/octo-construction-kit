@@ -87,3 +87,7 @@ attributes:
       - key: semanticId
         value: "0173-1#02-AAQ836#005"
         description: "E-mail address and encryption method"
+  - id: Address
+    valueType: Record
+    valueCkRecordId: Basic/Address
+    description: "Record containing address information"

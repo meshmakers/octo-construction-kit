@@ -16,3 +16,9 @@ attributes:
     valueType: Record
     description: "Bank account information"
     valueCkRecordId: ${thisModel}/BankAccount
+  - id: TaxIdentificationNumber
+    valueType: String
+    description: "Tax identification number of a entity"
+  - id: CompanyRegisterNumber
+    valueType: String
+    description: "Public registry number for the legal identification of the company"

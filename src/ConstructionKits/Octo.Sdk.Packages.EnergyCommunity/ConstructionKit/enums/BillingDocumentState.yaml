@@ -1,0 +1,17 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: BillingDocumentState
+    description: "Defines the billing state"
+    values:
+      - key: 0
+        name: Draft
+        description: "The billing document is a draft"
+      - key: 1
+        name: Completed
+        description: "The billing document is completed"
+      - key: 2
+        name: Sent
+        description: "The billing document has been sent"
+      - key: 3
+        name: Paid
+        description: "The billing document has been paid"

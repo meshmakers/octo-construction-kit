@@ -2,9 +2,10 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: Producer
     derivedFromCkTypeId: ${thisModel}/MeteringPoint
-    description: "A metering point identified as Producer"
+    description: "A metering point identified as producer metering point"
     attributes:
       - id: ${thisModel}/EnergyProductionCapacity
         name: EnergyProductionCapacity
+        isOptional: true
       - id: ${thisModel}/ProductionType
         name: ProductionType

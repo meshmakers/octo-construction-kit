@@ -1,0 +1,21 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: BillingDocumentLineItem
+    derivedFromCkTypeId: System/Entity
+    description: "An billing document line item"
+    attributes:
+      - id: ${thisModel}/GrossAmount
+        name: GrossAmount
+      - id: ${thisModel}/NetAmount
+        name: NetAmount
+      - id: ${thisModel}/TaxAmount
+        name: TaxAmount
+      - id: ${thisModel}/TaxRate
+        name: TaxRate
+      - id: ${thisModel}/UnitPrice
+        name: UnitPrice
+    associations:
+      - id: System/ParentChild
+        targetCkTypeId: ${thisModel}/BillingDocument
+      - id: ${thisModel}/AssociatedEnergyQuantity
+        targetCkTypeId: ${thisModel}/EnergyQuantity

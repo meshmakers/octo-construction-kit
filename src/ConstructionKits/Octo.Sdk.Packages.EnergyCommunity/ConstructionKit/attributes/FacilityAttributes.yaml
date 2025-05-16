@@ -6,8 +6,3 @@ attributes:
   - id: FacilityType
     valueType: Enum
     valueCkEnumId: ${thisModel}/FacilityType
-  - id: FacilityState
-    valueType: Enum
-    valueCkEnumId: ${thisModel}/State
-    description: "The state of the facility object"
-    

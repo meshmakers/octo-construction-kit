@@ -28,9 +28,10 @@ attributes:
         value: "°C"
       - key: Type
         value: Average
-        
   - id: File
     valueType: BinaryLinked
-    
   - id: Time
     valueType: DateTime
+  - id: Comment
+    valueType: String
+    description: "Optional Comment on the user"

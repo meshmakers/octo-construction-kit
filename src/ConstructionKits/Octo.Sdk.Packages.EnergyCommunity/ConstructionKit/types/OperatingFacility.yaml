@@ -4,11 +4,11 @@ types:
   derivedFromCkTypeId: Basic/TreeNode
   description: "An Operating Facility"
   attributes:
-    - id: ${thisModel}/Address
+    - id: Basic/Address
       name: Address
     - id: ${thisModel}/FacilityType
       name: FacilityType
-    - id: ${thisModel}/FacilityState
+    - id: ${thisModel}/State
       name: State
   associations:
     - id: ${thisModel}/AssociatedCustomer

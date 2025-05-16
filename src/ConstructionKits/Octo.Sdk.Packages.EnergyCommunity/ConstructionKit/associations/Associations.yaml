@@ -1,11 +1,13 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 associationRoles:
-  - id: AssociatedMeters
-    inboundName: OperatingFacility
+  - id: AssociatedEnergyQuantity
+    description: "The energy quantity associated with the billing document line item."
+    inboundName: EnergyQuantity
     inboundMultiplicity: One
-    outboundName: Meters
-    outboundMultiplicity: N
+    outboundName: BillingDocumentLineItems
+    outboundMultiplicity: ZeroOrOne
   - id: AssociatedCustomer
+    description: "The customer associated with the operating facilities."
     inboundName: Facilities
     inboundMultiplicity: N
     outboundName: Customer

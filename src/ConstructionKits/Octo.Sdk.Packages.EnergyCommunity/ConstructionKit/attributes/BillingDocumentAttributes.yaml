@@ -1,0 +1,28 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: BillingDocumentState
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/BillingDocumentState
+    description: "The state of the billing document"
+  - id: BillingDocumentType
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/BillingDocumentType
+    description: "The type of the billing document"
+  - id: GrossAmount
+    valueType: Double
+    description: "The gross amount of the billing document"
+  - id: NetAmount
+    valueType: Double
+    description: "The net amount of the billing document"
+  - id: TaxAmount
+    valueType: Double
+    description: "The tax amount of the billing document"
+  - id: TaxRate
+    valueType: Double
+    description: "The tax rate of the billing document"
+  - id: UnitPrice
+    valueType: Double
+    description: "The unit price of the billing document"
+  - id: GrossTotal
+    valueType: Double
+    description: "The gross total of the billing document"

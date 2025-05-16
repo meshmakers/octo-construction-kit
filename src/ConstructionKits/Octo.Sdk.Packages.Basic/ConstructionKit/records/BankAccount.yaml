@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: BankAccount
+  description: "A bank account with its details"
+  attributes:
+    - id: ${thisModel}/Iban
+      name: Iban
+    - id: ${thisModel}/SwiftCode
+      name: SwiftCode
+      isOptional: true
+    - id: ${thisModel}/BankName
+      name: BankName
+      isOptional: true
+    - id: ${thisModel}/AccountHolder
+      name: AccountHolder

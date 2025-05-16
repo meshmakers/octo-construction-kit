@@ -1,0 +1,18 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Iban
+    valueType: String
+    description: "International Bank Account Number"
+  - id: SwiftCode
+    valueType: String
+    description: "Bank Identifier Code"
+  - id: BankName
+    valueType: String
+    description: "Name of the bank"
+  - id: AccountHolder
+    valueType: String
+    description: "Name of the account holder"
+  - id: BankAccount
+    valueType: Record
+    description: "Bank account information"
+    valueCkRecordId: ${thisModel}/BankAccount

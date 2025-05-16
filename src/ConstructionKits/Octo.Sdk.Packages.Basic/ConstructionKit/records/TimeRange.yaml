@@ -1,0 +1,9 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: TimeRange
+  description: "A time range with a start and end date"
+  attributes:
+    - id: ${thisModel}/From
+      name: From
+    - id: ${thisModel}/To
+      name: To

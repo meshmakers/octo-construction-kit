@@ -2,6 +2,27 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Customer
   derivedFromCkTypeId: System/Entity
+  indexes:
+  - indexType: "Ascending"
+    fields:
+      - attributeNames:
+        - FirstName
+        - LastName
+        - CompanyName
+        - Street
+        - City
+        - EMailAddress
+  - indexType: "Text"
+    language: "english"
+    fields:
+      - weight: 1
+        attributeNames:
+          - FirstName
+          - LastName
+          - CompanyName
+          - Street
+          - City
+          - EMailAddress
   attributes:
   - id: ${thisModel}/FirstName
     name: FirstName

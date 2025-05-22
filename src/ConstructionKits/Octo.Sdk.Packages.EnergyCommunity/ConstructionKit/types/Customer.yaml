@@ -9,8 +9,10 @@ types:
     isOptional: true
   - id: ${thisModel}/FirstName
     name: FirstName
+    isOptional: true
   - id: ${thisModel}/LastName
     name: LastName
+    isOptional: true
   - id: ${thisModel}/Title
     name: Title
     isOptional: true

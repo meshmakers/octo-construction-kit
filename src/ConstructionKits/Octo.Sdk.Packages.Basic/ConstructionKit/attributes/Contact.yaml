@@ -1,0 +1,25 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Salutation
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/Salutation
+    description: "Salutation associated with the contact"
+  - id: FirstName
+    valueType: String
+    description: "The users first name(s)"
+  - id: LastName
+    valueType: String
+    description: "The users last name(s)"
+  - id: AcademicTitleSuffix
+    valueType: String
+    description: "Academic title suffix associated with the contact"
+  - id: AcademicTitlePrefix
+    valueType: String
+    description: "Academic title prefix associated with the contact"
+  - id: CompanyName
+    valueType: String
+    description: "Associated company name"
+  - id: Contact
+    valueType: Record
+    description: "Contact data with name and address"
+    valueCkRecordId: ${thisModel}/Contact

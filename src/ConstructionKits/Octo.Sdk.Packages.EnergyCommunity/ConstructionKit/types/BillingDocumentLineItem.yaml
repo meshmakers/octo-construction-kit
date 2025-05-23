@@ -17,5 +17,5 @@ types:
     associations:
       - id: System/ParentChild
         targetCkTypeId: ${thisModel}/BillingDocument
-      - id: ${thisModel}/AssociatedEnergyQuantity
+      - id: ${thisModel}/AssignedBilling
         targetCkTypeId: ${thisModel}/EnergyQuantity

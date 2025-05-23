@@ -6,12 +6,18 @@ types:
     attributes:
       - id: Basic/TimeRange
         name: TimeRange
+      - id: Basic/Comment
+        name: Comment
+        isOptional: true
       - id: ${thisModel}/BillingDocumentType
         name: BillingDocumentType
       - id: ${thisModel}/BillingDocumentState
         name: BillingDocumentState
       - id: ${thisModel}/GrossTotal
         name: GrossTotal
+      - id: Basic/BankAccount
+        name: BankAccount
+        isOptional: true
     associations:
-      - id: System/ParentChild
+      - id: ${thisModel}/AssignedBilling
         targetCkTypeId: ${thisModel}/Customer

@@ -4,10 +4,10 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${thisModel}/BillingDocumentState
     description: "The state of the billing document"
-  - id: BillingDocumentType
+  - id: BillingType
     valueType: Enum
-    valueCkEnumId: ${thisModel}/BillingDocumentType
-    description: "The type of the billing document"
+    valueCkEnumId: ${thisModel}/BillingType
+    description: "The type of the billing document or billing item"
   - id: GrossAmount
     valueType: Double
     description: "The gross amount of the billing document"

@@ -14,6 +14,8 @@ types:
         name: TaxRate
       - id: ${thisModel}/UnitPrice
         name: UnitPrice
+      - id: ${thisModel}/BillingType
+        name: BillingType
     associations:
       - id: System/ParentChild
         targetCkTypeId: ${thisModel}/BillingDocument

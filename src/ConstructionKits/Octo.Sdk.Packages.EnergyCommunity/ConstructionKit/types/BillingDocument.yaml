@@ -11,8 +11,8 @@ types:
       - id: Basic/Comment
         name: Comment
         isOptional: true
-      - id: ${thisModel}/BillingDocumentType
-        name: BillingDocumentType
+      - id: ${thisModel}/BillingType
+        name: BillingType
       - id: ${thisModel}/BillingDocumentState
         name: BillingDocumentState
       - id: ${thisModel}/GrossTotal

@@ -1,0 +1,11 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: BillingType
+    description: "The type a billing document or item"
+    values:
+      - key: 0
+        name: Debit
+        description: "The document is an invoice or the item is a debit note"
+      - key: 1
+        name: Credit
+        description: "The document or item is an credit note or credit"

@@ -4,6 +4,8 @@ types:
     derivedFromCkTypeId: Basic/Document
     description: "A billing document entity that contains accounting information."
     attributes:
+      - id: ${thisModel}/CustomerNumber
+        name: CustomerNumber
       - id: Basic/Contact
         name: Contact
       - id: Basic/TimeRange

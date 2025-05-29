@@ -349,7 +349,7 @@ internal static class GraphQl
                           comparisonValue: $toDateTime
                         }
                       ]
-                      groupBy: { attributeNames: [$groupBy] }
+                      groupBy: { attributePaths: [$groupBy] }
                     ) {
       					      totalCount
                       groupings {
@@ -391,7 +391,7 @@ internal static class GraphQl
                     comparisonValue: $toDateTime
                   }
                 ]
-                groupBy: { attributeNames: [$groupBy] }
+                groupBy: { attributePaths: [$groupBy] }
               ) {
                 totalCount
 

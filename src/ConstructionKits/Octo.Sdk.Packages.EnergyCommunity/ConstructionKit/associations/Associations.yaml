@@ -12,9 +12,3 @@ associationRoles:
     inboundMultiplicity: N
     outboundName: Customer
     outboundMultiplicity: One
-
-  - id: ParentChild
-    inboundName: Children
-    inboundMultiplicity: N
-    outboundName: Parent
-    outboundMultiplicity: One

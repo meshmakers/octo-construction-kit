@@ -7,8 +7,8 @@ enums:
         name: Draft
         description: "The billing document is a draft"
       - key: 1
-        name: Completed
-        description: "The billing document is completed"
+        name: Released
+        description: "The billing document is released"
       - key: 2
         name: Sent
         description: "The billing document has been sent"

@@ -18,3 +18,5 @@ types:
   - id: Basic/BankAccount
     name: BankAccount
     isOptional: true
+  - id: ${thisModel}/TaxProcedureCreditNote
+    name: TaxProcedureCreditNote

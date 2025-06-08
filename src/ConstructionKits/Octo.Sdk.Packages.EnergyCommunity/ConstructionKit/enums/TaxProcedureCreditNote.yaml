@@ -1,0 +1,14 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: TaxProcedureCreditNote
+    description: "Defines the tax procedure credit notes for a billing document or customer"
+    values:
+      - key: 0
+        name: SmallBusinessOwners
+        description: "No tax procedure is applied for small business owners"
+      - key: 1
+        name: ReverseCharge
+        description: "The reverse charge procedure is applied"
+      - key: 2
+        name: StandardTaxProcedure
+        description: "The standard tax procedure is applied"

@@ -26,3 +26,7 @@ attributes:
   - id: GrossTotal
     valueType: Double
     description: "The gross total of the billing document"
+  - id: TaxProcedureCreditNote
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/TaxProcedureCreditNote
+    description: "The tax procedure credit notes associated with the billing document"

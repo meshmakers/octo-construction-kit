@@ -13,6 +13,8 @@ types:
       - id: Basic/Comment
         name: Comment
         isOptional: true
+      - id: ${thisModel}/TaxProcedureCreditNote
+        name: TaxProcedureCreditNote
       - id: ${thisModel}/BillingType
         name: BillingType
       - id: ${thisModel}/BillingDocumentState

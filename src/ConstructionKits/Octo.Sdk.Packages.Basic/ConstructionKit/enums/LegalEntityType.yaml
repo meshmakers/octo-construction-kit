@@ -1,0 +1,17 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: LegalEntityType
+    description: The legal entity type of a contact
+    values:
+      - key: 0
+        name: NaturalPerson
+        description: A natural person is a human being with legal capacity, in contrast to a legal person (such as a company, organization, or government entity).
+      - key: 1
+        name: LegalPerson
+        description: Legal structure with the characteristics of a person
+      - key: 2
+        name: Company
+        description: Actor in economic life, such as any natural or legal person with UGB relevance.
+      - key: 3
+        name: LocalAuthority
+        description: Administrative unit with sovereign power such as municipality, federal state, republic.

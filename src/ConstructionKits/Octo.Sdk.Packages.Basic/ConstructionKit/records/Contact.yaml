@@ -2,6 +2,8 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: Contact
   attributes:
+    - id: ${thisModel}/LegalEntityType
+      name: LegalEntityType
     - id: ${thisModel}/Salutation
       name: Salutation
       isOptional: true

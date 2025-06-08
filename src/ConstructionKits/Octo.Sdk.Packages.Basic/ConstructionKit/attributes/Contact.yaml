@@ -4,6 +4,12 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${thisModel}/Salutation
     description: "Salutation associated with the contact"
+  - id: LegalEntityType
+    valueType: Enum
+    valueCkEnumId: ${thisModel}/LegalEntityType
+    description: "The legal entity type of the contact"
+    defaultValues:
+      - 0 # Default to 'NaturalPerson'
   - id: FirstName
     valueType: String
     description: "The users first name(s)"

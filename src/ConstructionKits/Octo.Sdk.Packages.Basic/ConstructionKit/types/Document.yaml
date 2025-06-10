@@ -7,5 +7,6 @@ types:
   attributes:
   - id: ${thisModel}/DocumentNumber
     name: DocumentNumber
+    autoIncrementReference: "BillingDocumentDocumentNumber"
   - id: ${thisModel}/DocumentDate
     name: DocumentDate

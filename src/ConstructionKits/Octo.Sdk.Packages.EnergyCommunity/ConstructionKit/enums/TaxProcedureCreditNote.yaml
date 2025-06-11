@@ -10,5 +10,8 @@ enums:
         name: ReverseCharge
         description: "The reverse charge procedure is applied"
       - key: 2
-        name: StandardTaxProcedure
-        description: "The standard tax procedure is applied"
+        name: NoTaxProcedure
+        description: "No tax procedure is applied"
+      - key: 3
+        name: FarmerTaxProcedure
+        description: "The farmer tax procedure is applied, which is a reduced tax amount for farmers"

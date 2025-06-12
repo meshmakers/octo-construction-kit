@@ -2,4 +2,4 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
 modelId: EnergyCommunity
 dependencies:
   - Basic
-  - System.Reporting
+  #- System.Identity

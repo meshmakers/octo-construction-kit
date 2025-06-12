@@ -27,5 +27,3 @@ types:
     associations:
       - id: ${thisModel}/AssignedBilling
         targetCkTypeId: ${thisModel}/Customer
-      - id: System/Related
-        targetCkTypeId: System.Reporting/FileSystemItem

@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: EdaMessage
     derivedFromCkTypeId: System/Entity
+    description: "Store messages sent and received in the Energy Data Access (EDA) system."
     attributes:
       - id: ${thisModel}/EdaMessageType
         name: MessageType
@@ -18,7 +19,7 @@ types:
       - id: ${thisModel}/EdaConversationId
         name: ConversationId
         isOptional: true
-      - id: ${thisModel}/MeteringPointNumber 
+      - id: ${thisModel}/MeteringPointNumber
         name: MeteringPoint
         isOptional: true
       - id: ${thisModel}/EdaRawMessage

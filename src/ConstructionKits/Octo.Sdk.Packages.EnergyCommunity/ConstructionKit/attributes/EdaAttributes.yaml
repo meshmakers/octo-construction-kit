@@ -22,8 +22,5 @@ attributes:
   valueType: String
 - id: EdaMessageProcessed
   valueType: Boolean
-- id: EdaResponseCode
-  valueType: Int
-- id: EdaUnitOfMeasurement
-  valueType: String
+
   

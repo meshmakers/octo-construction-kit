@@ -12,3 +12,9 @@ associationRoles:
     inboundMultiplicity: N
     outboundName: Customer
     outboundMultiplicity: One
+  - id: MessageToProcess
+    description: "Association between a message and the process it is part of."
+    inboundName: Messages
+    inboundMultiplicity: N
+    outboundName: Process
+    outboundMultiplicity: ZeroOrOne

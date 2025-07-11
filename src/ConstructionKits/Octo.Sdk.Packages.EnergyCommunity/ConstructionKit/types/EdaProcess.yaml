@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: EdaProcess
     derivedFromCkTypeId: System/Entity
+    description: "Store started processes in the Energy Data Access (EDA) system."
     attributes:
       - id: ${thisModel}/EdaProcessName
         name: Name

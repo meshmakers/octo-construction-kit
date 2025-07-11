@@ -18,4 +18,9 @@ attributes:
   valueType: String
 - id: EdaRawMessage
   valueType: String
+- id: EdaMessageType
+  valueType: String
+- id: EdaMessageProcessed
+  valueType: Boolean
+
   

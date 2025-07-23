@@ -1,14 +1,8 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
-- id: EdaProcessName
-  valueType: String
 - id: EdaMessageId
   valueType: String
 - id: EdaConversationId
-  valueType: String
-- id: EdaConsentId
-  valueType: String
-- id: EdaRequestId
   valueType: String
 - id: EdaProcessFinished
   valueType: Boolean
@@ -22,5 +16,7 @@ attributes:
   valueType: String
 - id: EdaMessageProcessed
   valueType: Boolean
-
-  
+- id: EdaProcessSuccess
+  valueType: Boolean
+- id: EdaProcessInfo
+  valueType: String

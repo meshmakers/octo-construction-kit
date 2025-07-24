@@ -20,3 +20,5 @@ attributes:
   valueType: Boolean
 - id: EdaProcessInfo
   valueType: String
+- id: EdaResponseCode
+  valueType: Int

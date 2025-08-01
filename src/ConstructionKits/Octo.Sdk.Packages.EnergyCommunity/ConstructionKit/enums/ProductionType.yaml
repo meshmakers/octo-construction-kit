@@ -21,3 +21,6 @@ enums:
       - key: 5
         name: CHP
         description: "Combined heat and power was used to produce the energy"
+      - key: 6
+        name: Other
+        description: "Other methods were used to produce the energy"

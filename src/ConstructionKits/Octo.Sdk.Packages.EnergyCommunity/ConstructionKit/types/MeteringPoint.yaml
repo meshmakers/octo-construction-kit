@@ -9,6 +9,9 @@ types:
       name: MeteringPointNumber
     - id: ${thisModel}/State
       name: State
+    - id: ${thisModel}/PartitionFactor
+      name: PartitionFactor
+      isOptional: true
   associations:
     - id: System/ParentChild
       targetCkTypeId: ${thisModel}/OperatingFacility

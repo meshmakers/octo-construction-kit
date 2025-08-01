@@ -3,3 +3,6 @@ attributes:
   - id: MeteringPointNumber
     valueType: String
     description: "Number identifying the metering point"
+  - id: PartitionFactor
+    valueType: Int
+    description: "Partition factor for the metering point to a specific energy community"

@@ -1,0 +1,37 @@
+description: Aggregated power measurement for entire house (mains)
+derivedFrom: System/Entity
+isCollectionRoot: true
+attributes:
+- attributeName: Timestamp
+  valueType: DateTime
+  isOptional: false
+  description: Unix timestamp of the measurement
+- attributeName: ActivePower
+  isOptional: false
+  description: Total active power consumption in Watts
+- attributeName: ApparentPower
+  isOptional: true
+  description: Total apparent power in VA (for houses 1,2,5)
+- attributeName: Voltage
+  valueType: Double
+  isOptional: true
+  description: RMS voltage measurement (for houses 1,2,5 at 16kHz)
+- attributeName: Current
+  valueType: Double
+  isOptional: true
+  description: RMS current measurement (for houses 1,2,5 at 16kHz)
+- attributeName: DataQuality
+  valueType: Enum
+  valueCkEnumId: DataQuality
+  isOptional: false
+  defaultValues: [1]
+  description: Quality indicator for this measurement
+- attributeName: SamplingFrequency
+  isOptional: false
+  description: Measurement frequency in Hz (1 or 6 seconds)
+associations:
+- associationRoleId: HouseMainsReadings
+  targetCkTypeId: UkDaleHouse
+  direction: Outbound
+  cardinality: One
+  description: The house this mains reading belongs to

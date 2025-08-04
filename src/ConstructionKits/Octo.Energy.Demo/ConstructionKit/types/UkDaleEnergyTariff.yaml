@@ -1,0 +1,43 @@
+description: Energy tariff information for UK households
+derivedFrom: Basic/NamedEntity
+isCollectionRoot: true
+attributes:
+- attributeName: TariffCode
+  isOptional: false
+  description: Unique tariff identifier
+- attributeName: RateType
+  valueType: Enum
+  valueCkEnumId: TariffType
+  isOptional: false
+  defaultValues: [1]
+  description: Type of tariff structure
+- attributeName: BaseRate
+  valueType: Double
+  isOptional: false
+  description: Base electricity rate in pence per kWh
+- attributeName: HighRate
+  valueType: Double
+  isOptional: true
+  description: Peak rate for time-of-use tariffs in pence per kWh
+- attributeName: LowRate
+  valueType: Double
+  isOptional: true
+  description: Off-peak rate for time-of-use tariffs in pence per kWh
+- attributeName: StandingCharge
+  valueType: Double
+  isOptional: true
+  description: Daily standing charge in pence
+- attributeName: ValidFrom
+  valueType: DateTime
+  isOptional: false
+  description: When this tariff becomes effective
+- attributeName: ValidTo
+  valueType: DateTime
+  isOptional: true
+  description: When this tariff expires
+associations:
+- associationRoleId: HouseTariff
+  targetCkTypeId: UkDaleHouse
+  direction: Inbound
+  cardinality: N
+  description: Houses using this tariff

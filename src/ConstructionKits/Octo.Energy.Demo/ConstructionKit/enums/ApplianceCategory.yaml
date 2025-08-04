@@ -1,0 +1,23 @@
+description: Appliance categories based on UK-DALE dataset
+values:
+- name: LightingAndOther
+  value: 1
+  description: Lighting, electronics and miscellaneous devices
+- name: KitchenMajor
+  value: 2
+  description: Major kitchen appliances (fridge, dishwasher, kettle, microwave)
+- name: LaundryAndCleaning
+  value: 3
+  description: Washing machine, tumble dryer, vacuum cleaner
+- name: HeatingAndCooling
+  value: 4
+  description: Heating systems, fans, air conditioning
+- name: Entertainment
+  value: 5
+  description: TV, audio systems, computer equipment
+- name: WaterHeating
+  value: 6
+  description: Electric water heater, immersion heater
+- name: CookingAppliances
+  value: 7
+  description: Electric hob, oven, toaster

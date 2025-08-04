@@ -1,0 +1,20 @@
+description: Occupancy patterns affecting energy consumption
+values:
+- name: FullTimeWorker
+  value: 1
+  description: Works full-time outside the home
+- name: PartTimeWorker
+  value: 2
+  description: Works part-time
+- name: HomeWorker
+  value: 3
+  description: Works from home
+- name: Retired
+  value: 4
+  description: Retired, typically home most of the day
+- name: Student
+  value: 5
+  description: Student with irregular schedule
+- name: Unemployed
+  value: 6
+  description: Unemployed, home most of the day

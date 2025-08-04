@@ -1,0 +1,14 @@
+description: Severity levels for anomaly classification
+values:
+- name: Low
+  value: 1
+  description: Minor deviation, informational only
+- name: Medium
+  value: 2
+  description: Moderate deviation, may need attention
+- name: High
+  value: 3
+  description: Significant deviation, should be investigated
+- name: Critical
+  value: 4
+  description: Critical anomaly, immediate action required

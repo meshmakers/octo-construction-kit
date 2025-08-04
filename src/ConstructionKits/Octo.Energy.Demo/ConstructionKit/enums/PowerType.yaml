@@ -1,0 +1,11 @@
+description: Power measurement type indicating active, reactive, or apparent power
+values:
+- name: Active
+  value: 1
+  description: Real power consumed by the appliance (kW)
+- name: Reactive  
+  value: 2
+  description: Reactive power component (kVAr)
+- name: Apparent
+  value: 3
+  description: Total power including reactive component (kVA)

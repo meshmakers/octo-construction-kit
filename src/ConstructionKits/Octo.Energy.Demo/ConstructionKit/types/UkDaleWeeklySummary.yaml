@@ -1,0 +1,42 @@
+description: Weekly consumption summary with cost calculations
+derivedFrom: System/Entity
+isCollectionRoot: true
+attributes:
+- attributeName: WeekStartDate
+  valueType: DateTime
+  isOptional: false
+  description: Start date of the week (Monday)
+- attributeName: TotalConsumptionKwh
+  valueType: Double
+  isOptional: false
+  description: Total energy consumption for the week in kWh
+- attributeName: EstimatedCostPence
+  valueType: Double
+  isOptional: true
+  description: Estimated electricity cost in pence
+- attributeName: PeakConsumptionKwh
+  valueType: Double
+  isOptional: true
+  description: Consumption during peak hours
+- attributeName: OffPeakConsumptionKwh
+  valueType: Double
+  isOptional: true
+  description: Consumption during off-peak hours
+- attributeName: MaxDailyKwh
+  valueType: Double
+  isOptional: true
+  description: Highest daily consumption in the week
+- attributeName: MinDailyKwh
+  valueType: Double
+  isOptional: true
+  description: Lowest daily consumption in the week
+- attributeName: AverageDailyKwh
+  valueType: Double
+  isOptional: true
+  description: Average daily consumption for the week
+associations:
+- associationRoleId: WeeklySummarySource
+  targetCkTypeId: UkDaleHouse
+  direction: Outbound
+  cardinality: One
+  description: The house this weekly summary belongs to

@@ -1,0 +1,20 @@
+description: Types of energy consumption anomalies
+values:
+- name: UnexpectedHigh
+  value: 1
+  description: Consumption significantly higher than expected
+- name: UnexpectedLow
+  value: 2
+  description: Consumption significantly lower than expected
+- name: ApplianceAlwaysOn
+  value: 3
+  description: Appliance appears to be always on
+- name: IrregularPattern
+  value: 4
+  description: Unusual consumption pattern detected
+- name: PowerSpike
+  value: 5
+  description: Sudden power spike detected
+- name: ApplianceOffline
+  value: 6
+  description: Appliance appears to be offline/faulty

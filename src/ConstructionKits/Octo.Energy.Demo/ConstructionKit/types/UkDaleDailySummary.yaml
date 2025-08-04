@@ -1,0 +1,39 @@
+description: Daily energy consumption summary for analysis and reporting
+derivedFrom: System/Entity
+isCollectionRoot: true
+attributes:
+- attributeName: Date
+  valueType: DateTime
+  isOptional: false
+  description: Date for the daily summary
+- attributeName: TotalEnergyKwh
+  isOptional: false
+  description: Total energy consumed during the day in kWh
+- attributeName: PeakPowerWatts
+  isOptional: false
+  description: Peak power consumption during the day
+- attributeName: AveragePowerWatts
+  isOptional: false
+  description: Average power consumption during the day
+- attributeName: MinPowerWatts
+  isOptional: false
+  description: Minimum power consumption during the day
+- attributeName: DataCompletenessPercent
+  valueType: Double
+  isOptional: false
+  description: Percentage of expected measurements actually recorded
+- attributeName: NumberOfReadings
+  valueType: Int
+  isOptional: false
+  description: Total number of power readings for the day
+associations:
+- associationRoleId: DailySummarySource
+  targetCkTypeId: UkDaleHouse
+  direction: Outbound
+  cardinality: ZeroOrOne
+  description: The house this daily summary belongs to (if house-level summary)
+- associationRoleId: DailySummarySource
+  targetCkTypeId: UkDaleAppliance
+  direction: Outbound
+  cardinality: ZeroOrOne
+  description: The appliance this daily summary belongs to (if appliance-level summary)

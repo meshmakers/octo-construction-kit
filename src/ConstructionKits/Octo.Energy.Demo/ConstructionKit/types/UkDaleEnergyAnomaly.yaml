@@ -1,0 +1,49 @@
+description: Energy consumption anomaly detection and alerts
+derivedFrom: System/Entity
+isCollectionRoot: true
+attributes:
+- attributeName: DetectionTime
+  valueType: DateTime
+  isOptional: false
+  description: When the anomaly was detected
+- attributeName: AnomalyType
+  valueType: Enum
+  valueCkEnumId: AnomalyType
+  isOptional: false
+  description: Type of anomaly detected
+- attributeName: SeverityLevel
+  valueType: Enum
+  valueCkEnumId: SeverityLevel
+  isOptional: false
+  defaultValues: [2]
+  description: Severity of the anomaly
+- attributeName: ExpectedValue
+  valueType: Double
+  isOptional: true
+  description: Expected power consumption in Watts
+- attributeName: ActualValue
+  valueType: Double
+  isOptional: false
+  description: Actual measured value in Watts
+- attributeName: DeviationPercent
+  valueType: Double
+  isOptional: true
+  description: Percentage deviation from expected
+- attributeName: IsResolved
+  valueType: Boolean
+  isOptional: false
+  defaultValues: [false]
+  description: Whether the anomaly has been resolved
+- attributeName: ResolvedTime
+  valueType: DateTime
+  isOptional: true
+  description: When the anomaly was resolved
+- attributeName: Description
+  isOptional: true
+  description: Human-readable description of the anomaly
+associations:
+- associationRoleId: AnomalySource
+  targetCkTypeId: UkDaleAppliance
+  direction: Outbound
+  cardinality: One
+  description: The appliance where the anomaly was detected

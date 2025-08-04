@@ -1,0 +1,14 @@
+description: Electricity tariff structure types
+values:
+- name: FlatRate
+  value: 1
+  description: Single rate for all times
+- name: Economy7
+  value: 2
+  description: Day/night rate with 7 hours off-peak
+- name: TimeOfUse
+  value: 3
+  description: Multiple rates based on time of day
+- name: DynamicTariff
+  value: 4
+  description: Variable rates based on demand/supply

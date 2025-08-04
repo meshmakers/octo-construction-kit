@@ -1,0 +1,64 @@
+description: Represents a UK household from the DALE dataset with energy monitoring
+derivedFrom: Basic/NamedEntity
+isCollectionRoot: true
+attributes:
+- attributeName: HouseId
+  isOptional: false
+  description: Unique identifier for the house (e.g., house_1, house_2)
+- attributeName: OccupantCount  
+  isOptional: true
+  description: Number of people living in the house
+- attributeName: FloorArea
+  isOptional: true
+  description: Total floor area in square meters
+- attributeName: RecordingStartDate
+  valueType: DateTime
+  isOptional: true
+  description: When data recording started for this house
+- attributeName: RecordingEndDate
+  valueType: DateTime
+  isOptional: true
+  description: When data recording ended for this house
+- attributeName: PostalCode
+  isOptional: true
+  description: UK postal code for location identification
+- attributeName: PropertyType
+  valueType: Enum
+  valueCkEnumId: PropertyType
+  isOptional: true
+  description: Type of property (flat, house, etc.)
+- attributeName: YearBuilt
+  valueType: Int
+  isOptional: true
+  description: Year the house was built
+associations:
+- associationRoleId: HouseAppliances
+  targetCkTypeId: UkDaleAppliance
+  direction: Inbound
+  cardinality: N
+  description: Appliances monitored in this house
+- associationRoleId: HouseMainsReadings
+  targetCkTypeId: UkDaleMainsReading
+  direction: Inbound
+  cardinality: N
+  description: Mains power readings for this house
+- associationRoleId: DailySummarySource
+  targetCkTypeId: UkDaleDailySummary
+  direction: Inbound
+  cardinality: N
+  description: Daily summaries for this house
+- associationRoleId: WeeklySummarySource
+  targetCkTypeId: UkDaleWeeklySummary
+  direction: Inbound
+  cardinality: N
+  description: Weekly summaries for this house
+- associationRoleId: HouseTariff
+  targetCkTypeId: UkDaleEnergyTariff
+  direction: Outbound
+  cardinality: One
+  description: The electricity tariff for this house
+- associationRoleId: HouseOccupants
+  targetCkTypeId: UkDaleOccupant
+  direction: Inbound
+  cardinality: N
+  description: People living in this house

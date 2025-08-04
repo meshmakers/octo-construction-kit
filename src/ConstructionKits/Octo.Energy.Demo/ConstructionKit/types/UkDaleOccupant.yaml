@@ -1,0 +1,37 @@
+description: Occupant demographic and behavioral information
+derivedFrom: Basic/NamedEntity
+isCollectionRoot: true
+attributes:
+- attributeName: AgeGroup
+  valueType: Enum
+  valueCkEnumId: AgeGroup
+  isOptional: true
+  description: Age group classification
+- attributeName: OccupationType
+  valueType: Enum
+  valueCkEnumId: OccupationType
+  isOptional: true
+  description: Employment/occupancy pattern
+- attributeName: EnergyAwarenessLevel
+  valueType: Enum
+  valueCkEnumId: AwarenessLevel
+  isOptional: true
+  description: Self-reported energy conservation awareness
+- attributeName: HomePresenceHours
+  valueType: Double
+  isOptional: true
+  description: Average hours per day someone is home
+- attributeName: SmartThermostat
+  valueType: Boolean
+  isOptional: true
+  description: Whether house has smart thermostat
+- attributeName: SmartMeterAccess
+  valueType: Boolean
+  isOptional: true
+  description: Whether occupants actively monitor smart meter
+associations:
+- associationRoleId: HouseOccupants
+  targetCkTypeId: UkDaleHouse
+  direction: Outbound
+  cardinality: One
+  description: The house this occupant lives in

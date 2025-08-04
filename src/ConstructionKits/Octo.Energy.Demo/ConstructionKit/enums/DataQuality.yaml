@@ -1,0 +1,14 @@
+description: Quality indicator for power measurement data
+values:
+- name: Good
+  value: 1
+  description: High quality measurement with no missing data
+- name: Estimated
+  value: 2  
+  description: Data estimated due to sensor issues or missing readings
+- name: Poor
+  value: 3
+  description: Low quality data with significant gaps or anomalies
+- name: Unknown
+  value: 4
+  description: Data quality cannot be determined

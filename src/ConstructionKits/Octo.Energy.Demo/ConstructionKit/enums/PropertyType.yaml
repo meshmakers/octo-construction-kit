@@ -1,0 +1,20 @@
+description: UK property types for demographic classification
+values:
+- name: FlatApartment
+  value: 1
+  description: Flat or apartment
+- name: TerracedHouse
+  value: 2
+  description: Terraced house
+- name: SemiDetachedHouse
+  value: 3
+  description: Semi-detached house
+- name: DetachedHouse
+  value: 4
+  description: Detached house
+- name: Bungalow
+  value: 5
+  description: Bungalow
+- name: Maisonette
+  value: 6
+  description: Maisonette

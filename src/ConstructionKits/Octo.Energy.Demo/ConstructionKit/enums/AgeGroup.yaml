@@ -1,0 +1,20 @@
+description: Age group classifications for demographic analysis
+values:
+- name: Under25
+  value: 1
+  description: Under 25 years old
+- name: Age25to34
+  value: 2
+  description: 25-34 years old
+- name: Age35to44
+  value: 3
+  description: 35-44 years old
+- name: Age45to54
+  value: 4
+  description: 45-54 years old
+- name: Age55to64
+  value: 5
+  description: 55-64 years old
+- name: Over65
+  value: 6
+  description: 65 years and older

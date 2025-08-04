@@ -1,0 +1,50 @@
+description: Represents an electrical appliance monitored in the UK-DALE dataset
+derivedFrom: Basic/NamedEntity
+attributes:
+- attributeName: ApplianceId
+  isOptional: false
+  description: Unique appliance identifier within the house
+- attributeName: ChannelNumber
+  isOptional: false
+  description: Data acquisition channel number
+- attributeName: Category
+  valueType: Enum
+  valueCkEnumId: ApplianceCategory
+  isOptional: false
+  description: Category classification of the appliance
+- attributeName: RoomLocation
+  isOptional: true
+  description: Room where the appliance is located
+- attributeName: Manufacturer
+  isOptional: true
+  description: Appliance manufacturer
+- attributeName: ModelName
+  isOptional: true
+  description: Appliance model designation
+- attributeName: RatedPower
+  isOptional: true
+  description: Rated power consumption in Watts
+- attributeName: InstallationDate
+  valueType: DateTime
+  isOptional: true
+  description: When the appliance was installed
+- attributeName: SamplingFrequency
+  isOptional: false
+  defaultValues: [6]
+  description: Measurement sampling frequency in Hz (typically 6 seconds for UK-DALE)
+associations:
+- associationRoleId: HouseAppliances
+  targetCkTypeId: UkDaleHouse
+  direction: Outbound
+  cardinality: One
+  description: The house this appliance belongs to
+- associationRoleId: ApplianceReadings
+  targetCkTypeId: UkDalePowerReading
+  direction: Inbound
+  cardinality: N
+  description: Power readings from this appliance
+- associationRoleId: AnomalySource
+  targetCkTypeId: UkDaleEnergyAnomaly
+  direction: Inbound
+  cardinality: N
+  description: Anomalies detected for this appliance

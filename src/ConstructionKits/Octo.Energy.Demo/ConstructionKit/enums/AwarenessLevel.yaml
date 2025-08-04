@@ -1,0 +1,14 @@
+description: Self-reported energy conservation awareness levels
+values:
+- name: Low
+  value: 1
+  description: Little awareness of energy consumption
+- name: Medium
+  value: 2
+  description: Some awareness and occasional conservation efforts
+- name: High
+  value: 3
+  description: Actively monitors and manages energy consumption
+- name: Expert
+  value: 4
+  description: Expert level knowledge and behavior modification

@@ -1,0 +1,32 @@
+description: Individual power measurement reading from UK-DALE dataset
+derivedFrom: System/Entity
+isCollectionRoot: true
+attributes:
+- attributeName: Timestamp
+  valueType: DateTime
+  isOptional: false
+  description: Unix timestamp of the measurement
+- attributeName: PowerWatts
+  isOptional: false
+  description: Power consumption in Watts
+- attributeName: PowerType
+  valueType: Enum
+  valueCkEnumId: PowerType
+  isOptional: false
+  defaultValues: [1]
+  description: Type of power measurement (Active, Reactive, Apparent)
+- attributeName: DataQuality
+  valueType: Enum
+  valueCkEnumId: DataQuality
+  isOptional: false
+  defaultValues: [1]
+  description: Quality indicator for this measurement
+- attributeName: EnergyKwh
+  isOptional: true
+  description: Calculated energy consumption for the interval in kWh
+associations:
+- associationRoleId: ApplianceReadings
+  targetCkTypeId: UkDaleAppliance
+  direction: Outbound
+  cardinality: One
+  description: The appliance this reading belongs to

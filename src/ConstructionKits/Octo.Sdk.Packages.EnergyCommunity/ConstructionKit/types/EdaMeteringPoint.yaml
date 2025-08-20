@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: EdaMeteringPoint
+    derivedFromCkTypeId: System/Entity
+    description: "Metering Point from EDA import"
+    attributes:
+      - id: ${thisModel}/MeteringPointNumber
+        name: MeteringPointNumber
+      - id: ${thisModel}/PartitionFactor
+        name: PartitionFactor
+        isOptional: true
+      - id: ${thisModel}/ProductionType
+        name: ProductionType
+      - id: ${thisModel}/IsProducer
+        name: IsProducer

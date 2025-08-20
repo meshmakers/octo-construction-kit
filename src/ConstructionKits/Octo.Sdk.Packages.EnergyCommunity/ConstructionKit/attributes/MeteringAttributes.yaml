@@ -6,3 +6,6 @@ attributes:
   - id: PartitionFactor
     valueType: Int
     description: "Partition factor for the metering point to a specific energy community"
+  - id: IsProducer
+    valueType: Boolean
+    description: "Indicates if the new metering point is a producer"

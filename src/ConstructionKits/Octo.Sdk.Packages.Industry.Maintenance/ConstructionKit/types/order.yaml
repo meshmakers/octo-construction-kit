@@ -25,9 +25,11 @@ types:
       isOptional: true
     - id: ${thisModel}/OrderState
       name: OrderState
-      isOptional: true      
+      isOptional: true
+    - id: ${thisModel}/OrderPriority
+      name: OrderPriority
   associations:
     - id: ${thisModel}/RelatedEvent
       targetCkTypeId: Industry.Basic/Event
-    - id: Basic/RelatedClassification
-      targetCkTypeId: Basic/TreeNode
+    - id: ${thisModel}/RelatedMachine
+      targetCkTypeId: Industry.Basic/Machine

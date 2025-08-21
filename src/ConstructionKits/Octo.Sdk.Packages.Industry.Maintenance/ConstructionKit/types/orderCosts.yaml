@@ -11,10 +11,6 @@ types:
         name: ExternalCosts
       - id: ${thisModel}/MaterialCosts
         name: MaterialCosts
-      - id: ${thisModel}/AggregationType
-        name: AggregationType
-      - id: ${thisModel}/AggregationDate
-        name: AggregationDate
     associations:
-      - id: System/ParentChild
+      - id: ${thisModel}/Costs
         targetCkTypeId: ${thisModel}/Order

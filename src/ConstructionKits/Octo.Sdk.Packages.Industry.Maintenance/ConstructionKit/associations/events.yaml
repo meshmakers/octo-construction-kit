@@ -15,4 +15,13 @@ associationRoles:
     inboundMultiplicity: One
     outboundName: Event
     outboundMultiplicity: ZeroOrOne
-
+  - id: RelatedMachine
+    inboundName: Orders
+    inboundMultiplicity: N
+    outboundName: Machine
+    outboundMultiplicity: One
+  - id: Costs
+    inboundName: Costs
+    inboundMultiplicity: ZeroOrOne
+    outboundName: Order
+    outboundMultiplicity: ZeroOrOne

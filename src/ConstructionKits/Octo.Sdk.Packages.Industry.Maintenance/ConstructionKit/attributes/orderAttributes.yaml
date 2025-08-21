@@ -8,6 +8,8 @@ attributes:
   - id: OrderPriority
     valueType: Enum
     valueCkEnumId: ${thisModel}/OrderPriority
+    defaultValues:
+      - 0
   - id: PlannedCosts
     valueType: Double
   - id: ActualCosts

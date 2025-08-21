@@ -12,6 +12,8 @@ attributes:
   valueType: Enum
   valueCkEnumId: ${thisModel}/MachineState
   isDataStream: true
+  defaultValues:
+    - 2
 
 - id: Power
   valueType: Double

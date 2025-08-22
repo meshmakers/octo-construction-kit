@@ -15,3 +15,6 @@ enums:
       - key: 3
         name: Paid
         description: "The billing document has been paid"
+      - key: 4
+        name: Canceled
+        description: "The billing document has been canceled"

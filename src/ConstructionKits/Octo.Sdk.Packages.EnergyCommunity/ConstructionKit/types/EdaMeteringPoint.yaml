@@ -11,5 +11,6 @@ types:
         isOptional: true
       - id: ${thisModel}/ProductionType
         name: ProductionType
+        isOptional: true
       - id: ${thisModel}/IsProducer
         name: IsProducer

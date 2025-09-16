@@ -21,4 +21,4 @@ attributes:
 - id: EdaProcessInfo
   valueType: String
 - id: EdaResponseCode
-  valueType: Int
+  valueType: String

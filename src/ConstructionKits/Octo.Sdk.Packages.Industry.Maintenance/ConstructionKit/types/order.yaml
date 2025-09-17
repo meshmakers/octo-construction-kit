@@ -2,6 +2,11 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Order
   derivedFromCkTypeId: System/Entity
+  indexes:
+    - indexType: "Ascending"
+      fields:
+        - attributePaths:
+            - OrderNumber
   attributes:
     - id: ${thisModel}/OrderNumber
       name: OrderNumber

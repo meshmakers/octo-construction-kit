@@ -1,22 +1,22 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: WaterMeter
-  derivedFromCkTypeId: Industry.Basic/Machine
+  derivedFromCkTypeId: ${Industry.Basic}/Machine
   attributes:
-  - id: ${thisModel}/NetVolume
+  - id: ${this}/NetVolume
     name: NetVolume
-  - id: ${thisModel}/Volume
+  - id: ${this}/Volume
     name: Volume
     isOptional: true
-  - id: ${thisModel}/ReverseVolume
+  - id: ${this}/ReverseVolume
     name: ReverseVolume
     isOptional: true
-  - id: Basic/AvgTemperature
+  - id: ${Basic}/AvgTemperature
     name: AvgWaterTemperature
     isOptional: true
-  - id: Basic/MinTemperature
+  - id: ${Basic}/MinTemperature
     name: MinWaterTemperature
     isOptional: true
-  - id: Basic/MaxTemperature
+  - id: ${Basic}/MaxTemperature
     name: MaxWaterTemperature
     isOptional: true

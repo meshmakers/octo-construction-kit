@@ -14,7 +14,7 @@ attributes:
         description: "public part of an unsymmetrical key pair to sign or encrypt text or messages"
   - id: EMailTypeOfEmailAddress
     valueType: Enum
-    valueCkEnumId: Basic/TypeOfTelephoneBasic
+    valueCkEnumId: ${this}/TypeOfTelephoneBasic
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO199#003"

@@ -1,9 +1,9 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Employee
-  derivedFromCkTypeId: Basic/Asset
+  derivedFromCkTypeId: ${Basic}/Asset
   description: Describes an employee with a staff number.
   attributes:
-    - id: ${thisModel}/StaffNumber
+    - id: ${this}/StaffNumber
       name: StaffNumber
     

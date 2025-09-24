@@ -2,16 +2,16 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: PhoneNumber
   attributes:
-    - id: ${thisModel}/TelephoneNumber
+    - id: ${this}/TelephoneNumber
       name: Number
-    - id: ${thisModel}/TypeOfTelephoneEnhanced
+    - id: ${this}/TypeOfTelephoneEnhanced
       name: Type
       isOptional: true
 
 - recordId: FaxNumber
   attributes:
-    - id: ${thisModel}/TelephoneNumber
+    - id: ${this}/TelephoneNumber
       name: Number
-    - id: ${thisModel}/TypeOfTelephoneBasic
+    - id: ${this}/TypeOfTelephoneBasic
       name: Type
       isOptional: true

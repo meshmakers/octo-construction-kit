@@ -9,4 +9,4 @@ attributes:
   - id: TimeRange
     valueType: Record
     description: "A time range with a start and end date"
-    valueCkRecordId: ${thisModel}/TimeRange
+    valueCkRecordId: ${this}/TimeRange

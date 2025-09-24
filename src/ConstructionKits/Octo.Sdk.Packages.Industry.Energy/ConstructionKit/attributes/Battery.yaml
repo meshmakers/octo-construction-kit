@@ -14,7 +14,7 @@ attributes:
   metaData:
     - key: Unit
       value: "%"
-- id: NumofCycles
+- id: NumOfCycles
   valueType: Int
   description: "Number of full loading cycles since production"
   isDataStream: true

@@ -5,8 +5,8 @@ attributes:
   - id: MeterReading
     valueType: Int
   - id: OperatingStatus
-    valueCkEnumId: ${thisModel}/OperatingStatus
+    valueCkEnumId: ${this}/OperatingStatus
     valueType: Enum
   - id: NetworkOperator
-    valueCkEnumId: ${thisModel}/NetworkOperator
+    valueCkEnumId: ${this}/NetworkOperator
     valueType: Enum 

@@ -8,7 +8,7 @@ attributes:
         description: "complete telephone number to be called to reach a business partner"
   - id: TypeOfTelephoneEnhanced
     valueType: Enum
-    valueCkEnumId: Basic/TypeOfTelephoneEnhanced
+    valueCkEnumId: ${this}/TypeOfTelephoneEnhanced
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO137#003"
@@ -16,7 +16,7 @@ attributes:
 
   - id: TypeOfTelephoneBasic
     valueType: Enum
-    valueCkEnumId: Basic/TypeOfTelephoneBasic
+    valueCkEnumId: ${this}/TypeOfTelephoneBasic
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO196#003"

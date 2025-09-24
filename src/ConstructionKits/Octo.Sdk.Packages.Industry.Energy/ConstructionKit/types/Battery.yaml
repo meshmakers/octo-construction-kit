@@ -1,35 +1,32 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Battery
-  derivedFromCkTypeId: Industry.Basic/Machine
+  derivedFromCkTypeId: ${Industry.Basic}/Machine
   attributes:
-  - id: ${thisModel}/Voltage
+  - id: ${this}/Voltage
     name: Voltage
     isOptional: true
-  - id: ${thisModel}/Ampere
+  - id: ${this}/Ampere
     name: Ampere
-  - id: Industry.Basic/Power
+  - id: ${Industry.Basic}/Power
     name: Power
-  - id: Industry.Basic/ImportedEnergy
+  - id: ${Industry.Basic}/ImportedEnergy
     name: ImportedEnergy
     isOptional: true
-  - id: ${thisModel}/ExportedEnergy
+  - id: ${this}/ExportedEnergy
     name: ExportedEnergy
     isOptional: true
-  - id: ${thisModel}/SoC
+  - id: ${this}/SoC
     name: SoC
-  - id: ${thisModel}/SoH
+  - id: ${this}/SoH
     name: SoH
     isOptional: true
-  - id: ${thisModel}/NumofCycles
-    name: NumofCycles
+  - id: ${this}/NumOfCycles
+    name: NumOfCycles
     isOptional: true
-  - id: ${thisModel}/Capacity
+  - id: ${this}/Capacity
     name: Capacity
     isOptional: true
-  - id: Basic/Temperature
+  - id: ${Basic}/Temperature
     name: Temperature
     isOptional: true
-  associations:
-    - id: System/ParentChild
-      targetCkTypeId: ${thisModel}/Inverter

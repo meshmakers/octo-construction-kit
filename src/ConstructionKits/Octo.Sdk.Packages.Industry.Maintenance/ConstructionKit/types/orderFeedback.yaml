@@ -1,17 +1,17 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: OrderFeedback
-  derivedFromCkTypeId: System/Entity
+  derivedFromCkTypeId: ${System}/Entity
   attributes:
-    - id: ${thisModel}/FeedbackNumber
+    - id: ${this}/FeedbackNumber
       name: FeedbackNumber
-    - id: ${thisModel}/StartDateTime
+    - id: ${this}/StartDateTime
       name: StartDateTime
-    - id: ${thisModel}/EndDateTime
+    - id: ${this}/EndDateTime
       name: EndDateTime
       isOptional: true
   associations:
-    - id: ${thisModel}/ReportingEmployee
-      targetCkTypeId: ${thisModel}/Employee
-    - id: System/ParentChild
-      targetCkTypeId: ${thisModel}/Order
+    - id: ${this}/ReportingEmployee
+      targetCkTypeId: ${this}/Employee
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/Order

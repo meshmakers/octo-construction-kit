@@ -1,15 +1,15 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: OperatingFacility
-  derivedFromCkTypeId: Basic/TreeNode
+  derivedFromCkTypeId: ${Basic}/TreeNode
   description: "An Operating Facility"
   attributes:
-    - id: Basic/Address
+    - id: ${Basic}/Address
       name: Address
-    - id: ${thisModel}/FacilityType
+    - id: ${this}/FacilityType
       name: FacilityType
-    - id: ${thisModel}/State
+    - id: ${this}/State
       name: State
   associations:
-    - id: ${thisModel}/AssociatedCustomer
-      targetCkTypeId: ${thisModel}/Customer
+    - id: ${this}/AssociatedCustomer
+      targetCkTypeId: ${this}/Customer

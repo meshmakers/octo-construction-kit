@@ -2,6 +2,6 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: DataQuality
     valueType: Enum
-    valueCkEnumId: ${thisModel}/DataQuality
+    valueCkEnumId: ${this}/DataQuality
     description: "The quality of the received data"
     isDataStream: true

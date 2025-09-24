@@ -1,36 +1,36 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Event
-  derivedFromCkTypeId: Basic/NamedEntity
+  derivedFromCkTypeId: ${Basic}/NamedEntity
   description: "An industrial event"
   attributes:
-  - id: Basic/Time
+  - id: ${Basic}/Time
     name: Time
-  - id: ${thisModel}/Message
+  - id: ${this}/Message
     name: Message
-  - id: ${thisModel}/TagName
+  - id: ${this}/TagName
     name: TagName
     isOptional: true
-  - id: ${thisModel}/EventCategory
+  - id: ${this}/EventCategory
     name: Category
     isOptional: true
   associations:
-    - id: ${thisModel}/EventSource
-      targetCkTypeId: Basic/Asset
+    - id: ${this}/EventSource
+      targetCkTypeId: ${Basic}/Asset
 
 - typeId: Alarm
-  derivedFromCkTypeId: ${thisModel}/Event
+  derivedFromCkTypeId: ${this}/Event
   description: "An industrial alam event"
   attributes:
-    - id: ${thisModel}/EventAlarmState
+    - id: ${this}/EventAlarmState
       name: State      
-    - id: ${thisModel}/EventAlarmType
+    - id: ${this}/EventAlarmType
       name: Type
-    - id: ${thisModel}/EventAlarmSource
+    - id: ${this}/EventAlarmSource
       name: Source
-    - id: ${thisModel}/EventAlarmPriority
+    - id: ${this}/EventAlarmPriority
       name: EventAlarmPriority
-    - id: ${thisModel}/EventAlarmCause
+    - id: ${this}/EventAlarmCause
       name: Cause
-    - id: ${thisModel}/EventAlarmReactivatedCount
+    - id: ${this}/EventAlarmReactivatedCount
       name: ReactivatedCount

@@ -1,40 +1,40 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Order
-  derivedFromCkTypeId: System/Entity
+  derivedFromCkTypeId: ${System}/Entity
   indexes:
     - indexType: "Ascending"
       fields:
         - attributePaths:
             - OrderNumber
   attributes:
-    - id: ${thisModel}/OrderNumber
+    - id: ${this}/OrderNumber
       name: OrderNumber
-    - id: ${thisModel}/ServiceType
+    - id: ${this}/ServiceType
       name: ServiceType
-    - id: ${thisModel}/OrderType
+    - id: ${this}/OrderType
       name: OrderType
-    - id: ${thisModel}/CreatedAt
+    - id: ${this}/CreatedAt
       name: CreatedAt
-    - id: ${thisModel}/OrderText
+    - id: ${this}/OrderText
       name: OrderText
       isOptional: true
-    - id: ${thisModel}/PlannedCosts
+    - id: ${this}/PlannedCosts
       name: PlannedCosts
       isOptional: true
-    - id: ${thisModel}/ActualCosts
+    - id: ${this}/ActualCosts
       name: ActualCosts
       isOptional: true
-    - id: ${thisModel}/ProjectNumber
+    - id: ${this}/ProjectNumber
       name: ProjectNumber
       isOptional: true
-    - id: ${thisModel}/OrderState
+    - id: ${this}/OrderState
       name: OrderState
       isOptional: true
-    - id: ${thisModel}/OrderPriority
+    - id: ${this}/OrderPriority
       name: OrderPriority
   associations:
-    - id: ${thisModel}/RelatedEvent
-      targetCkTypeId: Industry.Basic/Event
-    - id: ${thisModel}/RelatedMachine
-      targetCkTypeId: Industry.Basic/Machine
+    - id: ${this}/RelatedEvent
+      targetCkTypeId: ${Industry.Basic}/Event
+    - id: ${this}/RelatedMachine
+      targetCkTypeId: ${Industry.Basic}/Machine

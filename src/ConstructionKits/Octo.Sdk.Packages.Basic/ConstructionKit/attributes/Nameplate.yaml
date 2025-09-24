@@ -2,7 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: NamePlate
     valueType: Record
-    valueCkRecordId: Basic/NamePlate
+    valueCkRecordId: ${this}/NamePlate
     
         
   - id: NamePlate.ManufacturerName
@@ -20,7 +20,7 @@ attributes:
         description: "Short description of the product (short text)"
   - id: NamePlate.Address
     valueType: Record
-    valueCkRecordId: Basic/Address
+    valueCkRecordId: ${this}/Address
     metaData:
       - key: semanticId
         value: "0173-1#02-AAQ832#005"
@@ -45,14 +45,14 @@ attributes:
         description: "Year as completion date of object"
   - id: NamePlate.Markings
     valueType: RecordArray
-    valueCkRecordId: Basic/Marking
+    valueCkRecordId: ${this}/Marking
     metaData:
       - key: semanticId
         value: ""
         description: ""
   - id: NamePlate.AssetSpecificProperties
     valueType: RecordArray
-    valueCkRecordId: Basic/Marking
+    valueCkRecordId: ${this}/Marking
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO856#002"

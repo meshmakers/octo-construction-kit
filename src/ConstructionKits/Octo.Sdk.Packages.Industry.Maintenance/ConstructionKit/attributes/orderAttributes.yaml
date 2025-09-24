@@ -4,10 +4,10 @@ attributes:
     valueType: String
   - id: CostCategory
     valueType: Enum
-    valueCkEnumId: ${thisModel}/CostCategory
+    valueCkEnumId: ${this}/CostCategory
   - id: OrderPriority
     valueType: Enum
-    valueCkEnumId: ${thisModel}/OrderPriority
+    valueCkEnumId: ${this}/OrderPriority
     defaultValues:
       - 0
   - id: PlannedCosts
@@ -26,7 +26,7 @@ attributes:
     valueType: Double
   - id: AggregationType
     valueType: Enum
-    valueCkEnumId: ${thisModel}/AggregationType  
+    valueCkEnumId: ${this}/AggregationType  
   - id: AggregationDate
     valueType: DateTime
   - id: FeedbackNumber
@@ -37,5 +37,5 @@ attributes:
     valueType: DateTime
   - id: OrderState
     valueType: Enum
-    valueCkEnumId: ${thisModel}/OrderState
+    valueCkEnumId: ${this}/OrderState
   

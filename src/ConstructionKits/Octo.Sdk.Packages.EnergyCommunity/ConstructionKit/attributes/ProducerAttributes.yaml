@@ -8,4 +8,4 @@ attributes:
         value: "kWp"
   - id: ProductionType
     valueType: Enum
-    valueCkEnumId: ${thisModel}/ProductionType
+    valueCkEnumId: ${this}/ProductionType

@@ -15,7 +15,7 @@ attributes:
   - id: BankAccount
     valueType: Record
     description: "Bank account information"
-    valueCkRecordId: ${thisModel}/BankAccount
+    valueCkRecordId: ${this}/BankAccount
   - id: TaxIdentificationNumber
     valueType: String
     description: "Tax identification number of a entity"

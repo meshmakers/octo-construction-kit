@@ -2,11 +2,11 @@
 attributes:
   - id: BillingDocumentState
     valueType: Enum
-    valueCkEnumId: ${thisModel}/BillingDocumentState
+    valueCkEnumId: ${this}/BillingDocumentState
     description: "The state of the billing document"
   - id: BillingType
     valueType: Enum
-    valueCkEnumId: ${thisModel}/BillingType
+    valueCkEnumId: ${this}/BillingType
     description: "The type of the billing document or billing item"
   - id: GrossAmount
     valueType: Double
@@ -28,5 +28,5 @@ attributes:
     description: "The gross total of the billing document"
   - id: TaxProcedureCreditNote
     valueType: Enum
-    valueCkEnumId: ${thisModel}/TaxProcedureCreditNote
+    valueCkEnumId: ${this}/TaxProcedureCreditNote
     description: "The tax procedure credit notes associated with the billing document"

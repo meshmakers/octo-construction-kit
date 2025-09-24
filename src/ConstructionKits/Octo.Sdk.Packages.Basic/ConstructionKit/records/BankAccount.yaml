@@ -3,13 +3,13 @@ records:
 - recordId: BankAccount
   description: "A bank account with its details"
   attributes:
-    - id: ${thisModel}/Iban
+    - id: ${this}/Iban
       name: Iban
-    - id: ${thisModel}/SwiftCode
+    - id: ${this}/SwiftCode
       name: SwiftCode
       isOptional: true
-    - id: ${thisModel}/BankName
+    - id: ${this}/BankName
       name: BankName
       isOptional: true
-    - id: ${thisModel}/AccountHolder
+    - id: ${this}/AccountHolder
       name: AccountHolder

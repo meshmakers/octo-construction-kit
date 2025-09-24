@@ -2,23 +2,23 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: NamePlate
   attributes:
-    - id: ${thisModel}/NamePlate.ManufacturerName
+    - id: ${this}/NamePlate.ManufacturerName
       name: ManufacturerName
-    - id: ${thisModel}/NamePlate.ManufacturerProductDesignation
+    - id: ${this}/NamePlate.ManufacturerProductDesignation
       name: ManufacturerProductDesignation
-    - id: ${thisModel}/NamePlate.Address
+    - id: ${this}/NamePlate.Address
       name: Address
       isOptional: true
-    - id: ${thisModel}/NamePlate.ManufacturerProductFamily
+    - id: ${this}/NamePlate.ManufacturerProductFamily
       name: ManufacturerProductFamily
-    - id: ${thisModel}/NamePlate.SerialNumber
+    - id: ${this}/NamePlate.SerialNumber
       name: SerialNumber
       isOptional: true
-    - id: ${thisModel}/NamePlate.YearOfConstruction
+    - id: ${this}/NamePlate.YearOfConstruction
       name: YearOfConstruction
-    - id: ${thisModel}/NamePlate.Markings
+    - id: ${this}/NamePlate.Markings
       name: Markings
       isOptional: true
-    - id: ${thisModel}/NamePlate.AssetSpecificProperties
+    - id: ${this}/NamePlate.AssetSpecificProperties
       name: AssetSpecificProperties
       isOptional: true

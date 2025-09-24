@@ -30,5 +30,5 @@ attributes:
 - id: GoalText
   valueType: String
 - id: GoalState
-  valueCkEnumId: ${thisModel}/GoalState
+  valueCkEnumId: ${this}/GoalState
   valueType: Enum

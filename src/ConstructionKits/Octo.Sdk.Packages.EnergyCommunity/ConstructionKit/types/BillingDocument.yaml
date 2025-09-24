@@ -1,29 +1,29 @@
 ﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: BillingDocument
-    derivedFromCkTypeId: Basic/Document
+    derivedFromCkTypeId: ${Basic}/Document
     description: "A billing document entity that contains accounting information."
     attributes:
-      - id: ${thisModel}/CustomerNumber
+      - id: ${this}/CustomerNumber
         name: CustomerNumber
-      - id: Basic/Contact
+      - id: ${Basic}/Contact
         name: Contact
-      - id: Basic/TimeRange
+      - id: ${Basic}/TimeRange
         name: TimeRange
-      - id: Basic/Comment
+      - id: ${Basic}/Comment
         name: Comment
         isOptional: true
-      - id: ${thisModel}/TaxProcedureCreditNote
+      - id: ${this}/TaxProcedureCreditNote
         name: TaxProcedureCreditNote
-      - id: ${thisModel}/BillingType
+      - id: ${this}/BillingType
         name: BillingType
-      - id: ${thisModel}/BillingDocumentState
+      - id: ${this}/BillingDocumentState
         name: BillingDocumentState
-      - id: ${thisModel}/GrossTotal
+      - id: ${this}/GrossTotal
         name: GrossTotal
-      - id: Basic/BankAccount
+      - id: ${Basic}/BankAccount
         name: BankAccount
         isOptional: true
     associations:
-      - id: ${thisModel}/AssignedBilling
-        targetCkTypeId: ${thisModel}/Customer
+      - id: ${this}/AssignedBilling
+        targetCkTypeId: ${this}/Customer

@@ -68,26 +68,26 @@ attributes:
         description: "web site address where information about the product or contact is given"
   - id: AddressPhone
     valueType: Record
-    valueCkRecordId: Basic/PhoneNumber
+    valueCkRecordId: ${this}/PhoneNumber
     metaData:
       - key: semanticId
         value: "0173-1#02-AAQ833#005"
         description: "Phone number including type"
   - id: AddressFax
     valueType: Record
-    valueCkRecordId: Basic/FaxNumber
+    valueCkRecordId: ${this}/FaxNumber
     metaData:
       - key: semanticId
         value: "0173-1#02-AAQ834#005"
         description: "Fax number including type"
   - id: AddressEMail
     valueType: Record
-    valueCkRecordId: Basic/EMail
+    valueCkRecordId: ${this}/EMail
     metaData:
       - key: semanticId
         value: "0173-1#02-AAQ836#005"
         description: "E-mail address and encryption method"
   - id: Address
     valueType: Record
-    valueCkRecordId: Basic/Address
+    valueCkRecordId: ${this}/Address
     description: "Record containing address information"

@@ -2,11 +2,11 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: EnergyBalanceGroup
     valueType: Enum
-    valueCkEnumId: ${thisModel}/EnergyBalanceGroup
+    valueCkEnumId: ${this}/EnergyBalanceGroup
   - id: EnergyBalanceProduct
     valueType: Enum
-    valueCkEnumId: ${thisModel}/EnergyBalanceProduct
+    valueCkEnumId: ${this}/EnergyBalanceProduct
   - id: EnergyBalanceUnit
     valueType: Enum
-    valueCkEnumId: ${thisModel}/EnergyBalanceUnit
+    valueCkEnumId: ${this}/EnergyBalanceUnit
   

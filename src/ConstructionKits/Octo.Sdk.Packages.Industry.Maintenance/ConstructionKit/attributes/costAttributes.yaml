@@ -4,10 +4,10 @@ attributes:
   valueType: String
 - id: ServiceType
   valueType: Enum
-  valueCkEnumId: ${thisModel}/ServiceType  
+  valueCkEnumId: ${this}/ServiceType  
 - id: OrderType
   valueType: Enum
-  valueCkEnumId: ${thisModel}/OrderType
+  valueCkEnumId: ${this}/OrderType
 - id: CreatedAt
   valueType: DateTime
 - id: OrderText

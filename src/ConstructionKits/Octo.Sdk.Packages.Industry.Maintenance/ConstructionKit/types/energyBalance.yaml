@@ -1,22 +1,22 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: EnergyBalance
-    derivedFromCkTypeId: System/Entity
+    derivedFromCkTypeId: ${System}/Entity
     description: Describes an energy balance with a balance number.
     attributes:
-      - id: ${thisModel}/EnergyBalanceGroup
+      - id: ${this}/EnergyBalanceGroup
         name: Group
-      - id: ${thisModel}/EnergyBalanceProduct
+      - id: ${this}/EnergyBalanceProduct
         name: Product
-      - id: ${thisModel}/EnergyBalanceUnit
+      - id: ${this}/EnergyBalanceUnit
         name: Unit
-      - id: System/Description
+      - id: ${System}/Description
         name: Description
         isOptional: true
-      - id: Basic/Quantity
+      - id: ${Basic}/Quantity
         name: Quantity
-      - id: Basic/Time
+      - id: ${Basic}/Time
         name: Time
     associations:
-      - id: ${thisModel}/RelatedMachine
-        targetCkTypeId: Basic/TreeNode
+      - id: ${this}/RelatedMachine
+        targetCkTypeId: ${Basic}/TreeNode

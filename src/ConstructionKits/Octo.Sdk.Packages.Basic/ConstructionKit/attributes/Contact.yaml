@@ -2,11 +2,11 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: Salutation
     valueType: Enum
-    valueCkEnumId: ${thisModel}/Salutation
+    valueCkEnumId: ${this}/Salutation
     description: "Salutation associated with the contact"
   - id: LegalEntityType
     valueType: Enum
-    valueCkEnumId: ${thisModel}/LegalEntityType
+    valueCkEnumId: ${this}/LegalEntityType
     description: "The legal entity type of the contact"
     defaultValues:
       - 0 # Default to 'NaturalPerson'
@@ -28,4 +28,4 @@ attributes:
   - id: Contact
     valueType: Record
     description: "Contact data with name and address"
-    valueCkRecordId: ${thisModel}/Contact
+    valueCkRecordId: ${this}/Contact

@@ -1,10 +1,10 @@
 ﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: EnergyPrice
-    derivedFromCkTypeId: System/Entity
+    derivedFromCkTypeId: ${System}/Entity
     description: "The price of Energy at a certain time"
     attributes:
-      - id: ${thisModel}/Price
+      - id: ${this}/Price
         name: Price
-      - id: ${thisModel}/Currency
+      - id: ${this}/Currency
         name: Currency

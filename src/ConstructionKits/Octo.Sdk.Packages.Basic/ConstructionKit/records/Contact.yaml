@@ -2,34 +2,34 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: Contact
   attributes:
-    - id: ${thisModel}/LegalEntityType
+    - id: ${this}/LegalEntityType
       name: LegalEntityType
-    - id: ${thisModel}/Salutation
+    - id: ${this}/Salutation
       name: Salutation
       isOptional: true
-    - id: ${thisModel}/FirstName
+    - id: ${this}/FirstName
       name: FirstName
       isOptional: true
-    - id: ${thisModel}/LastName
+    - id: ${this}/LastName
       name: LastName
       isOptional: true
-    - id: ${thisModel}/AcademicTitlePrefix
+    - id: ${this}/AcademicTitlePrefix
       name: TitlePrefix
       isOptional: true
-    - id: ${thisModel}/AcademicTitleSuffix
+    - id: ${this}/AcademicTitleSuffix
       name: TitleSuffix
       isOptional: true
-    - id: ${thisModel}/CompanyName
+    - id: ${this}/CompanyName
       name: CompanyName
       isOptional: true
-    - id: ${thisModel}/Address
+    - id: ${this}/Address
       name: Address
-    - id: ${thisModel}/TaxIdentificationNumber
+    - id: ${this}/TaxIdentificationNumber
       name: TaxIdentificationNumber
       isOptional: true
-    - id: ${thisModel}/CompanyRegisterNumber
+    - id: ${this}/CompanyRegisterNumber
       name: CompanyRegisterNumber
       isOptional: true
-    - id: ${thisModel}/EMailAddress
+    - id: ${this}/EMailAddress
       name: Email
       isOptional: true

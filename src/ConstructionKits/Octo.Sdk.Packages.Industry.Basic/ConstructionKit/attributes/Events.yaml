@@ -6,19 +6,19 @@ attributes:
   isDataStream: true
 - id: EventAlarmState
   valueType: Enum
-  valueCkEnumId: ${thisModel}/EventAlarmState
+  valueCkEnumId: ${this}/EventAlarmState
   isDataStream: true
 - id: EventAlarmType
   valueType: Enum
-  valueCkEnumId: ${thisModel}/EventAlarmType
+  valueCkEnumId: ${this}/EventAlarmType
   isDataStream: true
 - id: EventAlarmSource
   valueType: Enum
-  valueCkEnumId: ${thisModel}/EventAlarmSource
+  valueCkEnumId: ${this}/EventAlarmSource
   isDataStream: true
 - id: EventAlarmPriority
   valueType: Enum
-  valueCkEnumId: ${thisModel}/EventAlarmPriority
+  valueCkEnumId: ${this}/EventAlarmPriority
   isDataStream: true
 - id: EventAlarmCause
   valueType: String

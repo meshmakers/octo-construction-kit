@@ -1,4 +1,4 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Tree
-  derivedFromCkTypeId: ${thisModel}/NamedEntity
+  derivedFromCkTypeId: ${this}/NamedEntity

@@ -2,14 +2,14 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: EMail
   attributes:
-    - id: ${thisModel}/EMailAddress
+    - id: ${this}/EMailAddress
       name: EMail
-    - id: ${thisModel}/EMailPublicKey
+    - id: ${this}/EMailPublicKey
       name: PublicKey
       isOptional: true
-    - id: ${thisModel}/EMailTypeOfEmailAddress
+    - id: ${this}/EMailTypeOfEmailAddress
       name: TypeOfEMail
       isOptional: true
-    - id: ${thisModel}/EMailTypeOfPublicKey
+    - id: ${this}/EMailTypeOfPublicKey
       name: TypeOfPublicKey
       isOptional: true

@@ -1,17 +1,17 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: MeteringPoint
-  derivedFromCkTypeId: Basic/NamedEntity
+  derivedFromCkTypeId: ${Basic}/NamedEntity
   isAbstract: true
   description: "Metering Point"
   attributes:
-    - id: ${thisModel}/MeteringPointNumber
+    - id: ${this}/MeteringPointNumber
       name: MeteringPointNumber
-    - id: ${thisModel}/State
+    - id: ${this}/State
       name: State
-    - id: ${thisModel}/PartitionFactor
+    - id: ${this}/PartitionFactor
       name: PartitionFactor
       isOptional: true
   associations:
-    - id: System/ParentChild
-      targetCkTypeId: ${thisModel}/OperatingFacility
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/OperatingFacility

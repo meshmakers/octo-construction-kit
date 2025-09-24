@@ -1,23 +1,23 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Customer
-  derivedFromCkTypeId: System/Entity
+  derivedFromCkTypeId: ${System}/Entity
   description: "Represents a customer of an energy community"
   attributes:
-  - id: ${thisModel}/CustomerNumber
+  - id: ${this}/CustomerNumber
     name: CustomerNumber
     autoIncrementReference: "CustomerNumber"
-  - id: Basic/Contact
+  - id: ${Basic}/Contact
     name: Contact
-  - id: Basic/Comment
+  - id: ${Basic}/Comment
     name: Comment
     isOptional: true
-  - id: ${thisModel}/BillingCycle
+  - id: ${this}/BillingCycle
     name: BillingCycle
-  - id: ${thisModel}/State
+  - id: ${this}/State
     name: State
-  - id: Basic/BankAccount
+  - id: ${Basic}/BankAccount
     name: BankAccount
     isOptional: true
-  - id: ${thisModel}/TaxProcedureCreditNote
+  - id: ${this}/TaxProcedureCreditNote
     name: TaxProcedureCreditNote

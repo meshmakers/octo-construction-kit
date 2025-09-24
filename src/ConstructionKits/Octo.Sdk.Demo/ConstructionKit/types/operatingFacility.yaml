@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: OperatingFacility
-  derivedFromCkTypeId: Basic/TreeNode
+  derivedFromCkTypeId: ${Basic}/TreeNode
   associations:
-  - id: ${thisModel}/Ownership
-    targetCkTypeId: ${thisModel}/Customer
+  - id: ${this}/Ownership
+    targetCkTypeId: ${this}/Customer

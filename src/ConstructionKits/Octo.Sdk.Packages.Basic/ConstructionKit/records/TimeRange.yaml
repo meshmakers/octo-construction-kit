@@ -3,7 +3,7 @@ records:
 - recordId: TimeRange
   description: "A time range with a start and end date"
   attributes:
-    - id: ${thisModel}/From
+    - id: ${this}/From
       name: From
-    - id: ${thisModel}/To
+    - id: ${this}/To
       name: To

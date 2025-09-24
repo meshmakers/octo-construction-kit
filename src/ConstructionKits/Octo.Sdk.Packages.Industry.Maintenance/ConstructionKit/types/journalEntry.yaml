@@ -1,15 +1,15 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: JournalEntry
-  derivedFromCkTypeId: System/Entity
+  derivedFromCkTypeId: ${System}/Entity
   description: Describes a journal entry with a time and a value for maintenance costs.
   attributes:
-    - id: Basic/Time
+    - id: ${Basic}/Time
       name: Time  
-    - id: ${thisModel}/JournalValue
+    - id: ${this}/JournalValue
       name: JournalValue
   associations:
-    - id: System/ParentChild
-      targetCkTypeId: ${thisModel}/Account
-    - id: ${thisModel}/RelatedCostCenter
-      targetCkTypeId: ${thisModel}/CostCenter
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/Account
+    - id: ${this}/RelatedCostCenter
+      targetCkTypeId: ${this}/CostCenter

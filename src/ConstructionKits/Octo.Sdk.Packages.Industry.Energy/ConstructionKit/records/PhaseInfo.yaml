@@ -2,13 +2,13 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: PhaseInfo
   attributes:
-    - id: ${thisModel}/Voltage
+    - id: ${this}/Voltage
       name: Voltage
       isOptional: true
-    - id: ${thisModel}/Ampere
+    - id: ${this}/Ampere
       name: Ampere
-    - id: Industry.Basic/Power
+    - id: ${Industry.Basic}/Power
       name: Power
-    - id: ${thisModel}/Frequency
+    - id: ${this}/Frequency
       name: Frequency
       isOptional: true

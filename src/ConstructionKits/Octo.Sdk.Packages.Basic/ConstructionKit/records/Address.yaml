@@ -2,41 +2,41 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: Address
   attributes:
-    - id: ${thisModel}/AddressDepartment
+    - id: ${this}/AddressDepartment
       name: Department
       isOptional: true
-    - id: ${thisModel}/AddressStreet
+    - id: ${this}/AddressStreet
       name: Street
-    - id: ${thisModel}/AddressZipcode
+    - id: ${this}/AddressZipcode
       name: Zipcode
-    - id: ${thisModel}/AddressPOBox
+    - id: ${this}/AddressPOBox
       name: POBox
       isOptional: true
-    - id: ${thisModel}/AddressZipOfPOBox
+    - id: ${this}/AddressZipOfPOBox
       name: ZipOfPOBox
       isOptional: true
-    - id: ${thisModel}/AddressCityTown
+    - id: ${this}/AddressCityTown
       name: CityTown
-    - id: ${thisModel}/AddressStateCounty
+    - id: ${this}/AddressStateCounty
       name: StateCounty
       isOptional: true
-    - id: ${thisModel}/AddressNationalCode
+    - id: ${this}/AddressNationalCode
       name: NationalCode
-    - id: ${thisModel}/AddressVATnumber
+    - id: ${this}/AddressVATnumber
       name: VATnumber
       isOptional: true
-    - id: ${thisModel}/AddressRemarks
+    - id: ${this}/AddressRemarks
       name: AddressRemarks
       isOptional: true
-    - id: ${thisModel}/AddressOfAdditionalLink
+    - id: ${this}/AddressOfAdditionalLink
       name: AddressOfAdditionalLink
       isOptional: true
-    - id: ${thisModel}/AddressPhone
+    - id: ${this}/AddressPhone
       name: Phone
       isOptional: true
-    - id: ${thisModel}/AddressFax
+    - id: ${this}/AddressFax
       name: Fax
       isOptional: true
-    - id: ${thisModel}/AddressEMail
+    - id: ${this}/AddressEMail
       name: EMail
       isOptional: true

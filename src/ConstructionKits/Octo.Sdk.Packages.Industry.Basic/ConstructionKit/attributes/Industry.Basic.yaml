@@ -10,7 +10,7 @@ attributes:
 
 - id: MachineState
   valueType: Enum
-  valueCkEnumId: ${thisModel}/MachineState
+  valueCkEnumId: ${this}/MachineState
   isDataStream: true
   defaultValues:
     - 2

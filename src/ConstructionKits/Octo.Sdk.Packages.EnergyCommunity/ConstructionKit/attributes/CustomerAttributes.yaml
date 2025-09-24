@@ -9,7 +9,7 @@ attributes:
 
 - id: BillingCycle
   valueType: Enum
-  valueCkEnumId: ${thisModel}/BillingCycle
+  valueCkEnumId: ${this}/BillingCycle
   description: "Billing cycle associated with the customer"
   defaultValues:
     - 1

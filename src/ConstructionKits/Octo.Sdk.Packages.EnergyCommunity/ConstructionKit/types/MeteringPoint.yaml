@@ -15,3 +15,8 @@ types:
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/OperatingFacility
+  indexes:
+    - indexType: UniqueNotDeleted
+      fields:
+        - attributePaths:
+            - MeteringPointNumber

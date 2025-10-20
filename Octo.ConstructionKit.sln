@@ -21,8 +21,20 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Maintenance", "src\ConstructionKits\Octo.Sdk.Packages.Industry.Maintenance\Octo.Sdk.Packages.Industry.Maintenance.csproj", "{44B0EE5C-B2AA-4FAC-A53C-E36328D4EA8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.EnergyCommunity", "src\ConstructionKits\Octo.Sdk.Packages.EnergyCommunity\Octo.Sdk.Packages.EnergyCommunity.csproj", "{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E0499B4A-B9B2-44C9-A2E5-649215770A56} = {E0499B4A-B9B2-44C9-A2E5-649215770A56}
+	EndProjectSection
 EndProject
 Global
+	GlobalSection(ProjectDependencies) = postSolution
+		{5540D024-E874-436D-AD9F-A8F8D1F09AEC}.0 = {E0499B4A-B9B2-44C9-A2E5-649215770A56}
+		{2C6D46AF-C457-4653-9877-C6FF2C5B2C3B}.0 = {5540D024-E874-436D-AD9F-A8F8D1F09AEC}
+		{B95AFF48-E45A-4F90-B782-0A5A19471A0B}.0 = {5540D024-E874-436D-AD9F-A8F8D1F09AEC}
+		{3163529E-5EDF-4FAA-A4E9-EE2D370EA256}.0 = {E0499B4A-B9B2-44C9-A2E5-649215770A56}
+		{E37B882B-70CD-451D-8395-34C1188361AB}.0 = {E0499B4A-B9B2-44C9-A2E5-649215770A56}
+		{44B0EE5C-B2AA-4FAC-A53C-E36328D4EA8D}.0 = {5540D024-E874-436D-AD9F-A8F8D1F09AEC}
+		{48B63881-ACDE-4CCC-88BB-15469FB1E4C8}.0 = {E0499B4A-B9B2-44C9-A2E5-649215770A56}
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU

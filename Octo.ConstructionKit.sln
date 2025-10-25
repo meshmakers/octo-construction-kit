@@ -25,7 +25,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.EnergyCom
 		{E0499B4A-B9B2-44C9-A2E5-649215770A56} = {E0499B4A-B9B2-44C9-A2E5-649215770A56}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Manufactoring", "src\ConstructionKits\Octo.Sdk.Packages.Industry.Manufactoring\Octo.Sdk.Packages.Industry.Manufactoring.csproj", "{89878854-80B8-4417-833B-CA9373ED01BB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Octo.Sdk.Packages.Industry.Manufacturing", "src\ConstructionKits\Octo.Sdk.Packages.Industry.Manufacturing\Octo.Sdk.Packages.Industry.Manufacturing.csproj", "{89878854-80B8-4417-833B-CA9373ED01BB}"
 EndProject
 Global
 	GlobalSection(ProjectDependencies) = postSolution

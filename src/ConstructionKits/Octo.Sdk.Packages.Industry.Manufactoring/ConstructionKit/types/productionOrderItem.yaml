@@ -1,0 +1,24 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ProductionOrderItem
+  description: "Individual line item within a production order specifying article, quantity, and machine assignment. Can span multiple shifts via ShiftOrderItems."
+  derivedFromCkTypeId: ${System}/Entity
+  attributes:
+    - id: ${this}/ItemNumber
+      name: ItemNumber
+    - id: ${this}/ArticleNumber
+      name: ArticleNumber      
+    - id: ${this}/ArticleText
+      name: ArticleText
+    - id: ${this}/PlannedQuantity
+      name: PlannedQuantity
+    - id: ${this}/ProductionOrderItemState
+      name: State
+    - id: ${this}/CycleTimeForOnePiece
+      name: CycleTimeForOnePiece
+      isOptional: true    
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/ProductionOrder     
+    - id: ${this}/Machine_OrderAssignment
+      targetCkTypeId: ${Industry.Basic}/Machine

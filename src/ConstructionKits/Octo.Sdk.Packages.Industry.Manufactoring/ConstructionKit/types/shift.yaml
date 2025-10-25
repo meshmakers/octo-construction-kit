@@ -1,0 +1,23 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Shift
+  description: "Specific occurrence of a work shift with actual start/end times. Aggregates employees and machines working during this period."
+  derivedFromCkTypeId: ${System}/Entity
+  attributes:
+    - id: ${this}/StartDateTime
+      name: StartDateTime
+    - id: ${this}/EndDateTime
+      name: EndDateTime
+      isOptional: true
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/ShiftTemplate
+
+- typeId: ShiftTemplate
+  description: "Reusable shift definition specifying standard shift times (e.g., 'Morning Shift 6:00-14:00'). Serves as template for creating actual shift instances."
+  derivedFromCkTypeId: ${Basic}/NamedEntity
+  attributes:
+    - id: ${this}/StartDateTime
+      name: StartDateTime
+    - id: ${this}/EndDateTime
+      name: EndDateTime

@@ -1,0 +1,16 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ProductionOrder
+  description: "Top-level manufacturing order containing one or more order items to be produced. Tracks overall order lifecycle and production timeframes."
+  derivedFromCkTypeId: ${System}/Entity
+  attributes:
+    - id: ${this}/OrderNumber
+      name: OrderNumber
+    - id: ${this}/ProductionOrderState
+      name: State
+    - id: ${this}/ProductionStartDateTime
+      name: ProductionStartDateTime
+      isOptional: true
+    - id: ${this}/ProductionEndDateTime
+      name: ProductionEndDateTime
+      isOptional: true

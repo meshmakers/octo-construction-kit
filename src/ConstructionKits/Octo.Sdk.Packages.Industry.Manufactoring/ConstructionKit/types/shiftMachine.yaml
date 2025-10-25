@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ShiftMachine
+  description: "Machine assignment to a shift, tracking which machines are active and their OEE performance. Supports many-to-many relationship with employees."
+  derivedFromCkTypeId: ${System}/Entity
+  attributes:
+    - id: ${this}/OeeStatistics
+      name: OeeStatistics
+      isOptional: true
+  associations:
+    - id: ${this}/ShiftAssignment
+      targetCkTypeId: ${this}/Shift
+    - id: ${this}/MachineAssignment
+      targetCkTypeId: ${Industry.Basic}/Machine

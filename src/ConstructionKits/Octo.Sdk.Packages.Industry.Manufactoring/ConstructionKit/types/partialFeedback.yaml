@@ -1,0 +1,22 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: PartialFeedback
+  description: "Intermediate or final production report capturing quantities (good/bad/test parts) created by an employee. Provides real-time production progress updates."
+  derivedFromCkTypeId: ${System}/Entity
+  attributes:
+    - id: ${this}/Timestamp
+      name: Timestamp
+    - id: ${this}/SyncTimestamp
+      name: SyncTimestamp
+
+    - id: ${this}/QuantityGood
+      name: QuantityGood
+    - id: ${this}/QuantityPoor
+      name: QuantityPoor
+    - id: ${this}/QuantityTestParts
+      name: QuantityTestParts
+  associations:
+    - id: ${this}/OrderItemFeedback
+      targetCkTypeId: ${this}/ProductionOrderItem
+    - id: ${this}/FeedbackResponsible
+      targetCkTypeId: ${Basic}/Employee

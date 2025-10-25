@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: EmployeeId
+    valueType: String
+    description: "Unique identifier for the employee"
+  - id: EmployeeExternalId
+    valueType: String
+    description: "External identifier for the employee"

@@ -1,0 +1,13 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: OeeStatistics
+  description: "Overall Equipment Effectiveness (OEE) metrics bundle. OEE = Availability × Performance × Quality, measuring manufacturing productivity."
+  attributes:
+    - id: ${this}/Total
+      name: Total
+    - id: ${this}/Availability
+      name: Availability
+    - id: ${this}/Performance
+      name: Performance      
+    - id: ${this}/Quality
+      name: Quality

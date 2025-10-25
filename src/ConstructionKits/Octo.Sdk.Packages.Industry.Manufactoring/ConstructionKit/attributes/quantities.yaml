@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: PlannedQuantity
+    description: "Total number of pieces planned to be produced for this order item"
+    valueType: Int
+  - id: QuantityGood
+    description: "Number of good/acceptable parts produced"
+    valueType: Int
+  - id: QuantityPoor
+    description: "Number of defective/rejected parts produced"
+    valueType: Int
+  - id: QuantityTestParts
+    description: "Number of test parts produced during setup or quality checks"
+    valueType: Int

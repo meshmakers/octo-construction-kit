@@ -1,0 +1,26 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: OrderNumber
+  description: "Unique identifier for the production order"
+  valueType: String
+  isDataStream: true
+- id: ProductionOrderState
+  description: "Current lifecycle state of the production order"
+  valueType: Enum
+  valueCkEnumId: ${this}/ProductionOrderState
+- id: ProductionOrderItemState
+  description: "Current lifecycle and execution state of the production order item"
+  valueType: Enum
+  valueCkEnumId: ${this}/ProductionOrderItemState
+- id: ItemNumber
+  description: "Position/line number of the item within the production order"
+  valueType: Int
+- id: ArticleNumber
+  description: "SKU or article identifier of the product to be manufactured"
+  valueType: String
+- id: ArticleText
+  description: "Descriptive name or text for the article"
+  valueType: String
+- id: CycleTimeForOnePiece
+  description: "Cycle time required to produce one piece, in seconds"
+  valueType: Int

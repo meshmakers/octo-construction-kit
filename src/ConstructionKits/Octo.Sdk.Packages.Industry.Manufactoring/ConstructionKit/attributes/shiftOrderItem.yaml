@@ -1,0 +1,5 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: RemainingPlannedQuantity
+  description: "Number of pieces still remaining to be produced from the total planned quantity"
+  valueType: Int

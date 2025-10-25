@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <AssemblyName>Meshmakers.Octo.Sdk.Packages.Industry.Manufactoring</AssemblyName>
-        <RootNamespace>Meshmakers.Octo.Sdk.Packages.Industry.Manufactoring</RootNamespace>
+        <AssemblyName>Meshmakers.Octo.Sdk.Packages.Industry.Manufacturing</AssemblyName>
+        <RootNamespace>Meshmakers.Octo.Sdk.Packages.Industry.Manufacturing</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <TargetFramework>net9.0</TargetFramework>
         <LangVersion>latestmajor</LangVersion>

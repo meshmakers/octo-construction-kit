@@ -37,4 +37,8 @@
         </None>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Octo.Sdk.Packages.Industry.Basic\Octo.Sdk.Packages.Industry.Basic.csproj" />
+    </ItemGroup>
+
 </Project>

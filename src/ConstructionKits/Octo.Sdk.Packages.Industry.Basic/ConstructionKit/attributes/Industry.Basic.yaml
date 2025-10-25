@@ -31,3 +31,9 @@ attributes:
       value: "kWh"
     - key: Decimals
       value: 2
+      
+- id: MachineCapabilities
+  valueType: Enum
+  valueCkEnumId: ${this}/MachineCapabilities
+  defaultValues:
+    - 0

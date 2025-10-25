@@ -1,0 +1,25 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: ProductionOrderItemState
+    description: "Lifecycle and execution states for production order items, including operational states like InProgress, Paused, and Interrupted"
+    isExtensible: true
+    values:
+      - key: 0
+        name: Created
+      - key: 1
+        name: Released
+      - key: 2
+        name: TechnicallyCompleted
+      - key: 3
+        name: Delivered
+      - key: 4
+        name: Confirmed
+      - key: 5
+        name: Cancelled
+      - key: 10
+        name: InProgress
+      - key: 11
+        name: Paused
+      - key: 12
+        name: Interrupted
+        

@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: Timestamp
+  description: "Date and time when the feedback was created/recorded"
+  valueType: DateTime
+- id: SyncTimestamp
+  description: "Date and time when the feedback was synchronized to the backend system"
+  valueType: DateTime

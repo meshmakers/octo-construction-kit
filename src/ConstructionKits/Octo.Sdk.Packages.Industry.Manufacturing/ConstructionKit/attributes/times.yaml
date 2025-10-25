@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: ProductionStartDateTime
+    description: "Date and time when production actually started"
+    valueType: DateTime
+  - id: ProductionEndDateTime
+    description: "Date and time when production actually ended"
+    valueType: DateTime

@@ -1,0 +1,31 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ShiftOrderItem
+  description: "Production tracking per shift for an order item. Created when production spans multiple shifts to track per-shift progress, quantities produced, and OEE metrics."
+  derivedFromCkTypeId: ${System}/Entity
+  attributes:
+    - id: ${this}/RemainingPlannedQuantity
+      name: RemainingPlannedQuantity
+
+    - id: ${this}/ProductionStartDateTime
+      name: ProductionStartDateTime
+      isOptional: true
+    - id: ${this}/ProductionEndDateTime
+      name: ProductionEndDateTime
+      isOptional: true
+
+    - id: ${this}/QuantityGood
+      name: QuantityGood
+    - id: ${this}/QuantityPoor
+      name: QuantityPoor
+    - id: ${this}/QuantityTestParts
+      name: QuantityTestParts
+
+    - id: ${this}/OeeStatistics
+      name: OeeStatistics
+      isOptional: true
+  associations:
+    - id: ${this}/OrderItemMachine
+      targetCkTypeId: ${this}/ShiftMachine
+    - id: ${this}/ShiftOrderToProductionOrder
+      targetCkTypeId: ${this}/ProductionOrderItem

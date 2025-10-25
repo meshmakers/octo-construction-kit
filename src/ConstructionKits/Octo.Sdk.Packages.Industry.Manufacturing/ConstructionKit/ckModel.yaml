@@ -1,0 +1,5 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
+dependencies:
+- Industry.Basic
+- Basic
+modelId: Industry.Manufacturing

@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: StartDateTime
+  description: "Date and time when the shift starts (actual or planned)"
+  valueType: DateTime
+- id: EndDateTime
+  description: "Date and time when the shift ends (actual or planned)"
+  valueType: DateTime

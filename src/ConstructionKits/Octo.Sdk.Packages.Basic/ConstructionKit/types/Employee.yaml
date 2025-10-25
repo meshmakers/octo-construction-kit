@@ -1,0 +1,13 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Employee
+  derivedFromCkTypeId: ${System}/Entity
+  attributes:
+    - id: ${this}/FirstName
+      name: FirstName
+    - id: ${this}/LastName
+      name: LastName
+    - id: ${this}/EmployeeId
+      name: EmployeeId
+    - id: ${this}/EmployeeExternalId
+      name: EmployeeExternalId

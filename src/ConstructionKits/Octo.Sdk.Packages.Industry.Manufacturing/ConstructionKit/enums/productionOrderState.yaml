@@ -1,0 +1,19 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: ProductionOrderState
+    description: "Lifecycle states for production orders, tracking the order from creation through completion and delivery"
+    isExtensible: true
+    values:
+      - key: 0
+        name: Created
+      - key: 1
+        name: Released
+      - key: 2
+        name: TechnicallyCompleted   
+      - key: 3
+        name: Delivered
+      - key: 4
+        name: Confirmed
+      - key: 5
+        name: Cancelled
+        

@@ -1,2 +1,2 @@
-global using Meshmakers.Octo.Sdk.Packages.Industry.Manufactoring.Generated.Basic.v1;
-global using Meshmakers.Octo.Sdk.Packages.Industry.Manufactoring.Generated.Industry.Basic.v1;
+global using Meshmakers.Octo.Sdk.Packages.Industry.Manufacturing.Generated.Basic.v1;
+global using Meshmakers.Octo.Sdk.Packages.Industry.Manufacturing.Generated.Industry.Basic.v1;

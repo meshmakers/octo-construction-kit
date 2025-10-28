@@ -21,11 +21,11 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ConstructionKitFolder Visible="false" Include="ConstructionKit"/>
+        <ConstructionKitFolder Visible="false" Include="$(MSBuildProjectDirectory)\ConstructionKit"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Octo.Sdk.Packages.Basic\Octo.Sdk.Packages.Basic.csproj" />
+        <ProjectReference Include="..\Octo.Sdk.Packages.Basic\Octo.Sdk.Packages.Basic.csproj" />
     </ItemGroup>
 
     <ItemGroup>

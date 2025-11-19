@@ -90,7 +90,7 @@ Octo.Sdk.Packages.XXX/
 │       ├── associations.yaml
 │       └── ...
 ├── Octo.Sdk.Packages.XXX.csproj       # Project file
-└── bin/Release/net9.0/
+└── bin/Release/net10.0/
     └── octo-ck-libraries/XXX/
         └── out/ck-XXX.yaml            # Compiled CK library
 ```
@@ -131,7 +131,7 @@ dotnet test tests/Octo.Sdk.Packages.Industry.Basic.old.SystemTests \
 # (GeneratePackageOnBuild is set to true in csproj files)
 dotnet build Octo.ConstructionKit.sln --configuration Release
 
-# Packages are output to: bin/Release/net9.0/*.nupkg
+# Packages are output to: bin/Release/net10.0/*.nupkg
 ```
 
 ### Build Configurations
@@ -237,8 +237,8 @@ Construction Kit dependencies are defined in the solution file:
 **Build Artifacts**:
 
 CK libraries are published from:
-- `src/ConstructionKits/Octo.Sdk.Demo/bin/Release/net9.0/octo-ck-libraries/Octo.Sdk.Demo`
-- `src/ConstructionKits/Octo.Sdk.Packages.Basic/bin/Release/net9.0/octo-ck-libraries/Octo.Sdk.Packages.Basic`
+- `src/ConstructionKits/Octo.Sdk.Demo/bin/Release/net10.0/octo-ck-libraries/Octo.Sdk.Demo`
+- `src/ConstructionKits/Octo.Sdk.Packages.Basic/bin/Release/net10.0/octo-ck-libraries/Octo.Sdk.Packages.Basic`
 - (And similar for all other CKs)
 
 **Version Naming**: `$(MajorVersion).$(MinorVersion).$(date:yyMM).$(DayOfMonth)$(rev:rrr)-$(Build.SourceBranchName)`
@@ -258,7 +258,7 @@ CK libraries are published from:
            <AssemblyName>Meshmakers.Octo.Sdk.Packages.XXX</AssemblyName>
            <RootNamespace>Meshmakers.Octo.Sdk.Packages.XXX</RootNamespace>
            <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-           <TargetFramework>net9.0</TargetFramework>
+           <TargetFramework>net10.0</TargetFramework>
            <OctoPublishCkModel>true</OctoPublishCkModel>
            <OctoGenerateCkDocumentation>true</OctoGenerateCkDocumentation>
        </PropertyGroup>
@@ -404,7 +404,7 @@ System tests are in `tests/Octo.Sdk.Packages.Industry.Basic.old.SystemTests/`:
 
 Each Construction Kit generates a NuGet package on build:
 
-- **Location**: `bin/{Configuration}/net9.0/*.nupkg`
+- **Location**: `bin/{Configuration}/net10.0/*.nupkg`
 - **Assembly Name**: `Meshmakers.Octo.Sdk.Packages.XXX.nupkg`
 - **Root Namespace**: `Meshmakers.Octo.Sdk.Packages.XXX`
 - **Metadata**:
@@ -435,7 +435,7 @@ Private NuGet server is optional:
 
 ### Key Generated Artifacts
 
-- Compiled CK Library: `bin/{Configuration}/net9.0/octo-ck-libraries/ProjectName/out/ck-{name}.yaml`
+- Compiled CK Library: `bin/{Configuration}/net10.0/octo-ck-libraries/ProjectName/out/ck-{name}.yaml`
 - Documentation: Generated alongside CK libraries (controlled by `OctoGenerateCkDocumentation`)
 - Source-generated Code: Produces C# classes from YAML definitions
 

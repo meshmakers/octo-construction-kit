@@ -12,6 +12,9 @@ types:
     - id: ${this}/PartitionFactor
       name: PartitionFactor
       isOptional: true
+    - id: ${this}/ConsentId
+      name: ConsentId
+      isOptional: true
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/OperatingFacility

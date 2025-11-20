@@ -9,3 +9,6 @@ attributes:
   - id: IsProducer
     valueType: Boolean
     description: "Indicates if the new metering point is a producer"
+  - id: ConsentId
+    valueType: String
+    description: "Identifier for the consent associated with the metering point"

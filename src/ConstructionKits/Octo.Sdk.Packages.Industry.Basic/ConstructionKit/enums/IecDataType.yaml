@@ -1,0 +1,70 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: IecDataType
+    useFlags: false
+    isExtensible: false
+    description: "IEC 61131-3 data types for SCADA runtime variables (zenon compatible)"
+    values:
+      - key: 1
+        name: INT
+        description: "IEC_INT - 16Bit signed"
+      - key: 2
+        name: UINT
+        description: "IEC_UINT - 16Bit unsigned"
+      - key: 3
+        name: DINT
+        description: "IEC_DINT - 32Bit signed"
+      - key: 4
+        name: UDINT
+        description: "IEC_UDINT - 32Bit unsigned"
+      - key: 5
+        name: REAL
+        description: "IEC_REAL - 32Bit float"
+      - key: 6
+        name: LREAL
+        description: "IEC_LREAL - 64Bit float"
+      - key: 8
+        name: BOOL
+        description: "IEC_BOOL - 1Bit"
+      - key: 9
+        name: USINT
+        description: "IEC_USINT - 8Bit unsigned"
+      - key: 10
+        name: SINT
+        description: "IEC_SINT - 8Bit signed"
+      - key: 12
+        name: STRING
+        description: "IEC_STRING - 8Bit*n"
+      - key: 17
+        name: TIME
+        description: "IEC_TIME"
+      - key: 18
+        name: DATE
+        description: "IEC_DATE"
+      - key: 19
+        name: TOD
+        description: "IEC_TOD - Time of Day"
+      - key: 20
+        name: DT
+        description: "IEC_DT - Date and Time"
+      - key: 21
+        name: WSTRING
+        description: "IEC_WSTRING - 16Bit*n"
+      - key: 22
+        name: BYTE
+        description: "IEC_BYTE - 8Bit"
+      - key: 23
+        name: WORD
+        description: "IEC_WORD - 16Bit"
+      - key: 24
+        name: DWORD
+        description: "IEC_DWORD - 32Bit"
+      - key: 25
+        name: LWORD
+        description: "IEC_LWORD - 64Bit"
+      - key: 26
+        name: LINT
+        description: "IEC_LINT - 64Bit signed"
+      - key: 27
+        name: ULINT
+        description: "IEC_ULINT - 64Bit unsigned"

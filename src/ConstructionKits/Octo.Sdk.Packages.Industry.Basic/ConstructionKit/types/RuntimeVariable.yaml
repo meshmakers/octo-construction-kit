@@ -1,0 +1,32 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: RuntimeVariable
+  derivedFromCkTypeId: ${Basic}/NamedEntity
+  description: "A runtime variable that can hold multiple primitive data types"
+  attributes:
+  - id: ${this}/IecDataType
+    name: IecDataType
+  - id: ${this}/IntValue
+    name: IntValue
+    isOptional: true
+  - id: ${this}/DoubleValue
+    name: DoubleValue
+    isOptional: true
+  - id: ${this}/StringValue
+    name: StringValue
+    isOptional: true
+  - id: ${this}/BooleanValue
+    name: BooleanValue
+    isOptional: true
+  - id: ${this}/DateTimeValue
+    name: DateTimeValue
+    isOptional: true
+  - id: ${this}/Int64Value
+    name: Int64Value
+    isOptional: true
+  - id: ${this}/TimeSpanValue
+    name: TimeSpanValue
+    isOptional: true
+  associations:
+    - id: ${this}/RuntimeVariableMachine
+      targetCkTypeId: ${this}/Machine

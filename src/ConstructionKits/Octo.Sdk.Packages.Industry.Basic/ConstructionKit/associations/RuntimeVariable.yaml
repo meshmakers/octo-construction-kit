@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+associationRoles:
+- id: RuntimeVariableMachine
+  description: "Defined on RuntimeVariable → Machine. Creates: RuntimeVariable.Machine (the machine this variable belongs to) and Machine.RuntimeVariables (all runtime variables for this machine)"
+  inboundName: RuntimeVariables
+  outboundName: Machine
+  inboundMultiplicity: N
+  outboundMultiplicity: One

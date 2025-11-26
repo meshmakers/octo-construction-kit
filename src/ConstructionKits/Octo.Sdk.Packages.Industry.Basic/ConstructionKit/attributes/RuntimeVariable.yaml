@@ -1,0 +1,42 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: IecDataType
+  valueType: Enum
+  valueCkEnumId: ${this}/IecDataType
+  description: "The IEC 61131-3 data type of the runtime variable in the SCADA system"
+  isDataStream: true
+
+- id: IntValue
+  valueType: Int
+  description: "Integer value of the runtime variable"
+  isDataStream: true
+
+- id: DoubleValue
+  valueType: Double
+  description: "Double precision floating point value of the runtime variable"
+  isDataStream: true
+
+- id: StringValue
+  valueType: String
+  description: "String value of the runtime variable"
+  isDataStream: true
+
+- id: BooleanValue
+  valueType: Boolean
+  description: "Boolean value of the runtime variable"
+  isDataStream: true
+
+- id: DateTimeValue
+  valueType: DateTime
+  description: "DateTime value of the runtime variable"
+  isDataStream: true
+
+- id: Int64Value
+  valueType: Int64
+  description: "64-bit integer value of the runtime variable"
+  isDataStream: true
+
+- id: TimeSpanValue
+  valueType: TimeSpan
+  description: "TimeSpan value of the runtime variable"
+  isDataStream: true

@@ -14,3 +14,6 @@ types:
         isOptional: true
       - id: ${this}/IsProducer
         name: IsProducer
+      - id: ${this}/ConsentId
+        name: ConsentId
+        isOptional: true

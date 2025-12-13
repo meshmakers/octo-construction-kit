@@ -19,7 +19,7 @@ entities:
     targetCkTypeId: System.Communication/MeshAdapter
   attributes:
   - id: System.Communication/DeploymentState
-    value: 2
+    value: 0
   - id: System/Name
     value: Mesh Pipeline
   - id: System/Enabled
@@ -151,8 +151,8 @@ entities:
                   targetValueKind: Array
                   targetValueWriteMode: Append
                   updateKind: CREATE
-                  sourceRtIdPath: $.updates._operatingFacilityUpdate.RtId
-                  sourceCkTypeIdPath: $.updates._operatingFacilityUpdate.CkTypeId
+                  originRtIdPath: $.updates._operatingFacilityUpdate.RtId
+                  originCkTypeIdPath: $.updates._operatingFacilityUpdate.CkTypeId
                   targetRtIdPath: $.full._customerUpdate.RtId
                   targetCkTypeIdPath: $.full._customerUpdate.CkTypeId
                   associationRoleId: OctoSdkDemo/Ownership
@@ -192,8 +192,8 @@ entities:
                       targetValueKind: Array
                       targetValueWriteMode: Append
                       updateKind: CREATE
-                      sourceRtIdPath: $.updates._meterUpdate.RtId
-                      sourceCkTypeIdPath: $.updates._meterUpdate.CkTypeId
+                      originRtIdPath: $.updates._meterUpdate.RtId
+                      originCkTypeIdPath: $.updates._meterUpdate.CkTypeId
                       targetRtIdPath: $.full._operatingFacilityUpdate.RtId
                       targetCkTypeIdPath: $.full._operatingFacilityUpdate.CkTypeId
                       associationRoleId: System/ParentChild

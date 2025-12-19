@@ -75,7 +75,9 @@ entities:
       - id: System/Name
         value: Systemnutzung NE 7 - Grundpreispauschale
       - id: OctoSdkDemo/MeteringPointNumber
-        value: AT0040000567200000000000002257263        
+        value: AT0040000567200000000000002257263    
+      - id: OctoSdkDemo/OperatingStatus
+        value: 1        
     associations:
       - roleId: System/ParentChild
         targetRtId: 65dc6d24cc529cdc46c84fd1
@@ -99,6 +101,8 @@ entities:
         value: Systemnutzung NE 7 - Grundpreispauschale
       - id: OctoSdkDemo/MeteringPointNumber
         value: AT0040000502000000000000005029745
+      - id: OctoSdkDemo/OperatingStatus
+        value: 1
     associations:
       - roleId: System/ParentChild
         targetRtId: 65dc6d24cc529cdc46c84fd3
@@ -110,6 +114,8 @@ entities:
         value: Systemnutzung Strom Einspeiser
       - id: OctoSdkDemo/MeteringPointNumber
         value: AT0040000502000000000000010265744
+      - id: OctoSdkDemo/OperatingStatus
+        value: 1
     associations:
       - roleId: System/ParentChild
         targetRtId: 65dc6d24cc529cdc46c84fd3

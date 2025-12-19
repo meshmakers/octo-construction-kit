@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: CustomerStatus
+  values:
+  - key: 0
+    name: Pending
+  - key: 1
+    name: Active
+  - key: 2
+    name: Suspended

@@ -6,48 +6,35 @@ types:
   - indexType: "Ascending"
     fields:
       - attributePaths:
-        - FirstName
-        - LastName
-        - CompanyName
-        - Street
-        - City
-        - EMailAddress
+        - Contact.FirstName
+        - Contact.LastName
+        - Contact.CompanyName
+        - Contact.Address.Street
+        - Contact.Address.CityTown
+        - Contact.Email
   - indexType: "Text"
     language: "en"
     fields:
       - weight: 1
         attributePaths:
-          - FirstName
-          - Street
-          - City
-          - EMailAddress
+          - Contact.FirstName
+          - Contact.Address.Street
+          - Contact.Address.CityTown
+          - Contact.Email
   - indexType: "Text"
     language: "en"
     fields:
       - weight: 2
         attributePaths:
-          - FirstName
-          - LastName
-          - CompanyName
-          - EMailAddress
+          - Contact.FirstName
+          - Contact.LastName
+          - Contact.CompanyName
+          - Contact.Email
   attributes:
-  - id: ${this}/FirstName
-    name: FirstName
-  - id: ${this}/LastName
-    name: LastName
-  - id: ${this}/CompanyName
-    name: CompanyName
-    isOptional: true
-  - id: ${this}/Street
-    name: Street
-  - id: ${this}/PostalCode
-    name: PostalCode
-  - id: ${this}/City
-    name: City    
-  - id: ${this}/Country
-    name: Country
-  - id: ${this}/EMailAddress
-    name: EMailAddress
+  - id: ${Basic}/Contact
+    name: Contact
+  - id: ${Basic}/BankAccount
+    name: BankAccount
     isOptional: true
   - id: ${this}/DateOfBirth
     name: DateOfBirth
@@ -58,3 +45,5 @@ types:
   - id: ${this}/PhoneNumberLandLine
     name: PhoneNumberLandLine
     isOptional: true
+  - id: ${this}/CustomerStatus
+    name: CustomerStatus

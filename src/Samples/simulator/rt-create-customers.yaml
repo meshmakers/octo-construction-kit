@@ -48,8 +48,14 @@ entities:
                   simulatorKey: Address.City
                 - targetPath: $.customer.zipCode
                   simulatorKey: Address.ZipCode
-                - targetPath: $.customer.country
-                  simulatorKey: Address.Country
+                - targetPath: $.customer.countryCode
+                  simulatorKey: Address.CountryCode
+                - targetPath: $.customer.status
+                  simulatorKey: Math.IntRandom
+                  configuration: "{min:0, max:2}"      
+                - targetPath: $.customer.legalEntityType
+                  simulatorKey: Math.IntRandom
+                  configuration: "{min:0, max:3}"        
             # operating facility
             - type: For@1
               description: create operating facilities
@@ -103,24 +109,30 @@ entities:
               rtIdPath: $.rtId
               generateRtId: true
               attributeUpdates:
-                - attributeName: FirstName
+                - attributeName: Contact.LegalEntityType
+                  attributeValueType: Int
+                  valuePath: $.customer.legalEntityType
+                - attributeName: Contact.FirstName
                   attributeValueType: String
                   valuePath: $.key.customer.firstName
-                - attributeName: LastName
+                - attributeName: Contact.LastName
                   attributeValueType: String
                   valuePath: $.key.customer.lastName
-                - attributeName: Street
+                - attributeName: Contact.Address.Street
                   attributeValueType: String
                   valuePath: $.key.customer.street
-                - attributeName: City
+                - attributeName: Contact.Address.CityTown
                   attributeValueType: String
                   valuePath: $.key.customer.city
-                - attributeName: PostalCode
+                - attributeName: Contact.Address.Zipcode
                   attributeValueType: String
                   valuePath: $.key.customer.zipCode
-                - attributeName: Country
+                - attributeName: Contact.Address.NationalCode
                   attributeValueType: String
-                  valuePath: $.key.customer.country
+                  valuePath: $.key.customer.countryCode
+                - attributeName: CustomerStatus
+                  attributeValueType: Int
+                  valuePath: $.key.customer.status
             - type: Project@1
               fields:
                 - path: "$.key.customer"
@@ -179,10 +191,10 @@ entities:
                           attributeValueType: String
                           valuePath: $.meteringPoint.meteringPointNumber
                         - attributeName: OperatingStatus
-                          attributeValueType: String
+                          attributeValueType: Int
                           valuePath: $.meteringPoint.operatingStatus
                         - attributeName: MeterReading
-                          attributeValueType: String
+                          attributeValueType: Int
                           valuePath: $.meteringPoint.meterReading
                         - attributeName: Name
                           attributeValueType: String

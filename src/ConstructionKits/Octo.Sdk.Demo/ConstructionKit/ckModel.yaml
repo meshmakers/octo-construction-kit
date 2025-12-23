@@ -1,4 +1,4 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
 dependencies:
-- Basic
-modelId: OctoSdkDemo
+- Basic-[1.0,2.0)
+modelId: OctoSdkDemo-2.0.0

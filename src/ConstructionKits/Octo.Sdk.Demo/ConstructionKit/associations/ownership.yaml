@@ -2,6 +2,6 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 associationRoles:
 - id: Ownership
   inboundName: Owns
-  inboundMultiplicity: ZeroOrOne
+  inboundMultiplicity: N
   outboundName: OwnedBy
-  outboundMultiplicity: N
+  outboundMultiplicity: ZeroOrOne

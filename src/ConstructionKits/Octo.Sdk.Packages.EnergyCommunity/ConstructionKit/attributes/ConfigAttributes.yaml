@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: EnergyCommunityId
+    valueType: String
+    description: "ID of the energy community"
+  - id: NetworkPartnerId
+    valueType: String
+    description: "ID of the network partner (Marktpartner"
+  - id: HeaderLogo
+    valueType: BinaryLinked
+    description: "Icon for the app header"
+  - id: FooterLogo
+    valueType: BinaryLinked
+    description: "Icon for the app footer"

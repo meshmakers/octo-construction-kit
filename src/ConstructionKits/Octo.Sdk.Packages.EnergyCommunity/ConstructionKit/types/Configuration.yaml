@@ -12,7 +12,10 @@ types:
         name: PartnerId
       - id: ${this}/HeaderLogo
         name: HeaderLogo
+        isOptional: true
       - id: ${this}/FooterLogo
         name: FooterLogo
+        isOptional: true
       - id: ${System.UI}/Theme.Colors
         name: Colors
+        isOptional: true

@@ -4,8 +4,6 @@ types:
     derivedFromCkTypeId: ${System}/Configuration
     description: "Configuration for an energy community"
     attributes:
-      - id: ${System}/Name
-        name: EnergyCommunityName
       - id: ${this}/EnergyCommunityId
         name: EnergyCommunityId
       - id: ${this}/NetworkPartnerId

@@ -1,4 +1,4 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
-modelId: Industry.Maintenance
+modelId: Industry.Maintenance-2.0.0
 dependencies:
-  - Industry.Basic-(,2.0)
+  - Industry.Basic-[2.0,3.0)

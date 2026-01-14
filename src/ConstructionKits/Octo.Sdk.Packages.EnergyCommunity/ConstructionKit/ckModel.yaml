@@ -2,3 +2,4 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
 modelId: EnergyCommunity-2.0.0
 dependencies:
   - Basic-[2.0,3.0)
+  - System.UI-[2.0,3.0)

@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - System.Communication
+  - System.Communication-2.0.0
 entities:
   - rtId: 672c69000e12cd897b01f2e1
     ckTypeId: System.Communication/MeshPipeline

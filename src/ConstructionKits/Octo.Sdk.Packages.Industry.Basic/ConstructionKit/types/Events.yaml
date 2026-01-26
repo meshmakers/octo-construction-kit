@@ -22,15 +22,15 @@ types:
   derivedFromCkTypeId: ${this}/Event
   description: "An industrial alam event"
   attributes:
-    - id: ${this}/EventAlarmState
+    - id: ${this}/AlarmState
       name: State      
-    - id: ${this}/EventAlarmType
+    - id: ${this}/AlarmType
       name: Type
-    - id: ${this}/EventAlarmSource
+    - id: ${this}/AlarmSourceType
       name: Source
-    - id: ${this}/EventAlarmPriority
+    - id: ${this}/AlarmPriority
       name: EventAlarmPriority
-    - id: ${this}/EventAlarmCause
+    - id: ${this}/AlarmCause
       name: Cause
-    - id: ${this}/EventAlarmReactivatedCount
+    - id: ${this}/AlarmReactivatedCount
       name: ReactivatedCount

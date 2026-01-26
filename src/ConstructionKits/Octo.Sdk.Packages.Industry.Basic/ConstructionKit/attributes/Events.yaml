@@ -4,26 +4,26 @@ attributes:
 - id: Message
   valueType: String
   isDataStream: true
-- id: EventAlarmState
+- id: AlarmState
   valueType: Enum
-  valueCkEnumId: ${this}/EventAlarmState
+  valueCkEnumId: ${this}/AlarmState
   isDataStream: true
-- id: EventAlarmType
+- id: AlarmType
   valueType: Enum
-  valueCkEnumId: ${this}/EventAlarmType
+  valueCkEnumId: ${this}/AlarmType
   isDataStream: true
-- id: EventAlarmSource
+- id: AlarmSourceType
   valueType: Enum
-  valueCkEnumId: ${this}/EventAlarmSource
+  valueCkEnumId: ${this}/AlarmSourceType
   isDataStream: true
-- id: EventAlarmPriority
+- id: AlarmPriority
   valueType: Enum
-  valueCkEnumId: ${this}/EventAlarmPriority
+  valueCkEnumId: ${this}/AlarmPriority
   isDataStream: true
-- id: EventAlarmCause
+- id: AlarmCause
   valueType: String
   isDataStream: true
-- id: EventAlarmReactivatedCount
+- id: AlarmReactivatedCount
   valueType: Int
   defaultValues:
     - 0

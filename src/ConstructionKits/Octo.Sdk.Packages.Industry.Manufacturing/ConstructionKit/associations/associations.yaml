@@ -1,65 +1,37 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 associationRoles:
-- id: Machine_OrderAssignment
+- id: MachineOrderAssignment
   description: "Defined on ProductionOrderItem → Machine. Creates: ProductionOrderItem.Machine (the assigned machine) and Machine.OrderItems (all order items assigned to this machine)"
   inboundName: OrderItems
   outboundName: Machine
   inboundMultiplicity: One
   outboundMultiplicity: N
 
-- id: ShiftAssignment
-  description: "Defined on ShiftMachine → Shift. Creates: ShiftMachine.Shift (the shift this machine assignment belongs to) and Shift.MachineAssignments (all machine assignments for this shift)"
-  inboundName: MachineAssignments
-  outboundName: Shift
-  inboundMultiplicity: N
-  outboundMultiplicity: ZeroOrOne
-
 - id: MachineAssignment
   description: "Defined on ShiftMachine → Machine. Creates: ShiftMachine.Machine (the physical machine) and Machine.ShiftAssignments (all shift assignments for this machine)"
   inboundName: ShiftAssignments
   outboundName: Machine
   inboundMultiplicity: N
-  outboundMultiplicity: ZeroOrOne
-
-- id: EmployeeShiftAssignment
-  description: "Defined on ShiftEmployee → Shift. Creates: ShiftEmployee.Shift (the shift this employee is working) and Shift.Employees (all employees working this shift)"
-  inboundName: Employees
-  outboundName: Shift
-  inboundMultiplicity: N
   outboundMultiplicity: One
 
-- id: ShiftEmployeeToEmployee
-  description: "Defined on ShiftEmployee → Employee. Creates: ShiftEmployee.Employee (the employee) and Employee.ShiftAssignments (all shift assignments for this employee)"
-  inboundName: ShiftAssignments
-  outboundName: Employee
-  inboundMultiplicity: N
-  outboundMultiplicity: One
-
-- id: EmployeeMachineAssignment
-  description: "Defined on ShiftEmployee → ShiftMachine. Creates: ShiftEmployee.AssignedMachines (machines this employee has access to) and ShiftMachine.AssignedEmployees (employees who have this machine)"
-  inboundName: AssignedEmployees
-  outboundName: AssignedMachines
+- id: MachineEmployeeAssignment
+  description: "Defined on ShiftMachine → Employee. Creates: ShiftMachine.AssignedEmployees (employees who have access to this machine) and Employee.MachineAssignments (machines this employee has access to)"
+  inboundName: ShiftMachines
+  outboundName: Employees
   inboundMultiplicity: N
   outboundMultiplicity: N
 
-- id: OrderItemMachine
-  description: "Defined on ShiftOrderItem → ShiftMachine. Creates: ShiftOrderItem.Machine (which machine is being used) and ShiftMachine.OrderItems (all order items produced on this machine)"
-  inboundName: OrderItems
-  outboundName: Machine
+- id: ShiftOrderItemEmployeeAssignment
+  description: "Defined on ShiftOrderItem → Employee. Creates: ShiftOrderItem.AssignedEmployees (employees working on this order item) and Employee.AssignedMachines (order items assigned to this employee)"
+  inboundName: ShiftOrderItems
+  outboundName: Employees
   inboundMultiplicity: N
-  outboundMultiplicity: One
+  outboundMultiplicity: N
 
 - id: ShiftOrderToProductionOrder
   description: "Defined on ShiftOrderItem → ProductionOrderItem. Creates: ShiftOrderItem.ProductionOrderItem (what is being produced) and ProductionOrderItem.ShiftOrderItems (all shift production records for this order)"
   inboundName: ShiftOrderItems
   outboundName: ProductionOrderItem
-  inboundMultiplicity: N
-  outboundMultiplicity: One
-
-- id: OrderItemFeedback
-  description: "Defined on PartialFeedback → ProductionOrderItem. Creates: PartialFeedback.OrderItem (the order item this feedback belongs to) and ProductionOrderItem.PartialFeedbacks (all feedback entries for this order item)"
-  inboundName: PartialFeedbacks
-  outboundName: OrderItem
   inboundMultiplicity: N
   outboundMultiplicity: One
 

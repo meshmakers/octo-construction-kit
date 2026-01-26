@@ -6,3 +6,9 @@ attributes:
 - id: SyncTimestamp
   description: "Date and time when the feedback was synchronized to the backend system"
   valueType: DateTime
+- id: FeedbackSyncState
+  description: "The sync state for synchronizing feedback to external systems"
+  valueType: Enum
+  valueCkEnumId: ${this}/FeedbackSyncState
+  defaultValues:
+    - 0

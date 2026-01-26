@@ -9,8 +9,8 @@ types:
     - id: ${this}/ProductionOrderState
       name: State
     - id: ${this}/ProductionStartDateTime
-      name: ProductionStartDateTime
+      name: StartDateTime
       isOptional: true
     - id: ${this}/ProductionEndDateTime
-      name: ProductionEndDateTime
+      name: EndDateTime
       isOptional: true

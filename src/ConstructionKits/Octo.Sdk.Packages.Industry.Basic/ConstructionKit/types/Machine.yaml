@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Machine
   derivedFromCkTypeId: ${Basic}/Asset
+  description: "A machine is a physical device that performs work, typically powered by electricity or other energy sources. Machines can range from simple tools to complex systems used in manufacturing, construction, and various industries. They often consist of mechanical, electrical, and electronic components that work together to accomplish specific tasks efficiently and effectively."
   attributes:
   - id: ${Basic}/NamePlate
     name: NamePlate

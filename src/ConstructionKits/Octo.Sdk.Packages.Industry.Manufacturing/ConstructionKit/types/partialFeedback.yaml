@@ -6,8 +6,7 @@ types:
   attributes:
     - id: ${this}/Timestamp
       name: Timestamp
-    - id: ${this}/SyncTimestamp
-      name: SyncTimestamp
+
 
     - id: ${this}/QuantityGood
       name: QuantityGood
@@ -15,8 +14,14 @@ types:
       name: QuantityPoor
     - id: ${this}/QuantityTestParts
       name: QuantityTestParts
+
+    - id: ${this}/SyncTimestamp
+      name: SyncTimestamp
+      isOptional: true
+    - id: ${this}/FeedbackSyncState
+      name: SyncState
   associations:
-    - id: ${this}/OrderItemFeedback
-      targetCkTypeId: ${this}/ProductionOrderItem
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/ShiftOrderItem
     - id: ${this}/FeedbackResponsible
       targetCkTypeId: ${Basic}/Employee

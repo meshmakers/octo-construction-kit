@@ -8,10 +8,10 @@ types:
       name: RemainingPlannedQuantity
 
     - id: ${this}/ProductionStartDateTime
-      name: ProductionStartDateTime
+      name: StartDateTime
       isOptional: true
     - id: ${this}/ProductionEndDateTime
-      name: ProductionEndDateTime
+      name: EndDateTime
       isOptional: true
 
     - id: ${this}/QuantityGood
@@ -25,7 +25,9 @@ types:
       name: OeeStatistics
       isOptional: true
   associations:
-    - id: ${this}/OrderItemMachine
-      targetCkTypeId: ${this}/ShiftMachine
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/Shift
     - id: ${this}/ShiftOrderToProductionOrder
       targetCkTypeId: ${this}/ProductionOrderItem
+    - id: ${this}/ShiftOrderItemEmployeeAssignment
+      targetCkTypeId: ${Basic}/Employee

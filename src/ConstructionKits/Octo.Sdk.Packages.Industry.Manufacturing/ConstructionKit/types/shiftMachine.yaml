@@ -8,7 +8,9 @@ types:
       name: OeeStatistics
       isOptional: true
   associations:
-    - id: ${this}/ShiftAssignment
+    - id: ${System}/ParentChild
       targetCkTypeId: ${this}/Shift
     - id: ${this}/MachineAssignment
       targetCkTypeId: ${Industry.Basic}/Machine
+    - id: ${this}/MachineEmployeeAssignment
+      targetCkTypeId: ${Basic}/Employee

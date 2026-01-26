@@ -20,5 +20,5 @@ types:
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/ProductionOrder     
-    - id: ${this}/Machine_OrderAssignment
+    - id: ${this}/MachineOrderAssignment
       targetCkTypeId: ${Industry.Basic}/Machine

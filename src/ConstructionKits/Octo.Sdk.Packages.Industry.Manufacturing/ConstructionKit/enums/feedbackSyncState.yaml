@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: FeedbackSyncState
+    description: "The sync state for synchronizing feedback to external systems"
+    isExtensible: true
+    values:
+      - key: 0
+        name: Unsynced
+      - key: 1
+        name: Synced

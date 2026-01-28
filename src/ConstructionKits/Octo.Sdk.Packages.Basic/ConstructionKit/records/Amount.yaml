@@ -1,0 +1,9 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: Amount
+  description: "A measured amount with value and unit"
+  attributes:
+    - id: ${this}/AmountValue
+      name: Value
+    - id: ${this}/UnitOfMeasure
+      name: Unit

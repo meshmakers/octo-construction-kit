@@ -3,3 +3,14 @@ attributes:
   - id: Quantity
     valueType: Double
     description: "Defines the quantity of a resource"
+  - id: AmountValue
+    valueType: Double
+    description: "Defines the amount of a resource"
+  - id: UnitOfMeasure
+    valueType: Enum
+    valueCkEnumId: ${this}/UnitOfMeasure
+    description: "The unit of measure for the quantity or amount"
+  - id: Amount
+    valueType: Record
+    valueCkRecordId: ${this}/Amount
+    description: "A measured amount with value and unit"

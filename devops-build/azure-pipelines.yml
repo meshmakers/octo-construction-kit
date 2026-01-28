@@ -63,7 +63,8 @@ stages:
         parameters:
           constructionKitLibraryPaths:
             - 'src/ConstructionKits/Octo.Sdk.Demo/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Demo'          
-            - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Basic'          
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Basic'
+            - 'src/ConstructionKits/Octo.Sdk.Packages.Basic.Energy/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Basic.Energy'
             - 'src/ConstructionKits/Octo.Sdk.Packages.EnergyCommunity/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.EnergyCommunity'          
             - 'src/ConstructionKits/Octo.Sdk.Packages.Environment/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Environment'          
             - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Basic'          

@@ -12,6 +12,3 @@ enums:
       - key: 2
         name: Inactive
         description: "The object is inactive but may be reactivated"
-      - key: 3
-        name: Deleted
-        description: "The object was deleted"

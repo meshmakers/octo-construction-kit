@@ -9,12 +9,11 @@ types:
       name: MeteringPointNumber
     - id: ${this}/State
       name: State
-    - id: ${this}/PartitionFactor
-      name: PartitionFactor
-      isOptional: true
     - id: ${this}/ConsentId
       name: ConsentId
       isOptional: true
+    - id: ${this}/CarrierType
+      name: CarrierType
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/OperatingFacility

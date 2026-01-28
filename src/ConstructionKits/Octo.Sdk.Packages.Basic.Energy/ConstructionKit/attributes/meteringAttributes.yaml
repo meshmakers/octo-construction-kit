@@ -3,12 +3,14 @@ attributes:
   - id: MeteringPointNumber
     valueType: String
     description: "Number identifying the metering point"
-  - id: PartitionFactor
-    valueType: Int
-    description: "Partition factor for the metering point to a specific energy community"
   - id: IsProducer
     valueType: Boolean
     description: "Indicates if the new metering point is a producer"
   - id: ConsentId
     valueType: String
     description: "Identifier for the consent associated with the metering point"
+  - id: CarrierType
+    valueType: Enum
+    valueCkEnumId: ${this}/CarrierType
+    description: "Type of energy carrier (e.g., electricity, gas)"
+

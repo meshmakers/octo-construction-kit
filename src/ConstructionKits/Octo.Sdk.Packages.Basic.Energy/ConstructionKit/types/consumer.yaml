@@ -3,7 +3,4 @@ types:
   - typeId: Consumer
     derivedFromCkTypeId: ${this}/MeteringPoint
     description: "A metering point identified as consumer metering point"
-    attributes:
-      - id: ${this}/EnergyConsumption
-        name: EnergyConsumption
-        isOptional: true
+

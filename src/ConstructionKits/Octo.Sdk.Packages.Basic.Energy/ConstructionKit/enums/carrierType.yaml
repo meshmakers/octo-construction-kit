@@ -1,0 +1,14 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: CarrierType
+    description: "Defines the type of energy carrier"
+    values:
+      - key: 0
+        name: Unknown
+        description: "The carrier type is unknown"
+      - key: 1
+        name: Electricity
+        description: "Electricity is used as energy carrier"
+      - key: 2
+        name: Gas
+        description: "Gas is used as energy carrier"

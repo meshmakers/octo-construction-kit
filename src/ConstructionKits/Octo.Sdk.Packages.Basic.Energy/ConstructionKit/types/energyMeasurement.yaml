@@ -1,16 +1,20 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
-- typeId: EnergyQuantity
+- typeId: EnergyMeasurement
   derivedFromCkTypeId: ${System}/Entity
   isAbstract: false
-  description: "Describes a quantity of energy, such as consumption or production."
+  description: "Describes a measurement of energy, such as consumption or production."
   attributes:
     - id: ${Basic}/TimeRange
       name: TimeRange
-    - id: ${Basic}/Quantity
-      name: Quantity
+    - id: ${Basic}/Amount
+      name: Amount
+    - id: ${this}/ObisCode
+      name: ObisCode
+      isOptional: true
     - id: ${this}/DataQuality
-      name: DataQuality 
+      name: DataQuality
+      isOptional: true
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/MeteringPoint

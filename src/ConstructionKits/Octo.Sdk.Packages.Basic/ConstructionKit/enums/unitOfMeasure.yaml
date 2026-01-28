@@ -1,0 +1,14 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: UnitOfMeasure
+    description: "Defines various units of measurement"
+    values:
+      - key: 0
+        name: NonUnit
+        description: "No unit applicable"
+      - key: 1
+        name: KWh
+        description: "Kilowatt-hour, a unit of energy equal to one kilowatt of power used for one hour"
+      - key: 2
+        name: MWh
+        description: "Megawatt-hour, a unit of energy equal to one megawatt of power used for one hour"

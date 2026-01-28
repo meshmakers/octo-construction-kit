@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: State
+    valueType: Enum
+    valueCkEnumId: ${this}/State
+    description: "The state of an object"
+    defaultValues:
+      - 1

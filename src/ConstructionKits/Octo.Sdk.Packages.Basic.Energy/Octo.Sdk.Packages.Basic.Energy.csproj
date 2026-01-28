@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <AssemblyName>Meshmakers.Octo.Sdk.Packages.Basic.Energy</AssemblyName>
+        <RootNamespace>Meshmakers.Octo.Sdk.Packages.Basic.Energy</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Configurations>Debug;Release;DebugL</Configurations>
+        <Platforms>AnyCPU</Platforms>
+        <OctoPublishCkModel Condition="'$(TargetFramework)' == 'net10.0'">true</OctoPublishCkModel>
+        <OctoGenerateCkDocumentation Condition="'$(TargetFramework)' == 'net10.0'">true</OctoGenerateCkDocumentation>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="$(OctoVersion)" />
+        <PackageReference Include="Meshmakers.Octo.ConstructionKit.MsBuildTasks" Version="$(OctoVersion)" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ConstructionKitFolder Visible="false" Include="$(MSBuildProjectDirectory)\ConstructionKit"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\..\..\assets\meshmakers64.png">
+            <Pack>True</Pack>
+            <PackagePath />
+            <Link>meshmakers64.png</Link>
+        </None>
+        <None Include="..\..\..\LICENSE">
+            <Pack>True</Pack>
+            <PackagePath />
+            <Link>LICENSE</Link>
+        </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="ConstructionKit\records\" />
+    </ItemGroup>
+</Project>

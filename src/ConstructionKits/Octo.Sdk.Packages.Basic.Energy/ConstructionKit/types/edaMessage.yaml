@@ -1,0 +1,31 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: EdaMessage
+    derivedFromCkTypeId: ${System}/Entity
+    description: "Store messages sent and received in the Energy Data Access (EDA) system."
+    attributes:
+      - id: ${this}/EdaMessageType
+        name: MessageType
+      - id: ${this}/EdaMessageProcessed
+        name: Processed
+      - id: ${this}/EdaSenderId
+        name: Sender
+      - id: ${this}/EdaReceiverId
+        name: Receiver
+      - id: ${Basic}/Time
+        name: CreationDate
+      - id: ${this}/EdaMessageId
+        name: MessageId
+      - id: ${this}/EdaConversationId
+        name: ConversationId
+        isOptional: true
+      - id: ${this}/MeteringPointNumber
+        name: MeteringPoint
+        isOptional: true
+      - id: ${this}/EdaRawMessage
+        name: RawMessage
+        isOptional: true
+    associations:
+      - id: ${this}/MessageToProcess
+        targetCkTypeId: ${this}/EdaProcess
+  

@@ -11,3 +11,22 @@ attributes:
 - id: CustomerStatus
   valueType: Enum
   valueCkEnumId: ${this}/CustomerStatus
+# RecordArray for customer notes
+- id: CustomerNotes
+  valueType: RecordArray
+  valueCkRecordId: ${this}/CustomerNote
+# Binary for profile picture (stored inline)
+- id: ProfilePicture
+  valueType: Binary
+# BinaryLinked for contract documents (stored as reference)
+- id: ContractDocument
+  valueType: BinaryLinked
+# Additional note attributes
+- id: NoteDate
+  valueType: DateTime
+- id: NoteText
+  valueType: String
+- id: NoteAuthor
+  valueType: String
+- id: NoteCategory
+  valueType: String

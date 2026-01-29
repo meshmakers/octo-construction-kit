@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: CustomerNote
+  description: "A note or remark about a customer"
+  attributes:
+    - id: ${this}/NoteDate
+      name: Date
+    - id: ${this}/NoteText
+      name: Text
+    - id: ${this}/NoteAuthor
+      name: Author
+      isOptional: true
+    - id: ${this}/NoteCategory
+      name: Category
+      isOptional: true

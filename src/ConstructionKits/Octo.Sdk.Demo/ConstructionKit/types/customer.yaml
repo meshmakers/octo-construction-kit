@@ -47,3 +47,12 @@ types:
     isOptional: true
   - id: ${this}/CustomerStatus
     name: CustomerStatus
+  - id: ${this}/CustomerNotes
+    name: Notes
+    isOptional: true
+  - id: ${this}/ProfilePicture
+    name: ProfilePicture
+    isOptional: true
+  - id: ${this}/ContractDocument
+    name: ContractDocument
+    isOptional: true

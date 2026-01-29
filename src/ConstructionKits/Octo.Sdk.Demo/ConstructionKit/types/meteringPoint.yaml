@@ -17,3 +17,6 @@ types:
   - id: ${this}/NetworkOperator
     name: NetworkOperator
     isOptional: true
+  - id: ${this}/DataTransmissionInterval
+    name: DataTransmissionInterval
+    isOptional: true

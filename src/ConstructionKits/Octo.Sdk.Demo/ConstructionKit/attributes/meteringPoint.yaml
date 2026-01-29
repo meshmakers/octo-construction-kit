@@ -9,4 +9,6 @@ attributes:
     valueType: Enum
   - id: NetworkOperator
     valueCkEnumId: ${this}/NetworkOperator
-    valueType: Enum 
+    valueType: Enum
+  - id: DataTransmissionInterval
+    valueType: TimeSpan

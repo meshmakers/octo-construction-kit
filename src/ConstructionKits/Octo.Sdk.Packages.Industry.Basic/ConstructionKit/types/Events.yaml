@@ -4,8 +4,8 @@ types:
   derivedFromCkTypeId: ${Basic}/NamedEntity
   description: "An industrial event"
   attributes:
-  - id: ${Basic}/Time
-    name: Time
+  - id: ${this}/EventReceived
+    name: Received
   - id: ${this}/Message
     name: Message
   - id: ${this}/TagName
@@ -20,17 +20,28 @@ types:
 
 - typeId: Alarm
   derivedFromCkTypeId: ${this}/Event
-  description: "An industrial alam event"
+  description: "An industrial alarm event"
   attributes:
     - id: ${this}/AlarmState
-      name: State      
+      name: State
     - id: ${this}/AlarmType
       name: Type
     - id: ${this}/AlarmSourceType
       name: Source
     - id: ${this}/AlarmPriority
-      name: EventAlarmPriority
+      name: Priority
     - id: ${this}/AlarmCause
       name: Cause
     - id: ${this}/AlarmReactivatedCount
       name: ReactivatedCount
+    - id: ${this}/AlarmLastModified
+      name: LastModified
+    - id: ${this}/AlarmAcknowledged
+      name: Acknowledged
+      isOptional: true
+    - id: ${this}/AlarmCleared
+      name: Cleared
+      isOptional: true
+    - id: ${this}/AlarmReactivated
+      name: Reactivated
+      isOptional: true

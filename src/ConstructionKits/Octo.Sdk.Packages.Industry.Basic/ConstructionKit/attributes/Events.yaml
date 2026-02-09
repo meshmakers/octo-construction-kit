@@ -36,3 +36,28 @@ attributes:
   description: Category of the event
   valueType: String
   isDataStream: true
+
+- id: AlarmLastModified
+  description: Timestamp of the last modification to this alarm (UTC).
+  valueType: DateTime
+  isDataStream: true
+
+- id: EventReceived
+  description: Timestamp when the event was first received (UTC). Null if not applicable.
+  valueType: DateTime
+  isDataStream: true
+
+- id: AlarmAcknowledged
+  description: Timestamp when the alarm was acknowledged by an operator (UTC). Null if not yet acknowledged.
+  valueType: DateTime
+  isDataStream: true
+
+- id: AlarmCleared
+  description: Timestamp when the alarm returned to normal (UTC). Null if still active.
+  valueType: DateTime
+  isDataStream: true
+
+- id: AlarmReactivated
+  description: Timestamp when the alarm reoccurred after being cleared (UTC). Null if never reactivated.
+  valueType: DateTime
+  isDataStream: true

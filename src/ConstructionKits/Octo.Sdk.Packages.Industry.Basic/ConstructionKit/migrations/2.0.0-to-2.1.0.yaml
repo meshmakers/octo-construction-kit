@@ -1,0 +1,73 @@
+$schema: https://schemas.meshmakers.cloud/ck-migration.schema.json
+sourceVersion: "2.0.0"
+targetVersion: "2.1.0"
+description: |
+  Migration from Industry.Basic 2.0.0 to 2.1.0.
+
+  This migration includes two attribute renames:
+  1. 'Time' → 'Received' on all Event entities
+  2. 'EventAlarmPriority' → 'Priority' on all Alarm entities
+
+  The Time attribute (inherited from Basic) represented when the event was received,
+  so 'Received' is a more semantically accurate name.
+
+  The EventAlarmPriority attribute was renamed to 'Priority' to follow naming conventions.
+
+  Since Alarm derives from Event, the Time→Received migration also affects all Alarm entities.
+
+  Breaking changes:
+  - Code/queries using 'time' on Event/Alarm must change to 'received'
+  - Code/queries using 'eventAlarmPriority' on Alarm must change to 'priority'
+
+steps:
+  # Rename Time attribute to Received on all Event entities
+  # This includes derived types like Alarm
+  - stepId: rename-time-to-received
+    description: "Rename Time attribute to Received on Event entities"
+    action: Transform
+    target:
+      ckTypeId: Industry.Basic/Event
+      blueprintSourceOnly: false
+    transform:
+      type: RenameAttribute
+      sourceAttribute: Time
+      targetAttribute: Received
+    onConflict: Skip
+    continueOnError: false
+
+  # Rename EventAlarmPriority attribute to Priority on Alarm entities
+  - stepId: rename-eventalarmpriority-to-priority
+    description: "Rename EventAlarmPriority attribute to Priority on Alarm entities"
+    action: Transform
+    target:
+      ckTypeId: Industry.Basic/Alarm
+      blueprintSourceOnly: false
+    transform:
+      type: RenameAttribute
+      sourceAttribute: EventAlarmPriority
+      targetAttribute: Priority
+    onConflict: Skip
+    continueOnError: false
+
+postValidations:
+  # Verify no Event entities still have the old Time attribute
+  - validationId: no-time-attribute-remains
+    description: "Ensure no Event entities have legacy Time attribute"
+    type: NoEntitiesOfType
+    target:
+      ckTypeId: Industry.Basic/Event
+      filter:
+        attribute: Time
+        operator: Exists
+    severity: Warning
+
+  # Verify no Alarm entities still have the old EventAlarmPriority attribute
+  - validationId: no-eventalarmpriority-attribute-remains
+    description: "Ensure no Alarm entities have legacy EventAlarmPriority attribute"
+    type: NoEntitiesOfType
+    target:
+      ckTypeId: Industry.Basic/Alarm
+      filter:
+        attribute: EventAlarmPriority
+        operator: Exists
+    severity: Warning

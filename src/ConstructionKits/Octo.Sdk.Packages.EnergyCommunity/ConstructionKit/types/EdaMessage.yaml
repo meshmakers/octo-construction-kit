@@ -28,4 +28,10 @@ types:
     associations:
       - id: ${this}/MessageToProcess
         targetCkTypeId: ${this}/EdaProcess
+    indexes:
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - MessageType
+              - Processed
   

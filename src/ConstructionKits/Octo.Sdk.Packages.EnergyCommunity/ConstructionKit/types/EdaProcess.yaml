@@ -29,3 +29,9 @@ types:
       - id: ${this}/EdaRawMessage
         name: RawMessage
         isOptional: true
+    indexes:
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - Finished
+              - Success

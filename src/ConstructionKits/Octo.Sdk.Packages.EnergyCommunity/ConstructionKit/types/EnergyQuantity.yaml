@@ -14,3 +14,9 @@ types:
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/MeteringPoint
+  indexes:
+    - indexType: "Ascending"
+      fields:
+        - attributePaths:
+          - TimeRange.From
+          - TimeRange.To

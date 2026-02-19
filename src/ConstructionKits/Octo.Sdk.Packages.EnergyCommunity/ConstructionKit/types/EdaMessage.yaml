@@ -34,4 +34,16 @@ types:
           - attributePaths:
               - MessageType
               - Processed
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - MessageType
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - Processed
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - MeteringPoint
   

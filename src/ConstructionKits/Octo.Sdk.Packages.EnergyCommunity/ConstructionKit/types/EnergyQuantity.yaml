@@ -20,3 +20,9 @@ types:
         - attributePaths:
           - TimeRange.From
           - TimeRange.To
+    - indexType: "Ascending"
+      fields:
+        - attributePaths:
+            - TimeRange.From
+            - TimeRange.To
+            - DataQuality

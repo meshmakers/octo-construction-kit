@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - System.Communication-2.0.0
+  - System.Communication-[2.0,3.0)
 entities:
   - rtId: 64a2b7bd162d703d9bb0f330
     ckTypeId: System.Communication/Pool

@@ -16,6 +16,8 @@ types:
         name: UnitPrice
       - id: ${this}/BillingType
         name: BillingType
+      - id: ${Basic}/Quantity
+        name: Quantity
     associations:
       - id: ${System}/ParentChild
         targetCkTypeId: ${this}/BillingDocument

@@ -10,7 +10,7 @@ associationRoles:
     description: "A metering point associated with a billing line item."
     inboundName: Billings
     inboundMultiplicity: N
-    outboundName: AssignedTo
+    outboundName: MeteringPoint
     outboundMultiplicity: ZeroOrOne
   - id: AssociatedCustomer
     description: "The customer associated with the operating facilities."

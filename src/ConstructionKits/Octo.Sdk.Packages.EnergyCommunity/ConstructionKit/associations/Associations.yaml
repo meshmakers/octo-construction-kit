@@ -2,7 +2,13 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 associationRoles:
   - id: AssignedBilling
     description: "A billing document or line item associated with data source."
-    inboundName: Billing
+    inboundName: Billings
+    inboundMultiplicity: N
+    outboundName: AssignedTo
+    outboundMultiplicity: ZeroOrOne
+  - id: BilledMeteringPoint
+    description: "A metering point associated with a billing line item."
+    inboundName: Billings
     inboundMultiplicity: N
     outboundName: AssignedTo
     outboundMultiplicity: ZeroOrOne

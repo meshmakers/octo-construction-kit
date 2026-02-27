@@ -23,3 +23,5 @@ types:
         targetCkTypeId: ${this}/BillingDocument
       - id: ${this}/AssignedBilling
         targetCkTypeId: ${this}/EnergyQuantity
+      - id: ${System}/ParentChild
+        targetCkTypeId: ${this}/MeteringPoint

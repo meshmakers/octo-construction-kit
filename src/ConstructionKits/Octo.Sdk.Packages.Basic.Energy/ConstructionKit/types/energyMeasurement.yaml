@@ -18,3 +18,37 @@ types:
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/MeteringPoint
+  indexes:
+    - indexType: "Ascending"
+      fields:
+        - attributePaths:
+            - TimeRange.From
+    - indexType: "Ascending"
+      fields:
+        - attributePaths:
+            - TimeRange.From
+            - TimeRange.To
+    - indexType: "Ascending"
+      fields:
+        - attributePaths:
+            - TimeRange.From
+            - ObisCode
+    - indexType: "Ascending"
+      fields:
+        - attributePaths:
+            - TimeRange.From
+            - TimeRange.To
+            - ObisCode
+    - indexType: "Ascending"
+      fields:
+        - attributePaths:
+            - TimeRange.From
+            - TimeRange.To
+            - ObisCode
+            - DataQuality
+    - indexType: "Ascending"
+      fields:
+        - attributePaths:
+            - TimeRange.From
+            - TimeRange.To
+            - DataQuality

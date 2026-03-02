@@ -29,3 +29,42 @@ types:
       - id: ${this}/EdaRawMessage
         name: RawMessage
         isOptional: true
+    indexes:
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - Finished
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - Success
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - MeteringPointNumber
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - StartTime
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - StartTime
+              - Success
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - StartTime
+              - Finished
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - StartTime
+              - MeteringPointNumber
+      - indexType: "Ascending"
+        fields:
+          - attributePaths:
+              - StartTime
+              - Name
+              - Finished
+              - Success

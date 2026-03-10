@@ -1,0 +1,36 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: PaymentOrder
+  derivedFromCkTypeId: ${System}/Entity
+  description: "A payment order (e.g. SEPA credit transfer)"
+  attributes:
+    - id: ${this}/PaymentAmount
+      name: Amount
+    - id: ${this}/PaymentCurrency
+      name: Currency
+    - id: ${this}/RecipientName
+      name: RecipientName
+    - id: ${this}/RecipientIban
+      name: RecipientIban
+    - id: ${this}/RecipientBic
+      name: RecipientBic
+      isOptional: true
+    - id: ${this}/PaymentPurpose
+      name: Purpose
+      isOptional: true
+    - id: ${this}/PaymentOrderStatus
+      name: Status
+    - id: ${this}/PaymentExternalId
+      name: ExternalId
+      isOptional: true
+    - id: ${this}/ExecutionDate
+      name: ExecutionDate
+      isOptional: true
+    - id: ${this}/PaymentEndToEndReference
+      name: EndToEndReference
+      isOptional: true
+  indexes:
+    - indexType: Ascending
+      fields:
+        - attributePaths:
+            - Status

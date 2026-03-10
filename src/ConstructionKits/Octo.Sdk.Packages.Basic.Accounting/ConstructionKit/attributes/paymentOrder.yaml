@@ -1,0 +1,33 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: PaymentAmount
+    valueType: Double
+    description: "Amount to transfer"
+  - id: PaymentCurrency
+    valueType: String
+    description: "ISO 4217 currency code of the payment"
+  - id: RecipientName
+    valueType: String
+    description: "Name of the payment recipient"
+  - id: RecipientIban
+    valueType: String
+    description: "IBAN of the payment recipient"
+  - id: RecipientBic
+    valueType: String
+    description: "BIC/SWIFT code of the recipient's bank"
+  - id: PaymentPurpose
+    valueType: String
+    description: "Purpose or reference text of the payment"
+  - id: PaymentOrderStatus
+    valueType: Enum
+    valueCkEnumId: ${this}/PaymentOrderStatus
+    description: "Current status of the payment order"
+  - id: PaymentExternalId
+    valueType: String
+    description: "Identifier of the payment in the external system"
+  - id: ExecutionDate
+    valueType: DateTime
+    description: "Requested execution date of the payment"
+  - id: PaymentEndToEndReference
+    valueType: String
+    description: "End-to-end reference for the payment"

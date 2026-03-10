@@ -1,0 +1,20 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: PaymentOrderStatus
+  description: "Status of a payment order"
+  values:
+    - key: 0
+      name: Pending
+      description: "Payment is pending approval or execution"
+    - key: 1
+      name: Approved
+      description: "Payment has been approved"
+    - key: 2
+      name: Executed
+      description: "Payment has been successfully executed"
+    - key: 3
+      name: Rejected
+      description: "Payment has been rejected"
+    - key: 4
+      name: Cancelled
+      description: "Payment has been cancelled"

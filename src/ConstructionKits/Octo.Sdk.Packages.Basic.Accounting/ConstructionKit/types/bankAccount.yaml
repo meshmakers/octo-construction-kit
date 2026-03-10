@@ -1,0 +1,44 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: BankAccount
+  derivedFromCkTypeId: ${Basic}/NamedEntity
+  description: "A bank account with balance and account details"
+  attributes:
+    - id: ${Basic}/Iban
+      name: Iban
+    - id: ${Basic}/SwiftCode
+      name: SwiftCode
+      isOptional: true
+    - id: ${Basic}/AccountHolder
+      name: AccountHolder
+      isOptional: true
+    - id: ${this}/AccountNumber
+      name: AccountNumber
+      isOptional: true
+    - id: ${this}/BankAccountType
+      name: AccountType
+      isOptional: true
+    - id: ${this}/Balance
+      name: Balance
+      isOptional: true
+    - id: ${this}/Currency
+      name: Currency
+    - id: ${this}/BalanceDate
+      name: BalanceDate
+      isOptional: true
+    - id: ${this}/Overdraft
+      name: Overdraft
+      isOptional: true
+    - id: ${this}/AvailableFunds
+      name: AvailableFunds
+      isOptional: true
+  associations:
+    - id: ${this}/AccountToTransaction
+      targetCkTypeId: ${this}/BankTransaction
+    - id: ${this}/AccountToPaymentOrder
+      targetCkTypeId: ${this}/PaymentOrder
+  indexes:
+    - indexType: UniqueNotDeleted
+      fields:
+        - attributePaths:
+            - Iban

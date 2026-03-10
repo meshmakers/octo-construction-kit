@@ -1,0 +1,26 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: BankAccountType
+  description: "Type of financial account"
+  values:
+    - key: 0
+      name: Checking
+      description: "Checking or current account"
+    - key: 1
+      name: Savings
+      description: "Savings account"
+    - key: 2
+      name: CreditCard
+      description: "Credit card account"
+    - key: 3
+      name: Loan
+      description: "Loan account"
+    - key: 4
+      name: Securities
+      description: "Securities or investment account"
+    - key: 5
+      name: PayPal
+      description: "PayPal account"
+    - key: 6
+      name: Other
+      description: "Other account type"

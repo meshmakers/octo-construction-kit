@@ -1,0 +1,33 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: BankConnection
+  derivedFromCkTypeId: ${Basic}/NamedEntity
+  description: "A connection to a bank institution used for synchronizing accounts and transactions"
+  attributes:
+    - id: ${Basic}/Iban
+      name: Iban
+      isOptional: true
+    - id: ${Basic}/BankName
+      name: BankName
+      isOptional: true
+    - id: ${this}/Bic
+      name: Bic
+      isOptional: true
+    - id: ${this}/BankCode
+      name: BankCode
+      isOptional: true
+    - id: ${this}/BankConnectionExternalId
+      name: ExternalId
+      isOptional: true
+    - id: ${this}/AccountIds
+      name: AccountIds
+      isOptional: true
+    - id: ${this}/LastSuccessfulSync
+      name: LastSuccessfulSync
+      isOptional: true
+    - id: ${this}/SyncStatus
+      name: SyncStatus
+      isOptional: true
+  associations:
+    - id: ${this}/ConnectionToAccount
+      targetCkTypeId: ${this}/BankAccount

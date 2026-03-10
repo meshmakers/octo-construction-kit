@@ -1,0 +1,20 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+associationRoles:
+- id: ConnectionToAccount
+  description: "Association between a bank connection and its accounts"
+  inboundName: Accounts
+  inboundMultiplicity: N
+  outboundName: BankConnection
+  outboundMultiplicity: ZeroOrOne
+- id: AccountToTransaction
+  description: "Association between a bank account and its transactions"
+  inboundName: Transactions
+  inboundMultiplicity: N
+  outboundName: Account
+  outboundMultiplicity: One
+- id: AccountToPaymentOrder
+  description: "Association between a bank account and its payment orders"
+  inboundName: PaymentOrders
+  inboundMultiplicity: N
+  outboundName: SourceAccount
+  outboundMultiplicity: One

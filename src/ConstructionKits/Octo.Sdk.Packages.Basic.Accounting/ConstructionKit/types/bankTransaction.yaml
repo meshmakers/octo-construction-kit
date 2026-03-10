@@ -1,0 +1,62 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: BankTransaction
+  derivedFromCkTypeId: ${System}/Entity
+  description: "A single bank transaction (booking)"
+  attributes:
+    - id: ${this}/TransactionId
+      name: TransactionId
+    - id: ${this}/Amount
+      name: Amount
+    - id: ${this}/TransactionCurrency
+      name: Currency
+    - id: ${this}/BookingDate
+      name: BookingDate
+    - id: ${this}/ValueDate
+      name: ValueDate
+      isOptional: true
+    - id: ${this}/Purpose
+      name: Purpose
+      isOptional: true
+    - id: ${this}/TransactionText
+      name: TransactionText
+      isOptional: true
+    - id: ${this}/PaymentReference
+      name: PaymentReference
+      isOptional: true
+    - id: ${this}/CounterpartName
+      name: CounterpartName
+      isOptional: true
+    - id: ${this}/CounterpartIban
+      name: CounterpartIban
+      isOptional: true
+    - id: ${this}/CounterpartBic
+      name: CounterpartBic
+      isOptional: true
+    - id: ${this}/TransactionDirection
+      name: Direction
+    - id: ${this}/EndToEndReference
+      name: EndToEndReference
+      isOptional: true
+    - id: ${this}/MandateReference
+      name: MandateReference
+      isOptional: true
+    - id: ${this}/CreditorId
+      name: CreditorId
+      isOptional: true
+    - id: ${this}/BankTransactionCode
+      name: BankTransactionCode
+      isOptional: true
+  indexes:
+    - indexType: UniqueNotDeleted
+      fields:
+        - attributePaths:
+            - TransactionId
+    - indexType: Ascending
+      fields:
+        - attributePaths:
+            - BookingDate
+    - indexType: Ascending
+      fields:
+        - attributePaths:
+            - Direction

@@ -1,0 +1,20 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Bic
+    valueType: String
+    description: "Bank Identifier Code (BIC/SWIFT)"
+  - id: BankCode
+    valueType: String
+    description: "National bank code (e.g. BLZ in Germany/Austria) or finAPI bank ID"
+  - id: BankConnectionExternalId
+    valueType: String
+    description: "Identifier of the bank connection in the external system"
+  - id: AccountIds
+    valueType: String
+    description: "Comma-separated list of finAPI account IDs associated with this bank connection"
+  - id: LastSuccessfulSync
+    valueType: DateTime
+    description: "Timestamp of the last successful synchronization"
+  - id: SyncStatus
+    valueType: String
+    description: "Current synchronization status"

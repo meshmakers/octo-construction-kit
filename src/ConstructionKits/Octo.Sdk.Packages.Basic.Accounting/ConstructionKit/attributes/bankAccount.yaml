@@ -1,0 +1,24 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: AccountNumber
+    valueType: String
+    description: "Bank-specific account number"
+  - id: BankAccountType
+    valueType: Enum
+    valueCkEnumId: ${this}/BankAccountType
+    description: "Type of the bank account"
+  - id: Balance
+    valueType: Double
+    description: "Current balance of the account"
+  - id: Currency
+    valueType: String
+    description: "ISO 4217 currency code (e.g. EUR, USD)"
+  - id: BalanceDate
+    valueType: DateTime
+    description: "Date of the last balance update"
+  - id: Overdraft
+    valueType: Double
+    description: "Overdraft limit of the account"
+  - id: AvailableFunds
+    valueType: Double
+    description: "Available funds on the account"

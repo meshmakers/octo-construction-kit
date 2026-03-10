@@ -1,0 +1,51 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: TransactionId
+    valueType: String
+    description: "Unique identifier of the transaction from the source system"
+  - id: Amount
+    valueType: Double
+    description: "Transaction amount (positive for credit, negative for debit)"
+  - id: TransactionCurrency
+    valueType: String
+    description: "ISO 4217 currency code of the transaction"
+  - id: BookingDate
+    valueType: DateTime
+    description: "Date when the transaction was booked"
+  - id: ValueDate
+    valueType: DateTime
+    description: "Value date of the transaction"
+  - id: Purpose
+    valueType: String
+    description: "Purpose or reference text of the transaction"
+  - id: TransactionText
+    valueType: String
+    description: "Descriptive text of the transaction from the bank statement"
+  - id: PaymentReference
+    valueType: String
+    description: "Payment reference of the transaction"
+  - id: CounterpartName
+    valueType: String
+    description: "Name of the counterpart (sender or receiver)"
+  - id: CounterpartIban
+    valueType: String
+    description: "IBAN of the counterpart"
+  - id: CounterpartBic
+    valueType: String
+    description: "BIC/SWIFT code of the counterpart's bank"
+  - id: TransactionDirection
+    valueType: Enum
+    valueCkEnumId: ${this}/TransactionDirection
+    description: "Direction of the transaction (Credit or Debit)"
+  - id: EndToEndReference
+    valueType: String
+    description: "End-to-end reference of the transaction"
+  - id: MandateReference
+    valueType: String
+    description: "SEPA mandate reference for direct debits"
+  - id: CreditorId
+    valueType: String
+    description: "SEPA creditor identifier for direct debits"
+  - id: BankTransactionCode
+    valueType: String
+    description: "Bank transaction code classifying the transaction type"

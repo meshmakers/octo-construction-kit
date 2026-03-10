@@ -1,0 +1,11 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: TransactionDirection
+  description: "Direction of a bank transaction"
+  values:
+    - key: 0
+      name: Credit
+      description: "Incoming payment"
+    - key: 1
+      name: Debit
+      description: "Outgoing payment"

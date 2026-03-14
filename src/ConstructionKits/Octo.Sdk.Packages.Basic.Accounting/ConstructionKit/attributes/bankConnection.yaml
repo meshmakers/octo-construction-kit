@@ -10,8 +10,8 @@ attributes:
     valueType: String
     description: "Identifier of the bank connection in the external system"
   - id: AccountIds
-    valueType: String
-    description: "Comma-separated list of finAPI account IDs associated with this bank connection"
+    valueType: IntArray
+    description: "List of finAPI account IDs associated with this bank connection"
   - id: LastSuccessfulSync
     valueType: DateTime
     description: "Timestamp of the last successful synchronization"

@@ -2,6 +2,8 @@
 
 Domain-specific data model packages for the [OctoMesh](https://www.meshmakers.io) platform. Each **Construction Kit** (CK) defines a bounded context with types, records, attributes, enumerations and associations — all described in YAML and compiled into NuGet packages at build time.
 
+For a comprehensive guide on Construction Kits, see the [official documentation](https://docs.meshmakers.cloud/docs/technologyGuide/constructionKits/intro).
+
 ## Available Construction Kits
 
 | Package | Model ID | Depends On | Description |

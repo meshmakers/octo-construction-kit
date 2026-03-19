@@ -4,6 +4,7 @@ records:
   attributes:
     - id: ${this}/LegalEntityType
       name: LegalEntityType
+      isOptional: true
     - id: ${this}/Salutation
       name: Salutation
       isOptional: true
@@ -24,6 +25,7 @@ records:
       isOptional: true
     - id: ${this}/Address
       name: Address
+      isOptional: true
     - id: ${this}/TaxIdentificationNumber
       name: TaxIdentificationNumber
       isOptional: true

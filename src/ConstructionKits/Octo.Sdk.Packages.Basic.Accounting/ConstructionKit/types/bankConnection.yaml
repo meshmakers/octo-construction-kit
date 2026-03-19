@@ -4,9 +4,6 @@ types:
   derivedFromCkTypeId: ${Basic}/NamedEntity
   description: "A connection to a bank institution used for synchronizing accounts and transactions"
   attributes:
-    - id: ${Basic}/Iban
-      name: Iban
-      isOptional: true
     - id: ${Basic}/BankName
       name: BankName
       isOptional: true

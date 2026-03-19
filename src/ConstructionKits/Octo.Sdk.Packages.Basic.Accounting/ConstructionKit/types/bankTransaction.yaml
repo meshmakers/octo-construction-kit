@@ -47,6 +47,9 @@ types:
     - id: ${this}/BankTransactionCode
       name: BankTransactionCode
       isOptional: true
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/BankAccount
   indexes:
     - indexType: UniqueNotDeleted
       fields:

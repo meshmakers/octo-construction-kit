@@ -29,6 +29,9 @@ types:
     - id: ${this}/PaymentEndToEndReference
       name: EndToEndReference
       isOptional: true
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/BankAccount
   indexes:
     - indexType: Ascending
       fields:

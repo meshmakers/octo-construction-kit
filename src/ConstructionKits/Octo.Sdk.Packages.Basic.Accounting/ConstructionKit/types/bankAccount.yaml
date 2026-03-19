@@ -6,8 +6,8 @@ types:
   attributes:
     - id: ${Basic}/Iban
       name: Iban
-    - id: ${Basic}/SwiftCode
-      name: SwiftCode
+    - id: ${Basic}/BankName
+      name: BankName
       isOptional: true
     - id: ${Basic}/AccountHolder
       name: AccountHolder
@@ -32,11 +32,6 @@ types:
     - id: ${this}/AvailableFunds
       name: AvailableFunds
       isOptional: true
-  associations:
-    - id: ${this}/AccountToTransaction
-      targetCkTypeId: ${this}/BankTransaction
-    - id: ${this}/AccountToPaymentOrder
-      targetCkTypeId: ${this}/PaymentOrder
   indexes:
     - indexType: UniqueNotDeleted
       fields:

@@ -1,0 +1,11 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: ParticipationPeriod
+    derivedFromCkTypeId: ${System}/Entity
+    description: "The participation period with a start and end date"
+    attributes:
+      - id: ${Basic}/TimeRange
+        name: TimeRange
+    associations:
+      - id: ${this}/ParticipationPeriod
+        targetCkTypeId: ${this}/MeteringPoint

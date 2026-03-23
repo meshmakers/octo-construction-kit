@@ -24,3 +24,9 @@ associationRoles:
     inboundMultiplicity: N
     outboundName: Process
     outboundMultiplicity: ZeroOrOne
+  - id: ParticipationPeriod
+    description: "Association between a metering point an a time range to get the participation period for a metering point"
+    inboundName: Periods
+    inboundMultiplicity: N
+    outboundName: MeteringPoint
+    outboundMultiplicity: One

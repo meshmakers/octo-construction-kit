@@ -1,0 +1,22 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: EnergyPerformanceIndicator
+  derivedFromCkTypeId: ${Basic}/NamedEntity
+  description: "Energy Performance Indicator (EnPI) for tracking energy efficiency metrics like kWh/unit"
+  attributes:
+    - id: ${Basic}/TimeRange
+      name: TimeRange
+    - id: ${this}/IndicatorValue
+      name: IndicatorValue
+    - id: ${this}/IndicatorUnit
+      name: IndicatorUnit
+    - id: ${this}/ReferenceValue
+      name: ReferenceValue
+      isOptional: true
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${Basic}/TreeNode
+  indexes:
+    - indexType: "Ascending"
+      fields:
+        - attributePaths: [TimeRange.From]

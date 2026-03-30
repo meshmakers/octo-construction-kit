@@ -1,10 +1,9 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
-- typeId: Photovoltaic
+- typeId: PhotovoltaicSystem
   derivedFromCkTypeId: ${Basic}/Asset
 
-
-- typeId: Photovoltaic.String
+- typeId: PhotovoltaicSystem.String
   derivedFromCkTypeId: ${Basic}/Asset
   attributes:
     - id: ${this}/NumOfModules
@@ -13,7 +12,7 @@ types:
       name: Power
       isOptional: true
 
-- typeId: Photovoltaic.Module
+- typeId: PhotovoltaicSystem.Module
   derivedFromCkTypeId: ${Industry.Basic}/Machine
   attributes:
     - id: ${this}/PeakPower

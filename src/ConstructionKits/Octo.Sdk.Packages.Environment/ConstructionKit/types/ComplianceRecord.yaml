@@ -1,0 +1,22 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ComplianceRecord
+  derivedFromCkTypeId: ${Basic}/NamedEntity
+  description: "Regulatory compliance record for standards like ISO 50001, EEffG, CSRD, NIS2"
+  attributes:
+    - id: ${this}/ComplianceCategory
+      name: ComplianceCategory
+    - id: ${this}/ComplianceStatus
+      name: ComplianceStatus
+    - id: ${this}/DueDate
+      name: DueDate
+      isOptional: true
+    - id: ${this}/AuditDate
+      name: AuditDate
+      isOptional: true
+    - id: ${this}/ComplianceNotes
+      name: ComplianceNotes
+      isOptional: true
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${Basic}/TreeNode

@@ -1,0 +1,22 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: DemandResponseEvent
+  derivedFromCkTypeId: ${Basic}/NamedEntity
+  description: "A demand response event representing participation in energy flexibility markets"
+  attributes:
+    - id: ${this}/ReductionKw
+      name: ReductionKw
+    - id: ${this}/DemandResponseStartTime
+      name: StartTime
+    - id: ${this}/DemandResponseEndTime
+      name: EndTime
+    - id: ${this}/Revenue
+      name: Revenue
+      isOptional: true
+    - id: ${this}/DemandResponseMarket
+      name: Market
+    - id: ${this}/DemandResponseStatus
+      name: Status
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${Basic}/TreeNode

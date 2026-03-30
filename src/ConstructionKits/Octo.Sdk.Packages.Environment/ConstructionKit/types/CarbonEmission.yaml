@@ -1,0 +1,25 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: CarbonEmission
+  derivedFromCkTypeId: ${System}/Entity
+  description: "Time-series data for CO2 emissions by scope (GHG Protocol Scope 1, 2, 3)"
+  attributes:
+    - id: ${Basic}/TimeRange
+      name: TimeRange
+    - id: ${this}/EmissionAmount
+      name: EmissionAmount
+    - id: ${this}/CarbonScope
+      name: CarbonScope
+    - id: ${this}/EmissionSource
+      name: EmissionSource
+      isOptional: true
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${Basic}/TreeNode
+  indexes:
+    - indexType: "Ascending"
+      fields:
+        - attributePaths: [TimeRange.From]
+    - indexType: "Ascending"
+      fields:
+        - attributePaths: [TimeRange.From, TimeRange.To, CarbonScope]

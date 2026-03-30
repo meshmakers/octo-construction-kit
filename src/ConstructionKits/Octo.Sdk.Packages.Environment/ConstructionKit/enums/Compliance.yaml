@@ -1,0 +1,26 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: ComplianceCategory
+    isExtensible: true
+    values:
+      - key: 0
+        name: ISO50001
+      - key: 1
+        name: EEffG
+      - key: 2
+        name: CSRD
+      - key: 3
+        name: NIS2
+  - enumId: ComplianceStatus
+    isExtensible: true
+    values:
+      - key: 0
+        name: Open
+      - key: 1
+        name: InProgress
+      - key: 2
+        name: Submitted
+      - key: 3
+        name: Compliant
+      - key: 4
+        name: Passed

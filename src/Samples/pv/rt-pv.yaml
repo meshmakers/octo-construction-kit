@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - Industry.Energy-[2.0,3.0)
+  - Industry.Energy-[3.0,4.0)
 entities:
   - rtId: 5fc8fc3d8b2fc75f925e21aa
     ckTypeId: Basic/Tree
@@ -21,7 +21,7 @@ entities:
 
 
   - rtId: 5fc8fda18b2fc75f925e21ac
-    ckTypeId: Industry.Energy/Photovoltaic
+    ckTypeId: Industry.Energy/PhotovoltaicSystem
     attributes:
       - id: System/Name
         value: PV
@@ -48,20 +48,20 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: Industry.Energy/Photovoltaic
+        targetCkTypeId: Industry.Energy/PhotovoltaicSystem
         
   - rtId: 5fc8fda18b2fc75f925e21ae
-    ckTypeId: Industry.Energy/Battery
+    ckTypeId: Industry.Energy/EnergyStorage
     attributes:
       - id: Industry.Energy/Capacity
         value: 12        
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: Industry.Energy/Photovoltaic
+        targetCkTypeId: Industry.Energy/PhotovoltaicSystem
         
   - rtId: 5fc8fda18b2fc75f925e21af
-    ckTypeId: Industry.Energy/Photovoltaic.Module
+    ckTypeId: Industry.Energy/PhotovoltaicSystem.Module
     attributes:
       - id: System/Name
         value: Hauptgebäude
@@ -70,10 +70,10 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: Industry.Energy/Photovoltaic
+        targetCkTypeId: Industry.Energy/PhotovoltaicSystem
           
   - rtId: 5fc8fda18b2fc75f925e21c0
-    ckTypeId: Industry.Energy/Photovoltaic.Module
+    ckTypeId: Industry.Energy/PhotovoltaicSystem.Module
     attributes:
       - id: System/Name
         value: Nebengebäude
@@ -82,7 +82,7 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: Industry.Energy/Photovoltaic
+        targetCkTypeId: Industry.Energy/PhotovoltaicSystem
           
   - rtId: 5fc8fda18b2fc75f925e21c1
     ckTypeId: Industry.Energy/EnergyMeter
@@ -92,7 +92,7 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: Industry.Energy/Photovoltaic
+        targetCkTypeId: Industry.Energy/PhotovoltaicSystem
   - rtId: 5fc8fda18b2fc75f925e21c2
     ckTypeId: Industry.Energy/EnergyMeter
     attributes:
@@ -101,4 +101,4 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fda18b2fc75f925e21ac
-        targetCkTypeId: Industry.Energy/Photovoltaic           
+        targetCkTypeId: Industry.Energy/PhotovoltaicSystem           

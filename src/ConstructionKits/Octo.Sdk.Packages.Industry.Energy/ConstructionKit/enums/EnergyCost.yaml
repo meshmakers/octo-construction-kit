@@ -1,0 +1,11 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: TariffType
+    isExtensible: true
+    values:
+      - key: 0
+        name: Standard
+      - key: 1
+        name: Peak
+      - key: 2
+        name: OffPeak

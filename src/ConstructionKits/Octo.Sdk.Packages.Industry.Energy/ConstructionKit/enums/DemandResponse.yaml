@@ -1,0 +1,19 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: DemandResponseMarket
+    isExtensible: true
+    values:
+      - key: 0
+        name: APCS
+      - key: 1
+        name: EXAA
+      - key: 2
+        name: Spot
+  - enumId: DemandResponseStatus
+    values:
+      - key: 0
+        name: Active
+      - key: 1
+        name: Completed
+      - key: 2
+        name: Cancelled

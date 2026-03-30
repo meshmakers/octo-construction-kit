@@ -1,0 +1,23 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: PredictedLoad
+  valueType: Double
+  description: "Predicted load from AI forecast model"
+  isDataStream: true
+  metaData:
+    - key: Unit
+      value: "kW"
+    - key: Decimals
+      value: 2
+- id: Confidence
+  valueType: Double
+  description: "Confidence level of the forecast prediction"
+  isDataStream: true
+  metaData:
+    - key: Unit
+      value: "%"
+    - key: Decimals
+      value: 1
+- id: ForecastModel
+  valueType: String
+  description: "Name or identifier of the AI forecast model used"

@@ -1,0 +1,23 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: EnergyForecast
+  derivedFromCkTypeId: ${System}/Entity
+  description: "AI-generated load forecast data for energy consumption prediction"
+  attributes:
+    - id: ${Basic}/TimeRange
+      name: TimeRange
+    - id: ${this}/PredictedLoad
+      name: PredictedLoad
+    - id: ${this}/Confidence
+      name: Confidence
+      isOptional: true
+    - id: ${this}/ForecastModel
+      name: ForecastModel
+      isOptional: true
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${Basic}/TreeNode
+  indexes:
+    - indexType: "Ascending"
+      fields:
+        - attributePaths: [TimeRange.From]

@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
-- typeId: Battery
+- typeId: EnergyStorage
   derivedFromCkTypeId: ${Industry.Basic}/Machine
   attributes:
   - id: ${this}/Voltage

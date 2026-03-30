@@ -1,0 +1,18 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: CarbonBudget
+  derivedFromCkTypeId: ${Basic}/NamedEntity
+  description: "Annual carbon budget with target tracking"
+  attributes:
+    - id: ${this}/BudgetYear
+      name: BudgetYear
+    - id: ${this}/BudgetTotal
+      name: BudgetTotal
+    - id: ${this}/BudgetConsumed
+      name: BudgetConsumed
+    - id: ${this}/TargetFulfillment
+      name: TargetFulfillment
+      isOptional: true
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${Basic}/TreeNode

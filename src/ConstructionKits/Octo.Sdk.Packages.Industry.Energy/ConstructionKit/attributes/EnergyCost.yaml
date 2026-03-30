@@ -1,0 +1,23 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: CostAmount
+  valueType: Double
+  description: "Energy cost amount"
+  isDataStream: true
+  metaData:
+    - key: Unit
+      value: "EUR"
+    - key: Decimals
+      value: 2
+- id: ForecastAmount
+  valueType: Double
+  description: "Forecasted energy cost amount"
+  isDataStream: true
+  metaData:
+    - key: Unit
+      value: "EUR"
+    - key: Decimals
+      value: 2
+- id: TariffType
+  valueType: Enum
+  valueCkEnumId: ${this}/TariffType

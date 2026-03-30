@@ -1,0 +1,13 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: IndicatorValue
+  valueType: Double
+  description: "Current value of the energy performance indicator"
+  isDataStream: true
+- id: IndicatorUnit
+  valueType: String
+  description: "Unit of the energy performance indicator (e.g. kWh/Stk, kWh/m2)"
+- id: ReferenceValue
+  valueType: Double
+  description: "Reference or baseline value for comparison"
+  isDataStream: true

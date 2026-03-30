@@ -1,0 +1,17 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: EnergySource
+    isExtensible: true
+    values:
+      - key: 0
+        name: Solar
+      - key: 1
+        name: Wind
+      - key: 2
+        name: Hydro
+      - key: 3
+        name: Biomass
+      - key: 4
+        name: Geothermal
+      - key: 5
+        name: Other

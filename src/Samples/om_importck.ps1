@@ -9,11 +9,12 @@ if (!(Test-Path -Path $PSScriptRoot/../ConstructionKits/Octo.Sdk.Packages.Basic/
 
 
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Basic/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Basic/out/ck-basic-2.yaml -w
+octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Basic.Energy/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Basic.Energy/out/ck-basic.energy.yaml -w
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.EnergyCommunity/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.EnergyCommunity/out/ck-energycommunity-3.yaml -w
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Basic/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Industry.Basic/out/ck-industry.basic-2.yaml -w
-octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Energy/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Industry.Energy/out/ck-industry.energy-2.yaml -w
+octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Energy/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Industry.Energy/out/ck-industry.energy-3.yaml -w
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Industry.Fluid/out/ck-industry.fluid-2.yaml -w
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Industry.Maintenance/out/ck-industry.maintenance-2.yaml -w
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Industry.Manufacturing/out/ck-industry.manufacturing-2.yaml
-octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Environment/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Environment/out/ck-environment-2.yaml -w
+octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Environment/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Environment/out/ck-environment-3.yaml -w
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Demo/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Demo/out/ck-octosdkdemo.yaml -w

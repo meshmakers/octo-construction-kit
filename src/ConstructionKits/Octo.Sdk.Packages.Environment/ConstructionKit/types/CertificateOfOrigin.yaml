@@ -1,0 +1,21 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: CertificateOfOrigin
+  derivedFromCkTypeId: ${Basic}/NamedEntity
+  description: "Certificate of origin (Herkunftsnachweis/HKN) for renewable energy"
+  attributes:
+    - id: ${this}/CertificateIssuer
+      name: CertificateIssuer
+    - id: ${this}/CertificateValidFrom
+      name: CertificateValidFrom
+    - id: ${this}/CertificateValidTo
+      name: CertificateValidTo
+    - id: ${this}/EnergySource
+      name: EnergySource
+    - id: ${this}/CertifiedAmount
+      name: CertifiedAmount
+    - id: ${this}/IsVerified
+      name: IsVerified
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${Basic}/TreeNode

@@ -123,7 +123,7 @@ entities:
                   targetValueWriteMode: Append
                   updateKind: UPDATE
                   rtId: 5fc8fda18b2fc75f925e21af
-                  ckTypeId: Industry.Energy/Photovoltaic.Module
+                  ckTypeId: Industry.Energy/PhotovoltaicSystem.Module
                   timestampPath: $.key.timestamp
                   attributeUpdates:
                     - attributeName: PeakPower
@@ -136,7 +136,7 @@ entities:
                   targetValueWriteMode: Append
                   updateKind: UPDATE
                   rtId: 5fc8fda18b2fc75f925e21c0
-                  ckTypeId: Industry.Energy/Photovoltaic.Module
+                  ckTypeId: Industry.Energy/PhotovoltaicSystem.Module
                   timestampPath: $.key.timestamp
                   attributeUpdates:
                     - attributeName: PeakPower
@@ -149,7 +149,7 @@ entities:
                   targetValueWriteMode: Append
                   updateKind: UPDATE
                   rtId: 5fc8fda18b2fc75f925e21ae
-                  ckTypeId: Industry.Energy/Battery
+                  ckTypeId: Industry.Energy/EnergyStorage
                   timestampPath: $.key.timestamp
                   attributeUpdates:
                     - attributeName: Power

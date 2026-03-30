@@ -1,0 +1,18 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: EmissionAmount
+  valueType: Double
+  description: "Amount of CO2 emissions"
+  isDataStream: true
+  metaData:
+    - key: Unit
+      value: "t"
+    - key: Decimals
+      value: 2
+- id: CarbonScope
+  valueType: Enum
+  valueCkEnumId: ${this}/CarbonScope
+  description: "Emission scope according to GHG Protocol (Scope 1, 2, or 3)"
+- id: EmissionSource
+  valueType: String
+  description: "Source of the emission (e.g. electricity, heating, transport)"

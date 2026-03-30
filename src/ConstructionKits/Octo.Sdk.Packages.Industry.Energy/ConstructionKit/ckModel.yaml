@@ -1,4 +1,4 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
-modelId: Industry.Energy-2.0.0
+modelId: Industry.Energy-3.1.0
 dependencies:
   - Industry.Basic-[2.0,3.0)

@@ -1,0 +1,19 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: ComplianceCategory
+  valueType: Enum
+  valueCkEnumId: ${this}/ComplianceCategory
+  description: "Category of the compliance standard"
+- id: ComplianceStatus
+  valueType: Enum
+  valueCkEnumId: ${this}/ComplianceStatus
+  description: "Current status of compliance"
+- id: DueDate
+  valueType: DateTime
+  description: "Due date for the compliance requirement"
+- id: AuditDate
+  valueType: DateTime
+  description: "Date of the last audit"
+- id: ComplianceNotes
+  valueType: String
+  description: "Additional notes or remarks"

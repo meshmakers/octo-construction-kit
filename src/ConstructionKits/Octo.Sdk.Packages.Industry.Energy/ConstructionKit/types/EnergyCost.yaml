@@ -1,0 +1,26 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: EnergyCost
+  derivedFromCkTypeId: ${System}/Entity
+  description: "Time-series data for energy costs including actual and forecasted amounts"
+  attributes:
+    - id: ${Basic}/TimeRange
+      name: TimeRange
+    - id: ${this}/CostAmount
+      name: CostAmount
+    - id: ${this}/ForecastAmount
+      name: ForecastAmount
+      isOptional: true
+    - id: ${this}/TariffType
+      name: TariffType
+      isOptional: true
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${Basic}/TreeNode
+  indexes:
+    - indexType: "Ascending"
+      fields:
+        - attributePaths: [TimeRange.From]
+    - indexType: "Ascending"
+      fields:
+        - attributePaths: [TimeRange.From, TimeRange.To, TariffType]

@@ -1,0 +1,30 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: ReductionKw
+  valueType: Double
+  description: "Power reduction in kW during demand response event"
+  metaData:
+    - key: Unit
+      value: "kW"
+    - key: Decimals
+      value: 2
+- id: Revenue
+  valueType: Double
+  description: "Revenue earned from demand response participation"
+  metaData:
+    - key: Unit
+      value: "EUR"
+    - key: Decimals
+      value: 2
+- id: DemandResponseMarket
+  valueType: Enum
+  valueCkEnumId: ${this}/DemandResponseMarket
+- id: DemandResponseStatus
+  valueType: Enum
+  valueCkEnumId: ${this}/DemandResponseStatus
+- id: DemandResponseStartTime
+  valueType: DateTime
+  description: "Start time of the demand response event"
+- id: DemandResponseEndTime
+  valueType: DateTime
+  description: "End time of the demand response event"

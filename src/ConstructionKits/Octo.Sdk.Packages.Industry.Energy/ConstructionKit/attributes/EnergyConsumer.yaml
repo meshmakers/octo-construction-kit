@@ -1,0 +1,19 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: NominalPower
+  valueType: Double
+  description: "Nominal or rated power capacity of the energy consumer"
+  metaData:
+    - key: Unit
+      value: "kW"
+    - key: Decimals
+      value: 2
+- id: LoadPercent
+  valueType: Double
+  description: "Current load as percentage of nominal power (0-100)"
+  isDataStream: true
+  metaData:
+    - key: Unit
+      value: "%"
+    - key: Decimals
+      value: 0

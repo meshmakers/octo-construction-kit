@@ -1,0 +1,16 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: EnergyConsumer
+  derivedFromCkTypeId: ${Industry.Basic}/Machine
+  description: "Energy consuming equipment with nominal power and load tracking"
+  attributes:
+    - id: ${Industry.Basic}/Power
+      name: Power
+    - id: ${Industry.Basic}/ImportedEnergy
+      name: ImportedEnergy
+      isOptional: true
+    - id: ${this}/NominalPower
+      name: NominalPower
+    - id: ${this}/LoadPercent
+      name: LoadPercent
+      isOptional: true

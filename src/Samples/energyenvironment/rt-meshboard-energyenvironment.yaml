@@ -490,4 +490,37 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: ee00000000000000000a0002
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"chartType":"line","categoryField":"timeRange_from","seriesGroupField":"amount_unit","valueField":"amount_value","showLegend":false,"legendPosition":"right","showMarkers":false,"referenceLines":[{"value":3000,"label":"Limit 3.000 kW","color":"#ef4444","opacity":0.8}],"queryName":"meshboard_energyenvironment_lastgang","queryRtId":"ee00000000000000000a0002"}'
+      value: '{"chartType":"area","categoryField":"timeRange_from","seriesGroupField":"obisCode","valueField":"amount_value","showLegend":true,"legendPosition":"right","valueAxisTitle":"kW","showMarkers":false,"referenceLines":[{"value":3000,"label":"Limit 3.000 kW","color":"#ef4444","opacity":0.8}],"queryName":"meshboard_energyenvironment_lastgang","queryRtId":"ee00000000000000000a0002"}'
+
+  # ============================================================
+  # ROW 14-15: AI FORECAST BAR CHART
+  # ============================================================
+
+  - rtId: ee00000000000000000d0601
+    ckTypeId: System.UI/DashboardWidget-1
+    associations:
+    - roleId: System/ParentChild-1
+      targetRtId: ee00000000000000000d0001
+      targetCkTypeId: System.UI/Dashboard-1
+      attributes: []
+    attributes:
+    - id: System/Name-1
+      value: AI Load Forecast - Next 6h
+    - id: System.UI/DashboardWidget.Type-1
+      value: barChart
+    - id: System.UI/DashboardWidget.Col-1
+      value: 1
+    - id: System.UI/DashboardWidget.Row-1
+      value: 14
+    - id: System.UI/DashboardWidget.ColSpan-1
+      value: 6
+    - id: System.UI/DashboardWidget.RowSpan-1
+      value: 2
+    - id: System.UI/DashboardWidget.DataSourceType-1
+      value: systemQuery
+    - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
+      value: ''
+    - id: System.UI/DashboardWidget.DataSourceRtId-1
+      value: ee00000000000000000a0003
+    - id: System.UI/DashboardWidget.Config-1
+      value: '{"chartType":"column","categoryField":"timeRange_from","series":[{"field":"predictedLoad","name":"Predicted Load"}],"showLegend":false,"showDataLabels":true,"dataLabelSuffix":" kW","colorThresholds":[{"value":2300,"color":"#10b981"},{"value":2600,"color":"#f59e0b"}],"defaultBarColor":"#ef4444","queryName":"meshboard_energyenvironment_forecast","queryRtId":"ee00000000000000000a0003"}'

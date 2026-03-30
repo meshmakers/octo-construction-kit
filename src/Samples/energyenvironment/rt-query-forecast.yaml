@@ -1,25 +1,23 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies: []
 entities:
-- rtId: ee00000000000000000a0002
+- rtId: ee00000000000000000a0003
   ckTypeId: System/SimpleRtQuery-1
   associations: []
   attributes:
   - id: System/Query.Columns-1
     value:
     - timeRange.from
-    - timeRange.to
-    - amount.value
-    - obisCode
+    - predictedLoad
   - id: System/Query.Sorting-1
     value: []
   - id: System/Query.FieldFilter-1
     value: []
   - id: System/Name-1
-    value: meshboard_energyenvironment_lastgang
+    value: meshboard_energyenvironment_forecast
   - id: System/Description-1
-    value: 'Lastgang 15-Min-Werte Gesamtlast'
+    value: 'AI Load Forecast - next hours'
   - id: System/Query.CkTypeId-1
-    value: Basic.Energy/EnergyMeasurement
+    value: Industry.Energy/EnergyForecast
   - id: System/Query.NavigationFilterMode-1
     value: 0

@@ -56,7 +56,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: e0500001000000000000ac06
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"valueAttribute":"power","suffix":" kW","icon":"flash"}'
+      value: '{"valueAttribute":"power","suffix":" kW","icon":"flash","trend":"up","comparisonText":"+3,1% vs. Vorwoche"}'
 
   # PV-Leistung - Inverter Power
   - rtId: ee00000000000000000d0102
@@ -86,7 +86,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: e0500001000000000000ac02
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"valueAttribute":"power","suffix":" kW","icon":"flash"}'
+      value: '{"valueAttribute":"power","suffix":" kW","icon":"flash","trend":"up","comparisonText":"+6% vs. Vormonat"}'
 
   # Energiekosten Heute
   - rtId: ee00000000000000000d0103
@@ -116,7 +116,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: e0500001000000000000ae01
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"valueAttribute":"costAmount","suffix":" EUR","icon":"chart"}'
+      value: '{"valueAttribute":"costAmount","suffix":" EUR","icon":"chart","trend":"neutral","comparisonText":"Prognose: 4.320 EUR"}'
 
   # EnPI
   - rtId: ee00000000000000000d0104
@@ -146,7 +146,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: e0500001000000000000b001
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"valueAttribute":"indicatorValue","suffix":" kWh/Stk","icon":"chart"}'
+      value: '{"valueAttribute":"indicatorValue","suffix":" kWh/Stk","icon":"chart","trend":"down","comparisonText":"-5,2% Effizienz"}'
 
   # Speicher SOC - Gauge
   - rtId: ee00000000000000000d0105

@@ -15,6 +15,10 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\Octo.Sdk.Packages.Basic\Octo.Sdk.Packages.Basic.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ConstructionKitFolder Visible="false" Include="$(MSBuildProjectDirectory)\ConstructionKit"/>
     </ItemGroup>
 

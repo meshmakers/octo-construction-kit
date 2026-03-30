@@ -14,7 +14,7 @@ entities:
       value: Energy & Environment
     - id: System/Description-1
       value: |-
-        Werk Donaustein - Energieuebersicht
+        Werk Donaustein - Energy Overview
         ---MESHBOARD_VARIABLES---
         {}
     - id: System.UI/Dashboard.Columns-1
@@ -38,7 +38,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: Momentanleistung
+      value: Total Power
     - id: System.UI/DashboardWidget.Type-1
       value: kpi
     - id: System.UI/DashboardWidget.Col-1
@@ -56,7 +56,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: e0500001000000000000ac06
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"valueAttribute":"power","suffix":" kW","icon":"flash","trend":"up","comparisonText":"+3,1% vs. Vorwoche"}'
+      value: '{"valueAttribute":"power","suffix":" kW","icon":"flash","trend":"up","comparisonText":"+3.1% vs. last week"}'
 
   # PV-Leistung - Inverter Power
   - rtId: ee00000000000000000d0102
@@ -68,7 +68,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: PV-Leistung
+      value: PV Power
     - id: System.UI/DashboardWidget.Type-1
       value: kpi
     - id: System.UI/DashboardWidget.Col-1
@@ -86,7 +86,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: e0500001000000000000ac02
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"valueAttribute":"power","suffix":" kW","icon":"flash","trend":"up","comparisonText":"+6% vs. Vormonat"}'
+      value: '{"valueAttribute":"power","suffix":" kW","icon":"flash","trend":"up","comparisonText":"+6% vs. last month"}'
 
   # Energiekosten Heute
   - rtId: ee00000000000000000d0103
@@ -98,7 +98,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: Energiekosten Heute
+      value: Energy Cost Today
     - id: System.UI/DashboardWidget.Type-1
       value: kpi
     - id: System.UI/DashboardWidget.Col-1
@@ -116,7 +116,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: e0500001000000000000ae01
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"valueAttribute":"costAmount","suffix":" EUR","icon":"chart","trend":"neutral","comparisonText":"Prognose: 4.320 EUR"}'
+      value: '{"valueAttribute":"costAmount","suffix":" EUR","icon":"chart","trend":"neutral","comparisonText":"Forecast: 4,320 EUR"}'
 
   # EnPI
   - rtId: ee00000000000000000d0104
@@ -146,7 +146,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: e0500001000000000000b001
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"valueAttribute":"indicatorValue","suffix":" kWh/Stk","icon":"chart","trend":"down","comparisonText":"-5,2% Effizienz"}'
+      value: '{"valueAttribute":"indicatorValue","suffix":" kWh/Stk","icon":"chart","trend":"down","comparisonText":"-5.2% Efficiency"}'
 
   # Speicher SOC - Gauge
   - rtId: ee00000000000000000d0105
@@ -158,7 +158,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: Speicher SOC
+      value: Storage SOC
     - id: System.UI/DashboardWidget.Type-1
       value: gauge
     - id: System.UI/DashboardWidget.Col-1
@@ -222,7 +222,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: Aktives DR-Ereignis
+      value: Active DR Event
     - id: System.UI/DashboardWidget.Type-1
       value: entityCard
     - id: System.UI/DashboardWidget.Col-1
@@ -252,7 +252,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: Anlagen-Uebersicht
+      value: Equipment Overview
     - id: System.UI/DashboardWidget.Type-1
       value: statsGrid
     - id: System.UI/DashboardWidget.Col-1
@@ -270,7 +270,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: ''
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"columns":3,"stats":[{"label":"Energiezaehler","queryId":"energyMeters","color":"cyan","suffix":""},{"label":"PV-Module","queryId":"pvModules","color":"mint","suffix":""},{"label":"Speicher","queryId":"storage","color":"violet","suffix":""},{"label":"DR-Events","queryId":"drEvents","color":"toffee","suffix":""},{"label":"Compliance","queryId":"compliance","color":"lilac","suffix":""},{"label":"Herkunftsnachweise","queryId":"hkn","color":"bubblegum","suffix":""}],"queries":[{"id":"energyMeters","ckTypeId":"Industry.Energy/EnergyMeter","aggregation":"count"},{"id":"pvModules","ckTypeId":"Industry.Energy/PhotovoltaicSystem.Module","aggregation":"count"},{"id":"storage","ckTypeId":"Industry.Energy/EnergyStorage","aggregation":"count"},{"id":"drEvents","ckTypeId":"Industry.Energy/DemandResponseEvent","aggregation":"count"},{"id":"compliance","ckTypeId":"Environment/ComplianceRecord","aggregation":"count"},{"id":"hkn","ckTypeId":"Environment/CertificateOfOrigin","aggregation":"count"}]}'
+      value: '{"columns":3,"stats":[{"label":"Energy Meters","queryId":"energyMeters","color":"cyan","suffix":""},{"label":"PV Modules","queryId":"pvModules","color":"mint","suffix":""},{"label":"Storage","queryId":"storage","color":"violet","suffix":""},{"label":"DR-Events","queryId":"drEvents","color":"toffee","suffix":""},{"label":"Compliance","queryId":"compliance","color":"lilac","suffix":""},{"label":"Certificates","queryId":"hkn","color":"bubblegum","suffix":""}],"queries":[{"id":"energyMeters","ckTypeId":"Industry.Energy/EnergyMeter","aggregation":"count"},{"id":"pvModules","ckTypeId":"Industry.Energy/PhotovoltaicSystem.Module","aggregation":"count"},{"id":"storage","ckTypeId":"Industry.Energy/EnergyStorage","aggregation":"count"},{"id":"drEvents","ckTypeId":"Industry.Energy/DemandResponseEvent","aggregation":"count"},{"id":"compliance","ckTypeId":"Environment/ComplianceRecord","aggregation":"count"},{"id":"hkn","ckTypeId":"Environment/CertificateOfOrigin","aggregation":"count"}]}'
 
   # CO2 & ESG - Stats Grid
   - rtId: ee00000000000000000d0203
@@ -300,7 +300,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: ''
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"columns":2,"stats":[{"label":"CO2-Emissionen (Eintraege)","queryId":"emissions","color":"toffee","suffix":""},{"label":"Umweltziele","queryId":"goals","color":"mint","suffix":""},{"label":"CO2-Budgets","queryId":"budgets","color":"cyan","suffix":""},{"label":"Zertifikate","queryId":"certs","color":"violet","suffix":""}],"queries":[{"id":"emissions","ckTypeId":"Environment/CarbonEmission","aggregation":"count"},{"id":"goals","ckTypeId":"Environment/EnvironmentalGoal","aggregation":"count"},{"id":"budgets","ckTypeId":"Environment/CarbonBudget","aggregation":"count"},{"id":"certs","ckTypeId":"Environment/CertificateOfOrigin","aggregation":"count"}]}'
+      value: '{"columns":2,"stats":[{"label":"CO2 Emissions","queryId":"emissions","color":"toffee","suffix":""},{"label":"Environmental Goals","queryId":"goals","color":"mint","suffix":""},{"label":"CO2 Budgets","queryId":"budgets","color":"cyan","suffix":""},{"label":"Certificates","queryId":"certs","color":"violet","suffix":""}],"queries":[{"id":"emissions","ckTypeId":"Environment/CarbonEmission","aggregation":"count"},{"id":"goals","ckTypeId":"Environment/EnvironmentalGoal","aggregation":"count"},{"id":"budgets","ckTypeId":"Environment/CarbonBudget","aggregation":"count"},{"id":"certs","ckTypeId":"Environment/CertificateOfOrigin","aggregation":"count"}]}'
 
   # ============================================================
   # ROW 4-5: ENTITY DETAILS
@@ -346,7 +346,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: Batteriespeicher BS-01
+      value: Energy Storage BS-01
     - id: System.UI/DashboardWidget.Type-1
       value: entityCard
     - id: System.UI/DashboardWidget.Col-1
@@ -406,7 +406,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: Regulatorik & Compliance
+      value: Regulatory & Compliance
     - id: System.UI/DashboardWidget.Type-1
       value: widgetGroup
     - id: System.UI/DashboardWidget.Col-1
@@ -424,7 +424,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: ''
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"layout":"horizontal","gridColumns":4,"gap":8,"childTemplate":{"widgetType":"kpi","titleTemplate":"$name","attributeMappings":{"value":"complianceStatus"}},"emptyMessage":"Keine Compliance-Eintraege vorhanden"}'
+      value: '{"layout":"horizontal","gridColumns":4,"gap":8,"childTemplate":{"widgetType":"kpi","titleTemplate":"$name","attributeMappings":{"value":"complianceStatus"}},"emptyMessage":"No compliance records found"}'
 
   # ============================================================
   # ROW 8-10: ANLAGEN TABLE
@@ -439,7 +439,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: Anlagen & Verbraucher
+      value: Equipment & Consumers
     - id: System.UI/DashboardWidget.Type-1
       value: table
     - id: System.UI/DashboardWidget.Col-1
@@ -457,4 +457,37 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: ee00000000000000000a0001
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"columns":[{"field":"name","title":"Anlage"},{"field":"machineState","title":"Status","dataType":"statusIcons","statusMapping":{"On":{"icon":"check-circle","tooltip":"Aktiv","color":"#10b981"},"Off":{"icon":"x-circle","tooltip":"Aus","color":"#ef4444"},"Unknown":{"icon":"question-circle","tooltip":"Unbekannt","color":"#6b7280"},"Error":{"icon":"exclamation-circle","tooltip":"Fehler","color":"#ef4444"},"Idle":{"icon":"minus-circle","tooltip":"Leerlauf","color":"#f59e0b"}}},{"field":"power","title":"Leistung (kW)","dataType":"numeric"},{"field":"loadPercent","title":"Last","dataType":"progressBar","width":200},{"field":"importedEnergy","title":"kWh Heute","dataType":"numeric"}],"sorting":[],"filters":[],"pageSize":20,"sortable":true,"queryName":"meshboard_energyenvironment_anlagen","queryRtId":"ee00000000000000000a0001"}'
+      value: '{"columns":[{"field":"name","title":"Equipment"},{"field":"machineState","title":"Status","dataType":"statusIcons","statusMapping":{"On":{"icon":"check-circle","tooltip":"Active","color":"#10b981"},"Off":{"icon":"x-circle","tooltip":"Off","color":"#ef4444"},"Unknown":{"icon":"question-circle","tooltip":"Unknown","color":"#6b7280"},"Error":{"icon":"exclamation-circle","tooltip":"Error","color":"#ef4444"},"Idle":{"icon":"minus-circle","tooltip":"Idle","color":"#f59e0b"}}},{"field":"power","title":"Power (kW)","dataType":"numeric"},{"field":"loadPercent","title":"Load","dataType":"progressBar","width":200},{"field":"importedEnergy","title":"kWh Today","dataType":"numeric"}],"sorting":[],"filters":[],"pageSize":20,"sortable":true,"queryName":"meshboard_energyenvironment_anlagen","queryRtId":"ee00000000000000000a0001"}'
+
+  # ============================================================
+  # ROW 11-13: LASTGANG LINE CHART
+  # ============================================================
+
+  - rtId: ee00000000000000000d0501
+    ckTypeId: System.UI/DashboardWidget-1
+    associations:
+    - roleId: System/ParentChild-1
+      targetRtId: ee00000000000000000d0001
+      targetCkTypeId: System.UI/Dashboard-1
+      attributes: []
+    attributes:
+    - id: System/Name-1
+      value: Load Profile - Today
+    - id: System.UI/DashboardWidget.Type-1
+      value: lineChart
+    - id: System.UI/DashboardWidget.Col-1
+      value: 1
+    - id: System.UI/DashboardWidget.Row-1
+      value: 11
+    - id: System.UI/DashboardWidget.ColSpan-1
+      value: 6
+    - id: System.UI/DashboardWidget.RowSpan-1
+      value: 3
+    - id: System.UI/DashboardWidget.DataSourceType-1
+      value: systemQuery
+    - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
+      value: ''
+    - id: System.UI/DashboardWidget.DataSourceRtId-1
+      value: ee00000000000000000a0002
+    - id: System.UI/DashboardWidget.Config-1
+      value: '{"chartType":"line","categoryField":"timeRange_from","seriesGroupField":"amount_unit","valueField":"amount_value","showLegend":false,"legendPosition":"right","showMarkers":false,"referenceLines":[{"value":3000,"label":"Limit 3.000 kW","color":"#ef4444","opacity":0.8}],"queryName":"meshboard_energyenvironment_lastgang","queryRtId":"ee00000000000000000a0002"}'

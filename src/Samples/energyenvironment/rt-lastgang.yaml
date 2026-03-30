@@ -1,0 +1,368 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - Basic.Energy-[1.0,2.0)
+entities:
+  # ============================================================
+  # LASTGANG - 15-Min-Werte Gesamtlast 13.03.2026 (06:00-20:00)
+  # Anlehnung an Screenshot: Kurve steigt morgens, Peak nachmittags
+  # ============================================================
+
+  - rtId: ee000000000000000000c001
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T06:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T06:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 1450
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c002
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T06:30:00Z"
+            - id: Basic/To
+              value: "2026-03-13T06:45:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 1520
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c003
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T07:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T07:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 1680
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c004
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T08:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T08:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 1920
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c005
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T09:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T09:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 2100
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c006
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T10:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T10:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 2350
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c007
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T11:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T11:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 2480
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c008
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T12:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T12:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 2250
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c009
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T13:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T13:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 2520
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c010
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T14:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T14:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 2680
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c011
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T15:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T15:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 2850
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c012
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T16:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T16:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 2620
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c013
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T17:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T17:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 2180
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c014
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T18:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T18:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 1850
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter
+
+  - rtId: ee000000000000000000c015
+    ckTypeId: Basic.Energy/EnergyMeasurement
+    attributes:
+      - id: Basic/TimeRange
+        value:
+          ckRecordId: Basic/TimeRange
+          attributes:
+            - id: Basic/From
+              value: "2026-03-13T19:00:00Z"
+            - id: Basic/To
+              value: "2026-03-13T19:15:00Z"
+      - id: Basic/Amount
+        value:
+          ckRecordId: Basic/Amount
+          attributes:
+            - id: Basic/AmountValue
+              value: 1520
+            - id: Basic/UnitOfMeasure
+              value: 1
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: e0500001000000000000ac06
+        targetCkTypeId: Industry.Energy/EnergyMeter

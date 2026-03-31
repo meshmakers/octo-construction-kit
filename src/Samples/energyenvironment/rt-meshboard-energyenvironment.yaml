@@ -303,7 +303,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: ''
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"columns":3,"tiles":[{"id":"co2-today","label":"CO2 Today","suffix":" t","color":"warning","entitySource":{"rtId":"e0500001000000000000b201","ckTypeId":"Environment/CarbonBudget","attributePath":"budgetConsumed"}},{"id":"budget-total","label":"Budget Total","suffix":" t","entitySource":{"rtId":"e0500001000000000000b201","ckTypeId":"Environment/CarbonBudget","attributePath":"budgetTotal"}},{"id":"target-pct","label":"Target Fulfillment","suffix":" %","color":"success","entitySource":{"rtId":"e0500001000000000000b201","ckTypeId":"Environment/CarbonBudget","attributePath":"targetFulfillment"}}]}'
+      value: '{"columns":3,"tiles":[{"id":"co2-ytd","label":"CO2 YTD","suffix":" t","color":"warning","entitySource":{"rtId":"e0500001000000000000b201","ckTypeId":"Environment/CarbonBudget","attributePath":"budgetConsumed"}},{"id":"budget-total","label":"Annual Budget","suffix":" t","entitySource":{"rtId":"e0500001000000000000b201","ckTypeId":"Environment/CarbonBudget","attributePath":"budgetTotal"}},{"id":"target-pct","label":"Target Fulfillment","suffix":" %","color":"success","entitySource":{"rtId":"e0500001000000000000b201","ckTypeId":"Environment/CarbonBudget","attributePath":"targetFulfillment"}}]}'
 
   # ============================================================
   # ROW 4-5: DETAIL WIDGETS
@@ -329,7 +329,7 @@ entities:
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 2
     - id: System.UI/DashboardWidget.RowSpan-1
-      value: 1
+      value: 2
     - id: System.UI/DashboardWidget.DataSourceType-1
       value: runtimeEntity
     - id: System.UI/DashboardWidget.DataSourceCkTypeId-1

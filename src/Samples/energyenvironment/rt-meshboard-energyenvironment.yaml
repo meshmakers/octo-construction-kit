@@ -101,7 +101,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: PV Power
+      value: Self-Consumption
     - id: System.UI/DashboardWidget.Type-1
       value: kpi
     - id: System.UI/DashboardWidget.Col-1
@@ -119,7 +119,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: ''
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"staticValue":"34","suffix":" %","icon":"flash","trend":"up","comparisonText":"+8% vs. Vormonat"}'
+      value: '{"staticValue":"34","suffix":" %","icon":"flash","trend":"up","comparisonText":"+8% vs. last month"}'
 
   # Energiekosten Heute
   - rtId: ee00000000000000000d0103
@@ -161,7 +161,7 @@ entities:
       attributes: []
     attributes:
     - id: System/Name-1
-      value: EnPI (kWh/Stk.)
+      value: EnPI (kWh/Unit)
     - id: System.UI/DashboardWidget.Type-1
       value: kpi
     - id: System.UI/DashboardWidget.Col-1
@@ -261,11 +261,11 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 5
     - id: System.UI/DashboardWidget.Row-1
-      value: 3
+      value: 8
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 2
     - id: System.UI/DashboardWidget.RowSpan-1
-      value: 3
+      value: 2
     - id: System.UI/DashboardWidget.DataSourceType-1
       value: runtimeEntity
     - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
@@ -325,11 +325,11 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 5
     - id: System.UI/DashboardWidget.Row-1
-      value: 8
+      value: 10
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 2
     - id: System.UI/DashboardWidget.RowSpan-1
-      value: 3
+      value: 1
     - id: System.UI/DashboardWidget.DataSourceType-1
       value: runtimeEntity
     - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
@@ -437,3 +437,36 @@ entities:
       value: ee00000000000000000a0003
     - id: System.UI/DashboardWidget.Config-1
       value: '{"chartType":"column","categoryField":"timeRange_from","series":[{"field":"predictedLoad","name":"Predicted Load"}],"showLegend":false,"showDataLabels":true,"dataLabelSuffix":" kW","colorThresholds":[{"value":2300,"color":"#10b981"},{"value":2600,"color":"#f59e0b"}],"defaultBarColor":"#ef4444","queryName":"meshboard_energyenvironment_forecast","queryRtId":"ee00000000000000000a0003"}'
+
+  # ============================================================
+  # ROW 8-9: AI INSIGHTS
+  # ============================================================
+
+  - rtId: ee00000000000000000d0701
+    ckTypeId: System.UI/DashboardWidget-1
+    associations:
+    - roleId: System/ParentChild-1
+      targetRtId: ee00000000000000000d0001
+      targetCkTypeId: System.UI/Dashboard-1
+      attributes: []
+    attributes:
+    - id: System/Name-1
+      value: AI Insights
+    - id: System.UI/DashboardWidget.Type-1
+      value: aiInsights
+    - id: System.UI/DashboardWidget.Col-1
+      value: 5
+    - id: System.UI/DashboardWidget.Row-1
+      value: 3
+    - id: System.UI/DashboardWidget.ColSpan-1
+      value: 2
+    - id: System.UI/DashboardWidget.RowSpan-1
+      value: 3
+    - id: System.UI/DashboardWidget.DataSourceType-1
+      value: static
+    - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
+      value: ''
+    - id: System.UI/DashboardWidget.DataSourceRtId-1
+      value: ''
+    - id: System.UI/DashboardWidget.Config-1
+      value: '{"domainContext":"energy management","maxInsights":4,"refreshInterval":0}'

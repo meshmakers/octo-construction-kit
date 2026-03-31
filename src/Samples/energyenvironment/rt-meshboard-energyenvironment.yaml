@@ -80,13 +80,13 @@ entities:
     - id: System.UI/DashboardWidget.RowSpan-1
       value: 2
     - id: System.UI/DashboardWidget.DataSourceType-1
-      value: runtimeEntity
+      value: static
     - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
-      value: Industry.Energy/Inverter
+      value: ''
     - id: System.UI/DashboardWidget.DataSourceRtId-1
-      value: e0500001000000000000ac02
+      value: ''
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"valueAttribute":"power","suffix":" kW","icon":"flash","trend":"up","comparisonText":"+6% vs. last month"}'
+      value: '{"staticValue":"34","suffix":" %","icon":"flash","trend":"up","comparisonText":"+8% vs. Vormonat"}'
 
   # Energiekosten Heute
   - rtId: ee00000000000000000d0103
@@ -226,13 +226,13 @@ entities:
     - id: System.UI/DashboardWidget.Type-1
       value: summaryCard
     - id: System.UI/DashboardWidget.Col-1
-      value: 1
+      value: 5
     - id: System.UI/DashboardWidget.Row-1
       value: 3
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 2
     - id: System.UI/DashboardWidget.RowSpan-1
-      value: 2
+      value: 3
     - id: System.UI/DashboardWidget.DataSourceType-1
       value: runtimeEntity
     - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
@@ -240,39 +240,9 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: ''
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"columns":2,"tiles":[{"id":"dr-reduction","label":"DR Reduction","prefix":"-","suffix":" kW","color":"primary","size":"full","entitySource":{"rtId":"e0500001000000000000ad01","ckTypeId":"Industry.Energy/DemandResponseEvent","attributePath":"reductionKw"}},{"id":"dr-revenue","label":"Revenue Today","prefix":"+","suffix":" EUR","color":"success","size":"full","entitySource":{"rtId":"e0500001000000000000ad01","ckTypeId":"Industry.Energy/DemandResponseEvent","attributePath":"revenue"}},{"id":"pv-power","label":"PV Power","suffix":" kW","entitySource":{"rtId":"e0500001000000000000ac02","ckTypeId":"Industry.Energy/Inverter","attributePath":"power"}},{"id":"storage-soc","label":"Storage SOC","suffix":" %","entitySource":{"rtId":"e0500001000000000000ac05","ckTypeId":"Industry.Energy/EnergyStorage","attributePath":"soC"}}]}'
+      value: '{"columns":2,"tiles":[{"id":"dr-reduction","label":"DR Reduction · bis 15:30 Uhr","prefix":"-","suffix":" kW","color":"primary","size":"full","entitySource":{"rtId":"e0500001000000000000ad01","ckTypeId":"Industry.Energy/DemandResponseEvent","attributePath":"reductionKw"}},{"id":"dr-revenue","label":"Revenue Today","prefix":"+","suffix":" EUR","color":"success","size":"full","entitySource":{"rtId":"e0500001000000000000ad01","ckTypeId":"Industry.Energy/DemandResponseEvent","attributePath":"revenue"}},{"id":"pv-power","label":"PV Power","suffix":" kW","entitySource":{"rtId":"e0500001000000000000ac02","ckTypeId":"Industry.Energy/Inverter","attributePath":"power"}},{"id":"storage-soc","label":"Storage SOC","suffix":" %","entitySource":{"rtId":"e0500001000000000000ac05","ckTypeId":"Industry.Energy/EnergyStorage","attributePath":"soC"}}]}'
 
-  # Anlagen Stats Grid - Aggregation
-  - rtId: ee00000000000000000d0202
-    ckTypeId: System.UI/DashboardWidget-1
-    associations:
-    - roleId: System/ParentChild-1
-      targetRtId: ee00000000000000000d0001
-      targetCkTypeId: System.UI/Dashboard-1
-      attributes: []
-    attributes:
-    - id: System/Name-1
-      value: Equipment Overview
-    - id: System.UI/DashboardWidget.Type-1
-      value: statsGrid
-    - id: System.UI/DashboardWidget.Col-1
-      value: 3
-    - id: System.UI/DashboardWidget.Row-1
-      value: 3
-    - id: System.UI/DashboardWidget.ColSpan-1
-      value: 2
-    - id: System.UI/DashboardWidget.RowSpan-1
-      value: 2
-    - id: System.UI/DashboardWidget.DataSourceType-1
-      value: aggregation
-    - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
-      value: ''
-    - id: System.UI/DashboardWidget.DataSourceRtId-1
-      value: ''
-    - id: System.UI/DashboardWidget.Config-1
-      value: '{"columns":3,"stats":[{"label":"Energy Meters","queryId":"energyMeters","color":"cyan","suffix":""},{"label":"PV Modules","queryId":"pvModules","color":"mint","suffix":""},{"label":"Storage","queryId":"storage","color":"violet","suffix":""},{"label":"DR-Events","queryId":"drEvents","color":"toffee","suffix":""},{"label":"Compliance","queryId":"compliance","color":"lilac","suffix":""},{"label":"Certificates","queryId":"hkn","color":"bubblegum","suffix":""}],"queries":[{"id":"energyMeters","ckTypeId":"Industry.Energy/EnergyMeter","aggregation":"count"},{"id":"pvModules","ckTypeId":"Industry.Energy/PhotovoltaicSystem.Module","aggregation":"count"},{"id":"storage","ckTypeId":"Industry.Energy/EnergyStorage","aggregation":"count"},{"id":"drEvents","ckTypeId":"Industry.Energy/DemandResponseEvent","aggregation":"count"},{"id":"compliance","ckTypeId":"Environment/ComplianceRecord","aggregation":"count"},{"id":"hkn","ckTypeId":"Environment/CertificateOfOrigin","aggregation":"count"}]}'
-
-  # CO2 & ESG - Stats Grid
+  # CO2 & ESG - Summary Card
   - rtId: ee00000000000000000d0203
     ckTypeId: System.UI/DashboardWidget-1
     associations:
@@ -288,7 +258,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 5
     - id: System.UI/DashboardWidget.Row-1
-      value: 3
+      value: 6
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 2
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -303,98 +273,8 @@ entities:
       value: '{"columns":3,"tiles":[{"id":"co2-today","label":"CO2 Today","suffix":" t","color":"warning","entitySource":{"rtId":"e0500001000000000000b201","ckTypeId":"Environment/CarbonBudget","attributePath":"budgetConsumed"}},{"id":"budget-total","label":"Budget Total","suffix":" t","entitySource":{"rtId":"e0500001000000000000b201","ckTypeId":"Environment/CarbonBudget","attributePath":"budgetTotal"}},{"id":"target-pct","label":"Target Fulfillment","suffix":" %","color":"success","entitySource":{"rtId":"e0500001000000000000b201","ckTypeId":"Environment/CarbonBudget","attributePath":"targetFulfillment"}}]}'
 
   # ============================================================
-  # ROW 4-5: ENTITY DETAILS
+  # ROW 4-5: DETAIL WIDGETS
   # ============================================================
-
-  # Operating Facility Entity Card
-  - rtId: ee00000000000000000d0301
-    ckTypeId: System.UI/DashboardWidget-1
-    associations:
-    - roleId: System/ParentChild-1
-      targetRtId: ee00000000000000000d0001
-      targetCkTypeId: System.UI/Dashboard-1
-      attributes: []
-    attributes:
-    - id: System/Name-1
-      value: Werk Donaustein
-    - id: System.UI/DashboardWidget.Type-1
-      value: entityAssociations
-    - id: System.UI/DashboardWidget.Col-1
-      value: 1
-    - id: System.UI/DashboardWidget.Row-1
-      value: 5
-    - id: System.UI/DashboardWidget.ColSpan-1
-      value: 3
-    - id: System.UI/DashboardWidget.RowSpan-1
-      value: 3
-    - id: System.UI/DashboardWidget.DataSourceType-1
-      value: runtimeEntity
-    - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
-      value: Basic.Energy/OperatingFacility
-    - id: System.UI/DashboardWidget.DataSourceRtId-1
-      value: e0500001000000000000aa02
-    - id: System.UI/DashboardWidget.Config-1
-      value: '{"showHeader":true,"showAttributes":true,"includeAssociations":true,"displayMode":"expandable"}'
-
-  # Energiespeicher Entity Card
-  - rtId: ee00000000000000000d0302
-    ckTypeId: System.UI/DashboardWidget-1
-    associations:
-    - roleId: System/ParentChild-1
-      targetRtId: ee00000000000000000d0001
-      targetCkTypeId: System.UI/Dashboard-1
-      attributes: []
-    attributes:
-    - id: System/Name-1
-      value: Energy Storage BS-01
-    - id: System.UI/DashboardWidget.Type-1
-      value: entityCard
-    - id: System.UI/DashboardWidget.Col-1
-      value: 4
-    - id: System.UI/DashboardWidget.Row-1
-      value: 5
-    - id: System.UI/DashboardWidget.ColSpan-1
-      value: 3
-    - id: System.UI/DashboardWidget.RowSpan-1
-      value: 1
-    - id: System.UI/DashboardWidget.DataSourceType-1
-      value: runtimeEntity
-    - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
-      value: Industry.Energy/EnergyStorage
-    - id: System.UI/DashboardWidget.DataSourceRtId-1
-      value: e0500001000000000000ac05
-    - id: System.UI/DashboardWidget.Config-1
-      value: '{"showHeader":true,"showAttributes":true}'
-
-  # CO2 Budget Entity Card
-  - rtId: ee00000000000000000d0303
-    ckTypeId: System.UI/DashboardWidget-1
-    associations:
-    - roleId: System/ParentChild-1
-      targetRtId: ee00000000000000000d0001
-      targetCkTypeId: System.UI/Dashboard-1
-      attributes: []
-    attributes:
-    - id: System/Name-1
-      value: CO2-Budget 2026
-    - id: System.UI/DashboardWidget.Type-1
-      value: entityCard
-    - id: System.UI/DashboardWidget.Col-1
-      value: 4
-    - id: System.UI/DashboardWidget.Row-1
-      value: 6
-    - id: System.UI/DashboardWidget.ColSpan-1
-      value: 3
-    - id: System.UI/DashboardWidget.RowSpan-1
-      value: 1
-    - id: System.UI/DashboardWidget.DataSourceType-1
-      value: runtimeEntity
-    - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
-      value: Environment/CarbonBudget
-    - id: System.UI/DashboardWidget.DataSourceRtId-1
-      value: e0500001000000000000b201
-    - id: System.UI/DashboardWidget.Config-1
-      value: '{"showHeader":true,"showAttributes":true}'
 
   # Compliance Widget Group
   - rtId: ee00000000000000000d0304
@@ -410,13 +290,13 @@ entities:
     - id: System.UI/DashboardWidget.Type-1
       value: statusList
     - id: System.UI/DashboardWidget.Col-1
-      value: 4
+      value: 5
     - id: System.UI/DashboardWidget.Row-1
-      value: 7
+      value: 8
     - id: System.UI/DashboardWidget.ColSpan-1
-      value: 3
-    - id: System.UI/DashboardWidget.RowSpan-1
       value: 2
+    - id: System.UI/DashboardWidget.RowSpan-1
+      value: 3
     - id: System.UI/DashboardWidget.DataSourceType-1
       value: runtimeEntity
     - id: System.UI/DashboardWidget.DataSourceCkTypeId-1
@@ -447,7 +327,7 @@ entities:
     - id: System.UI/DashboardWidget.Row-1
       value: 8
     - id: System.UI/DashboardWidget.ColSpan-1
-      value: 6
+      value: 4
     - id: System.UI/DashboardWidget.RowSpan-1
       value: 3
     - id: System.UI/DashboardWidget.DataSourceType-1
@@ -478,9 +358,9 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 1
     - id: System.UI/DashboardWidget.Row-1
-      value: 11
+      value: 3
     - id: System.UI/DashboardWidget.ColSpan-1
-      value: 6
+      value: 4
     - id: System.UI/DashboardWidget.RowSpan-1
       value: 3
     - id: System.UI/DashboardWidget.DataSourceType-1
@@ -511,9 +391,9 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 1
     - id: System.UI/DashboardWidget.Row-1
-      value: 14
-    - id: System.UI/DashboardWidget.ColSpan-1
       value: 6
+    - id: System.UI/DashboardWidget.ColSpan-1
+      value: 4
     - id: System.UI/DashboardWidget.RowSpan-1
       value: 2
     - id: System.UI/DashboardWidget.DataSourceType-1

@@ -55,7 +55,7 @@ entities:
     - id: System.UI/DashboardWidget.DataSourceRtId-1
       value: ''
     - id: System.UI/DashboardWidget.Config-1
-      value: '{"ckTypeId":"System.Notification/StatefulEvent","rotationInterval":5000,"showIcon":true,"maxAlerts":20}'
+      value: '{"ckTypeId":"System.Notification/StatefulEvent","rotationInterval":5000,"showIcon":true,"maxAlerts":20,"chromeless":true}'
 
   # ============================================================
   # ROW 2: KPI CARDS
@@ -77,7 +77,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 1
     - id: System.UI/DashboardWidget.Row-1
-      value: 2
+      value: 1
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 1
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -107,7 +107,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 2
     - id: System.UI/DashboardWidget.Row-1
-      value: 2
+      value: 1
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 1
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -137,7 +137,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 3
     - id: System.UI/DashboardWidget.Row-1
-      value: 2
+      value: 1
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 1
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -167,7 +167,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 4
     - id: System.UI/DashboardWidget.Row-1
-      value: 2
+      value: 1
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 1
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -197,7 +197,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 5
     - id: System.UI/DashboardWidget.Row-1
-      value: 2
+      value: 1
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 1
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -227,7 +227,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 6
     - id: System.UI/DashboardWidget.Row-1
-      value: 2
+      value: 1
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 1
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -261,7 +261,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 5
     - id: System.UI/DashboardWidget.Row-1
-      value: 4
+      value: 3
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 2
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -291,7 +291,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 5
     - id: System.UI/DashboardWidget.Row-1
-      value: 7
+      value: 6
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 2
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -325,7 +325,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 5
     - id: System.UI/DashboardWidget.Row-1
-      value: 9
+      value: 8
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 2
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -358,7 +358,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 1
     - id: System.UI/DashboardWidget.Row-1
-      value: 9
+      value: 8
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 4
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -391,7 +391,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 1
     - id: System.UI/DashboardWidget.Row-1
-      value: 4
+      value: 3
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 4
     - id: System.UI/DashboardWidget.RowSpan-1
@@ -424,7 +424,7 @@ entities:
     - id: System.UI/DashboardWidget.Col-1
       value: 1
     - id: System.UI/DashboardWidget.Row-1
-      value: 7
+      value: 6
     - id: System.UI/DashboardWidget.ColSpan-1
       value: 4
     - id: System.UI/DashboardWidget.RowSpan-1

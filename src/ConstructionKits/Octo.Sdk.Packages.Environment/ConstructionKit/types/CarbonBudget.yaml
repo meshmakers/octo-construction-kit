@@ -13,6 +13,12 @@ types:
     - id: ${this}/TargetFulfillment
       name: TargetFulfillment
       isOptional: true
+    - id: ${this}/DailyEmissions
+      name: DailyEmissions
+      isOptional: true
+    - id: ${this}/MonthlyEmissions
+      name: MonthlyEmissions
+      isOptional: true
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${Basic}/TreeNode

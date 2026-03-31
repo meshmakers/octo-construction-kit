@@ -603,6 +603,10 @@ entities:
         value: 489
       - id: Environment/TargetFulfillment
         value: 72
+      - id: Environment/DailyEmissions
+        value: 3.8
+      - id: Environment/MonthlyEmissions
+        value: 48.2
     associations:
       - roleId: System/ParentChild
         targetRtId: e0500001000000000000aa02

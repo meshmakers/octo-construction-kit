@@ -27,3 +27,19 @@ attributes:
       value: "%"
     - key: Decimals
       value: 1
+- id: DailyEmissions
+  valueType: Double
+  description: "Carbon emissions for the current day"
+  metaData:
+    - key: Unit
+      value: "t"
+    - key: Decimals
+      value: 1
+- id: MonthlyEmissions
+  valueType: Double
+  description: "Carbon emissions for the current month"
+  metaData:
+    - key: Unit
+      value: "t"
+    - key: Decimals
+      value: 1

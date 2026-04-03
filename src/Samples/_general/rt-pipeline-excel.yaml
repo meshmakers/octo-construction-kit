@@ -1,16 +1,16 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - System.Communication-[2.0,3.0)
+  - System.Communication-[3.0,4.0)
 entities:
   - rtId: 672c69000e12cd897b01f2e1
-    ckTypeId: System.Communication/MeshPipeline
+    ckTypeId: System.Communication/Pipeline
     associations:
       - roleId: System/ParentChild
         targetRtId: 672c67b00e12cd897b01f2d4
-        targetCkTypeId: System.Communication/DataPipeline
+        targetCkTypeId: System.Communication/DataFlow
       - roleId: System.Communication/Executes
         targetRtId: 66004fda527ac79a03ecedd7
-        targetCkTypeId: System.Communication/MeshAdapter        
+        targetCkTypeId: System.Communication/Adapter        
     attributes:
       - id: System/Name
         value: Mesh Pipeline
@@ -25,7 +25,7 @@ entities:
           transformations:
             - type: ImportFromExcel@1
   - rtId: 672c67b00e12cd897b01f2d4
-    ckTypeId: System.Communication/DataPipeline
+    ckTypeId: System.Communication/DataFlow
     attributes:
       - id: System/Name
         value: Excel

@@ -2,21 +2,21 @@ $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies: []
 entities:
 - rtId: 66e309cd5b53add9b5cd3869
-  ckTypeId: System.Communication/DataPipeline
+  ckTypeId: System.Communication/DataFlow
   associations: []
   attributes:
   - id: System/Name
     value: Create customers
   - id: System/Description
 - rtId: 66e309cd5b53add9b5cd386a
-  ckTypeId: System.Communication/MeshPipeline
+  ckTypeId: System.Communication/Pipeline
   associations:
   - roleId: System/ParentChild
     targetRtId: 66e309cd5b53add9b5cd3869
-    targetCkTypeId: System.Communication/DataPipeline
+    targetCkTypeId: System.Communication/DataFlow
   - roleId: System.Communication/Executes
     targetRtId: 66004fda527ac79a03ecedd7
-    targetCkTypeId: System.Communication/MeshAdapter
+    targetCkTypeId: System.Communication/Adapter
   attributes:
   - id: System.Communication/DeploymentState
     value: 0

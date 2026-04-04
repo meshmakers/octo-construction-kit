@@ -70,3 +70,7 @@ entities:
         value: >-
           triggers:
             - type: FromPipelineDataEvent@1
+          transformations:
+            - type: Logger@1
+              description: Log received data
+              message: Received sensor data from Producer Pipeline

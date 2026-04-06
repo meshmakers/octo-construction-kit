@@ -38,13 +38,11 @@ entities:
               locale: en
               simulations:
                 - targetPath: $.sensor.temperature
-                  simulatorKey: Random.Double
+                  simulatorKey: Math.DoubleRandom
                   configuration: "{min:15, max:35}"
                 - targetPath: $.sensor.humidity
-                  simulatorKey: Random.Double
+                  simulatorKey: Math.DoubleRandom
                   configuration: "{min:30, max:90}"
-                - targetPath: $.sensor.timestamp
-                  simulatorKey: Date.Now
             - type: ToPipelineDataEvent@1
               description: Send data to Consumer Pipeline
               path: $.sensor

@@ -1,9 +1,9 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - System.Communication-[2.0,3.0)
+  - System.Communication-[3.0,4.0)
 entities:
   - rtId: 66004fda527ac79a03ecedd7
-    ckTypeId: System.Communication/MeshAdapter
+    ckTypeId: System.Communication/Adapter
     attributes:
       - id: System/Name
         value: meshtest Adapter       

@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - System.Communication-[2.0,3.0)
+  - System.Communication-[3.0,4.0)
 entities:
   - rtId: 5fc8fc3d8b2fc75f925e21af
     ckTypeId: System.Communication/Pool
@@ -9,7 +9,7 @@ entities:
         value: k8sfirmianstrasse
     associations: []
   - rtId: 5fc8fc3d8b2fc75f925e21ba
-    ckTypeId: System.Communication/EdgeAdapter
+    ckTypeId: System.Communication/Adapter
     attributes:
       - id: System/Name
         value: Modbus PV
@@ -26,20 +26,20 @@ entities:
         
   # Data pipelines including mesh and edge pipelines
   - rtId: 5fc8fc3d8b2fc75f925e21bb
-    ckTypeId: System.Communication/DataPipeline
+    ckTypeId: System.Communication/DataFlow
     attributes:
       - id: System/Name
         value: PV Firmianstraße
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fc3d8b2fc75f925e21ba
-        targetCkTypeId: System.Communication/EdgeAdapter        
+        targetCkTypeId: System.Communication/Adapter        
   - rtId: 66b07d2995797e1617fd3164
-    ckTypeId: System.Communication/EdgePipeline
+    ckTypeId: System.Communication/Pipeline
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fc3d8b2fc75f925e21bb
-        targetCkTypeId: System.Communication/DataPipeline
+        targetCkTypeId: System.Communication/DataFlow
         attributes: []
     attributes:
       - id: System/Name
@@ -94,11 +94,11 @@ entities:
                   description: Load to event hub
                   targetPath: "$.data"
   - rtId: 66b07d2995797e1617fd3167
-    ckTypeId: System.Communication/MeshPipeline
+    ckTypeId: System.Communication/Pipeline
     associations:
       - roleId: System/ParentChild
         targetRtId: 5fc8fc3d8b2fc75f925e21bb
-        targetCkTypeId: System.Communication/DataPipeline
+        targetCkTypeId: System.Communication/DataFlow
     attributes:
       - id: System/Name
         value: Mesh Pipeline

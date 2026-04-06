@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - System.Communication-[2.0,3.0)
+  - System.Communication-[3.0,4.0)
 entities:
   - rtId: 64a2b7bd162d703d9bb0f330
     ckTypeId: System.Communication/Pool
@@ -9,7 +9,7 @@ entities:
         value: local
     associations: []
   - rtId: 64a2b7c72d5ac4ea4d8fea48
-    ckTypeId: System.Communication/EdgeAdapter
+    ckTypeId: System.Communication/Adapter
     attributes:
       - id: System/Name
         value: Meshmakers.Plugs.Zenon
@@ -20,7 +20,7 @@ entities:
         targetRtId: 64a2b7bd162d703d9bb0f330
         targetCkTypeId: System.Communication/Pool
   - rtId: 64a2b81dc72c3838dc95b08c
-    ckTypeId: System.Communication/EdgeAdapter
+    ckTypeId: System.Communication/Adapter
     attributes:
       - id: System/Name
         value: Meshmakers.Plugs.IsPro-Ng
@@ -31,7 +31,7 @@ entities:
         targetRtId: 64a2b7bd162d703d9bb0f330
         targetCkTypeId: System.Communication/Pool
   - rtId: 64ac19945a7c4fd9e788c137
-    ckTypeId: System.Communication/EdgeAdapter
+    ckTypeId: System.Communication/Adapter
     attributes:
       - id: System/Name
         value: Meshmakers.Sockets.Grafana

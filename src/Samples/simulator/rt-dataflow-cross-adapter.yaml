@@ -1,0 +1,193 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - System.Communication-[3.0,4.0)
+  - Industry.Basic-[3.0,4.0)
+entities:
+  # ==========================================================================
+  # DataFlow: Cross-Adapter Pipeline Chaining
+  #
+  # Demonstrates a 3-pipeline data flow across two adapters:
+  #   1. Mesh Adapter: Load configuration, send to simulation adapter
+  #   2. Simulation Adapter: Generate simulated data, send back to mesh
+  #   3. Mesh Adapter: Receive simulated data, store in database
+  # ==========================================================================
+
+  # --- DataFlow ---
+  - rtId: bb0000000000000000000001
+    ckTypeId: System.Communication/DataFlow
+    attributes:
+      - id: System/Name
+        value: Cross-Adapter Simulation Flow
+      - id: System/Description
+        value: Loads configuration, simulates data on edge adapter, stores results in mesh database.
+
+  # --- Configuration entity (System/TenantConfiguration) ---
+  # This is the configuration that Pipeline 1 will load and pass to Pipeline 2
+  - rtId: bb0000000000000000000010
+    ckTypeId: System/TenantConfiguration
+    rtWellKnownName: SampleSimulationConfig
+
+  # ==========================================================================
+  # Pipeline 1: Config Loader (Mesh Adapter)
+  #
+  # Triggered manually, loads the SampleSimulationConfig configuration,
+  # then sends it to Pipeline 2 (on the Simulation Adapter).
+  # ==========================================================================
+  - rtId: bb0000000000000000000002
+    ckTypeId: System.Communication/Pipeline
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: bb0000000000000000000001
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: 66004fda527ac79a03ecedd7
+        targetCkTypeId: System.Communication/Adapter
+      - roleId: System.Communication/Uses
+        targetRtId: bb0000000000000000000010
+        targetCkTypeId: System/TenantConfiguration
+    attributes:
+      - id: System/Name
+        value: Load Configuration
+      - id: System/Description
+        value: Loads SampleSimulationConfig and sends it to the Simulation pipeline.
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/PipelineDefinition
+        value: >-
+          triggers:
+            - type: FromExecutePipelineCommand@1
+          transformations:
+            - type: GetPipelineConfigByWellKnownName@1
+              description: Load SampleSimulationConfig
+              wellKnownName: SampleSimulationConfig
+              targetPath: $.config
+            - type: Logger@1
+              description: Log loaded configuration
+              message: Configuration loaded, sending to simulation adapter
+            - type: ToPipelineDataEvent@1
+              description: Send config to Simulation pipeline
+              path: $.config
+              targetPath: $.config
+              targetPipelineRtId: bb0000000000000000000003
+
+  # ==========================================================================
+  # Pipeline 2: Simulator (Simulation Adapter)
+  #
+  # Receives configuration from Pipeline 1, generates simulated sensor data,
+  # then sends results back to Pipeline 3 (on the Mesh Adapter).
+  # ==========================================================================
+  - rtId: bb0000000000000000000003
+    ckTypeId: System.Communication/Pipeline
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: bb0000000000000000000001
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: 65d5c447b420da3fb12381bc
+        targetCkTypeId: System.Communication/Adapter
+    attributes:
+      - id: System/Name
+        value: Simulate Sensor Data
+      - id: System/Description
+        value: Simulates sensor data and sends results to the Data Writer pipeline.
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/PipelineDefinition
+        value: >-
+          triggers:
+            - type: FromPipelineDataEvent@1
+          transformations:
+            - type: Logger@1
+              description: Log received config
+              message: Received configuration from mesh adapter, generating simulation data
+            - type: Simulation@1
+              description: Generate simulated sensor readings
+              locale: en
+              simulations:
+                - targetPath: $.sensorData.temperature
+                  simulatorKey: Math.DoubleRandom
+                  configuration: "{min:18, max:32}"
+                - targetPath: $.sensorData.humidity
+                  simulatorKey: Math.DoubleRandom
+                  configuration: "{min:35, max:85}"
+                - targetPath: $.sensorData.pressure
+                  simulatorKey: Math.DoubleRandom
+                  configuration: "{min:980, max:1040}"
+                - targetPath: $.sensorData.sensorId
+                  simulatorKey: Text.Lorem.Word
+                  configuration: "{count:1}"
+            - type: Logger@1
+              description: Log simulated data
+              message: Simulation data generated, sending to mesh adapter for storage
+            - type: ToPipelineDataEvent@1
+              description: Send simulated data to Data Writer
+              path: $.sensorData
+              targetPath: $.sensorData
+              targetPipelineRtId: bb0000000000000000000004
+
+  # ==========================================================================
+  # Pipeline 3: Data Writer (Mesh Adapter)
+  #
+  # Receives simulated data from Pipeline 2 and stores it in the database
+  # as a new entity.
+  # ==========================================================================
+  - rtId: bb0000000000000000000004
+    ckTypeId: System.Communication/Pipeline
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: bb0000000000000000000001
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: 66004fda527ac79a03ecedd7
+        targetCkTypeId: System.Communication/Adapter
+    attributes:
+      - id: System/Name
+        value: Store Sensor Reading
+      - id: System/Description
+        value: Receives simulated data and stores it in the database.
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/PipelineDefinition
+        value: >-
+          triggers:
+            - type: FromPipelineDataEvent@1
+          transformations:
+            - type: Logger@1
+              description: Log received sensor data
+              message: Received simulated sensor data from simulation adapter
+            - type: CreateUpdateInfo@1
+              description: Create RuntimeVariable for sensor reading
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: INSERT
+              ckTypeId: Industry.Basic/RuntimeVariable
+              rtIdPath: $.rtId
+              generateRtId: true
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.sensorData.sensorId
+                - attributeName: IecDataType
+                  attributeValueType: Int
+                  value: 6
+                - attributeName: DoubleValue
+                  attributeValueType: Double
+                  valuePath: $.sensorData.temperature
+            - type: CreateAssociationUpdate@1
+              description: Link RuntimeVariable to Simulation Machine
+              targetPath: $._assocUpdateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: CREATE
+              originRtIdPath: $._updateItems[0].RtId
+              originCkTypeIdPath: $._updateItems[0].CkTypeId
+              targetRtId: cc0000000000000000000001
+              targetCkTypeId: Industry.Basic/Machine
+              associationRoleId: Industry.Basic/RuntimeVariableMachine
+            - type: Logger@1
+              description: Log before apply
+              message: Storing sensor reading in database
+            - type: ApplyChanges@2
+              entityUpdatesPath: $._updateItems
+              associationUpdatesPath: $._assocUpdateItems

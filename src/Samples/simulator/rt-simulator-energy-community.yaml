@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - Industry.Energy-[2.0,3.0)
+  - Industry.Energy-[3.0,4.0)
 entities:
   - rtId: 65dc6d24cc529cdc46c84fca
     ckTypeId: Basic/Tree

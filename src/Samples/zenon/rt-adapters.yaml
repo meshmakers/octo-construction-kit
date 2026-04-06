@@ -1,9 +1,9 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - System.Communication
+  - System.Communication-[3.0,4.0)
 entities:
   - rtId: 65d5c447b420da3fb12381bc
-    ckTypeId: System.Communication/EdgeAdapter
+    ckTypeId: System.Communication/Adapter
     attributes:
       - id: System/Name
         value: Zenon Sample PlugIn     
@@ -12,12 +12,12 @@ entities:
         
     # Data pipelines of plug
   - rtId: 65d5c447b420da3fb12381bd
-    ckTypeId: System.Communication/DataPipeline
+    ckTypeId: System.Communication/DataFlow
     attributes:
       - id: System/Name
         value: zenon Pipeline
   - rtId: 65d5c447b420da3fb12381bf
-    ckTypeId: System.Communication/MeshPipeline
+    ckTypeId: System.Communication/Pipeline
     attributes:
       - id: System/Enabled
         value: true       
@@ -31,9 +31,9 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bd
-        targetCkTypeId: System.Communication/DataPipeline
+        targetCkTypeId: System.Communication/DataFlow
   - rtId: 65d5c447b420da3fb12381be
-    ckTypeId: System.Communication/EdgePipeline
+    ckTypeId: System.Communication/Pipeline
     attributes:
       - id: System/Enabled
         value: true
@@ -47,4 +47,4 @@ entities:
     associations:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bd
-        targetCkTypeId: System.Communication/DataPipeline
+        targetCkTypeId: System.Communication/DataFlow

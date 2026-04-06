@@ -1,0 +1,38 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - Industry.Basic-[2.0,3.0)
+entities:
+  # Tree for Industry simulation
+  - rtId: cc0000000000000000000010
+    ckTypeId: Basic/Tree
+    attributes:
+      - id: System/Name
+        value: Industry simulation
+      - id: System/Description
+        value: Simulation data for cross-adapter pipeline demo
+
+  # Location node
+  - rtId: cc0000000000000000000011
+    ckTypeId: Basic/TreeNode
+    attributes:
+      - id: System/Name
+        value: Factory Floor
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: cc0000000000000000000010
+        targetCkTypeId: Basic/Tree
+
+  # Machine for RuntimeVariable association
+  - rtId: cc0000000000000000000001
+    ckTypeId: Industry.Basic/Machine
+    attributes:
+      - id: System/Name
+        value: Simulation Sensor Unit
+      - id: System/Description
+        value: Virtual sensor machine for cross-adapter pipeline demo
+      - id: Industry.Basic/MachineState
+        value: 0
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: cc0000000000000000000011
+        targetCkTypeId: Basic/TreeNode

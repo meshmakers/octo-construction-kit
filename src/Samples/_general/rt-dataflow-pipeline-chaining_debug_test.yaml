@@ -49,7 +49,7 @@ entities:
               description: Send data to Consumer Pipeline
               path: $.sensor
               targetPath: $.input
-              targetPipelineRtEntityId: aa0000000000000000000003
+              targetPipelineRtId: aa0000000000000000000003
 
   # Pipeline B: Consumer - receives data from Pipeline A
   - rtId: aa0000000000000000000003

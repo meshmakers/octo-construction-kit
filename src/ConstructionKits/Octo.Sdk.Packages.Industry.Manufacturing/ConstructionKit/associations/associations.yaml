@@ -4,8 +4,8 @@ associationRoles:
   description: "Defined on ProductionOrderItem → Machine. Creates: ProductionOrderItem.Machine (the assigned machine) and Machine.OrderItems (all order items assigned to this machine)"
   inboundName: OrderItems
   outboundName: Machine
-  inboundMultiplicity: One
-  outboundMultiplicity: N
+  inboundMultiplicity: N
+  outboundMultiplicity: One
 
 - id: MachineAssignment
   description: "Defined on ShiftMachine → Machine. Creates: ShiftMachine.Machine (the physical machine) and Machine.ShiftAssignments (all shift assignments for this machine)"

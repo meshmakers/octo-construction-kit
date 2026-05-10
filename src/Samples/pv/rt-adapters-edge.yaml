@@ -190,7 +190,7 @@ entities:
             - type: Project@1
               fields:
                 - path: $.x
-            - type: SaveInTimeSeries@1
+            - type: SaveStreamDataInArchive@1
               path: _updateItems
             - type: FilterLatestUpdateInfo@1
               path: _updateItems

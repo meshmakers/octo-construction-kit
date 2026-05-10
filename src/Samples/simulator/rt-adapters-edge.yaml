@@ -120,18 +120,10 @@ entities:
                   valuePath: $.Constant        
             - type: ApplyChanges@1
               path: $._updateItems
-            - type: EnrichWithMongoData@1
+            - type: BackfillFromRtEntity@1
               path: $._updateItems
-              targetPath: $._updateItems
-              targetValueKind: Simple
-              targetValueWriteMode: Overwrite
-              rtId: 65dc6d24cc529cdc46c84fd4
-              ckTypeId: OctoSdkDemo/MeteringPoint
-              attributeUpdates: 
-                - attributeName: MeteringPointNumber
-                  attributeValueType: String
-                  valuePath: $.meteringPointNumber
-              description: update
+              archiveRtId: 65dc6d24cc529cdc46c84fd4
+              description: Backfill missing attributes (driven by archive column spec)
     associations:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bd

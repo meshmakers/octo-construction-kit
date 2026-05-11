@@ -11,7 +11,6 @@ attributes:
 - id: LoadPercent
   valueType: Double
   description: "Current load as percentage of nominal power (0-100)"
-  isDataStream: true
   metaData:
     - key: Unit
       value: "%"

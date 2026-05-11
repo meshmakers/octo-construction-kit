@@ -3,7 +3,6 @@ attributes:
 - id: OrderNumber
   description: "Unique identifier for the production order"
   valueType: String
-  isDataStream: true
 - id: ProductionOrderState
   description: "Current lifecycle state of the production order"
   valueType: Enum

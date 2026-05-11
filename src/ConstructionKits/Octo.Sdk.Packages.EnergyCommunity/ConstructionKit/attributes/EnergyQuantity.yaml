@@ -4,4 +4,3 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${this}/DataQuality
     description: "The quality of the received data"
-    isDataStream: true

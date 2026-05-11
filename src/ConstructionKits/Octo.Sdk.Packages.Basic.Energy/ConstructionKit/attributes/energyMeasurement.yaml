@@ -4,7 +4,6 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${this}/DataQuality
     description: "The quality of the received data"
-    isDataStream: true
   - id: ObisCode
     valueType: String
     description: "The OBIS code associated with the energy measurement"

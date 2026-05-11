@@ -3,7 +3,6 @@ attributes:
 - id: EmissionAmount
   valueType: Double
   description: "Amount of CO2 emissions"
-  isDataStream: true
   metaData:
     - key: Unit
       value: "t"

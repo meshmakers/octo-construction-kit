@@ -3,7 +3,6 @@ attributes:
 - id: PredictedLoad
   valueType: Double
   description: "Predicted load from AI forecast model"
-  isDataStream: true
   metaData:
     - key: Unit
       value: "kW"
@@ -12,7 +11,6 @@ attributes:
 - id: Confidence
   valueType: Double
   description: "Confidence level of the forecast prediction"
-  isDataStream: true
   metaData:
     - key: Unit
       value: "%"

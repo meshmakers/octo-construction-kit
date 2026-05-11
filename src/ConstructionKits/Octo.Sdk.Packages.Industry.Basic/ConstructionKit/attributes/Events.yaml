@@ -3,61 +3,47 @@ attributes:
 
 - id: Message
   valueType: String
-  isDataStream: true
 - id: AlarmState
   valueType: Enum
   valueCkEnumId: ${this}/AlarmState
-  isDataStream: true
 - id: AlarmType
   valueType: Enum
   valueCkEnumId: ${this}/AlarmType
-  isDataStream: true
 - id: AlarmSourceType
   valueType: Enum
   valueCkEnumId: ${this}/AlarmSourceType
-  isDataStream: true
 - id: AlarmPriority
   valueType: Enum
   valueCkEnumId: ${this}/AlarmPriority
-  isDataStream: true
 - id: AlarmCause
   valueType: String
-  isDataStream: true
 - id: AlarmReactivatedCount
   valueType: Int
   defaultValues:
     - 0
-  isDataStream: true
 - id: TagName
   description: Tag or VariableName that is used (when available) that generated this event
   valueType: String
-  isDataStream: true
 - id: EventCategory
   description: Category of the event
   valueType: String
-  isDataStream: true
 
 - id: AlarmLastModified
   description: Timestamp of the last modification to this alarm (UTC).
   valueType: DateTime
-  isDataStream: true
 
 - id: EventReceived
   description: Timestamp when the event was first received (UTC). Null if not applicable.
   valueType: DateTime
-  isDataStream: true
 
 - id: AlarmAcknowledged
   description: Timestamp when the alarm was acknowledged by an operator (UTC). Null if not yet acknowledged.
   valueType: DateTime
-  isDataStream: true
 
 - id: AlarmCleared
   description: Timestamp when the alarm returned to normal (UTC). Null if still active.
   valueType: DateTime
-  isDataStream: true
 
 - id: AlarmReactivated
   description: Timestamp when the alarm reoccurred after being cleared (UTC). Null if never reactivated.
   valueType: DateTime
-  isDataStream: true

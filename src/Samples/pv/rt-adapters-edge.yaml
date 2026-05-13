@@ -15,10 +15,6 @@ entities:
         value: Modbus PV
       - id: System.Communication/AdapterConfiguration
         value: ""
-      - id: System.Communication/Deployment.ImageName
-        value: meshmakers/octo-communication-plug-modbus      
-      - id: System.Communication/Deployment.ImageVersion
-        value: "999.0.0.0"
     associations:
       - roleId: System.Communication/Manages
         targetRtId: 5fc8fc3d8b2fc75f925e21af

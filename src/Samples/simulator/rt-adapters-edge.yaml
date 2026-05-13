@@ -15,10 +15,6 @@ entities:
         value: Simulation       
       - id: System.Communication/AdapterConfiguration
         value: ""
-      - id: System.Communication/Deployment.ImageName
-        value: meshmakers/octo-communication-adapter-simulation     
-      - id: System.Communication/Deployment.ImageVersion
-        value: "999.0.0.0"
     associations:
       - roleId: System.Communication/Manages
         targetRtId: 65d5c447b420da3fb12381bb

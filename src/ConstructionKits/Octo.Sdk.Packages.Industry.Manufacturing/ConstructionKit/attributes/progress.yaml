@@ -1,0 +1,5 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: IsRunning
+    description: "True when the simulator (or adapter) considers the machine to be actively producing this ProductionOrderItem."
+    valueType: Boolean

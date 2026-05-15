@@ -6,3 +6,6 @@ attributes:
   - id: ProductionEndDateTime
     description: "Date and time when production actually ended"
     valueType: DateTime
+  - id: HaltTime
+    description: "Cumulative seconds the machine was not in 'running' state for the current ProductionOrderItem."
+    valueType: Int

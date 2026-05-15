@@ -1,0 +1,19 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ProductionOrderItemProgress
+  description: "Live runtime counters and elapsed-time tracking for the in-progress ProductionOrderItem. Updated by the production simulator DataFlow or by real-machine adapters."
+  derivedFromCkTypeId: ${System}/Entity
+  attributes:
+    - id: ${this}/QuantityGood
+      name: Produced
+    - id: ${this}/QuantityPoor
+      name: Rejected
+    - id: ${this}/QuantityTestParts
+      name: Tested
+    - id: ${this}/HaltTime
+      name: HaltTime
+    - id: ${this}/IsRunning
+      name: IsRunning
+  associations:
+    - id: ${System}/ParentChild
+      targetCkTypeId: ${this}/ProductionOrderItem

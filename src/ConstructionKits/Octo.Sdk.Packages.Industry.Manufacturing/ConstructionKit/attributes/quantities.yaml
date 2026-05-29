@@ -12,3 +12,6 @@ attributes:
   - id: QuantityTestParts
     description: "Number of test parts produced during setup or quality checks"
     valueType: Int
+  - id: PiecesPerPallet
+    description: "Operator-configured number of produced pieces that fit on a single pallet; drives the next-partial-confirmation hint on the order page"
+    valueType: Int

@@ -17,4 +17,4 @@ octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/bin
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Industry.Maintenance/out/ck-industry.maintenance-2.yaml -w
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Industry.Manufacturing/out/ck-industry.manufacturing-2.yaml
 octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Packages.Environment/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Packages.Environment/out/ck-environment-3.yaml -w
-octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Demo/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Demo/out/ck-octosdkdemo.yaml -w
+octo-cli -c importck -f ../ConstructionKits/Octo.Sdk.Demo/bin/$configuration/$framework/octo-ck-libraries/Octo.Sdk.Demo/out/ck-octosdkdemo-2.yaml -w

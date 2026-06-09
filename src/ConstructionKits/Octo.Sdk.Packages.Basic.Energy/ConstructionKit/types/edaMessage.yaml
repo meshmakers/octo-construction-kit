@@ -25,6 +25,7 @@ types:
       - id: ${this}/EdaRawMessage
         name: RawMessage
         isOptional: true
+      - id: ${this}/Foo
     associations:
       - id: ${this}/MessageToProcess
         targetCkTypeId: ${this}/EdaProcess

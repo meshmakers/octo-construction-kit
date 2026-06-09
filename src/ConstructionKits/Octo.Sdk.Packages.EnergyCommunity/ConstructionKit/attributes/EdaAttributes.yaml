@@ -22,3 +22,5 @@ attributes:
   valueType: String
 - id: EdaResponseCode
   valueType: String
+- id: Foo
+  valueType: String

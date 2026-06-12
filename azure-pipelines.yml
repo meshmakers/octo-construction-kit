@@ -1,0 +1,104 @@
+# Root-level CI pipeline using shared templates from octo-pipeline-templates.
+#
+# Coexists with devops-build/azure-pipelines.yml during the Phase 1-services
+# pilot. Once parity is verified, def 104 yamlFilename can be flipped to this
+# file and devops-build/ deleted in a follow-up commit. Services-train
+# references def 104 by ID so the train is unaffected by the yamlFilename swap.
+#
+# Construction-kit-specific quirks preserved from the legacy YAML:
+#   - NO Docker step — this repo only publishes NuGet packages (10 CK packages)
+#   - NO GitSSHGroup / NO InstallSSHKey — no private submodules referenced
+#   - NO download-ca — restores from public NuGet feed only
+#   - submodules: true (NOT recursive) — matches legacy
+#   - Build passes /p:OctoPublishCatalog="$(effectivePublishCatalog)" for the
+#     CK model catalog publish-gating (only main / r* tags publish to GitHub;
+#     feature branches publish to per-run LocalFileSystemCatalog —
+#     incident: Industry.Basic-2.1.1 pinned by downstream packages without
+#     itself being published, breaking every tenant's library-status endpoint)
+#   - SystemTests excluded
+#   - HAS push-nuget — 10 Meshmakers.Octo.Sdk.Packages.* NuGets per build
+#   - HAS 10 CK library outputs (the actual Construction Kit YAMLs)
+
+name: $(MajorVersion).$(MinorVersion).$(date:yyMM).$(DayOfMonth)$(rev:rrr)-$(Build.SourceBranchName)
+
+resources:
+  repositories:
+    - repository: pipelineTemplates
+      type: github
+      name: meshmakers/octo-pipeline-templates
+      endpoint: meshmakers-access-token
+      ref: refs/tags/tpl-v0.3.0
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - dev/*
+      - test/*
+      - main
+  tags:
+    exclude:
+      - '*'
+
+variables:
+  - group: ApiKeys-mm-cloud
+  - group: OctoDefault
+  - name: solutionFile
+    value: 'Octo.ConstructionKit.sln'
+  - name: artifactsFrameworkVersion
+    value: 'net10.0'
+  - name: buildConfiguration
+    value: 'Release'
+  - name: buildPlatform
+    value: 'Any CPU'
+  - name: isRelease
+    value: ${{ startsWith(variables['Build.SourceBranch'], 'refs/tags/r') }}
+  - name: isMain
+    value: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/main') }}
+  - name: isTest
+    value: ${{ startsWith(variables['Build.SourceBranch'], 'refs/heads/test') }}
+
+stages:
+  - stage: Build
+    jobs:
+      - job: buildAndTest
+        displayName: 'Build NuGets and execute tests'
+        pool:
+          name: meshmakers-ci-agents
+        steps:
+          - template: templates/steps/update-build-number.yml@pipelineTemplates
+          - checkout: self
+            clean: true
+            submodules: true
+          - template: templates/steps/set-version.yml@pipelineTemplates
+          - task: DotNetCoreCLI@2
+            displayName: 'Build'
+            inputs:
+              command: 'build'
+              projects: '$(solutionFile)'
+              arguments: '--configuration $(buildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer) /p:OctoPublishCatalog="$(effectivePublishCatalog)" /p:OctoPrivateGitHubApiKey=$(GitHubPAT) /p:OctoPublicGitHubApiKey=$(GitHubPAT)'
+              publishWebProjects: false
+              zipAfterPublish: false
+              modifyOutputPath: false
+          - task: DotNetCoreCLI@2
+            displayName: 'Test'
+            inputs:
+              command: 'test'
+              projects: |
+                **/*Tests.csproj
+                !**/*SystemTests.csproj
+              testRunTitle: 'CI'
+          - template: templates/steps/handle-artifacts.yml@pipelineTemplates
+            parameters:
+              constructionKitLibraryPaths:
+                - 'src/ConstructionKits/Octo.Sdk.Demo/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Demo'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Basic'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Basic.Energy/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Basic.Energy'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.EnergyCommunity/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.EnergyCommunity'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Environment/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Environment'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Basic'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Energy/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Energy'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Fluid'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Maintenance'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Manufacturing'
+          - template: templates/steps/push-nuget-package.yml@pipelineTemplates

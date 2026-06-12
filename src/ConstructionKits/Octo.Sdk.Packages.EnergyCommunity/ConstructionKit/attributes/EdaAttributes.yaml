@@ -22,3 +22,9 @@ attributes:
   valueType: String
 - id: EdaResponseCode
   valueType: String
+- id: EdaProcessPlanned
+  valueType: Boolean
+  defaultValues:
+    - false
+- id: EdaProcessData
+  valueType: String

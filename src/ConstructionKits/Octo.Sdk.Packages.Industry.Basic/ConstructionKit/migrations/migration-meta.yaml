@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/ck-migration-meta.schema.json
-ckModelId: Industry.Basic-2.1.1
+ckModelId: Industry.Basic-2.1.2
 migrations:
   - fromVersion: "2.0.0"
     toVersion: "2.1.0"

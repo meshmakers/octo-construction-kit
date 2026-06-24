@@ -1,0 +1,8 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: ConsentId
+    description: "Identifier for the consent associated with the metering point"
+    valueType: String
+  - id: ConsentActive
+    description: "Indicates whether the consent is currently active"
+    valueType: Boolean

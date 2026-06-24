@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+associationRoles:
+- id: ConsentPeriodToMeteringPoint
+  description: "Association between a metering point and a consent period"
+  inboundName: Consents
+  inboundMultiplicity: N
+  outboundName: MeteringPoint
+  outboundMultiplicity: One

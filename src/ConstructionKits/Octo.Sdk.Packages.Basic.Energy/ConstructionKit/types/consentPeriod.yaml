@@ -1,0 +1,19 @@
+﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ConsentPeriod
+  derivedFromCkTypeId: ${System}/Entity
+  description: "The period for a consent, with a start date and an optional end date"
+  attributes:
+    - id: ${Basic}/From
+      name: From
+    - id: ${Basic}/To
+      name: To
+      isOptional: true
+    - id: ${this}/ConsentActive
+      name: Active
+    - id: ${this}/ConsentId
+      name: ConsentId
+      isOptional: true
+  associations:
+    - id: ${this}/ConsentPeriodToMeteringPoint
+      targetCkTypeId: ${this}/MeteringPoint

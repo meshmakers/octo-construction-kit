@@ -6,3 +6,12 @@ attributes:
   - id: ConsentActive
     description: "Indicates whether the consent is currently active"
     valueType: Boolean
+  - id: ConsentUri
+    description: "URI pointing to the consent site of the network operator"
+    valueType: String
+  - id: ConsentEmailSent
+    description: "Indicates whether an email has been sent to the customer regarding the consent"
+    valueType: Boolean
+  - id: ConsentEmailSentSuccess
+    description: "Indicates whether the email sent to the customer was successful"
+    valueType: Boolean

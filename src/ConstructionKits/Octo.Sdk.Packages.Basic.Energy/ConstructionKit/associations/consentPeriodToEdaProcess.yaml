@@ -2,7 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 associationRoles:
 - id: ConsentPeriodToEdaProcess
   description: "Association between an EDA process and a consent period"
-  inboundName: Consents
-  inboundMultiplicity: N
+  inboundName: Consent
+  inboundMultiplicity: One
   outboundName: EdaProcess
   outboundMultiplicity: One

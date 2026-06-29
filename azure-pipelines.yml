@@ -87,6 +87,7 @@ stages:
             submodules: true
           - template: templates/steps/set-version.yml@pipelineTemplates
           - task: DotNetCoreCLI@2
+            retryCountOnTaskFailure: 2
             displayName: 'Build'
             inputs:
               command: 'build'
@@ -96,6 +97,7 @@ stages:
               zipAfterPublish: false
               modifyOutputPath: false
           - task: DotNetCoreCLI@2
+            retryCountOnTaskFailure: 2
             displayName: 'Test'
             inputs:
               command: 'test'

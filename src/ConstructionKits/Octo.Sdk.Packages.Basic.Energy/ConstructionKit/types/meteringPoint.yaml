@@ -14,6 +14,9 @@ types:
       isOptional: true
     - id: ${this}/CarrierType
       name: CarrierType
+    - id: ${this}/NotificationContactEmail
+      name: NotificationContactEmail
+      isOptional: true
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/OperatingFacility

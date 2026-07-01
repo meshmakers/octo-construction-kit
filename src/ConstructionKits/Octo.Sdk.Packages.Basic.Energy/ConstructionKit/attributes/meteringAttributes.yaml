@@ -10,3 +10,6 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${this}/CarrierType
     description: "Type of energy carrier (e.g., electricity, gas)"
+  - id: NotificationContactEmail
+    valueType: String
+    description: "Email address for notifications related to the metering point"

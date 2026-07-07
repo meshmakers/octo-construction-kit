@@ -1,0 +1,86 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+# Generische Logistik-Enums. isExtensible -> Kunden/Projekte koennen Werte ergaenzen,
+# ohne die Basis zu aendern. Quellspezifische Codes (z.B. DILOS 100/200/300) mappt der Adapter.
+enums:
+- enumId: Carrier
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 1
+    name: DHL
+  - key: 2
+    name: UPS
+  - key: 3
+    name: GLS
+  - key: 4
+    name: DPD
+  - key: 5
+    name: Post
+  - key: 6
+    name: FedEx
+  - key: 99
+    name: Other
+- enumId: ArticleType
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 1
+    name: Single
+  - key: 2
+    name: Serial
+  - key: 3
+    name: Batch
+  - key: 4
+    name: BestBefore
+- enumId: OrderStatus
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 1
+    name: Offered
+  - key: 2
+    name: Ordered
+  - key: 3
+    name: Confirmed
+  - key: 4
+    name: Paid
+  - key: 5
+    name: Packed
+  - key: 6
+    name: InFulfillment
+  - key: 7
+    name: Shipped
+  - key: 8
+    name: Complaint
+  - key: 9
+    name: Deleted
+  - key: 10
+    name: Completed
+  - key: 11
+    name: Cancelled
+  - key: 12
+    name: Archived
+  - key: 13
+    name: PaymentReminder
+  - key: 14
+    name: Reminder1
+  - key: 15
+    name: Reminder2
+  - key: 16
+    name: Return
+- enumId: Completeness
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 1
+    name: Complete
+  - key: 2
+    name: Partial
+- enumId: StockStatus
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 1
+    name: Available
+  - key: 2
+    name: Blocked

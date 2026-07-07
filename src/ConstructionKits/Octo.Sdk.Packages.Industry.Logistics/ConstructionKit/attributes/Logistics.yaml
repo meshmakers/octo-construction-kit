@@ -1,0 +1,64 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+# Generisches, wiederverwendbares Logistik-/Fulfillment-Modell.
+# KEINE quell-/kundenspezifischen Artefakte hier (die gehoeren in den Adapter bzw. eine Kunden-CK-Schicht).
+attributes:
+- id: CustomerNumber
+  valueType: String
+- id: OrderNumber
+  valueType: String
+  description: "Primary order identifier"
+- id: ExternalOrderNumber
+  valueType: String
+  description: "Reference number from the source system (shop/ERP)"
+- id: OrderDate
+  valueType: DateTime
+- id: DeliveryDate
+  valueType: DateTime
+- id: ArticleNumber
+  valueType: String
+- id: Ean
+  valueType: String
+- id: PositionNumber
+  valueType: Int
+- id: Weight
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "kg"
+    - key: Decimals
+      value: 3
+- id: Carrier
+  valueType: Enum
+  valueCkEnumId: ${this}/Carrier
+- id: ArticleType
+  valueType: Enum
+  valueCkEnumId: ${this}/ArticleType
+# --- Versand / Bestand (AR / BE) ---
+- id: ShipmentNumber
+  valueType: String
+  description: "Dispatch / forwarding number"
+- id: ShipmentDate
+  valueType: DateTime
+- id: TrackingNumber
+  valueType: String
+  description: "Parcel / tracking number"
+- id: PackagingType
+  valueType: String
+- id: ServiceType
+  valueType: String
+- id: ParcelCount
+  valueType: Int
+- id: DeliveredQuantity
+  valueType: Double
+- id: OpenQuantity
+  valueType: Double
+  description: "Undelivered quantity; negative = over-delivery"
+- id: OrderStatus
+  valueType: Enum
+  valueCkEnumId: ${this}/OrderStatus
+- id: Completeness
+  valueType: Enum
+  valueCkEnumId: ${this}/Completeness
+- id: StockStatus
+  valueType: Enum
+  valueCkEnumId: ${this}/StockStatus

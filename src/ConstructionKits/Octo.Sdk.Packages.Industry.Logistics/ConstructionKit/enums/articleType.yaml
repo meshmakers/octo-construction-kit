@@ -1,0 +1,16 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: ArticleType
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 0
+    name: Unknown
+  - key: 1
+    name: Single
+  - key: 2
+    name: Serial
+  - key: 3
+    name: Batch
+  - key: 4
+    name: BestBefore

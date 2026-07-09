@@ -1,0 +1,22 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: ShipmentNumber
+  valueType: String
+  description: "Dispatch / forwarding number"
+- id: ShipmentDate
+  valueType: DateTime
+- id: TrackingNumber
+  valueType: String
+  description: "Parcel / tracking number"
+- id: PackagingType
+  valueType: String
+- id: ServiceType
+  valueType: String
+- id: ParcelCount
+  valueType: Int
+- id: Carrier
+  valueType: Enum
+  valueCkEnumId: ${this}/Carrier
+- id: Completeness
+  valueType: Enum
+  valueCkEnumId: ${this}/Completeness

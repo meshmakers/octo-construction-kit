@@ -1,0 +1,12 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: StockStatus
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 0
+    name: Unknown
+  - key: 1
+    name: Available
+  - key: 2
+    name: Blocked

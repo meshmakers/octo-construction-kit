@@ -1,0 +1,9 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: ArticleNumber
+  valueType: String
+- id: Ean
+  valueType: String
+- id: ArticleType
+  valueType: Enum
+  valueCkEnumId: ${this}/ArticleType

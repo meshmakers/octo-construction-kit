@@ -1,0 +1,22 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ShipmentItem
+  derivedFromCkTypeId: ${System}/Entity        # AR item / packing-list record (P*/L*)
+  description: "A dispatched line within a shipment."
+  attributes:
+  - id: ${this}/PositionNumber
+    name: PositionNumber
+  # ${Basic}/Quantity can only be referenced once per type (attribute ids are unique),
+  # so delivered/open quantities are deliberately dedicated attributes.
+  - id: ${this}/DeliveredQuantity
+    name: DeliveredQuantity
+  - id: ${this}/OpenQuantity
+    name: OpenQuantity                         # can be negative (over-delivery; -1 seen in the golden sample files)
+    isOptional: true
+  associations:
+  - id: ${this}/ShipmentItemShipment
+    targetCkTypeId: ${this}/Shipment
+  - id: ${this}/ShipmentItemArticle
+    targetCkTypeId: ${this}/Article
+  - id: ${this}/ShipmentItemParcel
+    targetCkTypeId: ${this}/Parcel

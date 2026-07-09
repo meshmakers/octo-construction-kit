@@ -1,0 +1,23 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Shipment
+  derivedFromCkTypeId: ${System}/Entity        # DILOS order feedback ("Auftragsrueckmeldung", AR) header
+  description: "A dispatch / order feedback for an order; carries totals and completeness."
+  attributes:
+  - id: ${this}/ShipmentNumber
+    name: ShipmentNumber
+  - id: ${this}/ShipmentDate
+    name: ShipmentDate
+    isOptional: true
+  - id: ${this}/Completeness
+    name: Completeness
+    isOptional: true
+  - id: ${this}/ParcelCount
+    name: ParcelCount
+    isOptional: true
+  - id: ${this}/Weight
+    name: TotalWeight
+    isOptional: true
+  associations:
+  - id: ${this}/ShipmentOrder
+    targetCkTypeId: ${this}/Order

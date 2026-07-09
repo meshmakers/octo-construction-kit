@@ -1,0 +1,17 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Article
+  derivedFromCkTypeId: ${Basic}/NamedEntity   # inherits Name + Description
+  description: "An article / product master record."
+  attributes:
+  - id: ${this}/ArticleNumber
+    name: ArticleNumber
+  - id: ${this}/Ean
+    name: Ean
+    isOptional: true
+  - id: ${this}/Weight
+    name: Weight
+    isOptional: true
+  - id: ${this}/ArticleType
+    name: ArticleType
+    isOptional: true

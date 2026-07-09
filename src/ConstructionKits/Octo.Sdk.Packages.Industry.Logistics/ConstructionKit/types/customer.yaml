@@ -1,0 +1,11 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Customer
+  derivedFromCkTypeId: ${Basic}/NamedEntity   # inherits Name + Description
+  description: "A customer who places logistics/fulfillment orders."
+  attributes:
+  - id: ${this}/CustomerNumber
+    name: CustomerNumber
+  - id: ${Basic}/Contact                       # Contact record (CompanyName/First/LastName/Email/Address)
+    name: Contact                              # full contact (company/person/email) instead of Address only
+    isOptional: true

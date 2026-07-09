@@ -1,19 +1,19 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
-# Generische Logistik-Entities (wiederverwendbares Branchen-Geruest).
-# Konvention: transaktionale Typen -> ${System}/Entity; benannte Stammdaten -> ${Basic}/NamedEntity.
+# Generic logistics entities (reusable industry scaffold).
+# Convention: transactional types -> ${System}/Entity; named master data -> ${Basic}/NamedEntity.
 types:
 - typeId: Customer
-  derivedFromCkTypeId: ${Basic}/NamedEntity   # erbt Name + Description
+  derivedFromCkTypeId: ${Basic}/NamedEntity   # inherits Name + Description
   description: "A customer who places logistics/fulfillment orders."
   attributes:
   - id: ${this}/CustomerNumber
     name: CustomerNumber
-  - id: ${Basic}/Contact                       # Contact-Record (CompanyName/First/LastName/Email/Address)
-    name: Contact                              # statt nur Address — Ueberlappungs-Review 2026-07-03 (Gerry P7)
+  - id: ${Basic}/Contact                       # Contact record (CompanyName/First/LastName/Email/Address)
+    name: Contact                              # full contact (company/person/email) instead of Address only
     isOptional: true
 
 - typeId: Article
-  derivedFromCkTypeId: ${Basic}/NamedEntity   # erbt Name + Description
+  derivedFromCkTypeId: ${Basic}/NamedEntity   # inherits Name + Description
   description: "An article / product master record."
   attributes:
   - id: ${this}/ArticleNumber
@@ -29,7 +29,7 @@ types:
     isOptional: true
 
 - typeId: Order
-  derivedFromCkTypeId: ${System}/Entity        # transaktional (wie Industry.Maintenance/order)
+  derivedFromCkTypeId: ${System}/Entity        # transactional (like Industry.Maintenance/order)
   description: "A logistics order placed by a customer for fulfillment."
   attributes:
   - id: ${this}/OrderNumber
@@ -74,7 +74,7 @@ types:
     targetCkTypeId: ${this}/Article
 
 - typeId: Shipment
-  derivedFromCkTypeId: ${System}/Entity        # ← Auftragsrueckmeldung (AR) Kopf
+  derivedFromCkTypeId: ${System}/Entity        # DILOS order feedback ("Auftragsrueckmeldung", AR) header
   description: "A dispatch / order feedback for an order; carries totals and completeness."
   attributes:
   - id: ${this}/ShipmentNumber
@@ -96,7 +96,7 @@ types:
     targetCkTypeId: ${this}/Order
 
 - typeId: Parcel
-  derivedFromCkTypeId: ${System}/Entity        # ← AR Paketsatz (C*)
+  derivedFromCkTypeId: ${System}/Entity        # AR parcel record (C*)
   description: "A parcel / colli within a shipment; carries tracking and carrier."
   attributes:
   - id: ${this}/TrackingNumber
@@ -118,17 +118,17 @@ types:
     targetCkTypeId: ${this}/Shipment
 
 - typeId: ShipmentItem
-  derivedFromCkTypeId: ${System}/Entity        # ← AR Positions-/Packliste (P*/L*)
+  derivedFromCkTypeId: ${System}/Entity        # AR item / packing-list record (P*/L*)
   description: "A dispatched line within a shipment."
   attributes:
   - id: ${this}/PositionNumber
     name: PositionNumber
-  # Review 2026-07-03: ${Basic}/Quantity-Doppelreferenz scheitert am unique-attribute-id-constraint
-  # (eine ID nur 1x pro Typ) -> beide bleiben bewusst eigene Attribute.
+  # ${Basic}/Quantity can only be referenced once per type (attribute ids are unique),
+  # so delivered/open quantities are deliberately dedicated attributes.
   - id: ${this}/DeliveredQuantity
     name: DeliveredQuantity
   - id: ${this}/OpenQuantity
-    name: OpenQuantity                         # kann negativ sein (Ueberlieferung, golden-belegt -1)
+    name: OpenQuantity                         # can be negative (over-delivery; -1 seen in the golden sample files)
     isOptional: true
   associations:
   - id: ${this}/ShipmentItemShipment

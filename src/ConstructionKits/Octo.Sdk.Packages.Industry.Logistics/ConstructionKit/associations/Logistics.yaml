@@ -18,7 +18,7 @@ associationRoles:
   outboundName: Article
   inboundMultiplicity: N
   outboundMultiplicity: One
-# --- Versand / Bestand (AR / BE) ---
+# --- Shipping / stock (return path) ---
 - id: ShipmentOrder
   description: "Shipment -> Order. Creates Shipment.Order (one) and Order.Shipments (many)."
   inboundName: Shipments

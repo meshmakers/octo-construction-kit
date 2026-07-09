@@ -116,6 +116,7 @@ stages:
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Basic'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Energy/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Energy'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Fluid'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Logistics/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Logistics'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Maintenance'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Manufacturing'
           - template: templates/steps/push-nuget-package.yml@pipelineTemplates

@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
-# Generisches, wiederverwendbares Logistik-/Fulfillment-Modell.
-# KEINE quell-/kundenspezifischen Artefakte hier (die gehoeren in den Adapter bzw. eine Kunden-CK-Schicht).
+# Generic, reusable logistics/fulfillment model.
+# NO source- or customer-specific artifacts here (those belong in the adapter or a customer CK layer).
 attributes:
 - id: CustomerNumber
   valueType: String
@@ -33,7 +33,7 @@ attributes:
 - id: ArticleType
   valueType: Enum
   valueCkEnumId: ${this}/ArticleType
-# --- Versand / Bestand (AR / BE) ---
+# --- Shipping / stock (return path) ---
 - id: ShipmentNumber
   valueType: String
   description: "Dispatch / forwarding number"

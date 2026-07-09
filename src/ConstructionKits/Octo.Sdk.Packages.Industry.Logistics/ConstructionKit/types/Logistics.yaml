@@ -139,7 +139,7 @@ types:
     targetCkTypeId: ${this}/Parcel
 
 - typeId: Stock
-  derivedFromCkTypeId: ${System}/Entity        # ← Bestandsmeldung (BE)
+  derivedFromCkTypeId: ${System}/Entity        # stock report (return path)
   description: "Stock level of an article (stock overview)."
   attributes:
   - id: ${Basic}/Quantity

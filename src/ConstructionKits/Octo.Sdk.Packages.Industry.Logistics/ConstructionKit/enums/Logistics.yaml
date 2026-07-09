@@ -1,11 +1,15 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
-# Generische Logistik-Enums. isExtensible -> Kunden/Projekte koennen Werte ergaenzen,
-# ohne die Basis zu aendern. Quellspezifische Codes (z.B. DILOS 100/200/300) mappt der Adapter.
+# Generic logistics enums. isExtensible -> customers/projects can add values without
+# changing the base kit. Source-specific codes (e.g. DILOS 100/200/300) are mapped by the
+# adapter. Key 0 = Unknown on every enum: the default numeric value of an unset Enum
+# attribute is 0, so it must map to a defined member (repo convention).
 enums:
 - enumId: Carrier
   useFlags: false
   isExtensible: true
   values:
+  - key: 0
+    name: Unknown
   - key: 1
     name: DHL
   - key: 2
@@ -24,6 +28,8 @@ enums:
   useFlags: false
   isExtensible: true
   values:
+  - key: 0
+    name: Unknown
   - key: 1
     name: Single
   - key: 2
@@ -36,6 +42,8 @@ enums:
   useFlags: false
   isExtensible: true
   values:
+  - key: 0
+    name: Unknown
   - key: 1
     name: Offered
   - key: 2
@@ -72,6 +80,8 @@ enums:
   useFlags: false
   isExtensible: true
   values:
+  - key: 0
+    name: Unknown
   - key: 1
     name: Complete
   - key: 2
@@ -80,6 +90,8 @@ enums:
   useFlags: false
   isExtensible: true
   values:
+  - key: 0
+    name: Unknown
   - key: 1
     name: Available
   - key: 2

@@ -37,6 +37,7 @@ octo-construction-kit/
 │   │   ├── Octo.Sdk.Packages.Industry.Basic/               # Industry-specific basic
 │   │   ├── Octo.Sdk.Packages.Industry.Energy/              # Energy sector CK
 │   │   ├── Octo.Sdk.Packages.Industry.Fluid/               # Fluid systems CK
+│   │   ├── Octo.Sdk.Packages.Industry.Logistics/           # Logistics/fulfillment CK
 │   │   ├── Octo.Sdk.Packages.Industry.Maintenance/         # Maintenance operations CK
 │   │   ├── Octo.Sdk.Packages.Industry.Manufactoring/       # Manufacturing operations CK
 │   │   ├── Octo.Sdk.Packages.Environment/                  # Environmental data CK
@@ -209,6 +210,7 @@ Construction Kit dependencies are defined in the solution file:
 - **Octo.Sdk.Packages.Industry.Basic** → depends on Octo.Sdk.Packages.Basic
 - **Octo.Sdk.Packages.Industry.Energy** → depends on Octo.Sdk.Packages.Industry.Basic
 - **Octo.Sdk.Packages.Industry.Fluid** → depends on Octo.Sdk.Packages.Industry.Basic
+- **Octo.Sdk.Packages.Industry.Logistics** → depends on Octo.Sdk.Packages.Basic
 - **Octo.Sdk.Packages.Environment** → depends on Octo.Sdk.Packages.Basic
 - **Octo.Sdk.Packages.EnergyCommunity** → depends on Octo.Sdk.Packages.Basic
 

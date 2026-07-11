@@ -1,0 +1,17 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: OrderNumber
+  valueType: String
+  description: "Primary order identifier"
+- id: ExternalOrderNumber
+  valueType: String
+  description: "Reference number from the source system (shop/ERP)"
+- id: OrderDate
+  valueType: DateTime
+- id: DeliveryDate
+  valueType: DateTime
+- id: OrderStatus
+  valueType: Enum
+  valueCkEnumId: ${this}/OrderStatus
+- id: PositionNumber
+  valueType: Int

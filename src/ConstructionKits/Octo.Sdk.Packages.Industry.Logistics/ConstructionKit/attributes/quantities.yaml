@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: Weight
+  valueType: Double
+  metaData:
+    - key: Unit
+      value: "kg"
+    - key: Decimals
+      value: 3
+- id: DeliveredQuantity
+  valueType: Double
+- id: OpenQuantity
+  valueType: Double
+  description: "Undelivered quantity; negative = over-delivery"

@@ -14,6 +14,7 @@ For a comprehensive guide on Construction Kits, see the [official documentation]
 | **Industry.Basic** | `Industry.Basic-2.1.0` | Basic | Extended industrial domain model |
 | **Industry.Energy** | `Industry.Energy-2.0.0` | Industry.Basic | Energy sector specific types |
 | **Industry.Fluid** | `Industry.Fluid-2.0.0` | Industry.Basic | Fluid system management |
+| **Industry.Logistics** | `Industry.Logistics-1.0.0` | Basic | Logistics/fulfillment orders, shipments and stock |
 | **Industry.Maintenance** | `Industry.Maintenance-2.0.0` | Industry.Basic | Maintenance operations and scheduling |
 | **Industry.Manufacturing** | `Industry.Manufacturing-2.0.0` | Industry.Basic | Production orders and manufacturing |
 | **Environment** | `Environment-2.0.0` | Basic | Environmental data and monitoring |
@@ -35,6 +36,7 @@ System
         ├── Basic.Energy
         ├── Environment
         ├── EnergyCommunity
+        ├── Industry.Logistics
         ├── OctoSdkDemo
         └── Industry.Basic
               ├── Industry.Energy

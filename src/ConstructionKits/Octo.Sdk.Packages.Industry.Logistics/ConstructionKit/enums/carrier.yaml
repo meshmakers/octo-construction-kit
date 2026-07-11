@@ -1,0 +1,22 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: Carrier
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 0
+    name: Unknown
+  - key: 1
+    name: DHL
+  - key: 2
+    name: UPS
+  - key: 3
+    name: GLS
+  - key: 4
+    name: DPD
+  - key: 5
+    name: Post
+  - key: 6
+    name: FedEx
+  - key: 99
+    name: Other

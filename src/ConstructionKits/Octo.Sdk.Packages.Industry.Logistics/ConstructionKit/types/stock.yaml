@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: Stock
+  derivedFromCkTypeId: ${System}/Entity        # stock report (return path)
+  description: "Stock level of an article (stock overview)."
+  attributes:
+  - id: ${Basic}/Quantity
+    name: Quantity
+  - id: ${this}/StockStatus
+    name: Status
+    isOptional: true
+  associations:
+  - id: ${this}/StockArticle
+    targetCkTypeId: ${this}/Article

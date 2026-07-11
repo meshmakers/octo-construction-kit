@@ -1,0 +1,40 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: OrderStatus
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 0
+    name: Unknown
+  - key: 1
+    name: Offered
+  - key: 2
+    name: Ordered
+  - key: 3
+    name: Confirmed
+  - key: 4
+    name: Paid
+  - key: 5
+    name: Packed
+  - key: 6
+    name: InFulfillment
+  - key: 7
+    name: Shipped
+  - key: 8
+    name: Complaint
+  - key: 9
+    name: Deleted
+  - key: 10
+    name: Completed
+  - key: 11
+    name: Cancelled
+  - key: 12
+    name: Archived
+  - key: 13
+    name: PaymentReminder
+  - key: 14
+    name: Reminder1
+  - key: 15
+    name: Reminder2
+  - key: 16
+    name: Return

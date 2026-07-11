@@ -1,0 +1,57 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+associationRoles:
+- id: OrderCustomer
+  description: "Order -> Customer. Creates Order.Customer (one) and Customer.Orders (many)."
+  inboundName: Orders
+  outboundName: Customer
+  inboundMultiplicity: N
+  outboundMultiplicity: One
+- id: OrderItemOrder
+  description: "OrderItem -> Order. Creates OrderItem.Order (one) and Order.OrderItems (many)."
+  inboundName: OrderItems
+  outboundName: Order
+  inboundMultiplicity: N
+  outboundMultiplicity: One
+- id: OrderItemArticle
+  description: "OrderItem -> Article. Creates OrderItem.Article (one) and Article.OrderItems (many)."
+  inboundName: OrderItems
+  outboundName: Article
+  inboundMultiplicity: N
+  outboundMultiplicity: One
+# --- Shipping / stock (return path) ---
+- id: ShipmentOrder
+  description: "Shipment -> Order. Creates Shipment.Order (one) and Order.Shipments (many)."
+  inboundName: Shipments
+  outboundName: Order
+  inboundMultiplicity: N
+  outboundMultiplicity: One
+- id: ParcelShipment
+  description: "Parcel -> Shipment. Creates Parcel.Shipment (one) and Shipment.Parcels (many)."
+  inboundName: Parcels
+  outboundName: Shipment
+  inboundMultiplicity: N
+  outboundMultiplicity: One
+- id: ShipmentItemShipment
+  description: "ShipmentItem -> Shipment. Creates ShipmentItem.Shipment (one) and Shipment.ShipmentItems (many)."
+  inboundName: ShipmentItems
+  outboundName: Shipment
+  inboundMultiplicity: N
+  outboundMultiplicity: One
+- id: ShipmentItemArticle
+  description: "ShipmentItem -> Article. Creates ShipmentItem.Article (one) and Article.ShipmentItems (many)."
+  inboundName: ShipmentItems
+  outboundName: Article
+  inboundMultiplicity: N
+  outboundMultiplicity: One
+- id: ShipmentItemParcel
+  description: "ShipmentItem -> Parcel. Creates ShipmentItem.Parcel (zeroOrOne) and Parcel.ShipmentItems (many)."
+  inboundName: ShipmentItems
+  outboundName: Parcel
+  inboundMultiplicity: N
+  outboundMultiplicity: ZeroOrOne
+- id: StockArticle
+  description: "Stock -> Article. Creates Stock.Article (one) and Article.Stocks (many)."
+  inboundName: Stocks
+  outboundName: Article
+  inboundMultiplicity: N
+  outboundMultiplicity: One

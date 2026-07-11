@@ -1,0 +1,12 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
+# Generic, reusable logistics/fulfillment model (industry scaffold).
+# NO source- or customer-specific artifacts here (those belong in the adapter or a
+# customer CK layer); source-specific codes (e.g. DILOS 100/200/300) are mapped by
+# the adapter.
+# Conventions: transactional types -> ${System}/Entity; named master data ->
+# ${Basic}/NamedEntity. Enums are isExtensible (customers/projects can add values
+# without changing the base kit) and define key 0 = Unknown: the default numeric
+# value of an unset Enum attribute is 0, so it must map to a defined member.
+modelId: Industry.Logistics-1.0.0
+dependencies:
+  - Basic-[2.0,3.0)

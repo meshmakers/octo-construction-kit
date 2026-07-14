@@ -47,6 +47,9 @@ types:
     - id: ${this}/BankTransactionCode
       name: BankTransactionCode
       isOptional: true
+    - id: ${this}/TransactionMatchState
+      name: MatchState
+      isOptional: true
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/BankAccount
@@ -63,3 +66,7 @@ types:
       fields:
         - attributePaths:
             - Direction
+    - indexType: Ascending
+      fields:
+        - attributePaths:
+            - MatchState

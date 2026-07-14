@@ -4,8 +4,10 @@ types:
   derivedFromCkTypeId: ${Basic}/NamedEntity
   description: "A bank account with balance and account details"
   attributes:
+    # Optional since 1.4.0: credit-card and PayPal accounts have no IBAN.
     - id: ${Basic}/Iban
       name: Iban
+      isOptional: true
     - id: ${Basic}/BankName
       name: BankName
       isOptional: true
@@ -32,8 +34,18 @@ types:
     - id: ${this}/AvailableFunds
       name: AvailableFunds
       isOptional: true
+    - id: ${this}/BankAccountExternalId
+      name: ExternalId
+      isOptional: true
+  # No unique IBAN index since 1.4.0 — IBAN is optional (credit card / PayPal)
+  # and multiple IBAN-less accounts would collide on a unique index. Sync
+  # pipelines deduplicate via ExternalId lookups instead.
   indexes:
-    - indexType: UniqueNotDeleted
+    - indexType: Ascending
       fields:
         - attributePaths:
             - Iban
+    - indexType: Ascending
+      fields:
+        - attributePaths:
+            - ExternalId

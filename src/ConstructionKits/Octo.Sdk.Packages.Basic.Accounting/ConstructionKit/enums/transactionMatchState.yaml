@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: TransactionMatchState
+  description: "Reconciliation state of a bank transaction against accounting documents"
+  values:
+    - key: 0
+      name: Unreviewed
+      description: "Transaction has not been reviewed for matching yet"
+    - key: 1
+      name: Matched
+      description: "Transaction is assigned to one or more accounting documents"
+    - key: 2
+      name: Unmatched
+      description: "Matching was attempted but no accounting document could be assigned"

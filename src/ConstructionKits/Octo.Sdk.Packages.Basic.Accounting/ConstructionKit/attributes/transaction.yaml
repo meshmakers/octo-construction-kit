@@ -49,3 +49,7 @@ attributes:
   - id: BankTransactionCode
     valueType: String
     description: "Bank transaction code classifying the transaction type"
+  - id: TransactionMatchState
+    valueType: Enum
+    valueCkEnumId: ${this}/TransactionMatchState
+    description: "Reconciliation state of the transaction against accounting documents"

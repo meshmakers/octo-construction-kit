@@ -22,3 +22,6 @@ attributes:
   - id: AvailableFunds
     valueType: Double
     description: "Available funds on the account"
+  - id: BankAccountExternalId
+    valueType: String
+    description: "Identifier of the account in the external system (e.g. finAPI account ID)"

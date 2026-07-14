@@ -53,3 +53,6 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${this}/TransactionMatchState
     description: "Reconciliation state of the transaction against accounting documents"
+  - id: TransactionMatchComment
+    valueType: String
+    description: "Comment on the reconciliation state, e.g. why a transaction is ignored"

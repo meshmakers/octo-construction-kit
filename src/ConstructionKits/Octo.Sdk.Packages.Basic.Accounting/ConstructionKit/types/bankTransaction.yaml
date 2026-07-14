@@ -50,6 +50,9 @@ types:
     - id: ${this}/TransactionMatchState
       name: MatchState
       isOptional: true
+    - id: ${this}/TransactionMatchComment
+      name: MatchComment
+      isOptional: true
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/BankAccount

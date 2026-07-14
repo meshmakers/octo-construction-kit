@@ -12,3 +12,6 @@ enums:
     - key: 2
       name: Unmatched
       description: "Matching was attempted but no accounting document could be assigned"
+    - key: 3
+      name: Ignored
+      description: "Deliberately excluded from matching (see MatchComment for the reason)"

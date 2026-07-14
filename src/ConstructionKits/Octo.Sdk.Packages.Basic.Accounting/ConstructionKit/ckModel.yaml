@@ -1,4 +1,4 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
-modelId: Basic.Accounting-1.4.0
+modelId: Basic.Accounting-1.4.1
 dependencies:
   - Basic-[2.0,3.0)

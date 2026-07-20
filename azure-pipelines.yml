@@ -16,6 +16,9 @@
 #     incident: Industry.Basic-2.1.1 pinned by downstream packages without
 #     itself being published, breaking every tenant's library-status endpoint)
 #   - SystemTests excluded
+#   - CK SemVer validation gate (validate-ck-versions) runs BEFORE Build:
+#     CK models are published DURING dotnet build, so version honesty must
+#     be enforced first. Validates the 11 published CKs in dependency order.
 #   - HAS push-nuget — 10 Meshmakers.Octo.Sdk.Packages.* NuGets per build
 #   - HAS 10 CK library outputs (the actual Construction Kit YAMLs)
 
@@ -39,7 +42,7 @@ resources:
       type: github
       name: meshmakers/octo-pipeline-templates
       endpoint: meshmakers-access-token
-      ref: refs/tags/tpl-v0.4.11
+      ref: refs/tags/tpl-v0.5.0
 
 trigger:
   batch: true
@@ -86,6 +89,20 @@ stages:
             clean: true
             submodules: true
           - template: templates/steps/set-version.yml@pipelineTemplates
+          - template: templates/steps/validate-ck-versions.yml@pipelineTemplates
+            parameters:
+              constructionKitPaths:
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Basic.Energy/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.EnergyCommunity/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Environment/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Basic/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Logistics/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Energy/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Demo/ConstructionKit'
           - task: DotNetCoreCLI@2
             retryCountOnTaskFailure: 2
             displayName: 'Build'

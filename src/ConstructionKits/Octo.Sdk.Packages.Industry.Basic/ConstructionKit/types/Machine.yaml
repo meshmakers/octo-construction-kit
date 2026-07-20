@@ -18,3 +18,6 @@ types:
   - id: ${this}/MachineCapabilities
     name: MachineCapabilities
     isOptional: true
+  - id: ${this}/IsSimulated
+    name: IsSimulated
+    isOptional: true

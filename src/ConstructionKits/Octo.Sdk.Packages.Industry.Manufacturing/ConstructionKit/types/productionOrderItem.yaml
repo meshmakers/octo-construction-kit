@@ -16,7 +16,10 @@ types:
       name: State
     - id: ${this}/CycleTimeForOnePiece
       name: CycleTimeForOnePiece
-      isOptional: true    
+      isOptional: true
+    - id: ${this}/OeeStatistics
+      name: OeeStatistics
+      isOptional: true
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/ProductionOrder     

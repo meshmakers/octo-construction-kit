@@ -14,3 +14,5 @@ enums:
     name: Error
   - key: 4
     name: Idle
+  - key: 5
+    name: Setup

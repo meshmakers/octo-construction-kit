@@ -32,3 +32,8 @@ attributes:
   valueCkEnumId: ${this}/MachineCapabilities
   defaultValues:
     - 0
+
+- id: IsSimulated
+  valueType: Boolean
+  defaultValues:
+    - false

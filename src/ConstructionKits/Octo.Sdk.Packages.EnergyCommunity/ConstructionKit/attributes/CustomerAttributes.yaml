@@ -13,3 +13,8 @@ attributes:
   description: "Billing cycle associated with the customer"
   defaultValues:
     - 1
+
+
+- id: DateOfBirth
+  valueType: DateTime
+  description: "Date of birth of the customer (natural person)"

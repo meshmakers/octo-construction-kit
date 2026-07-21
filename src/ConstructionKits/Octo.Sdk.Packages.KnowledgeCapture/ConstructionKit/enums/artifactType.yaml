@@ -1,0 +1,24 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: ArtifactType
+    description: 'Kind of weakly structured business artifact ingested as a knowledge source. The two thesis Control Set types (support/professional-services reports and development compilations) plus the individual raw source kinds they aggregate.'
+    isExtensible: true
+    values:
+      - key: 0
+        name: SupportReport
+        description: 'Support or professional-services report: narrative prose, problem description, steps taken, resolution.'
+      - key: 1
+        name: DevCompilation
+        description: 'Compiled development document aggregating work item context, commit logs, pull request descriptions and change statistics.'
+      - key: 2
+        name: WorkItem
+        description: 'A single work item / ticket (e.g. Azure DevOps, Jira): title, description, acceptance criteria, comments.'
+      - key: 3
+        name: CommitHistory
+        description: 'Git commit log or pull request history: fragmented, terse entries where decisions are frequently implicit.'
+      - key: 4
+        name: TeamsChat
+        description: 'Chat or channel conversation (e.g. Microsoft Teams): informal, dialogic, weakly structured.'
+      - key: 5
+        name: MeetingTranscript
+        description: 'Verbatim or summarized meeting transcript.'

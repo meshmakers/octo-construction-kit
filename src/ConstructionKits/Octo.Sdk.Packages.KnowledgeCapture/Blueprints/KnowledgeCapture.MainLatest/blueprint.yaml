@@ -1,0 +1,26 @@
+$schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
+blueprintId: KnowledgeCapture.MainLatest-1.0.0
+description: |
+  GenAI-based knowledge capture seed for dev and test environments. Seeds the
+  configuration entities (ServiceAccountConfiguration, McpConfiguration,
+  AiConfiguration), the versioned prompt templates, and four pipelines:
+  a generic source-artifact ingest endpoint (bronze), the structured
+  generation pipeline with a verification pass (silver, GenerationMode
+  Pipeline), the agentic generation pipeline with MCP retrieval tools
+  (silver, GenerationMode Agentic), and the audience rendition pipeline
+  (gold). Pipelines are seeded Undeployed; deploy them from Studio or via
+  MCP deploy_pipeline. Before first use: set the ClientSecret on the
+  wiki-capture-sa ServiceAccountConfiguration (register the OIDC client in
+  octo-identity-services with scope OctoApiReadOnly) and the ApiKey on the
+  wiki-capture-llm AiConfiguration. 1.0.0 requires System.Communication
+  3.25.1+ (McpConfiguration type with AuthServiceAccountConfigurationName).
+ckModelDependencies:
+  - KnowledgeCapture-[1.0.0,2.0)
+  - System.Communication-[3.25.1,4.0)
+
+seedDataPath: seed-data/entities.yaml
+
+requires:
+  octo.environment:
+    - dev
+    - test

@@ -1,20 +1,14 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
-
-
-- id: CustomerNumber
-  valueType: String
-  description: "Internal customer number"
-
-
-- id: BillingCycle
-  valueType: Enum
-  valueCkEnumId: ${this}/BillingCycle
-  description: "Billing cycle associated with the customer"
-  defaultValues:
-    - 1
-
-
-- id: DateOfBirth
-  valueType: DateTime
-  description: "Date of birth of the customer (natural person)"
+  - id: CustomerNumber
+    valueType: String
+    description: "Internal customer number"
+  - id: BillingCycle
+    valueType: Enum
+    valueCkEnumId: ${this}/BillingCycle
+    description: "Billing cycle associated with the customer"
+    defaultValues:
+      - 1
+  - id: DateOfBirth
+    valueType: DateTime
+    description: "Date of birth of the customer (natural person)"

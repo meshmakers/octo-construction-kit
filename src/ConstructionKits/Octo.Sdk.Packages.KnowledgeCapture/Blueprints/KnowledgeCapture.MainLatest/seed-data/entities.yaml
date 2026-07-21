@@ -1,0 +1,698 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - KnowledgeCapture-1.0.0
+  - System.Communication-3.25.1
+entities:
+  # --------------------------------------------------------------------------
+  # Configuration entities
+  # --------------------------------------------------------------------------
+  - rtId: '672000000000000000000001'
+    ckTypeId: System.Communication/ServiceAccountConfiguration
+    rtWellKnownName: wiki-capture-sa
+    # OAuth2 client-credentials account the agentic pipeline uses to call
+    # octo-mcp-service (read-only retrieval). Register the client in
+    # octo-identity-services with scope OctoApiReadOnly and set the
+    # ClientSecret before deploying the agentic pipeline.
+    # NOTE: Configuration-derived types have no Name/Description attributes;
+    # the rtWellKnownName is the identifier.
+    attributes:
+      - id: System.Communication/IssuerUri
+        value: https://localhost:5003
+      - id: System.Communication/ClientId
+        value: wiki-capture-mcp
+      - id: System.Communication/ClientSecret
+        value: ""
+      - id: System/TenantId
+        value: meshtest
+
+  - rtId: '672000000000000000000002'
+    ckTypeId: System.Communication/McpConfiguration
+    rtWellKnownName: wiki-capture-mcp
+    # MCP server used by the agentic generation pipeline for read-only
+    # retrieval over already-ingested entities (get_entity_by_id,
+    # query_entities, ...). Dev/test URL; adjust host and tenant segment
+    # for other environments.
+    attributes:
+      - id: System.Communication/Url
+        value: https://localhost:5017/meshtest/mcp
+      - id: System.Communication/Transport
+        value: 2   # Http
+      - id: System.Communication/AuthServiceAccountConfigurationName
+        value: wiki-capture-sa
+
+  - rtId: '672000000000000000000003'
+    ckTypeId: System.Communication/AiConfiguration
+    rtWellKnownName: wiki-capture-llm
+    # LLM credentials and defaults for the knowledge capture pipelines.
+    # Set the ApiKey before deploying. Model and sampling follow the thesis
+    # constants (claude-sonnet-4-6, temperature 0.3).
+    attributes:
+      - id: System.Communication/ApiKey
+        value: ""
+      - id: System.Communication/AiModel
+        value: claude-sonnet-4-6
+      - id: System.Communication/MaxTokens
+        value: 4096
+      - id: System.Communication/Temperature
+        value: 0.3
+
+  # --------------------------------------------------------------------------
+  # Data flow (groups the pipelines)
+  # --------------------------------------------------------------------------
+  - rtId: '672000000000000000000004'
+    ckTypeId: System.Communication/DataFlow
+    rtWellKnownName: knowledge-capture
+    attributes:
+      - id: System/Name
+        value: Knowledge Capture
+      - id: System/Description
+        value: >-
+          GenAI wiki-entry capture: ingest (bronze) -> generate + verify
+          (silver) -> render per audience (gold).
+
+  # --------------------------------------------------------------------------
+  # Prompt templates (governed source of truth; pipeline definitions embed a
+  # copy of this text because LlmQuery@1 takes prompts inline. When editing,
+  # bump TemplateVersion and update the pipeline definition to match.)
+  # --------------------------------------------------------------------------
+  - rtId: '672000000000000000000005'
+    ckTypeId: KnowledgeCapture/PromptTemplate
+    rtWellKnownName: wiki-prompt-structured
+    attributes:
+      - id: System/Name
+        value: Structured generation prompt
+      - id: KnowledgeCapture/GenerationMode
+        value: 0   # Pipeline
+      - id: KnowledgeCapture/TemplateVersion
+        value: 1
+      - id: KnowledgeCapture/DefaultModelId
+        value: claude-sonnet-4-6
+      - id: KnowledgeCapture/Temperature
+        value: 0.3
+      - id: KnowledgeCapture/MaxTokens
+        value: 4096
+      - id: KnowledgeCapture/SystemPrompt
+        value: |-
+          You are a knowledge management assistant for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries.
+
+          Rules:
+          - Ground every claim in the source artifact. Use only the provided artifact content; do not use outside knowledge.
+          - If information is missing or unclear, omit it. Never invent information. A short or empty section is acceptable.
+          - For each section, provide citations: a word-for-word quote from the source that supports it, plus an anchor (commit hash, work item id, timestamp) when one is present in the source.
+          - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
+          - Respond with JSON only, exactly matching the requested schema.
+      - id: KnowledgeCapture/UserTemplate
+        value: |-
+          The main content line is the id of the source artifact. The additional context contains the source artifact entity; its attributes include the full raw text (Content), the artifact type, and the source system.
+
+          Create an audience-neutral structured wiki entry from the artifact content:
+          1. First identify the key facts: decisions (with their rationale), actions taken, issues or blockers encountered, and technical details.
+          2. Then write these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources".
+          3. For every section, add citations with word-for-word source quotes.
+
+          Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+
+  - rtId: '672000000000000000000006'
+    ckTypeId: KnowledgeCapture/PromptTemplate
+    rtWellKnownName: wiki-prompt-verification
+    attributes:
+      - id: System/Name
+        value: Verification prompt (evaluator pass)
+      - id: KnowledgeCapture/GenerationMode
+        value: 0   # Pipeline
+      - id: KnowledgeCapture/TemplateVersion
+        value: 1
+      - id: KnowledgeCapture/DefaultModelId
+        value: claude-sonnet-4-6
+      - id: KnowledgeCapture/Temperature
+        value: 0.0
+      - id: KnowledgeCapture/MaxTokens
+        value: 2048
+      - id: KnowledgeCapture/SystemPrompt
+        value: |-
+          You are a meticulous fact-checker. You compare a generated wiki entry draft against its source artifact. Use only the provided data; do not use outside knowledge. Keep output minimal: flags only, no preamble.
+      - id: KnowledgeCapture/UserTemplate
+        value: |-
+          The input contains the source artifact(s) (ground truth, attribute Content) and the generated draft (title, sections, citations).
+
+          Check every claim in the draft against the source content:
+          - Flag each claim that has no support in the source, with a one-sentence reason.
+          - Verify each citation: if a sourceQuote does not occur verbatim or near-verbatim in the source, flag it.
+          - If everything is supported, return an empty list.
+
+          Return JSON: {"flags": [{"claim": string, "reason": string}]}
+
+  - rtId: '672000000000000000000007'
+    ckTypeId: KnowledgeCapture/PromptTemplate
+    rtWellKnownName: wiki-prompt-agentic
+    attributes:
+      - id: System/Name
+        value: Agentic generation prompt
+      - id: KnowledgeCapture/GenerationMode
+        value: 1   # Agentic
+      - id: KnowledgeCapture/TemplateVersion
+        value: 1
+      - id: KnowledgeCapture/DefaultModelId
+        value: claude-sonnet-4-6
+      - id: KnowledgeCapture/Temperature
+        value: 0.3
+      - id: KnowledgeCapture/MaxTokens
+        value: 16384
+      - id: KnowledgeCapture/SystemPrompt
+        value: |-
+          You are a knowledge management agent for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries through a multi-step process:
+
+          1. EXTRACT - Read the artifact and identify every discrete fact: decisions (with rationale), actions taken, issues or blockers, technical details.
+          2. RETRIEVE (only if needed) - Use the available MCP tools (e.g. get_entity_by_id, query_entities) to fetch related context: other SourceArtifact entities from the same source system or existing WikiEntry entities on the same topic. Retrieve only what you need; the tools are read-only.
+          3. DRAFT - Produce the structured wiki entry with sections and citations back to the source.
+          4. REVIEW - Re-read the source and check your draft for missing information (completeness), unsupported claims (hallucinations), and correct attribution. Keep intermediate notes concise: bullet list, at most 150 words; output NONE when no issues are found.
+          5. REVISE - Fix any issues found in the review step.
+
+          Rules:
+          - Ground every claim in the source material. If information is missing or unclear, omit it. Never invent information.
+          - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
+          - Your final answer must be JSON only, exactly matching the requested schema.
+      - id: KnowledgeCapture/UserTemplate
+        value: |-
+          The main content line is the id of the source artifact. The additional context contains the source artifact entity; its attributes include the full raw text (Content), the artifact type, and the source system.
+
+          Work through EXTRACT, RETRIEVE (if needed), DRAFT, REVIEW, REVISE, then return the final entry with these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources". Every section needs citations with word-for-word source quotes.
+
+          Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+
+  - rtId: '672000000000000000000008'
+    ckTypeId: KnowledgeCapture/PromptTemplate
+    rtWellKnownName: wiki-prompt-render
+    attributes:
+      - id: System/Name
+        value: Audience rendition prompt
+      - id: KnowledgeCapture/TemplateVersion
+        value: 1
+      - id: KnowledgeCapture/DefaultModelId
+        value: claude-sonnet-4-6
+      - id: KnowledgeCapture/Temperature
+        value: 0.3
+      - id: KnowledgeCapture/MaxTokens
+        value: 4096
+      - id: KnowledgeCapture/SystemPrompt
+        value: |-
+          You render verified, audience-neutral wiki entries as audience-specific markdown pages. Use only facts present in the entry; never add or invent content. Output markdown only, starting with a level-1 title heading.
+      - id: KnowledgeCapture/UserTemplate
+        value: |-
+          The main content is the requested audience name. The additional context contains the verified wiki entry (Sections with headings and content, plus Citations).
+
+          Render the entry as a markdown page using exactly the audience's section schema:
+          - development: ## Summary, ## Decisions, ## Action items, ## Blockers and open questions, ## Implementation detail, ## Sources
+          - marketing: ## Outcome (plain language, no commit or file-level detail), ## Stakeholders involved, ## Business impact, ## Status and next milestone, ## Sources
+          - architect: ## Summary, ## Decisions (each with its driver and at least one alternative considered), ## Consequences, ## Open questions and risks, ## Sources
+
+          Preserve source references in the Sources section. If the entry lacks content for a section, keep the heading and write "Nothing recorded.". Output markdown only.
+
+  # --------------------------------------------------------------------------
+  # Pipeline 1: generic ingest endpoint (bronze)
+  # POST body: { "title", "artifactType" (int, see ArtifactType enum),
+  #              "sourceSystem", "sourceUri", "content", "contentPreview",
+  #              "isPiiRedacted" (bool), "capturedAt" (ISO 8601) }
+  # --------------------------------------------------------------------------
+  - rtId: '672000000000000000000009'
+    ckTypeId: System.Communication/Pipeline
+    rtWellKnownName: wiki-capture-ingest
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: '672000000000000000000004'
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: '670000000000000000000002'
+        targetCkTypeId: System.Communication/Adapter
+    attributes:
+      - id: System/Name
+        value: Wiki Capture - Ingest Source Artifact
+      - id: System/Description
+        value: >-
+          Generic bronze-layer ingest endpoint. Any webhook, relay or script
+          POSTs a normalized artifact payload; the pipeline persists it
+          unchanged as a SourceArtifact. Point Azure DevOps service hooks,
+          Teams/Graph pollers or export scripts at this endpoint (see package
+          README for source-specific trigger nodes like FromMicrosoftGraph@1).
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/DeploymentState
+        value: 0   # Undeployed
+      - id: System.Communication/IsDebuggingEnabled
+        value: false
+      - id: System.Communication/PipelineDefinition
+        value: |-
+          triggers:
+            - type: FromHttpRequest@1
+              method: POST
+              path: /knowledge-capture/ingest
+              description: Normalized artifact payload (title, artifactType, sourceSystem, sourceUri, content, ...).
+          transformations:
+            - type: CreateUpdateInfo@1
+              description: Create the SourceArtifact (bronze, append-only).
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: INSERT
+              ckTypeId: KnowledgeCapture/SourceArtifact
+              rtIdPath: $.newArtifactRtId
+              generateRtId: true
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.body.title
+                - attributeName: ArtifactType
+                  attributeValueType: Int
+                  valuePath: $.body.artifactType
+                - attributeName: SourceSystem
+                  attributeValueType: String
+                  valuePath: $.body.sourceSystem
+                - attributeName: SourceUri
+                  attributeValueType: String
+                  valuePath: $.body.sourceUri
+                - attributeName: Content
+                  attributeValueType: String
+                  valuePath: $.body.content
+                - attributeName: ContentPreview
+                  attributeValueType: String
+                  valuePath: $.body.contentPreview
+                - attributeName: IsPiiRedacted
+                  attributeValueType: Boolean
+                  valuePath: $.body.isPiiRedacted
+                - attributeName: CapturedAt
+                  attributeValueType: DateTime
+                  valuePath: $.body.capturedAt
+            - type: ApplyChanges@2
+              description: Persist the source artifact.
+              entityUpdatesPath: $._updateItems
+
+  # --------------------------------------------------------------------------
+  # Pipeline 2: structured generation (silver, GenerationMode Pipeline)
+  # POST body: { "artifactRtIds": ["<rtId>"] }
+  # --------------------------------------------------------------------------
+  - rtId: '67200000000000000000000a'
+    ckTypeId: System.Communication/Pipeline
+    rtWellKnownName: wiki-capture-structured
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: '672000000000000000000004'
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: '670000000000000000000002'
+        targetCkTypeId: System.Communication/Adapter
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000003'
+        targetCkTypeId: System.Communication/AiConfiguration
+    attributes:
+      - id: System/Name
+        value: Wiki Capture - Structured Generation
+      - id: System/Description
+        value: >-
+          Structured pipeline architecture (thesis Section 4.2.1): fetch
+          artifact, ONE generation LLM call with fixed JSON schema, ONE
+          verification LLM call (evaluator pass, fills HallucinationFlags),
+          write WikiEntry as Draft for human verification. Prompts:
+          wiki-prompt-structured v1, wiki-prompt-verification v1.
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/DeploymentState
+        value: 0   # Undeployed
+      - id: System.Communication/IsDebuggingEnabled
+        value: false
+      - id: System.Communication/PipelineDefinition
+        value: |-
+          triggers:
+            - type: FromHttpRequest@1
+              method: POST
+              path: /knowledge-capture/generate
+              description: 'Body: { "artifactRtIds": ["<rtId>"] }'
+          transformations:
+            - type: GetRtEntitiesById@1
+              description: Fetch the source artifact(s) (bronze).
+              ckTypeId: KnowledgeCapture/SourceArtifact
+              rtIdsPath: $.body.artifactRtIds
+              targetPath: $.artifacts
+            - type: LlmQuery@1
+              description: Single-call generation (wiki-prompt-structured v1).
+              provider: Anthropic
+              apiKeyConfigurationName: wiki-capture-llm
+              model: claude-sonnet-4-6
+              temperature: 0.3
+              maxTokens: 4096
+              timeoutSeconds: 180
+              responseFormat: json
+              jsonFormatSample: '{"title":"...","sections":[{"heading":"Summary","sectionContent":"...","sortOrder":0}],"citations":[{"sectionRef":"Summary","sourceQuote":"...","sourceAnchor":""}]}'
+              path: $.body.artifactRtIds[0]
+              dataPaths:
+                - $.artifacts
+              targetPath: $.draft
+              systemPrompt: |-
+                You are a knowledge management assistant for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries.
+
+                Rules:
+                - Ground every claim in the source artifact. Use only the provided artifact content; do not use outside knowledge.
+                - If information is missing or unclear, omit it. Never invent information. A short or empty section is acceptable.
+                - For each section, provide citations: a word-for-word quote from the source that supports it, plus an anchor (commit hash, work item id, timestamp) when one is present in the source.
+                - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
+                - Respond with JSON only, exactly matching the requested schema.
+              question: |-
+                The main content line is the id of the source artifact. The additional context contains the source artifact entity; its attributes include the full raw text (Content), the artifact type, and the source system.
+
+                Create an audience-neutral structured wiki entry from the artifact content:
+                1. First identify the key facts: decisions (with their rationale), actions taken, issues or blockers encountered, and technical details.
+                2. Then write these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources".
+                3. For every section, add citations with word-for-word source quotes.
+
+                Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+            - type: LlmQuery@1
+              description: Verification pass (wiki-prompt-verification v1, evaluator step).
+              provider: Anthropic
+              apiKeyConfigurationName: wiki-capture-llm
+              model: claude-sonnet-4-6
+              temperature: 0.0
+              maxTokens: 2048
+              timeoutSeconds: 180
+              responseFormat: json
+              jsonFormatSample: '{"flags":[{"claim":"...","reason":"..."}]}'
+              path: $.body.artifactRtIds[0]
+              dataPaths:
+                - $.artifacts
+                - $.draft
+              targetPath: $.review
+              systemPrompt: |-
+                You are a meticulous fact-checker. You compare a generated wiki entry draft against its source artifact. Use only the provided data; do not use outside knowledge. Keep output minimal: flags only, no preamble.
+              question: |-
+                The additional context contains the source artifact entity (ground truth; its Content attribute holds the raw text) and the generated draft (title, sections, citations).
+
+                Check every claim in the draft against the source content:
+                - Flag each claim that has no support in the source, with a one-sentence reason.
+                - Verify each citation: if a sourceQuote does not occur verbatim or near-verbatim in the source, flag it.
+                - If everything is supported, return an empty list.
+
+                Return JSON: {"flags": [{"claim": string, "reason": string}]}
+            - type: CreateUpdateInfo@1
+              description: Create the WikiEntry (silver, Draft).
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: INSERT
+              ckTypeId: KnowledgeCapture/WikiEntry
+              rtIdPath: $.newEntryRtId
+              generateRtId: true
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.draft.title
+                - attributeName: Sections
+                  attributeValueType: RecordArray
+                  valuePath: $.draft.sections
+                - attributeName: Citations
+                  attributeValueType: RecordArray
+                  valuePath: $.draft.citations
+                - attributeName: HallucinationFlags
+                  attributeValueType: RecordArray
+                  valuePath: $.review.flags
+                - attributeName: VerificationStatus
+                  attributeValueType: Int
+                  value: 0
+                - attributeName: GenerationMode
+                  attributeValueType: Int
+                  value: 0
+                - attributeName: PromptName
+                  attributeValueType: String
+                  value: wiki-prompt-structured
+                - attributeName: PromptVersion
+                  attributeValueType: Int
+                  value: 1
+                - attributeName: ModelId
+                  attributeValueType: String
+                  value: claude-sonnet-4-6
+            - type: CreateAssociationUpdate@1
+              description: Link entry to its source artifact (GeneratedFrom).
+              targetPath: $._assocItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: CREATE
+              originRtIdPath: $._updateItems[0].RtId
+              originCkTypeIdPath: $._updateItems[0].CkTypeId
+              targetRtIdPath: $.body.artifactRtIds[0]
+              targetCkTypeId: KnowledgeCapture/SourceArtifact
+              associationRoleId: KnowledgeCapture/GeneratedFrom
+            - type: ApplyChanges@2
+              description: Persist entry and association.
+              entityUpdatesPath: $._updateItems
+              associationUpdatesPath: $._assocItems
+
+  # --------------------------------------------------------------------------
+  # Pipeline 3: agentic generation (silver, GenerationMode Agentic)
+  # POST body: { "artifactRtIds": ["<rtId>"] }
+  # --------------------------------------------------------------------------
+  - rtId: '67200000000000000000000b'
+    ckTypeId: System.Communication/Pipeline
+    rtWellKnownName: wiki-capture-agentic
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: '672000000000000000000004'
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: '670000000000000000000002'
+        targetCkTypeId: System.Communication/Adapter
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000003'
+        targetCkTypeId: System.Communication/AiConfiguration
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000002'
+        targetCkTypeId: System.Communication/McpConfiguration
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000001'
+        targetCkTypeId: System.Communication/ServiceAccountConfiguration
+    attributes:
+      - id: System/Name
+        value: Wiki Capture - Agentic Generation
+      - id: System/Description
+        value: >-
+          Agentic workflow architecture (thesis Section 4.2.2): single agentic
+          LLM call with read-only MCP retrieval tools and an
+          EXTRACT-RETRIEVE-DRAFT-REVIEW-REVISE self-correction loop, bounded
+          by maxToolRounds. The entity write happens deterministically
+          outside the agent loop, so the agent stays read-only. Prompt:
+          wiki-prompt-agentic v1.
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/DeploymentState
+        value: 0   # Undeployed
+      - id: System.Communication/IsDebuggingEnabled
+        value: false
+      - id: System.Communication/PipelineDefinition
+        value: |-
+          triggers:
+            - type: FromHttpRequest@1
+              method: POST
+              path: /knowledge-capture/generate-agentic
+              description: 'Body: { "artifactRtIds": ["<rtId>"] }'
+          transformations:
+            - type: GetRtEntitiesById@1
+              description: Fetch the source artifact(s) (bronze).
+              ckTypeId: KnowledgeCapture/SourceArtifact
+              rtIdsPath: $.body.artifactRtIds
+              targetPath: $.artifacts
+            - type: LlmQuery@1
+              description: Agentic generation with MCP retrieval (wiki-prompt-agentic v1).
+              provider: Anthropic
+              apiKeyConfigurationName: wiki-capture-llm
+              model: claude-sonnet-4-6
+              temperature: 0.3
+              maxTokens: 16384
+              timeoutSeconds: 600
+              mcpConfigurationNames:
+                - wiki-capture-mcp
+              maxToolRounds: 8
+              responseFormat: json
+              jsonFormatSample: '{"title":"...","sections":[{"heading":"Summary","sectionContent":"...","sortOrder":0}],"citations":[{"sectionRef":"Summary","sourceQuote":"...","sourceAnchor":""}]}'
+              path: $.body.artifactRtIds[0]
+              dataPaths:
+                - $.artifacts
+              targetPath: $.draft
+              systemPrompt: |-
+                You are a knowledge management agent for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries through a multi-step process:
+
+                1. EXTRACT - Read the artifact and identify every discrete fact: decisions (with rationale), actions taken, issues or blockers, technical details.
+                2. RETRIEVE (only if needed) - Use the available MCP tools (e.g. get_entity_by_id, query_entities) to fetch related context: other SourceArtifact entities from the same source system or existing WikiEntry entities on the same topic. Retrieve only what you need; the tools are read-only.
+                3. DRAFT - Produce the structured wiki entry with sections and citations back to the source.
+                4. REVIEW - Re-read the source and check your draft for missing information (completeness), unsupported claims (hallucinations), and correct attribution. Keep intermediate notes concise: bullet list, at most 150 words; output NONE when no issues are found.
+                5. REVISE - Fix any issues found in the review step.
+
+                Rules:
+                - Ground every claim in the source material. If information is missing or unclear, omit it. Never invent information.
+                - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
+                - Your final answer must be JSON only, exactly matching the requested schema.
+              question: |-
+                The main content line is the id of the source artifact. The additional context contains the source artifact entity; its attributes include the full raw text (Content), the artifact type, and the source system.
+
+                Work through EXTRACT, RETRIEVE (if needed), DRAFT, REVIEW, REVISE, then return the final entry with these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources". Every section needs citations with word-for-word source quotes.
+
+                Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+            - type: CreateUpdateInfo@1
+              description: Create the WikiEntry (silver, Draft).
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: INSERT
+              ckTypeId: KnowledgeCapture/WikiEntry
+              rtIdPath: $.newEntryRtId
+              generateRtId: true
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.draft.title
+                - attributeName: Sections
+                  attributeValueType: RecordArray
+                  valuePath: $.draft.sections
+                - attributeName: Citations
+                  attributeValueType: RecordArray
+                  valuePath: $.draft.citations
+                - attributeName: VerificationStatus
+                  attributeValueType: Int
+                  value: 0
+                - attributeName: GenerationMode
+                  attributeValueType: Int
+                  value: 1
+                - attributeName: PromptName
+                  attributeValueType: String
+                  value: wiki-prompt-agentic
+                - attributeName: PromptVersion
+                  attributeValueType: Int
+                  value: 1
+                - attributeName: ModelId
+                  attributeValueType: String
+                  value: claude-sonnet-4-6
+            - type: CreateAssociationUpdate@1
+              description: Link entry to its source artifact (GeneratedFrom).
+              targetPath: $._assocItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: CREATE
+              originRtIdPath: $._updateItems[0].RtId
+              originCkTypeIdPath: $._updateItems[0].CkTypeId
+              targetRtIdPath: $.body.artifactRtIds[0]
+              targetCkTypeId: KnowledgeCapture/SourceArtifact
+              associationRoleId: KnowledgeCapture/GeneratedFrom
+            - type: ApplyChanges@2
+              description: Persist entry and association.
+              entityUpdatesPath: $._updateItems
+              associationUpdatesPath: $._assocItems
+
+  # --------------------------------------------------------------------------
+  # Pipeline 4: audience rendition (gold)
+  # POST body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development",
+  #              "audienceKey": 0, "title": "<rendition name>" }
+  # --------------------------------------------------------------------------
+  - rtId: '67200000000000000000000c'
+    ckTypeId: System.Communication/Pipeline
+    rtWellKnownName: wiki-render-audience
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: '672000000000000000000004'
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: '670000000000000000000002'
+        targetCkTypeId: System.Communication/Adapter
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000003'
+        targetCkTypeId: System.Communication/AiConfiguration
+    attributes:
+      - id: System/Name
+        value: Wiki Capture - Audience Rendition
+      - id: System/Description
+        value: >-
+          Gold layer: renders a VERIFIED wiki entry as an audience-specific
+          markdown page (development/marketing/architect section schemas,
+          thesis CL-01 Table 15). Facts are verified once on the entry;
+          renditions are cheap, repeatable renderings. Only render Verified
+          entries. Prompt: wiki-prompt-render v1.
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/DeploymentState
+        value: 0   # Undeployed
+      - id: System.Communication/IsDebuggingEnabled
+        value: false
+      - id: System.Communication/PipelineDefinition
+        value: |-
+          triggers:
+            - type: FromHttpRequest@1
+              method: POST
+              path: /knowledge-capture/render
+              description: 'Body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development", "audienceKey": 0, "title": "..." }'
+          transformations:
+            - type: GetRtEntitiesById@1
+              description: Fetch the verified wiki entry (silver).
+              ckTypeId: KnowledgeCapture/WikiEntry
+              rtIdsPath: $.body.wikiEntryRtIds
+              targetPath: $.entries
+            - type: LlmQuery@1
+              description: Render markdown for the requested audience (wiki-prompt-render v1).
+              provider: Anthropic
+              apiKeyConfigurationName: wiki-capture-llm
+              model: claude-sonnet-4-6
+              temperature: 0.3
+              maxTokens: 4096
+              timeoutSeconds: 180
+              responseFormat: text
+              path: $.body.audience
+              dataPaths:
+                - $.entries
+              targetPath: $.rendition
+              systemPrompt: |-
+                You render verified, audience-neutral wiki entries as audience-specific markdown pages. Use only facts present in the entry; never add or invent content. Output markdown only, starting with a level-1 title heading.
+              question: |-
+                The input contains a verified wiki entry under "entries" (Sections with headings and content, plus Citations) and the requested audience under "body.audience".
+
+                Render the entry as a markdown page using exactly the audience's section schema:
+                - development: ## Summary, ## Decisions, ## Action items, ## Blockers and open questions, ## Implementation detail, ## Sources
+                - marketing: ## Outcome (plain language, no commit or file-level detail), ## Stakeholders involved, ## Business impact, ## Status and next milestone, ## Sources
+                - architect: ## Summary, ## Decisions (each with its driver and at least one alternative considered), ## Consequences, ## Open questions and risks, ## Sources
+
+                Preserve source references in the Sources section. If the entry lacks content for a section, keep the heading and write "Nothing recorded.". Output markdown only.
+            - type: CreateUpdateInfo@1
+              description: Create the WikiRendition (gold).
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: INSERT
+              ckTypeId: KnowledgeCapture/WikiRendition
+              rtIdPath: $.newRenditionRtId
+              generateRtId: true
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.body.title
+                - attributeName: Audience
+                  attributeValueType: Int
+                  valuePath: $.body.audienceKey
+                - attributeName: Body
+                  attributeValueType: String
+                  valuePath: $.rendition
+                - attributeName: PromptName
+                  attributeValueType: String
+                  value: wiki-prompt-render
+                - attributeName: PromptVersion
+                  attributeValueType: Int
+                  value: 1
+                - attributeName: ModelId
+                  attributeValueType: String
+                  value: claude-sonnet-4-6
+            - type: CreateAssociationUpdate@1
+              description: Link rendition to its wiki entry (RenderOf).
+              targetPath: $._assocItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: CREATE
+              originRtIdPath: $._updateItems[0].RtId
+              originCkTypeIdPath: $._updateItems[0].CkTypeId
+              targetRtIdPath: $.body.wikiEntryRtIds[0]
+              targetCkTypeId: KnowledgeCapture/WikiEntry
+              associationRoleId: KnowledgeCapture/RenderOf
+            - type: ApplyChanges@2
+              description: Persist rendition and association.
+              entityUpdatesPath: $._updateItems
+              associationUpdatesPath: $._assocItems

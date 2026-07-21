@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+associationRoles:
+  - id: RenderOf
+    description: Links an audience-specific rendition (gold) to the verified wiki entry (silver) it renders. One entry can have many renditions; each rendition renders exactly one entry.
+    inboundName: Renditions
+    inboundMultiplicity: N
+    outboundName: RenderOf
+    outboundMultiplicity: One

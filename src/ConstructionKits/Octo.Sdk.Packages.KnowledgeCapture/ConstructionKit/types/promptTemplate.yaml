@@ -1,0 +1,36 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: PromptTemplate
+    derivedFromCkTypeId: ${Basic}/NamedEntity
+    isFinal: true
+    description: >
+      Versioned prompt template (adaptability principle: output schema, tone
+      and style are dictated by prompts, not by architecture code). The
+      governed source of truth for prompt text; generated entries reference it
+      via PromptName/PromptVersion for the audit trail. NOTE: LlmQuery@1
+      currently takes prompt text inline, so pipeline definitions embed a copy
+      of this text. When editing a template, bump TemplateVersion and update
+      the corresponding pipeline definition(s) to match.
+    attributes:
+      - id: ${this}/GenerationMode
+        name: GenerationMode
+        isOptional: true
+      - id: ${this}/TemplateVersion
+        name: TemplateVersion
+      - id: ${this}/SystemPrompt
+        name: SystemPrompt
+      - id: ${this}/UserTemplate
+        name: UserTemplate
+        isOptional: true
+      - id: ${this}/FewShotExamples
+        name: FewShotExamples
+        isOptional: true
+      - id: ${this}/DefaultModelId
+        name: DefaultModelId
+        isOptional: true
+      - id: ${this}/Temperature
+        name: Temperature
+        isOptional: true
+      - id: ${this}/MaxTokens
+        name: MaxTokens
+        isOptional: true

@@ -1,0 +1,33 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: SourceArtifact
+    derivedFromCkTypeId: ${Basic}/NamedEntity
+    isFinal: true
+    description: >
+      A weakly structured business artifact captured from a source system
+      (bronze layer). Raw, append-only working copy: preserved as ingested so
+      wiki entries can be regenerated, audited, and re-verified. The system of
+      record (SourceUri) keeps the authoritative copy. PII redaction is
+      optional and recorded via IsPiiRedacted.
+    attributes:
+      - id: ${this}/ArtifactType
+        name: ArtifactType
+      - id: ${this}/SourceSystem
+        name: SourceSystem
+      - id: ${this}/SourceUri
+        name: SourceUri
+        isOptional: true
+      - id: ${this}/Content
+        name: Content
+      - id: ${this}/ContentPreview
+        name: ContentPreview
+        isOptional: true
+      - id: ${this}/ContentHash
+        name: ContentHash
+        isOptional: true
+      - id: ${this}/IsPiiRedacted
+        name: IsPiiRedacted
+        isOptional: true
+      - id: ${this}/CapturedAt
+        name: CapturedAt
+        isOptional: true

@@ -1,0 +1,26 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Heading
+    valueType: String
+    description: 'Section heading.'
+  - id: SectionContent
+    valueType: String
+    description: 'Section content (markdown allowed).'
+  - id: SortOrder
+    valueType: Int
+    description: 'Display/render order of the section within the entry.'
+  - id: SectionRef
+    valueType: String
+    description: 'Heading of the section this citation supports.'
+  - id: SourceQuote
+    valueType: String
+    description: 'Word-for-word quote from the source artifact that grounds the claim.'
+  - id: SourceAnchor
+    valueType: String
+    description: 'Optional precise anchor in the source, e.g. a commit hash, work item id, or message timestamp.'
+  - id: Claim
+    valueType: String
+    description: 'The claim from the draft that could not be grounded in the source.'
+  - id: Reason
+    valueType: String
+    description: 'One-sentence reason why the claim was flagged.'

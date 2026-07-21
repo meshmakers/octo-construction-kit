@@ -3,8 +3,9 @@ blueprintId: KnowledgeCapture.MainLatest-1.0.0
 description: |
   GenAI-based knowledge capture seed for dev and test environments. Seeds the
   configuration entities (ServiceAccountConfiguration, McpConfiguration,
-  AiConfiguration), the versioned prompt templates, and four pipelines:
-  a generic source-artifact ingest endpoint (bronze), the structured
+  AiConfiguration), the versioned prompt templates, and five pipelines:
+  a generic source-artifact ingest endpoint (bronze), a PDF ingest via
+  OCR (bronze), the structured
   generation pipeline with a verification pass (silver, GenerationMode
   Pipeline), the agentic generation pipeline with MCP retrieval tools
   (silver, GenerationMode Agentic), and the audience rendition pipeline

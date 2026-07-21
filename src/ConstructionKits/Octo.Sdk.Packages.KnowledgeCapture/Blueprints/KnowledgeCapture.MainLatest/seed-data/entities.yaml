@@ -10,9 +10,10 @@ entities:
     ckTypeId: System.Communication/ServiceAccountConfiguration
     rtWellKnownName: wiki-capture-sa
     # OAuth2 client-credentials account the agentic pipeline uses to call
-    # octo-mcp-service (read-only retrieval). Register the client in
-    # octo-identity-services with scope OctoApiReadOnly and set the
-    # ClientSecret before deploying the agentic pipeline.
+    # octo-mcp-service (read-only retrieval by prompt contract; the token
+    # service currently requests scope OctoApiFullAccess hardcoded, so the
+    # client must allow it). Register the client in octo-identity-services
+    # and set the ClientSecret before deploying the agentic pipeline.
     # NOTE: Configuration-derived types have no Name/Description attributes;
     # the rtWellKnownName is the identifier.
     attributes:
@@ -282,6 +283,88 @@ entities:
                 - attributeName: CapturedAt
                   attributeValueType: DateTime
                   valuePath: $.body.capturedAt
+            - type: ApplyChanges@2
+              description: Persist the source artifact.
+              entityUpdatesPath: $._updateItems
+
+  # --------------------------------------------------------------------------
+  # Pipeline 1b: PDF ingest via OCR (bronze)
+  # POST multipart/form-data: file=<pdf> plus optional form fields
+  # sourceSystem, sourceUri. Example:
+  #   curl -k -X POST .../meshtest/knowledge-capture/ingest-pdf \
+  #     -F "file=@report.pdf" -F "sourceSystem=Zenon" -F "sourceUri=..."
+  # --------------------------------------------------------------------------
+  - rtId: '67200000000000000000000d'
+    ckTypeId: System.Communication/Pipeline
+    rtWellKnownName: wiki-capture-ingest-pdf
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: '672000000000000000000004'
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: '670000000000000000000002'
+        targetCkTypeId: System.Communication/Adapter
+    attributes:
+      - id: System/Name
+        value: Wiki Capture - Ingest PDF (OCR)
+      - id: System/Description
+        value: >-
+          Bronze-layer ingest for PDF artifacts (e.g. support/professional
+          services reports): multipart upload -> OCR text extraction ->
+          SourceArtifact. The OCR text becomes Content; the original PDF stays
+          in its system of record (SourceUri).
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/DeploymentState
+        value: 0   # Undeployed
+      - id: System.Communication/IsDebuggingEnabled
+        value: false
+      - id: System.Communication/PipelineDefinition
+        value: |-
+          triggers:
+            - type: FromHttpRequest@1
+              method: POST
+              path: /knowledge-capture/ingest-pdf
+              description: 'multipart/form-data: file=<pdf>, optional form fields sourceSystem, sourceUri.'
+          transformations:
+            - type: PdfOcrExtraction@1
+              description: OCR the uploaded PDF (base64 multipart file -> text).
+              language: en
+              maxFileSizeBytes: 20000000
+              continueOnError: false
+              path: $.files[0].data
+              targetPath: $.ocrText
+            - type: CreateUpdateInfo@1
+              description: Create the SourceArtifact (bronze) from the OCR text.
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: INSERT
+              ckTypeId: KnowledgeCapture/SourceArtifact
+              rtIdPath: $.newArtifactRtId
+              generateRtId: true
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.files[0].fileName
+                - attributeName: ArtifactType
+                  attributeValueType: Int
+                  value: 0   # SupportReport
+                - attributeName: SourceSystem
+                  attributeValueType: String
+                  valuePath: $.formData.sourceSystem
+                - attributeName: SourceUri
+                  attributeValueType: String
+                  valuePath: $.formData.sourceUri
+                - attributeName: Content
+                  attributeValueType: String
+                  valuePath: $.ocrText
+                - attributeName: IsPiiRedacted
+                  attributeValueType: Boolean
+                  value: false
+                - attributeName: CapturedAt
+                  attributeValueType: DateTime
+                  value: =utcNow()
             - type: ApplyChanges@2
               description: Persist the source artifact.
               entityUpdatesPath: $._updateItems

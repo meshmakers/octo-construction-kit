@@ -71,9 +71,19 @@ prompts then keep anonymized identifiers as-is.
    - Refresh the blueprint catalog in Studio if it doesn't appear immediately.
 1. Install the blueprint `KnowledgeCapture.MainLatest-1.0.0` (Studio or MCP
    `install_blueprint`). Requires `System.Communication` ≥ 3.25.1.
-2. Register an OIDC client `wiki-capture-mcp` in octo-identity-services with
-   scope `OctoApiReadOnly` and the tenant in `allowed_tenants`; set the
-   `ClientSecret` on the `wiki-capture-sa` ServiceAccountConfiguration.
+2. Register an OIDC client `wiki-capture-mcp` in octo-identity-services:
+   client-credentials grant, enabled, require client secret, and allowed scope
+   **`octo_api`** — that is the literal scope string (the value of the
+   `CommonConstants.OctoApiFullAccess` constant) which `ServiceAccountTokenService`
+   requests hardcoded; read-only scoping awaits the configurable-scope
+   enhancement from mcp-auth-plan. Ensure the tenant is covered by
+   `allowed_tenants`, then set the `ClientSecret` on the `wiki-capture-sa`
+   ServiceAccountConfiguration (same value, two places).
+   CLI: `octo-cli -c AddClientCredentialsClient -id wiki-capture-mcp -n "Wiki Capture MCP" -s <secret>`
+   Verify independently of the adapter before deploying:
+   `curl -k -X POST https://localhost:5003/connect/token -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=client_credentials&client_id=wiki-capture-mcp&client_secret=<secret>&scope=octo_api&acr_values=tenant:meshtest"`
+   must return an access_token (`invalid_client` = id/secret problem,
+   `invalid_scope` = the client lacks `octo_api`).
 3. Set the `ApiKey` on the `wiki-capture-llm` AiConfiguration.
 4. Check the `wiki-capture-mcp` McpConfiguration `Url`
    (dev default: `https://localhost:5017/meshtest/mcp`).
@@ -165,6 +175,18 @@ systems are reached via adapter trigger nodes, not MCP.
   the record type declared by the CK schema; the `{CkRecordId, Attributes}`
   envelope remains required for polymorphic records and dotted attribute
   paths. This package's generation pipelines depend on that adapter change.
+- **MCP tool allowlist**: the agentic pipeline currently offers the entire
+  octo-mcp-service surface (~198 tools ≈ 20k+ prompt tokens per call) —
+  expensive and poor agent-computer-interface design. Add a tool
+  allowlist/filter to `McpConfiguration` or `LlmQuery@1` and scope this
+  pipeline to the few read tools it needs (get_entity_by_id, query_entities,
+  get_type_schema).
+- **Small-model tool use**: gpt-oss-120b made zero tool calls despite 198
+  offered (replicates the thesis Run 1 small-model finding). Judge the
+  agentic architecture on a stronger model (claude-sonnet) before drawing
+  conclusions; note also the node's documented fallback that
+  `responseFormat: json` is incompatible with tools on most providers (JSON
+  is then enforced by the system prompt alone).
 
 ## Sources
 

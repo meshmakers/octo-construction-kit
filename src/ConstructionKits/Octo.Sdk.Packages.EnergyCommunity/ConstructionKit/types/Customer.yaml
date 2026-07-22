@@ -21,3 +21,6 @@ types:
     isOptional: true
   - id: ${this}/TaxProcedureCreditNote
     name: TaxProcedureCreditNote
+  - id: ${this}/DateOfBirth
+    name: DateOfBirth
+    isOptional: true

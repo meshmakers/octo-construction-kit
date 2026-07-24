@@ -25,6 +25,9 @@ types:
     - id: ${this}/SyncStatus
       name: SyncStatus
       isOptional: true
+    - id: ${this}/ConsentExpiresAt
+      name: ConsentExpiresAt
+      isOptional: true
   associations:
     - id: ${this}/ConnectionToAccount
       targetCkTypeId: ${this}/BankAccount

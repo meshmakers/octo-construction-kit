@@ -18,3 +18,6 @@ attributes:
   - id: SyncStatus
     valueType: String
     description: "Current synchronization status"
+  - id: ConsentExpiresAt
+    valueType: DateTime
+    description: "Expiry of the bank's AIS consent; after this date a re-consent (web form) is required before further synchronization"

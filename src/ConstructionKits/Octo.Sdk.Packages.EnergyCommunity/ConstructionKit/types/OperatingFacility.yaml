@@ -1,8 +1,0 @@
-$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
-types:
-- typeId: OperatingFacility
-  derivedFromCkTypeId: ${Basic.Energy}/OperatingFacility
-  description: "An operating facility owned by an energy community customer"
-  associations:
-    - id: ${this}/AssociatedCustomer
-      targetCkTypeId: ${this}/Customer

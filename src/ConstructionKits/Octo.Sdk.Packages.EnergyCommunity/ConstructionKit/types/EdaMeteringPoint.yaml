@@ -1,9 +1,0 @@
-$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
-types:
-  - typeId: EdaMeteringPoint
-    derivedFromCkTypeId: ${Basic.Energy}/EdaMeteringPoint
-    description: "Metering point from EDA import with energy-community specific attributes"
-    attributes:
-      - id: ${this}/PartitionFactor
-        name: PartitionFactor
-        isOptional: true

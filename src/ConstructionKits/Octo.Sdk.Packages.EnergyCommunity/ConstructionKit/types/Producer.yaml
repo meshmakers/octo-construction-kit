@@ -4,7 +4,7 @@ types:
     derivedFromCkTypeId: ${Basic.Energy}/Producer
     description: "A producer metering point participating in an energy community"
     attributes:
-      - id: ${this}/PartitionFactor
+      - id: ${Basic.Energy}/PartitionFactor
         name: PartitionFactor
         isOptional: true
       - id: ${this}/EnergyProductionCapacity

@@ -6,6 +6,9 @@ types:
     attributes:
       - id: ${this}/MeteringPointNumber
         name: MeteringPointNumber
+      - id: ${this}/PartitionFactor
+        name: PartitionFactor
+        isOptional: true
       - id: ${this}/ProductionType
         name: ProductionType
         isOptional: true

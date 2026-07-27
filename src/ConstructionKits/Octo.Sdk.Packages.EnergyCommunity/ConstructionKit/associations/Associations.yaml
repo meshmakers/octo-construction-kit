@@ -12,12 +12,12 @@ associationRoles:
     inboundMultiplicity: N
     outboundName: MeteringPoint
     outboundMultiplicity: ZeroOrOne
-  - id: AssociatedCustomer
-    description: "The customer associated with the operating facilities."
-    inboundName: Facilities
-    inboundMultiplicity: N
-    outboundName: Customer
-    outboundMultiplicity: One
+  - id: AssociatedFacilities
+    description: "The operating facilities associated with a customer."
+    inboundName: Customer
+    inboundMultiplicity: One
+    outboundName: Facilities
+    outboundMultiplicity: N
   - id: ParticipationPeriod
     description: "Association between a metering point an a time range to get the participation period for a metering point"
     inboundName: Periods

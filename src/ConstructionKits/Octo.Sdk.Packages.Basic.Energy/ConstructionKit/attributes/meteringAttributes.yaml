@@ -3,6 +3,9 @@ attributes:
   - id: MeteringPointNumber
     valueType: String
     description: "Number identifying the metering point"
+  - id: PartitionFactor
+    valueType: Int
+    description: "Partition factor of the metering point within an energy community (percentage share, EDA process EC_PRTFACT_CHANGE)"
   - id: IsProducer
     valueType: Boolean
     description: "Indicates if the new metering point is a producer"

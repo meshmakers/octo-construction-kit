@@ -24,3 +24,6 @@ types:
   - id: ${this}/DateOfBirth
     name: DateOfBirth
     isOptional: true
+  associations:
+  - id: ${this}/AssociatedFacilities
+    targetCkTypeId: ${Basic.Energy}/OperatingFacility

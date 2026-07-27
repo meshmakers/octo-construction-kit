@@ -1,8 +1,8 @@
-﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: BillingDocumentLineItem
     derivedFromCkTypeId: ${System}/Entity
-    description: "An billing document line item"
+    description: "A billing document line item"
     attributes:
       - id: ${this}/GrossAmount
         name: GrossAmount
@@ -18,10 +18,26 @@ types:
         name: BillingType
       - id: ${Basic}/Quantity
         name: Quantity
+      - id: ${Basic}/TimeRange
+        name: BilledTimeRange
+        isOptional: true
+      - id: ${this}/IntervalCount
+        name: IntervalCount
+        isOptional: true
+      - id: ${this}/IntervalCountL1
+        name: IntervalCountL1
+        isOptional: true
+      - id: ${this}/IntervalCountL2
+        name: IntervalCountL2
+        isOptional: true
+      - id: ${this}/IntervalCountL3
+        name: IntervalCountL3
+        isOptional: true
+      - id: ${this}/IntervalCountUnknown
+        name: IntervalCountUnknown
+        isOptional: true
     associations:
       - id: ${System}/ParentChild
         targetCkTypeId: ${this}/BillingDocument
-      - id: ${this}/AssignedBilling
-        targetCkTypeId: ${this}/EnergyQuantity
       - id: ${this}/BilledMeteringPoint
-        targetCkTypeId: ${this}/MeteringPoint
+        targetCkTypeId: ${Basic.Energy}/MeteringPoint

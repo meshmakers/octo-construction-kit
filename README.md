@@ -9,22 +9,22 @@ For a comprehensive guide on Construction Kits, see the [official documentation]
 | Package | Model ID | Depends On | Description |
 |---------|----------|------------|-------------|
 | **Basic** | `Basic-2.0.2` | System | Core domain model (Asset, Employee, Document, TreeNode, ...) |
-| **Basic.Accounting** | `Basic.Accounting-1.3.0` | Basic | Accounting and billing domain |
-| **Basic.Energy** | `Basic.Energy-1.0.1` | Basic | Base energy domain types |
-| **Industry.Basic** | `Industry.Basic-2.1.0` | Basic | Extended industrial domain model |
-| **Industry.Energy** | `Industry.Energy-2.0.0` | Industry.Basic | Energy sector specific types |
+| **Basic.Accounting** | `Basic.Accounting-1.5.1` | Basic | Accounting and billing domain |
+| **Basic.Energy** | `Basic.Energy-1.2.0` | Basic | Base energy domain types (metering points, EDA, energy measurements) |
+| **Industry.Basic** | `Industry.Basic-2.1.3` | Basic | Extended industrial domain model |
+| **Industry.Energy** | `Industry.Energy-3.1.0` | Industry.Basic | Energy sector specific types |
 | **Industry.Fluid** | `Industry.Fluid-2.0.0` | Industry.Basic | Fluid system management |
 | **Industry.Logistics** | `Industry.Logistics-1.0.0` | Basic | Logistics/fulfillment orders, shipments and stock |
 | **Industry.Maintenance** | `Industry.Maintenance-2.0.0` | Industry.Basic | Maintenance operations and scheduling |
-| **Industry.Manufacturing** | `Industry.Manufacturing-2.0.0` | Industry.Basic | Production orders and manufacturing |
-| **Environment** | `Environment-2.0.0` | Basic | Environmental data and monitoring |
-| **EnergyCommunity** | `EnergyCommunity-3.0.3` | Basic | Energy community management |
+| **Industry.Manufacturing** | `Industry.Manufacturing-2.1.1` | Industry.Basic | Production orders and manufacturing |
+| **Environment** | `Environment-3.1.0` | Basic | Environmental data and monitoring |
+| **EnergyCommunity** | `EnergyCommunity-4.0.0` | Basic, Basic.Energy | Energy community management (community/billing types on top of Basic.Energy; metering data lives in stream-data archives since 4.0.0) |
 
 ### Demo Packages
 
 | Package | Model ID | Description |
 |---------|----------|-------------|
-| **Octo.Sdk.Demo** | `OctoSdkDemo-1.0.1` | General SDK demo |
+| **Octo.Sdk.Demo** | `OctoSdkDemo-2.0.1` | General SDK demo |
 | **Octo.Energy.Demo** | `OctoEnergyDemo` | Energy domain demo |
 
 ### Dependency Graph
@@ -34,8 +34,8 @@ System
   └── Basic
         ├── Basic.Accounting
         ├── Basic.Energy
+        │     └── EnergyCommunity
         ├── Environment
-        ├── EnergyCommunity
         ├── Industry.Logistics
         ├── OctoSdkDemo
         └── Industry.Basic

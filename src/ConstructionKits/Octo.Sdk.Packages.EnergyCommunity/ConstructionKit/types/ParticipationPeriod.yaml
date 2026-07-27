@@ -8,4 +8,4 @@ types:
         name: TimeRange
     associations:
       - id: ${this}/ParticipationPeriod
-        targetCkTypeId: ${this}/MeteringPoint
+        targetCkTypeId: ${Basic.Energy}/MeteringPoint

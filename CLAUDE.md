@@ -212,7 +212,7 @@ Construction Kit dependencies are defined in the solution file:
 - **Octo.Sdk.Packages.Industry.Fluid** → depends on Octo.Sdk.Packages.Industry.Basic
 - **Octo.Sdk.Packages.Industry.Logistics** → depends on Octo.Sdk.Packages.Basic
 - **Octo.Sdk.Packages.Environment** → depends on Octo.Sdk.Packages.Basic
-- **Octo.Sdk.Packages.EnergyCommunity** → depends on Octo.Sdk.Packages.Basic
+- **Octo.Sdk.Packages.EnergyCommunity** → depends on Octo.Sdk.Packages.Basic and Octo.Sdk.Packages.Basic.Energy (since EnergyCommunity 4.0.0: community/billing types subtype the Basic.Energy metering-point types; metering data is stream data, no EnergyQuantity entity anymore)
 
 ---
 

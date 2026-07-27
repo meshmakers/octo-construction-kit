@@ -6,6 +6,3 @@ attributes:
     metaData:
       - key: Unit
         value: "kWp"
-  - id: ProductionType
-    valueType: Enum
-    valueCkEnumId: ${this}/ProductionType

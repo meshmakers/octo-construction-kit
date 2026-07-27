@@ -14,7 +14,7 @@ types:
     isOptional: true
   - id: ${this}/BillingCycle
     name: BillingCycle
-  - id: ${this}/State
+  - id: ${Basic.Energy}/State
     name: State
   - id: ${Basic}/BankAccount
     name: BankAccount

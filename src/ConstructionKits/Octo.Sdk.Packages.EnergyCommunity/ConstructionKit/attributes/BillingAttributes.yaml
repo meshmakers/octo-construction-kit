@@ -1,4 +1,4 @@
-﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: BillingDocumentState
     valueType: Enum
@@ -30,3 +30,18 @@ attributes:
     valueType: Enum
     valueCkEnumId: ${this}/TaxProcedureCreditNote
     description: "The tax procedure credit notes associated with the billing document"
+  - id: IntervalCount
+    valueType: Int
+    description: "Total number of stream-data intervals aggregated into the billed quantity"
+  - id: IntervalCountL1
+    valueType: Int
+    description: "Number of billed intervals with data quality L1 (metered values)"
+  - id: IntervalCountL2
+    valueType: Int
+    description: "Number of billed intervals with data quality L2 (interpolated values)"
+  - id: IntervalCountL3
+    valueType: Int
+    description: "Number of billed intervals with data quality L3 (estimated values)"
+  - id: IntervalCountUnknown
+    valueType: Int
+    description: "Number of billed intervals with unknown data quality"

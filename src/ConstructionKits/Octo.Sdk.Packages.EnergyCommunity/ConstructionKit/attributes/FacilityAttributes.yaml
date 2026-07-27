@@ -1,8 +1,0 @@
-﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
-attributes:
-  - id: FacilityName
-    valueType: String
-    description: "The name of the facility"
-  - id: FacilityType
-    valueType: Enum
-    valueCkEnumId: ${this}/FacilityType

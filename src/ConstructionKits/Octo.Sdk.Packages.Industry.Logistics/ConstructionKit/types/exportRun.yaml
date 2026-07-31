@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ExportRun
+  derivedFromCkTypeId: ${System}/Entity        # outbound export/delivery log
+  description: "One outbound export/delivery run of a dataset (e.g. article master), keyed by kind and calendar day. Doubles as the delivery-dedup marker: at most one delivery per kind and day."
+  attributes:
+  - id: ${this}/ExportKind
+    name: ExportKind
+  - id: ${this}/ExportDate
+    name: ExportDate

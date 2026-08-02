@@ -56,3 +56,9 @@ attributes:
   - id: TransactionMatchComment
     valueType: String
     description: "Comment on the reconciliation state, e.g. why a transaction is ignored"
+  - id: TransactionInClarification
+    valueType: Boolean
+    description: "Marks the transaction as under clarification (open question / needs review). Orthogonal to the reconciliation MatchState; used to surface open clarification cases in an overview and list filter."
+  - id: TransactionClarificationNote
+    valueType: String
+    description: "Free-text note describing what needs to be clarified about the transaction."

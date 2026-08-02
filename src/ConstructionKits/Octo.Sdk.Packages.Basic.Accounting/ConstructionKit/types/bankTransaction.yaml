@@ -53,6 +53,12 @@ types:
     - id: ${this}/TransactionMatchComment
       name: MatchComment
       isOptional: true
+    - id: ${this}/TransactionInClarification
+      name: InClarification
+      isOptional: true
+    - id: ${this}/TransactionClarificationNote
+      name: ClarificationNote
+      isOptional: true
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/BankAccount
@@ -73,3 +79,7 @@ types:
       fields:
         - attributePaths:
             - MatchState
+    - indexType: Ascending
+      fields:
+        - attributePaths:
+            - InClarification

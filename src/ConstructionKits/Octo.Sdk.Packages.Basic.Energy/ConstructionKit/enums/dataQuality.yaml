@@ -15,3 +15,6 @@ enums:
       - key: 3
         name: L3
         description: "The data is an estimate"
+      - key: 4
+        name: Manual
+        description: "The value was entered or corrected manually by a user"

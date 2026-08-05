@@ -13,9 +13,9 @@ associationRoles:
     outboundName: MeteringPoint
     outboundMultiplicity: ZeroOrOne
   - id: AssociatedFacilities
-    description: "The operating facilities associated with a customer."
+    description: "The operating facilities associated with a customer. Optional: facilities may exist without a customer (data minimization for tenants without the Billing blueprint, AB#4718)."
     inboundName: Customer
-    inboundMultiplicity: One
+    inboundMultiplicity: ZeroOrOne
     outboundName: Facilities
     outboundMultiplicity: N
   - id: ParticipationPeriod

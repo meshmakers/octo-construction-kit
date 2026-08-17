@@ -3,6 +3,8 @@ types:
 - typeId: NamedEntity
   derivedFromCkTypeId: ${System}/Entity
   isAbstract: true
+  displayNameRule: "${Name}"
+  displayDescriptionRule: "${Description}"
   attributes:
   - id: ${System}/Name
     name: Name

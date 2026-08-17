@@ -43,7 +43,7 @@ resources:
       type: github
       name: meshmakers/octo-pipeline-templates
       endpoint: meshmakers-access-token
-      ref: refs/tags/tpl-v0.5.0
+      ref: refs/tags/tpl-v0.5.2
 
 trigger:
   batch: true
@@ -92,16 +92,6 @@ stages:
           - template: templates/steps/set-version.yml@pipelineTemplates
           - template: templates/steps/validate-ck-versions.yml@pipelineTemplates
             parameters:
-              # test/0.2-dev ONLY: pin the CK compiler tool to the engine
-              # packages published from this branch. The latest stable tool
-              # (3.4.x) neither knows displayNameRule/displayDescriptionRule
-              # (AB#4809 schema -> parse error) nor their patch-level SemVer
-              # classification. Bump when the branch engine CI publishes a
-              # schema-relevant change; REMOVE on merge to main (the stable
-              # tool learns the fields with the next core-libs release).
-              # NOTE: the engine CI publishes the compiler WITHOUT the -dev
-              # build-number suffix — pin the suffix-less feed version.
-              toolVersion: '0.2.2608.17010'
               # Same 11 published CKs as constructionKitLibraryPaths on the
               # handle-artifacts step below — keep both lists in sync when
               # adding/removing a CK. THIS list must additionally stay in

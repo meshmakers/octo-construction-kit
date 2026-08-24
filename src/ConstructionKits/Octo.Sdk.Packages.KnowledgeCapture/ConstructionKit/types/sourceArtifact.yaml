@@ -31,3 +31,6 @@ types:
       - id: ${this}/CapturedAt
         name: CapturedAt
         isOptional: true
+      - id: ${this}/ExtractionTier
+        name: ExtractionTier
+        isOptional: true

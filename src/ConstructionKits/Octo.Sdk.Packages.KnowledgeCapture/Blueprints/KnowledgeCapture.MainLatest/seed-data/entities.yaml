@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - KnowledgeCapture-1.0.0
+  - KnowledgeCapture-1.1.0
   - System.Communication-3.25.1
 entities:
   # --------------------------------------------------------------------------
@@ -328,10 +328,15 @@ entities:
               description: 'multipart/form-data: file=<pdf>, optional form fields sourceSystem, sourceUri.'
           transformations:
             - type: PdfOcrExtraction@1
-              description: OCR the uploaded PDF (base64 multipart file -> text).
+              description: >-
+                Extract text via the extraction ladder (AB#4464): embedded e-invoice XML ->
+                text layer (lossless for born-digital PDFs) -> OCR for pages without one.
+                The tier used is persisted on the artifact (ExtractionTier).
               language: en
               maxFileSizeBytes: 20000000
               continueOnError: false
+              preferTextLayer: true
+              extractEmbeddedXml: true
               path: $.files[0].data
               targetPath: $.ocrText
             - type: CreateUpdateInfo@1
@@ -365,6 +370,9 @@ entities:
                 - attributeName: CapturedAt
                   attributeValueType: DateTime
                   value: =utcNow()
+                - attributeName: ExtractionTier
+                  attributeValueType: String
+                  valuePath: $.ExtractionTier
             - type: ApplyChanges@2
               description: Persist the source artifact.
               entityUpdatesPath: $._updateItems

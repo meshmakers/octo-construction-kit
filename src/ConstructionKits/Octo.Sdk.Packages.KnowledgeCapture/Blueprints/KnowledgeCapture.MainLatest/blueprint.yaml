@@ -16,7 +16,7 @@ description: |
   wiki-capture-llm AiConfiguration. 1.0.0 requires System.Communication
   3.25.1+ (McpConfiguration type with AuthServiceAccountConfigurationName).
 ckModelDependencies:
-  - KnowledgeCapture-[1.0.0,2.0)
+  - KnowledgeCapture-[1.1.0,2.0)
   - System.Communication-[3.25.1,4.0)
 
 seedDataPath: seed-data/entities.yaml

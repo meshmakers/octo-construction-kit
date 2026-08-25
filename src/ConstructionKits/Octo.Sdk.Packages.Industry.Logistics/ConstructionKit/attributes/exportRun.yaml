@@ -3,6 +3,6 @@ attributes:
 - id: ExportKind
   valueType: String
   description: "Kind of export/delivery run (e.g. article master export); the adapter supplies the value."
-- id: ExportDate
+- id: ExportDay
   valueType: String
   description: "Calendar day (yyyy-MM-dd) in the delivery time zone — bucket key of the dedup marker, not a timestamp."

@@ -7,6 +7,6 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
 # ${Basic}/NamedEntity. Enums are isExtensible (customers/projects can add values
 # without changing the base kit) and define key 0 = Unknown: the default numeric
 # value of an unset Enum attribute is 0, so it must map to a defined member.
-modelId: Industry.Logistics-1.2.0
+modelId: Industry.Logistics-2.0.0
 dependencies:
   - Basic-[2.0,3.0)

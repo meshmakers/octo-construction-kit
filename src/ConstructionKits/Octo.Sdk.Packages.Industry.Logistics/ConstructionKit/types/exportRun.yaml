@@ -6,5 +6,5 @@ types:
   attributes:
   - id: ${this}/ExportKind
     name: ExportKind
-  - id: ${this}/ExportDate
-    name: ExportDate
+  - id: ${this}/ExportDay
+    name: ExportDay

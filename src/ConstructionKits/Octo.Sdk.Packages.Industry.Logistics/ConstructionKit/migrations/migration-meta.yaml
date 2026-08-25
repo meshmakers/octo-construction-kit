@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/ck-migration-meta.schema.json
+ckModelId: Industry.Logistics-2.0.0
+migrations:
+  - fromVersion: "1.2.0"
+    toVersion: "2.0.0"
+    scriptPath: 1.2.0-to-2.0.0.yaml
+    description: "Rename ExportDate to ExportDay on ExportRun"
+    breaking: true

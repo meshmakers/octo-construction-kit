@@ -1,0 +1,49 @@
+$schema: https://schemas.meshmakers.cloud/ck-migration.schema.json
+sourceVersion: "1.2.0"
+targetVersion: "2.0.0"
+description: |
+  Migration from Industry.Logistics 1.2.0 to 2.0.0.
+
+  Renames 'ExportDate' to 'ExportDay' on all ExportRun entities. The value is unchanged:
+  a calendar day (yyyy-MM-dd) in the delivery time zone, used as the bucket key of the
+  delivery-dedup marker. Every other Date attribute in this kit (OrderDate, DeliveryDate,
+  ShipmentDate) is a DateTime, so the old name read like a timestamp.
+
+  A rename is structurally a removal plus an addition, which is why the model takes a
+  major bump. The RenameAttribute transform carries the stored value over to the new
+  attribute name, so an existing marker keeps gating its day across the upgrade.
+
+  Tenants still installed on 1.1.0 reach this script through the engine's start-gap
+  auto-bridge (1.1.0 -> 1.2.0 is a schema-only no-op); no separate 1.1.0 entry is needed.
+
+  Breaking changes:
+  - Code, queries and pipeline configurations reading 'ExportDate' on ExportRun must read
+    'ExportDay'.
+
+steps:
+  # Rename ExportDate to ExportDay on all ExportRun entities
+  - stepId: rename-exportdate-to-exportday
+    description: "Rename ExportDate attribute to ExportDay on ExportRun entities"
+    action: Transform
+    target:
+      ckTypeId: Industry.Logistics/ExportRun
+      blueprintSourceOnly: false
+    transform:
+      type: RenameAttribute
+      sourceAttribute: ExportDate
+      targetAttribute: ExportDay
+    onConflict: Skip
+    continueOnError: false
+
+postValidations:
+  # Verify every marker carries the new attribute; the old slot is left in place by the
+  # transform and is no longer part of the model, so its absence is not what to check for
+  - validationId: every-exportrun-has-exportday
+    description: "Ensure every ExportRun entity carries the ExportDay attribute"
+    type: NoEntitiesOfType
+    target:
+      ckTypeId: Industry.Logistics/ExportRun
+      filter:
+        attribute: ExportDay
+        operator: NotExists
+    severity: Warning

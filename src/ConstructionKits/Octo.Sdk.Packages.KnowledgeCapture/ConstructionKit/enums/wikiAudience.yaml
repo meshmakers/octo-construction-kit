@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 enums:
   - enumId: WikiAudience
-    description: 'Target audience of a rendered wiki entry. Switches the section schema of the rendition (thesis CL-01, Table 15). Development is the default.'
+    description: 'Target audience of a rendered wiki entry. Selects the section schema of the rendition. Development is the default.'
     isExtensible: true
     values:
       - key: 0

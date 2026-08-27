@@ -1,0 +1,24 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: ExtractionTier
+    description: 'Provenance and trust grade of a source artifact''s Content, i.e. how the text was obtained. Reviewers and downstream consumers scale their trust accordingly.'
+    isExtensible: false
+    values:
+      - key: 0
+        name: NativeText
+        description: 'Content arrived as text (work items, chats, transcripts, generic ingest). No extraction involved.'
+      - key: 1
+        name: EmbeddedStructured
+        description: 'Content derived from an embedded structured attachment (e.g. ZUGFeRD/Factur-X e-invoice XML). Exact, machine-readable provenance.'
+      - key: 2
+        name: TextLayer
+        description: 'Born-digital PDF text layer. Lossless extraction; text inside embedded images is not included.'
+      - key: 3
+        name: TextLayerFromOcr
+        description: 'Scanned document with a baked-in OCR text layer (searchable PDF). Usable, but OCR-grade trust.'
+      - key: 4
+        name: Mixed
+        description: 'Text layer for pages that have one, OCR for pages without.'
+      - key: 5
+        name: Ocr
+        description: 'Full OCR extraction. Recognition errors possible, especially in identifiers and numbers.'

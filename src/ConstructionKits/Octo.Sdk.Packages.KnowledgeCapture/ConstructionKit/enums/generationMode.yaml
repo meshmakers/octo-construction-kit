@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 enums:
   - enumId: GenerationMode
-    description: 'Which of the two comparative architectures (thesis Section 2.2) generated a wiki entry. Recorded for auditability and architecture comparison.'
+    description: 'Which generation architecture produced a wiki entry. Recorded for auditability and architecture comparison.'
     isExtensible: false
     values:
       - key: 0

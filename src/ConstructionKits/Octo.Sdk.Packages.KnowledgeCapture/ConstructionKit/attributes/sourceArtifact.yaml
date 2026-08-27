@@ -26,11 +26,16 @@ attributes:
     valueType: DateTime
     description: 'When the artifact was captured/ingested into the mesh.'
   - id: ExtractionTier
+    valueType: Enum
+    valueCkEnumId: ${this}/ExtractionTier
+    description: >-
+      Provenance and trust grade of Content (how the text was obtained): NativeText,
+      EmbeddedStructured, TextLayer, TextLayerFromOcr, Mixed, Ocr. Reviewers and
+      downstream consumers scale their trust accordingly.
+  - id: StructuredContent
     valueType: String
     description: >-
-      How Content was extracted from the source document, i.e. the trust grade of the
-      text: "TextLayer" (born-digital PDF text layer, lossless), "TextLayerFromOcr"
-      (scanned document with a baked-in OCR text layer - usable, OCR-grade trust),
-      "Mixed" (text layer plus OCR for pages without one), "Ocr" (full OCR).
-      Unset for artifacts whose content arrived as text (work items, chats, transcripts).
-      Reviewers and downstream consumers should scale their trust accordingly (AB#4464).
+      Structured machine-readable form of the source when available, e.g. the embedded
+      UN/CEFACT CII invoice XML of a ZUGFeRD/Factur-X PDF (EN 16931). Preserved verbatim
+      (bronze fidelity); downstream domain pipelines (e.g. accounting) parse it into
+      typed entities. Unset when the source carries no structured payload.

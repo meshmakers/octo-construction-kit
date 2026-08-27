@@ -69,25 +69,45 @@ prompts then keep anonymized identifiers as-is.
      LocalFileSystemBlueprintCatalog — make sure its root matches what the
      asset services read (`$ROOTPATH/.octo/*` in the octo developer shell).
    - Refresh the blueprint catalog in Studio if it doesn't appear immediately.
-1. Install the blueprint `KnowledgeCapture.MainLatest-1.0.0` (Studio or MCP
+1. Install the blueprint `KnowledgeCapture.MainLatest` (Studio or MCP
    `install_blueprint`). Requires `System.Communication` ≥ 3.25.1.
-2. Register an OIDC client `wiki-capture-mcp` in octo-identity-services:
-   client-credentials grant, enabled, require client secret, and allowed scope
-   **`octo_api`** — that is the literal scope string (the value of the
-   `CommonConstants.OctoApiFullAccess` constant) which `ServiceAccountTokenService`
-   requests hardcoded; read-only scoping awaits the configurable-scope
-   enhancement from mcp-auth-plan. Ensure the tenant is covered by
-   `allowed_tenants`, then set the `ClientSecret` on the `wiki-capture-sa`
-   ServiceAccountConfiguration (same value, two places).
-   CLI: `octo-cli -c AddClientCredentialsClient -id wiki-capture-mcp -n "Wiki Capture MCP" -s <secret>`
-   Verify independently of the adapter before deploying:
-   `curl -k -X POST https://localhost:5003/connect/token -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=client_credentials&client_id=wiki-capture-mcp&client_secret=<secret>&scope=octo_api&acr_values=tenant:meshtest"`
-   must return an access_token (`invalid_client` = id/secret problem,
-   `invalid_scope` = the client lacks `octo_api`).
-3. Set the `ApiKey` on the `wiki-capture-llm` AiConfiguration.
-4. Check the `wiki-capture-mcp` McpConfiguration `Url`
+2. Set the secrets. The blueprint seeds the configuration entities with EMPTY
+   secrets; the OIDC client itself is not part of the blueprint and must be
+   registered in octo-identity-services. `ServiceAccountTokenService` requests
+   scope `octo_api` hardcoded, so the client must allow it (the CLI command
+   does).
+
+   Option A — new client with a chosen secret:
+
+   ```
+   octo-cli -c AddClientCredentialsClient -id wiki-capture-mcp -n "Wiki Capture MCP" -s <secret>
+   ```
+
+   Option B — client already exists: generate a secret server-side and copy
+   the printed value:
+
+   ```
+   octo-cli -c CreateApiSecretClient -cid wiki-capture-mcp -d "wiki capture"
+   ```
+
+   Then, in Studio:
+   - `wiki-capture-sa` (ServiceAccountConfiguration) → `ClientSecret` = the same secret.
+   - `wiki-capture-llm` (AiConfiguration) → `ApiKey` = the LLM provider key.
+
+   Verify the client independently of the adapter:
+
+   ```
+   curl -k -X POST https://localhost:5003/connect/token \
+     -H "Content-Type: application/x-www-form-urlencoded" \
+     -d "grant_type=client_credentials&client_id=wiki-capture-mcp&client_secret=<secret>&scope=octo_api&acr_values=tenant:meshtest"
+   ```
+
+   Must return an `access_token` (`invalid_client` = id/secret mismatch,
+   `invalid_scope` = client lacks `octo_api`).
+
+3. Check the `wiki-capture-mcp` McpConfiguration `Url`
    (dev default: `https://localhost:5017/meshtest/mcp`).
-5. Deploy the pipelines (Studio or MCP `deploy_pipeline`).
+4. Deploy the pipelines (Studio or MCP `deploy_pipeline`).
 
 Smoke test (adapter dev ports 5020/5021, tenant `meshtest`):
 

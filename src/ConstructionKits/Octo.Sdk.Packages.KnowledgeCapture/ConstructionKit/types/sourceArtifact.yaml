@@ -34,3 +34,6 @@ types:
       - id: ${this}/ExtractionTier
         name: ExtractionTier
         isOptional: true
+      - id: ${this}/StructuredContent
+        name: StructuredContent
+        isOptional: true

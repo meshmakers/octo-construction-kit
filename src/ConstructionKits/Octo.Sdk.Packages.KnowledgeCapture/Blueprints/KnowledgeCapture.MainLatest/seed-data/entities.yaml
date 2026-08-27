@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - KnowledgeCapture-1.1.0
+  - KnowledgeCapture-1.2.1
   - System.Communication-3.25.1
 entities:
   # --------------------------------------------------------------------------
@@ -85,7 +85,7 @@ entities:
       - id: KnowledgeCapture/GenerationMode
         value: 0   # Pipeline
       - id: KnowledgeCapture/TemplateVersion
-        value: 1
+        value: 2
       - id: KnowledgeCapture/DefaultModelId
         value: claude-sonnet-4-6
       - id: KnowledgeCapture/Temperature
@@ -102,9 +102,10 @@ entities:
           - For each section, provide citations: a word-for-word quote from the source that supports it, plus an anchor (commit hash, work item id, timestamp) when one is present in the source.
           - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
           - Respond with JSON only, exactly matching the requested schema.
+          CRITICAL: Output must be strictly valid JSON. Escape every double quote inside string values as \" — when quoting source text that contains quotation marks, keep typographic quotes („…") unchanged and escape straight quotes.
       - id: KnowledgeCapture/UserTemplate
         value: |-
-          The main content line is the id of the source artifact. The additional context contains the source artifact entity; its attributes include the full raw text (Content), the artifact type, and the source system.
+          The main content line is the id of the source artifact. The additional context contains the source artifact's raw text.
 
           Create an audience-neutral structured wiki entry from the artifact content:
           1. First identify the key facts: decisions (with their rationale), actions taken, issues or blockers encountered, and technical details.
@@ -112,6 +113,7 @@ entities:
           3. For every section, add citations with word-for-word source quotes.
 
           Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+          CRITICAL: Output must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
 
   - rtId: '672000000000000000000006'
     ckTypeId: KnowledgeCapture/PromptTemplate
@@ -122,7 +124,7 @@ entities:
       - id: KnowledgeCapture/GenerationMode
         value: 0   # Pipeline
       - id: KnowledgeCapture/TemplateVersion
-        value: 1
+        value: 2
       - id: KnowledgeCapture/DefaultModelId
         value: claude-sonnet-4-6
       - id: KnowledgeCapture/Temperature
@@ -131,17 +133,17 @@ entities:
         value: 2048
       - id: KnowledgeCapture/SystemPrompt
         value: |-
-          You are a meticulous fact-checker. You compare a generated wiki entry draft against its source artifact. Use only the provided data; do not use outside knowledge. Keep output minimal: flags only, no preamble.
+          You are a meticulous fact-checker. You compare a generated wiki entry draft against its source artifact. Use only the provided data; do not use outside knowledge. Keep output minimal: flags only, no preamble. Output must be strictly valid JSON.
       - id: KnowledgeCapture/UserTemplate
         value: |-
-          The input contains the source artifact(s) (ground truth, attribute Content) and the generated draft (title, sections, citations).
+          The additional context contains the source artifact's raw text (ground truth) and the generated draft (title, sections, citations).
 
           Check every claim in the draft against the source content:
           - Flag each claim that has no support in the source, with a one-sentence reason.
           - Verify each citation: if a sourceQuote does not occur verbatim or near-verbatim in the source, flag it.
           - If everything is supported, return an empty list.
 
-          Return JSON: {"flags": [{"claim": string, "reason": string}]}
+          Return JSON: {"flags": [{"claim": string, "reason": string}]}. Never emit an unescaped double quote inside a string value — use single quotes when quoting.
 
   - rtId: '672000000000000000000007'
     ckTypeId: KnowledgeCapture/PromptTemplate
@@ -152,7 +154,7 @@ entities:
       - id: KnowledgeCapture/GenerationMode
         value: 1   # Agentic
       - id: KnowledgeCapture/TemplateVersion
-        value: 1
+        value: 2
       - id: KnowledgeCapture/DefaultModelId
         value: claude-sonnet-4-6
       - id: KnowledgeCapture/Temperature
@@ -173,13 +175,15 @@ entities:
           - Ground every claim in the source material. If information is missing or unclear, omit it. Never invent information.
           - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
           - Your final answer must be JSON only, exactly matching the requested schema.
+          CRITICAL: The final answer must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
       - id: KnowledgeCapture/UserTemplate
         value: |-
-          The main content line is the id of the source artifact. The additional context contains the source artifact entity; its attributes include the full raw text (Content), the artifact type, and the source system.
+          The main content line is the id of the source artifact. The additional context contains the source artifact's raw text.
 
           Work through EXTRACT, RETRIEVE (if needed), DRAFT, REVIEW, REVISE, then return the final entry with these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources". Every section needs citations with word-for-word source quotes.
 
           Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+          CRITICAL: Output must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
 
   - rtId: '672000000000000000000008'
     ckTypeId: KnowledgeCapture/PromptTemplate
@@ -283,6 +287,9 @@ entities:
                 - attributeName: CapturedAt
                   attributeValueType: DateTime
                   valuePath: $.body.capturedAt
+                - attributeName: ExtractionTier
+                  attributeValueType: String
+                  value: NativeText
             - type: ApplyChanges@2
               description: Persist the source artifact.
               entityUpdatesPath: $._updateItems
@@ -310,9 +317,11 @@ entities:
       - id: System/Description
         value: >-
           Bronze-layer ingest for PDF artifacts (e.g. support/professional
-          services reports): multipart upload -> OCR text extraction ->
-          SourceArtifact. The OCR text becomes Content; the original PDF stays
-          in its system of record (SourceUri).
+          services reports, e-invoices): multipart upload -> extraction ladder
+          (embedded e-invoice XML -> text layer -> OCR) -> SourceArtifact.
+          Extracted text becomes Content, embedded invoice XML is preserved in
+          StructuredContent, the tier used is persisted as ExtractionTier. The
+          original PDF stays in its system of record (SourceUri).
       - id: System/Enabled
         value: true
       - id: System.Communication/DeploymentState
@@ -329,7 +338,7 @@ entities:
           transformations:
             - type: PdfOcrExtraction@1
               description: >-
-                Extract text via the extraction ladder (AB#4464): embedded e-invoice XML ->
+                Extract text via the extraction ladder: embedded e-invoice XML ->
                 text layer (lossless for born-digital PDFs) -> OCR for pages without one.
                 The tier used is persisted on the artifact (ExtractionTier).
               language: en
@@ -364,12 +373,12 @@ entities:
                 - attributeName: Content
                   attributeValueType: String
                   valuePath: $.ocrText
+                - attributeName: StructuredContent
+                  attributeValueType: String
+                  valuePath: $.EmbeddedXml
                 - attributeName: IsPiiRedacted
                   attributeValueType: Boolean
                   value: false
-                - attributeName: CapturedAt
-                  attributeValueType: DateTime
-                  value: =utcNow()
                 - attributeName: ExtractionTier
                   attributeValueType: String
                   valuePath: $.ExtractionTier
@@ -399,11 +408,11 @@ entities:
         value: Wiki Capture - Structured Generation
       - id: System/Description
         value: >-
-          Structured pipeline architecture (thesis Section 4.2.1): fetch
-          artifact, ONE generation LLM call with fixed JSON schema, ONE
-          verification LLM call (evaluator pass, fills HallucinationFlags),
-          write WikiEntry as Draft for human verification. Prompts:
-          wiki-prompt-structured v1, wiki-prompt-verification v1.
+          Structured generation: fetches the source artifact, one generation
+          LLM call with server-side JSON schema enforcement, one verification
+          LLM call (fills HallucinationFlags), writes the WikiEntry as Draft
+          for human verification. Prompts: wiki-prompt-structured v2,
+          wiki-prompt-verification v2.
       - id: System/Enabled
         value: true
       - id: System.Communication/DeploymentState
@@ -433,9 +442,11 @@ entities:
               timeoutSeconds: 180
               responseFormat: json
               jsonFormatSample: '{"title":"...","sections":[{"heading":"Summary","sectionContent":"...","sortOrder":0}],"citations":[{"sectionRef":"Summary","sourceQuote":"...","sourceAnchor":""}]}'
+              jsonSchema: '{"type":"object","properties":{"title":{"type":"string"},"sections":{"type":"array","minItems":6,"items":{"type":"object","properties":{"heading":{"type":"string"},"sectionContent":{"type":"string"},"sortOrder":{"type":"integer"}},"required":["heading","sectionContent","sortOrder"],"additionalProperties":false}},"citations":{"type":"array","minItems":3,"items":{"type":"object","properties":{"sectionRef":{"type":"string"},"sourceQuote":{"type":"string"},"sourceAnchor":{"type":"string"}},"required":["sectionRef","sourceQuote","sourceAnchor"],"additionalProperties":false}}},"required":["title","sections","citations"],"additionalProperties":false}'
+              maxJsonRepairAttempts: 1
               path: $.body.artifactRtIds[0]
               dataPaths:
-                - $.artifacts
+                - $.artifacts.Items[0].Attributes.Content
               targetPath: $.draft
               systemPrompt: |-
                 You are a knowledge management assistant for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries.
@@ -446,8 +457,9 @@ entities:
                 - For each section, provide citations: a word-for-word quote from the source that supports it, plus an anchor (commit hash, work item id, timestamp) when one is present in the source.
                 - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
                 - Respond with JSON only, exactly matching the requested schema.
+                CRITICAL: Output must be strictly valid JSON. Escape every double quote inside string values as \" — when quoting source text that contains quotation marks, keep typographic quotes („…") unchanged and escape straight quotes.
               question: |-
-                The main content line is the id of the source artifact. The additional context contains the source artifact entity; its attributes include the full raw text (Content), the artifact type, and the source system.
+                The main content line is the id of the source artifact. The additional context contains the source artifact's raw text.
 
                 Create an audience-neutral structured wiki entry from the artifact content:
                 1. First identify the key facts: decisions (with their rationale), actions taken, issues or blockers encountered, and technical details.
@@ -455,6 +467,7 @@ entities:
                 3. For every section, add citations with word-for-word source quotes.
 
                 Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+                CRITICAL: Output must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
             - type: LlmQuery@1
               description: Verification pass (wiki-prompt-verification v1, evaluator step).
               provider: Anthropic
@@ -465,22 +478,24 @@ entities:
               timeoutSeconds: 180
               responseFormat: json
               jsonFormatSample: '{"flags":[{"claim":"...","reason":"..."}]}'
+              jsonSchema: '{"type":"object","properties":{"flags":{"type":"array","items":{"type":"object","properties":{"claim":{"type":"string"},"reason":{"type":"string"}},"required":["claim","reason"],"additionalProperties":false}}},"required":["flags"],"additionalProperties":false}'
+              maxJsonRepairAttempts: 1
               path: $.body.artifactRtIds[0]
               dataPaths:
-                - $.artifacts
+                - $.artifacts.Items[0].Attributes.Content
                 - $.draft
               targetPath: $.review
               systemPrompt: |-
-                You are a meticulous fact-checker. You compare a generated wiki entry draft against its source artifact. Use only the provided data; do not use outside knowledge. Keep output minimal: flags only, no preamble.
+                You are a meticulous fact-checker. You compare a generated wiki entry draft against its source artifact. Use only the provided data; do not use outside knowledge. Keep output minimal: flags only, no preamble. Output must be strictly valid JSON.
               question: |-
-                The additional context contains the source artifact entity (ground truth; its Content attribute holds the raw text) and the generated draft (title, sections, citations).
+                The additional context contains the source artifact's raw text (ground truth) and the generated draft (title, sections, citations).
 
                 Check every claim in the draft against the source content:
                 - Flag each claim that has no support in the source, with a one-sentence reason.
                 - Verify each citation: if a sourceQuote does not occur verbatim or near-verbatim in the source, flag it.
                 - If everything is supported, return an empty list.
 
-                Return JSON: {"flags": [{"claim": string, "reason": string}]}
+                Return JSON: {"flags": [{"claim": string, "reason": string}]}. Never emit an unescaped double quote inside a string value — use single quotes when quoting.
             - type: CreateUpdateInfo@1
               description: Create the WikiEntry (silver, Draft).
               targetPath: $._updateItems
@@ -514,7 +529,7 @@ entities:
                   value: wiki-prompt-structured
                 - attributeName: PromptVersion
                   attributeValueType: Int
-                  value: 1
+                  value: 2
                 - attributeName: ModelId
                   attributeValueType: String
                   value: claude-sonnet-4-6
@@ -562,12 +577,11 @@ entities:
         value: Wiki Capture - Agentic Generation
       - id: System/Description
         value: >-
-          Agentic workflow architecture (thesis Section 4.2.2): single agentic
-          LLM call with read-only MCP retrieval tools and an
-          EXTRACT-RETRIEVE-DRAFT-REVIEW-REVISE self-correction loop, bounded
-          by maxToolRounds. The entity write happens deterministically
-          outside the agent loop, so the agent stays read-only. Prompt:
-          wiki-prompt-agentic v1.
+          Agentic generation: single LLM call with read-only MCP retrieval
+          tools and an extract-retrieve-draft-review-revise self-correction
+          loop, bounded by maxToolRounds. The entity write happens
+          deterministically outside the agent loop, so the agent stays
+          read-only. Prompt: wiki-prompt-agentic v2.
       - id: System/Enabled
         value: true
       - id: System.Communication/DeploymentState
@@ -600,9 +614,12 @@ entities:
               maxToolRounds: 8
               responseFormat: json
               jsonFormatSample: '{"title":"...","sections":[{"heading":"Summary","sectionContent":"...","sortOrder":0}],"citations":[{"sectionRef":"Summary","sourceQuote":"...","sourceAnchor":""}]}'
+              # No jsonSchema: server-side schema enforcement is unavailable in tools mode;
+              # JSON discipline = prompt + input sanitizing + bounded repair.
+              maxJsonRepairAttempts: 1
               path: $.body.artifactRtIds[0]
               dataPaths:
-                - $.artifacts
+                - $.artifacts.Items[0].Attributes.Content
               targetPath: $.draft
               systemPrompt: |-
                 You are a knowledge management agent for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries through a multi-step process:
@@ -617,12 +634,14 @@ entities:
                 - Ground every claim in the source material. If information is missing or unclear, omit it. Never invent information.
                 - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
                 - Your final answer must be JSON only, exactly matching the requested schema.
+                CRITICAL: The final answer must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
               question: |-
-                The main content line is the id of the source artifact. The additional context contains the source artifact entity; its attributes include the full raw text (Content), the artifact type, and the source system.
+                The main content line is the id of the source artifact. The additional context contains the source artifact's raw text.
 
                 Work through EXTRACT, RETRIEVE (if needed), DRAFT, REVIEW, REVISE, then return the final entry with these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources". Every section needs citations with word-for-word source quotes.
 
                 Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+                CRITICAL: Output must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
             - type: CreateUpdateInfo@1
               description: Create the WikiEntry (silver, Draft).
               targetPath: $._updateItems
@@ -653,7 +672,7 @@ entities:
                   value: wiki-prompt-agentic
                 - attributeName: PromptVersion
                   attributeValueType: Int
-                  value: 1
+                  value: 2
                 - attributeName: ModelId
                   attributeValueType: String
                   value: claude-sonnet-4-6
@@ -696,11 +715,11 @@ entities:
         value: Wiki Capture - Audience Rendition
       - id: System/Description
         value: >-
-          Gold layer: renders a VERIFIED wiki entry as an audience-specific
-          markdown page (development/marketing/architect section schemas,
-          thesis CL-01 Table 15). Facts are verified once on the entry;
-          renditions are cheap, repeatable renderings. Only render Verified
-          entries. Prompt: wiki-prompt-render v1.
+          Gold layer: renders a verified wiki entry as an audience-specific
+          markdown page (development, marketing or architect section schema).
+          Facts are verified once on the entry; renditions are cheap,
+          repeatable renderings. Only render Verified entries.
+          Prompt: wiki-prompt-render v1.
       - id: System/Enabled
         value: true
       - id: System.Communication/DeploymentState

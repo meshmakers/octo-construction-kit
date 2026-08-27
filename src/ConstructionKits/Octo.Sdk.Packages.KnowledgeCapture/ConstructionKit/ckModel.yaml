@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
-modelId: KnowledgeCapture-1.1.0
+modelId: KnowledgeCapture-1.2.1
 # GenAI-based knowledge capture for SME business processes: transforms weakly
 # structured business artifacts (work items, commit histories, chats, meeting
 # transcripts, support reports) into structured, human-verified wiki entries.

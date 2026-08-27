@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 enums:
   - enumId: ArtifactType
-    description: 'Kind of weakly structured business artifact ingested as a knowledge source. The two thesis Control Set types (support/professional-services reports and development compilations) plus the individual raw source kinds they aggregate.'
+    description: 'Kind of weakly structured business artifact ingested as a knowledge source: aggregated report types (support/professional-services reports, development compilations) and the individual raw source kinds they aggregate.'
     isExtensible: true
     values:
       - key: 0

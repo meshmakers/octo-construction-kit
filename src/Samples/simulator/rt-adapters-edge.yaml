@@ -29,6 +29,8 @@ entities:
   - rtId: 65d5c447b420da3fb12381be
     ckTypeId: System.Communication/Pipeline
     attributes:
+      - id: System/Name
+        value: Simulate Signals
       - id: System/Enabled
         value: true
       - id: System.Communication/PipelineDefinition
@@ -84,8 +86,10 @@ entities:
   - rtId: 65d5c447b420da3fb12381bf
     ckTypeId: System.Communication/Pipeline
     attributes:
+      - id: System/Name
+        value: Store Simulated Readings
       - id: System/Enabled
-        value: true 
+        value: true
       - id: System.Communication/PipelineDefinition
         value: >-
           triggers:

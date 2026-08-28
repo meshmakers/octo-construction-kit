@@ -46,10 +46,10 @@ entities:
               simulations:
                 - targetPath: $.sensor.temperature
                   simulatorKey: Math.DoubleRandom
-                  configuration: "{min:18, max:32}"
+                  configuration: "{\"min\":18, \"max\":32}"
                 - targetPath: $.sensor.humidity
                   simulatorKey: Math.DoubleRandom
-                  configuration: "{min:30, max:90}"
+                  configuration: "{\"min\":30, \"max\":90}"
             - type: Logger@1
               description: Log generated data
               message: Scheduled trigger executed - sensor data generated

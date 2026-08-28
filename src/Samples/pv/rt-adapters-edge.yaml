@@ -55,30 +55,30 @@ entities:
                     - register: 69
                       valueType: INT16
                       registerType: ReadHoldingRegister
-                      targetPath: batteryPower
+                      targetPath: $.batteryPower
                     - register: 67
                       valueType: UINT16
                       registerType: ReadHoldingRegister
-                      targetPath: productionPower
+                      targetPath: $.productionPower
                     - register: 75
                       valueType: INT32
                       registerType: ReadHoldingRegister
-                      targetPath: additionalProductionPower
+                      targetPath: $.additionalProductionPower
                     - register: 82
                       valueType: UINT16
                       registerType: ReadHoldingRegister
-                      targetPath: batteryStateOfCharge
+                      targetPath: $.batteryStateOfCharge
                     - register: 71
                       valueType: INT32
                       registerType: ReadHoldingRegister
-                      targetPath: consumption
+                      targetPath: $.consumption
                     - register: 73
                       valueType: INT32
                       registerType: ReadHoldingRegister
-                      targetPath: net
+                      targetPath: $.net
             - type: LinearScaler@1
               path: $.additionalProductionPower
-              targetPath: additionalProductionPower
+              targetPath: $.additionalProductionPower
               scaleInputMin: 0
               scaleInputMax: -10000
               scaleOutputMin: 0
@@ -89,6 +89,7 @@ entities:
                 - type: ToPipelineDataEvent@1
                   description: Load to event hub
                   targetPath: "$.data"
+                  targetPipelineRtId: 66b07d2995797e1617fd3167
   - rtId: 66b07d2995797e1617fd3167
     ckTypeId: System.Communication/Pipeline
     associations:
@@ -187,9 +188,9 @@ entities:
               fields:
                 - path: $.x
             - type: SaveStreamDataInArchive@1
-              path: _updateItems
+              path: $._updateItems
             - type: FilterLatestUpdateInfo@1
-              path: _updateItems
-              targetPath: _updateItems
+              path: $._updateItems
+              targetPath: $._updateItems
             - type: ApplyChanges@1
-              path: _updateItems
+              path: $._updateItems

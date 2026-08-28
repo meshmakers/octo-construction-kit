@@ -39,10 +39,10 @@ entities:
               simulations:
                 - targetPath: $.sensor.temperature
                   simulatorKey: Math.DoubleRandom
-                  configuration: "{min:15, max:35}"
+                  configuration: "{\"min\":15, \"max\":35}"
                 - targetPath: $.sensor.humidity
                   simulatorKey: Math.DoubleRandom
-                  configuration: "{min:30, max:90}"
+                  configuration: "{\"min\":30, \"max\":90}"
             - type: ToPipelineDataEvent@1
               description: Send data to Consumer Pipeline
               path: $.sensor

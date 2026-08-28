@@ -106,16 +106,16 @@ entities:
               simulations:
                 - targetPath: $.sensorData.temperature
                   simulatorKey: Math.DoubleRandom
-                  configuration: "{min:18, max:32}"
+                  configuration: "{\"min\":18, \"max\":32}"
                 - targetPath: $.sensorData.humidity
                   simulatorKey: Math.DoubleRandom
-                  configuration: "{min:35, max:85}"
+                  configuration: "{\"min\":35, \"max\":85}"
                 - targetPath: $.sensorData.pressure
                   simulatorKey: Math.DoubleRandom
-                  configuration: "{min:980, max:1040}"
+                  configuration: "{\"min\":980, \"max\":1040}"
                 - targetPath: $.sensorData.sensorId
                   simulatorKey: Text.Lorem.Word
-                  configuration: "{count:1}"
+                  configuration: "{\"count\":1}"
             - type: Logger@1
               description: Log simulated data
               message: Simulation data generated, sending to mesh adapter for storage

@@ -39,19 +39,20 @@ entities:
           transformations:
             - type: Simulation@1
               description: Simulates data
+              locale: en
               simulations:
-                - targetPath: Sinus
+                - targetPath: $.Sinus
                   simulatorKey: Math.Sinus
-                - targetPath: Constant_6
+                - targetPath: $.Constant_6
                   simulatorKey: Math.Constant
-                  configuration: "{ amplitude: 6}"
-                - targetPath: Triangle
+                  configuration: "{ \"amplitude\": 6}"
+                - targetPath: $.Triangle
                   simulatorKey: Math.Triangle
             - type: SelectByPath@1
               description: Transform object node
               selectPath:
                 - path: "$.Sinus"
-                  targetPath: Sinus5
+                  targetPath: $.Sinus5
                   transformations:
                     - type: LinearScaler@1
                       scaleInputMin: 0
@@ -59,7 +60,7 @@ entities:
                       scaleOutputMin: 0
                       scaleOutputMax: 1000
                 - path: "$.Constant_6"
-                  targetPath: Constant
+                  targetPath: $.Constant
                   transformations:
                     - type: LinearScaler@1
                       scaleInputMin: 0
@@ -72,6 +73,7 @@ entities:
                 - path: "$.Constant_6"
             - type: ToPipelineDataEvent@1
               description: Load to event hub
+              targetPipelineRtId: 65d5c447b420da3fb12381bf
     associations:
       - roleId: System/ParentChild
         targetRtId: 65d5c447b420da3fb12381bd

@@ -32,7 +32,7 @@ entities:
         - type: For@1
           description: create customers
           count: 1
-          targetPath: customers
+          targetPath: $.customers
           transformations:
             # customer
             - type: Simulation@1
@@ -52,15 +52,15 @@ entities:
                   simulatorKey: Address.CountryCode
                 - targetPath: $.customer.status
                   simulatorKey: Math.IntRandom
-                  configuration: "{min:0, max:2}"      
+                  configuration: "{\"min\":0, \"max\":2}"      
                 - targetPath: $.customer.legalEntityType
                   simulatorKey: Math.IntRandom
-                  configuration: "{min:0, max:3}"        
+                  configuration: "{\"min\":0, \"max\":3}"        
             # operating facility
             - type: For@1
               description: create operating facilities
               count: 2
-              targetPath: operatingFacilities
+              targetPath: $.operatingFacilities
               transformations:
                 - type: Project@1
                   fields:
@@ -74,7 +74,7 @@ entities:
                 - type: For@1
                   description: create metering points
                   count: 2
-                  targetPath: meteringPoints
+                  targetPath: $.meteringPoints
                   transformations:
                     - type: Project@1
                       fields:
@@ -86,13 +86,13 @@ entities:
                           simulatorKey: Energy.MeteringPointNumber
                         - targetPath: $.operatingStatus
                           simulatorKey: Math.IntRandom
-                          configuration: "{min:0, max:2}"
+                          configuration: "{\"min\":0, \"max\":2}"
                         - targetPath: $.meterReading
                           simulatorKey: Math.IntRandom
-                          configuration: "{min:0, max:99999}"
+                          configuration: "{\"min\":0, \"max\":99999}"
                         - targetPath: $.name
                           simulatorKey: Text.Lorem.Word
-                          configuration: "{count:2}"
+                          configuration: "{\"count\":2}"
           # create update items for database
         - type: ForEach@1
           description: create update infos customer

@@ -1,0 +1,26 @@
+$schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
+blueprintId: Locations.Austria-1.0.0
+description: |
+  Seeds the complete Austrian location tree as Basic model runtime entities:
+
+    Tree "Locations" -> Country (AT) -> 9 States -> 116 Districts
+    -> 2237 Cities with postal codes (Basic/AddressZipcode)
+
+  Data-only blueprint - no pipelines, no workloads, no configuration. Use it
+  wherever an application needs Austrian cities searchable by name or postal
+  code (e.g. the energy-community app parents every operating facility to a
+  Basic/City and copies its name/zipcode into the facility address).
+
+  The tree root is seeded with rtWellKnownName "Locations" so other blueprints
+  or applications can reference it. All rtIds are stable synthetic ids with
+  prefix 10ca; re-applying the blueprint is an idempotent upsert.
+
+  Do NOT install on tenants that already carry a manually imported city tree
+  (e.g. via the legacy plz.xlsx Office Add-In import) - the seed would create a
+  second, parallel tree because the existing entities have different rtIds.
+ckModelDependencies:
+  # 2.0.3 floor: matches the floor the published downstream model artifacts pin
+  # (e.g. Basic.Energy 1.4.0 / EnergyCommunity 4.2.0 pin Basic-2.0.3 exactly);
+  # a tenant holds one version per model, so a lower floor would conflict.
+  - Basic-[2.0.3,3.0)
+seedDataPath: seed-data/entities.yaml

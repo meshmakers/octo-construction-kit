@@ -43,7 +43,7 @@ resources:
       type: github
       name: meshmakers/octo-pipeline-templates
       endpoint: meshmakers-access-token
-      ref: refs/tags/tpl-v0.5.3
+      ref: refs/tags/tpl-v0.5.4
 
 trigger:
   batch: true
@@ -108,6 +108,15 @@ stages:
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/ConstructionKit'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/ConstructionKit'
                 - 'src/ConstructionKits/Octo.Sdk.Demo/ConstructionKit'
+          # Blueprint version-honesty gate (octo-bpm validateVersion, AB#5021): a
+          # blueprint whose content changed without a version bump fails the build —
+          # published blueprint versions are immutable. Blueprints are published by
+          # the catalogs release train from this build's artifact, not by the build.
+          - template: templates/steps/validate-blueprints.yml@pipelineTemplates
+            parameters:
+              # Same list as handle-artifacts.blueprintPaths below — keep in sync.
+              blueprintPaths:
+                - 'src/Blueprints/Locations.Austria'
           - task: DotNetCoreCLI@2
             retryCountOnTaskFailure: 2
             displayName: 'Build'
@@ -143,4 +152,9 @@ stages:
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Logistics/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Logistics'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Maintenance'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Manufacturing'
+              # Blueprint sources shipped in the `local` artifact so the catalogs
+              # release train publishes them at r-tag time. Same list as the
+              # validate-blueprints step above — keep both in sync.
+              blueprintPaths:
+                - 'src/Blueprints/Locations.Austria'
           - template: templates/steps/push-nuget-package.yml@pipelineTemplates

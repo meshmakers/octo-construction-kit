@@ -317,10 +317,9 @@ entities:
       - id: System/Description
         value: >-
           Bronze-layer ingest for PDF artifacts (e.g. support/professional
-          services reports, e-invoices): multipart upload -> extraction ladder
-          (embedded e-invoice XML -> text layer -> OCR) -> SourceArtifact.
-          Extracted text becomes Content, embedded invoice XML is preserved in
-          StructuredContent, the tier used is persisted as ExtractionTier. The
+          services reports): multipart upload -> extraction ladder
+          (text layer -> OCR) -> SourceArtifact. Extracted text becomes
+          Content, the tier used is persisted as ExtractionTier. The
           original PDF stays in its system of record (SourceUri).
       - id: System/Enabled
         value: true
@@ -338,14 +337,13 @@ entities:
           transformations:
             - type: PdfOcrExtraction@1
               description: >-
-                Extract text via the extraction ladder: embedded e-invoice XML ->
-                text layer (lossless for born-digital PDFs) -> OCR for pages without one.
+                Extract text via the extraction ladder: text layer (lossless for
+                born-digital PDFs) -> OCR for pages without one.
                 The tier used is persisted on the artifact (ExtractionTier).
               language: en
               maxFileSizeBytes: 20000000
               continueOnError: false
               preferTextLayer: true
-              extractEmbeddedXml: true
               path: $.files[0].data
               targetPath: $.ocrText
             - type: CreateUpdateInfo@1
@@ -373,9 +371,6 @@ entities:
                 - attributeName: Content
                   attributeValueType: String
                   valuePath: $.ocrText
-                - attributeName: StructuredContent
-                  attributeValueType: String
-                  valuePath: $.EmbeddedXml
                 - attributeName: IsPiiRedacted
                   attributeValueType: Boolean
                   value: false

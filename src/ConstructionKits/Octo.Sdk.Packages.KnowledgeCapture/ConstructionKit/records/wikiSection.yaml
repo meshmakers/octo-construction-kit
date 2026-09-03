@@ -1,0 +1,13 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+  - recordId: WikiSection
+    description: A single section of an audience-neutral wiki entry. Sections are the unit of block-level human review and of downstream audience rendering.
+    isFinal: true
+    isAbstract: false
+    attributes:
+      - id: ${this}/Heading
+        name: Heading
+      - id: ${this}/SectionContent
+        name: SectionContent
+      - id: ${this}/SortOrder
+        name: SortOrder

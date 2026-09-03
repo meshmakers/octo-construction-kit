@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
+modelId: KnowledgeCapture-1.2.1
+# GenAI-based knowledge capture for SME business processes: transforms weakly
+# structured business artifacts (work items, commit histories, chats, meeting
+# transcripts, support reports) into structured, human-verified wiki entries.
+# Medallion layering: SourceArtifact (bronze) -> WikiEntry (silver) ->
+# WikiRendition (gold). Based on the master thesis "System Designs for GenAI-Based
+# Knowledge Capture in SME Business Processes" (Schwaab, 2026). See README.md.
+dependencies:
+  - Basic-[2.0,3.0)

@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+  - recordId: Citation
+    description: Source attribution for a claim in a wiki entry (accountability principle; citation recall/precision per Gao et al. ALCE). Anchors a section back to the exact source passage.
+    isFinal: true
+    isAbstract: false
+    attributes:
+      - id: ${this}/SectionRef
+        name: SectionRef
+      - id: ${this}/SourceQuote
+        name: SourceQuote
+      - id: ${this}/SourceAnchor
+        name: SourceAnchor
+        isOptional: true

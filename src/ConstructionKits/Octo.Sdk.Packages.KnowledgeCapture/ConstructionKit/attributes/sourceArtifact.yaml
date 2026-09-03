@@ -1,0 +1,41 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: ArtifactType
+    valueType: Enum
+    valueCkEnumId: ${this}/ArtifactType
+    description: 'Kind of business artifact (support report, work item, commit history, chat, transcript, ...).'
+  - id: SourceSystem
+    valueType: String
+    description: 'System of record the artifact came from, e.g. "AzureDevOps", "Git", "MicrosoftTeams", "Zenon".'
+  - id: SourceUri
+    valueType: String
+    description: 'Link back to the artifact in its system of record. The system of record keeps the authoritative copy; this entity is the working (bronze) copy.'
+  - id: Content
+    valueType: String
+    description: 'Full raw text of the artifact (post-normalization, pre-LLM). Bronze layer: append-only, preserved as ingested for reprocessing and audit. v1 stores text inline (WiredTiger-compressed, well below the 16 MB document limit at SME artifact sizes); planned evolution to BinaryLinked/GridFS or object storage when corpus size demands it.'
+  - id: ContentPreview
+    valueType: String
+    description: 'Short excerpt of the content (first ~500 characters) for list views and quick inspection in Studio.'
+  - id: ContentHash
+    valueType: String
+    description: 'SHA-256 hash of Content. Used for idempotent ingestion and duplicate detection.'
+  - id: IsPiiRedacted
+    valueType: Boolean
+    description: 'True if the content was PII-redacted before or during ingestion. Redaction is OPTIONAL and off by default: in production, names and companies usually carry attribution value. When true, generation prompts switch to anonymized attribution.'
+  - id: CapturedAt
+    valueType: DateTime
+    description: 'When the artifact was captured/ingested into the mesh.'
+  - id: ExtractionTier
+    valueType: Enum
+    valueCkEnumId: ${this}/ExtractionTier
+    description: >-
+      Provenance and trust grade of Content (how the text was obtained): NativeText,
+      EmbeddedStructured, TextLayer, TextLayerFromOcr, Mixed, Ocr. Reviewers and
+      downstream consumers scale their trust accordingly.
+  - id: StructuredContent
+    valueType: String
+    description: >-
+      Structured machine-readable form of the source when available, e.g. the embedded
+      UN/CEFACT CII invoice XML of a ZUGFeRD/Factur-X PDF (EN 16931). Preserved verbatim
+      (bronze fidelity); downstream domain pipelines (e.g. accounting) parse it into
+      typed entities. Unset when the source carries no structured payload.

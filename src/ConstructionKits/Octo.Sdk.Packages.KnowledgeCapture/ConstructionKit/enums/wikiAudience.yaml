@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: WikiAudience
+    description: 'Target audience of a rendered wiki entry. Selects the section schema of the rendition. Development is the default.'
+    isExtensible: true
+    values:
+      - key: 0
+        name: Development
+        description: 'Developer audience. Sections: Summary, Decisions, Action items, Blockers and open questions, Implementation detail, Sources.'
+      - key: 1
+        name: Marketing
+        description: 'Marketing audience. Sections: Outcome, Stakeholders involved, Business impact, Status and next milestone, Sources. Plain language, no commit-level detail.'
+      - key: 2
+        name: Architect
+        description: 'Architecture audience. Sections: Summary, Decisions (with driver and alternative considered), Consequences, Open questions and risks, Sources.'

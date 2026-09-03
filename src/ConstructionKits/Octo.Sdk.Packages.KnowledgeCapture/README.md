@@ -174,16 +174,11 @@ systems are reached via adapter trigger nodes, not MCP.
 
 ## Changed in 1.2.0 (2026-08-26)
 
-- `ExtractionTier` is now an enum (NativeText, EmbeddedStructured, TextLayer,
-  TextLayerFromOcr, Mixed, Ocr); the generic ingest sets NativeText explicitly.
-- New `SourceArtifact.StructuredContent`: embedded e-invoice XML (ZUGFeRD/
-  Factur-X, UN/CEFACT CII per EN 16931) is preserved verbatim by the PDF ingest.
-- Generation/verification pipelines: server-side JSON schema enforcement
-  (structured outputs, minItems against lazy-valid outputs), bounded JSON
-  repair, context narrowed to the artifact's raw text (prevents metadata
-  citations), quote-glyph guidance; prompts bumped to v2.
-- PDF ingest no longer defaults CapturedAt to ingest time (RtCreationDateTime
-  covers that); CapturedAt is for backdated source timestamps.
+- `ExtractionTier` is now an enum (NativeText, TextLayer, TextLayerFromOcr,
+  Mixed, Ocr); the generic ingest sets NativeText explicitly.
+- New `SourceArtifact.StructuredContent`: optional machine-readable form of a
+  source (e.g. an e-invoice XML payload). Not populated by the PDF ingest
+  pipeline; reserved for domain pipelines that carry a structured payload.
 
 ## Pinned follow-ups (from the first smoke test, 2026-07-21)
 

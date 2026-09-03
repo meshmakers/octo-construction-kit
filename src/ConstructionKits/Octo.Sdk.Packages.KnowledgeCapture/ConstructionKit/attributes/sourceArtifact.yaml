@@ -30,8 +30,8 @@ attributes:
     valueCkEnumId: ${this}/ExtractionTier
     description: >-
       Provenance and trust grade of Content (how the text was obtained): NativeText,
-      EmbeddedStructured, TextLayer, TextLayerFromOcr, Mixed, Ocr. Reviewers and
-      downstream consumers scale their trust accordingly.
+      TextLayer, TextLayerFromOcr, Mixed, Ocr. Reviewers and downstream consumers
+      scale their trust accordingly.
   - id: StructuredContent
     valueType: String
     description: >-

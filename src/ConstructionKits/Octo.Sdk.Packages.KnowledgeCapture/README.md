@@ -35,8 +35,11 @@ name/version, model id) is the product contract.
 - **Agentic workflow** (`wiki-capture-agentic`): one agentic `LlmQuery@1` with
   read-only MCP retrieval tools and an EXTRACT→RETRIEVE→DRAFT→REVIEW→REVISE
   self-correction loop, bounded by `maxToolRounds`. The entity write happens
-  deterministically *outside* the agent loop, so the MCP service account only
-  needs `OctoApiReadOnly`.
+  deterministically *outside* the agent loop, so the MCP service account needs
+  no write role. Today it still has to hold the `octo_api` scope: the adapter's
+  `ServiceAccountTokenService` requests exactly that scope and octo-mcp-service
+  requires it on its transport endpoint (`Mcp:RequiredApiScopes`, default
+  `octo_api`). Moving to `octo_api.read_only` needs both to accept it first.
 
 Human-in-the-loop verification happens in Studio: review the Draft entry
 (sections, citations, hallucination flags), edit, then set `VerificationStatus`
@@ -70,7 +73,7 @@ prompts then keep anonymized identifiers as-is.
      asset services read (`$ROOTPATH/.octo/*` in the octo developer shell).
    - Refresh the blueprint catalog in Studio if it doesn't appear immediately.
 1. Install the blueprint `KnowledgeCapture.MainLatest` (Studio or MCP
-   `install_blueprint`). Requires `System.Communication` ≥ 3.25.1.
+   `install_blueprint`). Requires `System.Communication` ≥ 3.32.0.
 2. Set the secrets. The blueprint seeds the configuration entities with EMPTY
    secrets; the OIDC client itself is not part of the blueprint and must be
    registered in octo-identity-services. `ServiceAccountTokenService` requests

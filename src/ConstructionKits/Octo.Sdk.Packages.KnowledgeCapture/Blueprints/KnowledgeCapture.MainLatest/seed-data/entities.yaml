@@ -606,6 +606,14 @@ entities:
               timeoutSeconds: 600
               mcpConfigurationNames:
                 - wiki-capture-mcp
+              # Read-only retrieval allowlist (exact tool names, see LlmQuery@1 mcpToolNames). Without
+              # it every tool of the MCP server is offered - 200 on octo-mcp-service, including write
+              # and admin tools - and each call ships all their schemas (~47k prompt tokens).
+              mcpToolNames:
+                - get_entity_by_id
+                - query_entities
+                - query_entities_simple
+                - search_types
               maxToolRounds: 8
               responseFormat: json
               jsonFormatSample: '{"title":"...","sections":[{"heading":"Summary","sectionContent":"...","sortOrder":0}],"citations":[{"sectionRef":"Summary","sourceQuote":"...","sourceAnchor":""}]}'

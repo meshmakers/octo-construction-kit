@@ -73,7 +73,7 @@ prompts then keep anonymized identifiers as-is.
      asset services read (`$ROOTPATH/.octo/*` in the octo developer shell).
    - Refresh the blueprint catalog in Studio if it doesn't appear immediately.
 1. Install the blueprint `KnowledgeCapture.MainLatest` (Studio or MCP
-   `install_blueprint`). Requires `System.Communication` ≥ 3.32.0.
+   `install_blueprint`). Requires `System.Communication` ≥ 3.34.0.
 2. Set the secrets. The blueprint seeds the configuration entities with EMPTY
    secrets; the OIDC client itself is not part of the blueprint and must be
    registered in octo-identity-services. `ServiceAccountTokenService` requests

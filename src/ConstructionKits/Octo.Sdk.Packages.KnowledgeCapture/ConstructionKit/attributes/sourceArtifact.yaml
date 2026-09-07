@@ -21,7 +21,9 @@ attributes:
     description: 'SHA-256 hash of Content. Used for idempotent ingestion and duplicate detection.'
   - id: IsPiiRedacted
     valueType: Boolean
-    description: 'True if the content was PII-redacted before or during ingestion. Redaction is OPTIONAL and off by default: in production, names and companies usually carry attribution value. When true, generation prompts switch to anonymized attribution.'
+    defaultValues:
+      - false
+    description: 'True if the content was PII-redacted before or during ingestion. Mandatory (default false) because the generation prompts branch on it: a missing value would leave the attribution mode undefined. Redaction itself is OPTIONAL and off by default: in production, names and companies usually carry attribution value. When true, generation prompts switch to anonymized attribution.'
   - id: CapturedAt
     valueType: DateTime
     description: 'When the artifact was captured/ingested into the mesh.'

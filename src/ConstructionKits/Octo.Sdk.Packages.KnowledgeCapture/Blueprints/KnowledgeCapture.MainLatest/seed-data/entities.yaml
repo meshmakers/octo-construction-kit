@@ -10,32 +10,37 @@ entities:
     ckTypeId: System.Communication/ServiceAccountConfiguration
     rtWellKnownName: wiki-capture-sa
     # OAuth2 client-credentials account the agentic pipeline uses to call
-    # octo-mcp-service (read-only retrieval by prompt contract; the token
-    # service currently requests scope OctoApiFullAccess hardcoded, so the
-    # client must allow it). Register the client in octo-identity-services
-    # and set the ClientSecret before deploying the agentic pipeline.
+    # octo-mcp-service (read-only retrieval by prompt contract; the adapter's token
+    # service requests scope octo_api, so the client must allow it). Register the
+    # client in octo-identity-services and set the ClientSecret before deploying
+    # the agentic pipeline.
+    # IssuerUri and TenantId are left empty on purpose: empty means "this
+    # installation's identity service" and "the adapter's own tenant" (AB#5115),
+    # so the seed carries no environment- or tenant-specific value.
     # NOTE: Configuration-derived types have no Name/Description attributes;
     # the rtWellKnownName is the identifier.
     attributes:
       - id: System.Communication/IssuerUri
-        value: https://localhost:5003
+        value: ""
       - id: System.Communication/ClientId
         value: wiki-capture-mcp
       - id: System.Communication/ClientSecret
         value: ""
       - id: System/TenantId
-        value: meshtest
+        value: ""
 
   - rtId: '672000000000000000000002'
     ckTypeId: System.Communication/McpConfiguration
     rtWellKnownName: wiki-capture-mcp
     # MCP server used by the agentic generation pipeline for read-only
     # retrieval over already-ingested entities (get_entity_by_id,
-    # query_entities, ...). Dev/test URL; adjust host and tenant segment
-    # for other environments.
+    # query_entities, ...). {tenantId} is substituted by the adapter at
+    # resolution time with the executing tenant. The host is the local dev
+    # default; set it for your environment before deploying (see README,
+    # Setup) — it is install-time configuration like the secrets above.
     attributes:
       - id: System.Communication/Url
-        value: https://localhost:5017/meshtest/mcp
+        value: https://localhost:5017/{tenantId}/mcp
       - id: System.Communication/Transport
         value: 2   # Http
       - id: System.Communication/AuthServiceAccountConfigurationName
@@ -288,8 +293,8 @@ entities:
                   attributeValueType: DateTime
                   valuePath: $.body.capturedAt
                 - attributeName: ExtractionTier
-                  attributeValueType: String
-                  value: NativeText
+                  attributeValueType: Int
+                  value: 0   # NativeText
             - type: ApplyChanges@2
               description: Persist the source artifact.
               entityUpdatesPath: $._updateItems
@@ -298,7 +303,7 @@ entities:
   # Pipeline 1b: PDF ingest via OCR (bronze)
   # POST multipart/form-data: file=<pdf> plus optional form fields
   # sourceSystem, sourceUri. Example:
-  #   curl -k -X POST .../meshtest/knowledge-capture/ingest-pdf \
+  #   curl -k -X POST .../<tenant>/knowledge-capture/ingest-pdf \
   #     -F "file=@report.pdf" -F "sourceSystem=Zenon" -F "sourceUri=..."
   # --------------------------------------------------------------------------
   - rtId: '67200000000000000000000d'
@@ -375,8 +380,8 @@ entities:
                   attributeValueType: Boolean
                   value: false
                 - attributeName: ExtractionTier
-                  attributeValueType: String
-                  valuePath: $.ExtractionTier
+                  attributeValueType: Int
+                  valuePath: $.ExtractionTier   # tier name from PdfOcrExtraction@1, coerced to the enum key
             - type: ApplyChanges@2
               description: Persist the source artifact.
               entityUpdatesPath: $._updateItems
@@ -428,7 +433,7 @@ entities:
               rtIdsPath: $.body.artifactRtIds
               targetPath: $.artifacts
             - type: LlmQuery@1
-              description: Single-call generation (wiki-prompt-structured v1).
+              description: Single-call generation (wiki-prompt-structured v2).
               provider: Anthropic
               apiKeyConfigurationName: wiki-capture-llm
               model: claude-sonnet-4-6
@@ -464,7 +469,7 @@ entities:
                 Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
                 CRITICAL: Output must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
             - type: LlmQuery@1
-              description: Verification pass (wiki-prompt-verification v1, evaluator step).
+              description: Verification pass (wiki-prompt-verification v2, evaluator step).
               provider: Anthropic
               apiKeyConfigurationName: wiki-capture-llm
               model: claude-sonnet-4-6
@@ -597,7 +602,7 @@ entities:
               rtIdsPath: $.body.artifactRtIds
               targetPath: $.artifacts
             - type: LlmQuery@1
-              description: Agentic generation with MCP retrieval (wiki-prompt-agentic v1).
+              description: Agentic generation with MCP retrieval (wiki-prompt-agentic v2).
               provider: Anthropic
               apiKeyConfigurationName: wiki-capture-llm
               model: claude-sonnet-4-6
@@ -721,8 +726,10 @@ entities:
           Gold layer: renders a verified wiki entry as an audience-specific
           markdown page (development, marketing or architect section schema).
           Facts are verified once on the entry; renditions are cheap,
-          repeatable renderings. Only render Verified entries.
-          Prompt: wiki-prompt-render v1.
+          repeatable renderings. The pipeline enforces the gate itself: the
+          fetch is filtered to VerificationStatus Verified and the model is
+          not called when nothing matched, so a Draft id cannot produce a
+          rendition. Prompt: wiki-prompt-render v1.
       - id: System/Enabled
         value: true
       - id: System.Communication/DeploymentState
@@ -738,74 +745,85 @@ entities:
               description: 'Body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development", "audienceKey": 0, "title": "..." }'
           transformations:
             - type: GetRtEntitiesById@1
-              description: Fetch the verified wiki entry (silver).
+              description: Fetch the wiki entry (silver) — Verified entries only, whatever the caller passed.
               ckTypeId: KnowledgeCapture/WikiEntry
               rtIdsPath: $.body.wikiEntryRtIds
+              fieldFilters:
+                - attributePath: VerificationStatus
+                  operator: Equals
+                  comparisonValue: 2   # VerificationStatus.Verified
               targetPath: $.entries
-            - type: LlmQuery@1
-              description: Render markdown for the requested audience (wiki-prompt-render v1).
-              provider: Anthropic
-              apiKeyConfigurationName: wiki-capture-llm
-              model: claude-sonnet-4-6
-              temperature: 0.3
-              maxTokens: 4096
-              timeoutSeconds: 180
-              responseFormat: text
-              path: $.body.audience
-              dataPaths:
-                - $.entries
-              targetPath: $.rendition
-              systemPrompt: |-
-                You render verified, audience-neutral wiki entries as audience-specific markdown pages. Use only facts present in the entry; never add or invent content. Output markdown only, starting with a level-1 title heading.
-              question: |-
-                The input contains a verified wiki entry under "entries" (Sections with headings and content, plus Citations) and the requested audience under "body.audience".
+            - type: If@1
+              description: Render only when a Verified entry was found; an empty fetch must not reach the model.
+              path: $.entries.TotalCount
+              operator: GreaterThan
+              value: 0
+              valueType: Int
+              transformations:
+                - type: LlmQuery@1
+                  description: Render markdown for the requested audience (wiki-prompt-render v1).
+                  provider: Anthropic
+                  apiKeyConfigurationName: wiki-capture-llm
+                  model: claude-sonnet-4-6
+                  temperature: 0.3
+                  maxTokens: 4096
+                  timeoutSeconds: 180
+                  responseFormat: text
+                  path: $.body.audience
+                  dataPaths:
+                    - $.entries
+                  targetPath: $.rendition
+                  systemPrompt: |-
+                    You render verified, audience-neutral wiki entries as audience-specific markdown pages. Use only facts present in the entry; never add or invent content. Output markdown only, starting with a level-1 title heading.
+                  question: |-
+                    The main content is the requested audience name. The additional context contains the verified wiki entry (Sections with headings and content, plus Citations).
 
-                Render the entry as a markdown page using exactly the audience's section schema:
-                - development: ## Summary, ## Decisions, ## Action items, ## Blockers and open questions, ## Implementation detail, ## Sources
-                - marketing: ## Outcome (plain language, no commit or file-level detail), ## Stakeholders involved, ## Business impact, ## Status and next milestone, ## Sources
-                - architect: ## Summary, ## Decisions (each with its driver and at least one alternative considered), ## Consequences, ## Open questions and risks, ## Sources
+                    Render the entry as a markdown page using exactly the audience's section schema:
+                    - development: ## Summary, ## Decisions, ## Action items, ## Blockers and open questions, ## Implementation detail, ## Sources
+                    - marketing: ## Outcome (plain language, no commit or file-level detail), ## Stakeholders involved, ## Business impact, ## Status and next milestone, ## Sources
+                    - architect: ## Summary, ## Decisions (each with its driver and at least one alternative considered), ## Consequences, ## Open questions and risks, ## Sources
 
-                Preserve source references in the Sources section. If the entry lacks content for a section, keep the heading and write "Nothing recorded.". Output markdown only.
-            - type: CreateUpdateInfo@1
-              description: Create the WikiRendition (gold).
-              targetPath: $._updateItems
-              targetValueKind: Array
-              targetValueWriteMode: Append
-              updateKind: INSERT
-              ckTypeId: KnowledgeCapture/WikiRendition
-              rtIdPath: $.newRenditionRtId
-              generateRtId: true
-              attributeUpdates:
-                - attributeName: Name
-                  attributeValueType: String
-                  valuePath: $.body.title
-                - attributeName: Audience
-                  attributeValueType: Int
-                  valuePath: $.body.audienceKey
-                - attributeName: Body
-                  attributeValueType: String
-                  valuePath: $.rendition
-                - attributeName: PromptName
-                  attributeValueType: String
-                  value: wiki-prompt-render
-                - attributeName: PromptVersion
-                  attributeValueType: Int
-                  value: 1
-                - attributeName: ModelId
-                  attributeValueType: String
-                  value: claude-sonnet-4-6
-            - type: CreateAssociationUpdate@1
-              description: Link rendition to its wiki entry (RenderOf).
-              targetPath: $._assocItems
-              targetValueKind: Array
-              targetValueWriteMode: Append
-              updateKind: CREATE
-              originRtIdPath: $._updateItems[0].RtId
-              originCkTypeIdPath: $._updateItems[0].CkTypeId
-              targetRtIdPath: $.body.wikiEntryRtIds[0]
-              targetCkTypeId: KnowledgeCapture/WikiEntry
-              associationRoleId: KnowledgeCapture/RenderOf
-            - type: ApplyChanges@2
-              description: Persist rendition and association.
-              entityUpdatesPath: $._updateItems
-              associationUpdatesPath: $._assocItems
+                    Preserve source references in the Sources section. If the entry lacks content for a section, keep the heading and write "Nothing recorded.". Output markdown only.
+                - type: CreateUpdateInfo@1
+                  description: Create the WikiRendition (gold).
+                  targetPath: $._updateItems
+                  targetValueKind: Array
+                  targetValueWriteMode: Append
+                  updateKind: INSERT
+                  ckTypeId: KnowledgeCapture/WikiRendition
+                  rtIdPath: $.newRenditionRtId
+                  generateRtId: true
+                  attributeUpdates:
+                    - attributeName: Name
+                      attributeValueType: String
+                      valuePath: $.body.title
+                    - attributeName: Audience
+                      attributeValueType: Int
+                      valuePath: $.body.audienceKey
+                    - attributeName: Body
+                      attributeValueType: String
+                      valuePath: $.rendition
+                    - attributeName: PromptName
+                      attributeValueType: String
+                      value: wiki-prompt-render
+                    - attributeName: PromptVersion
+                      attributeValueType: Int
+                      value: 1
+                    - attributeName: ModelId
+                      attributeValueType: String
+                      value: claude-sonnet-4-6
+                - type: CreateAssociationUpdate@1
+                  description: Link rendition to its wiki entry (RenderOf).
+                  targetPath: $._assocItems
+                  targetValueKind: Array
+                  targetValueWriteMode: Append
+                  updateKind: CREATE
+                  originRtIdPath: $._updateItems[0].RtId
+                  originCkTypeIdPath: $._updateItems[0].CkTypeId
+                  targetRtIdPath: $.body.wikiEntryRtIds[0]
+                  targetCkTypeId: KnowledgeCapture/WikiEntry
+                  associationRoleId: KnowledgeCapture/RenderOf
+                - type: ApplyChanges@2
+                  description: Persist rendition and association.
+                  entityUpdatesPath: $._updateItems
+                  associationUpdatesPath: $._assocItems

@@ -27,7 +27,6 @@ types:
         isOptional: true
       - id: ${this}/IsPiiRedacted
         name: IsPiiRedacted
-        isOptional: true
       - id: ${this}/CapturedAt
         name: CapturedAt
         isOptional: true

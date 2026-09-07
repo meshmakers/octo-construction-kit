@@ -12,7 +12,8 @@ description: |
   (gold). Pipelines are seeded Undeployed; deploy them from Studio or via
   MCP deploy_pipeline. Before first use: set the ClientSecret on the
   wiki-capture-sa ServiceAccountConfiguration (register the OIDC client in
-  octo-identity-services with scope OctoApiReadOnly) and the ApiKey on the
+  octo-identity-services with scope octo_api - the adapter requests that scope
+  and octo-mcp-service requires it) and the ApiKey on the
   wiki-capture-llm AiConfiguration. Requires System.Communication 3.32.0+
   (McpConfiguration type with AuthServiceAccountConfigurationName).
 ckModelDependencies:

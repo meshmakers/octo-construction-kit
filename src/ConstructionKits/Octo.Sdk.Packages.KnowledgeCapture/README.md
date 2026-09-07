@@ -67,7 +67,8 @@ prompts then keep anonymized identifiers as-is.
      (or run from source:
      `dotnet run --project octo-construction-kit-engine/src/BlueprintManager -- ...`).
      Then:
-     `octo-bpm -c publish -p .../Octo.Sdk.Packages.KnowledgeCapture/Blueprints/KnowledgeCapture.MainLatest`
+     `octo-bpm -c publish -p src/ConstructionKits/Octo.Sdk.Packages.KnowledgeCapture/Blueprints/KnowledgeCapture.MainLatest`
+     (path relative to the octo-construction-kit repository root)
      (`-f` to replace, `-c validate` for a pre-check, `-c catalogs` /
      `-c config` to inspect the catalog root). Publishes to the
      LocalFileSystemBlueprintCatalog — make sure its root matches what the
@@ -101,9 +102,16 @@ prompts then keep anonymized identifiers as-is.
    Verify the client independently of the adapter:
 
    ```
+   # Local development only: -k skips TLS verification for the self-signed dev
+   # certificate; against any other environment use --cacert <ca.pem> instead.
+   # The secret stays out of the command line and the shell history.
+   read -rs WIKI_CAPTURE_MCP_SECRET
    curl -k -X POST https://localhost:5003/connect/token \
-     -H "Content-Type: application/x-www-form-urlencoded" \
-     -d "grant_type=client_credentials&client_id=wiki-capture-mcp&client_secret=<secret>&scope=octo_api&acr_values=tenant:meshtest"
+     --data-urlencode "grant_type=client_credentials" \
+     --data-urlencode "client_id=wiki-capture-mcp" \
+     --data-urlencode "client_secret=$WIKI_CAPTURE_MCP_SECRET" \
+     --data-urlencode "scope=octo_api" \
+     --data-urlencode "acr_values=tenant:<tenant>"
    ```
 
    Must return an `access_token` (`invalid_client` = id/secret mismatch,

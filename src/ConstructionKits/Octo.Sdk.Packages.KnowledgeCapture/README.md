@@ -5,7 +5,8 @@ business artifacts (work items, commit histories, chats, transcripts, support
 reports) into structured, human-verified wiki entries. Operationalizes the design
 of *System Designs for GenAI-Based Knowledge Capture in SME Business Processes*
 (Schwaab, 2026) on OctoMesh, using the `LlmQuery@1` / `McpToolCall@1` pipeline
-nodes (branch `dev/philipp/llmquery-node-v2`).
+nodes of octo-mesh-adapter (0.2 line) and System.Communication ≥ 3.34.0
+(`McpConfiguration` with `AuthServiceAccountConfigurationName`).
 
 ## Design
 
@@ -174,6 +175,13 @@ systems are reached via adapter trigger nodes, not MCP.
 - Few-shot examples (thesis CL-02) are intentionally not seeded; add 3–5
   tenant-specific synthetic exemplars to the `FewShotExamples` attribute and
   the pipeline prompts once real verified entries exist.
+- Small models make no tool calls: with 198 tools offered, gpt-oss-120b never
+  called one (the thesis Run 1 finding). Judge the agentic architecture on a
+  strong model (claude-sonnet) before drawing conclusions; the seeded agentic
+  pipeline restricts the offered tools to four read tools via `mcpToolNames`.
+- `responseFormat: json` is incompatible with tools on most providers; in the
+  agentic pipeline JSON is therefore enforced by the system prompt and the
+  node's bounded repair, not by a server-side schema.
 
 ## Changed in 1.2.0 (2026-08-26)
 
@@ -182,42 +190,6 @@ systems are reached via adapter trigger nodes, not MCP.
 - New `SourceArtifact.StructuredContent`: optional machine-readable form of a
   source (e.g. an e-invoice XML payload). Not populated by the PDF ingest
   pipeline; reserved for domain pipelines that carry a structured payload.
-
-## Pinned follow-ups (from the first smoke test, 2026-07-21)
-
-- **LlmQuery@1 `metadataTargetPath`**: emit run metadata (model *as resolved at
-  request time*, prompt/completion tokens, latency, cost) into the data
-  context so `ModelId`/`LatencySeconds`/`CostUsd` on WikiEntry are mapped via
-  `valuePath` instead of hardcoded literals (currently the seeded `ModelId`
-  is a static stamp and goes stale when the node's model is overridden).
-- **Render pipeline quality gate**: add a `fieldFilters` clause
-  (`VerificationStatus == 2`) to the `GetRtEntitiesById@1` node in
-  `wiki-render-audience` so only Verified entries can be rendered — today the
-  pipeline trusts the caller.
-- **Citation prompt tuning (template v2)**: instruct "quote only from the
-  Content attribute; keep quotes minimal" — v1 outputs cited serialized
-  entity JSON for the Sources section and whole-content quotes for
-  Technical detail.
-- **Studio pipeline-editor bug**: the LlmQuery provider dropdown shows the
-  enum value twice (proper spelling + SCREAMING_SNAKE variant) — schema/form
-  generation issue, cosmetic.
-- **CreateUpdateInfo@1 schema-inferred record coercion** (implemented
-  2026-07-21 on `dev/philipp/llmquery-node-v2`): plain JSON objects coerce to
-  the record type declared by the CK schema; the `{CkRecordId, Attributes}`
-  envelope remains required for polymorphic records and dotted attribute
-  paths. This package's generation pipelines depend on that adapter change.
-- **MCP tool allowlist**: the agentic pipeline currently offers the entire
-  octo-mcp-service surface (~198 tools ≈ 20k+ prompt tokens per call) —
-  expensive and poor agent-computer-interface design. Add a tool
-  allowlist/filter to `McpConfiguration` or `LlmQuery@1` and scope this
-  pipeline to the few read tools it needs (get_entity_by_id, query_entities,
-  get_type_schema).
-- **Small-model tool use**: gpt-oss-120b made zero tool calls despite 198
-  offered (replicates the thesis Run 1 small-model finding). Judge the
-  agentic architecture on a stronger model (claude-sonnet) before drawing
-  conclusions; note also the node's documented fallback that
-  `responseFormat: json` is incompatible with tools on most providers (JSON
-  is then enforced by the system prompt alone).
 
 ## Sources
 

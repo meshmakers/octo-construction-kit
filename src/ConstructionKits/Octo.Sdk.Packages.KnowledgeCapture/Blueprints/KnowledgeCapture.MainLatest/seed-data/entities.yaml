@@ -820,7 +820,10 @@ entities:
                   updateKind: CREATE
                   originRtIdPath: $._updateItems[0].RtId
                   originCkTypeIdPath: $._updateItems[0].CkTypeId
-                  targetRtIdPath: $.body.wikiEntryRtIds[0]
+                  # The entry that was actually fetched (Verified filter applied), not the first
+                  # requested id: a request mixing a Draft and a Verified id renders the Verified
+                  # one and must link the rendition to it.
+                  targetRtIdPath: $.entries.Items[0].RtId
                   targetCkTypeId: KnowledgeCapture/WikiEntry
                   associationRoleId: KnowledgeCapture/RenderOf
                 - type: ApplyChanges@2

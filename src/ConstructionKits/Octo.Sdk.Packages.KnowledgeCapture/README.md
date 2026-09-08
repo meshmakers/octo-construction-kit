@@ -102,16 +102,20 @@ prompts then keep anonymized identifiers as-is.
    Verify the client independently of the adapter:
 
    ```
-   # Local development only: -k skips TLS verification for the self-signed dev
-   # certificate; against any other environment use --cacert <ca.pem> instead.
-   # The secret stays out of the command line and the shell history.
+   # Authenticated TLS: --cacert names the CA of the target environment. For the local
+   # dev setup that is the ASP.NET developer certificate (self-signed, so it is its own
+   # CA): the .crt written by New-DeveloperCertificate under ~/.aspnet/dev-certs/https/,
+   # or `dotnet dev-certs https --export-path dev-cert.crt --format PEM`.
+   # The secret is read without echo and handed to curl on stdin (client_secret@-), so it
+   # never appears in the argument list, process metadata or the shell history.
    read -rs WIKI_CAPTURE_MCP_SECRET
-   curl -k -X POST https://localhost:5003/connect/token \
+   printf '%s' "$WIKI_CAPTURE_MCP_SECRET" | curl --cacert <ca.crt> -X POST https://localhost:5003/connect/token \
      --data-urlencode "grant_type=client_credentials" \
      --data-urlencode "client_id=wiki-capture-mcp" \
-     --data-urlencode "client_secret=$WIKI_CAPTURE_MCP_SECRET" \
+     --data-urlencode "client_secret@-" \
      --data-urlencode "scope=octo_api" \
      --data-urlencode "acr_values=tenant:<tenant>"
+   unset WIKI_CAPTURE_MCP_SECRET
    ```
 
    Must return an `access_token` (`invalid_client` = id/secret mismatch,

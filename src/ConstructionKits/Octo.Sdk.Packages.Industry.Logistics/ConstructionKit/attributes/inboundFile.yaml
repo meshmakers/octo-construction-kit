@@ -1,0 +1,23 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: FileKey
+  valueType: String
+  description: "Identity of the inbound file and the only comparison key of the dedup marker; enforced unique by index. The adapter composes it from source name, remote directory, file name, size in bytes and the listing's last-write timestamp text, joined by '|' (e.g. MySftp|/inbound|orders-20260828.txt|430|2026-08-28T07:11:16.0670000Z)."
+- id: SourceName
+  valueType: String
+  description: "Name of the source configuration entry the file was fetched from (e.g. the SFTP server configuration name)."
+- id: SourceDirectory
+  valueType: String
+  description: "Remote directory the file was listed in."
+- id: FileName
+  valueType: String
+  description: "File name as reported by the source listing."
+- id: FileSize
+  valueType: Int64
+  description: "Size in bytes as reported by the source listing."
+- id: LastWriteUtc
+  valueType: DateTime
+  description: "Last-write timestamp (UTC) of the file as reported by the source listing, stored as a date for filtering and sorting; the verbatim listing text is kept inside FileKey."
+- id: ProcessedAt
+  valueType: DateTime
+  description: "Point in time the adapter finished processing the file."

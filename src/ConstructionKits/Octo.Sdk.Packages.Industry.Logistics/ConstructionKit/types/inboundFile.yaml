@@ -1,0 +1,25 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: InboundFile
+  derivedFromCkTypeId: ${System}/Entity        # inbound file processing marker
+  description: "One successfully processed inbound file (e.g. an order or stock file fetched from an SFTP source), keyed by FileKey. Doubles as the fetch-dedup marker: a listed file whose FileKey already exists is not processed again, and a unique index rejects a second marker for the same FileKey. Instances are only inserted, never updated; the existence of the instance is the statement."
+  indexes:
+  - indexType: "UniqueNotDeleted"
+    fields:
+      - attributePaths:
+        - FileKey
+  attributes:
+  - id: ${this}/FileKey
+    name: FileKey
+  - id: ${this}/SourceName
+    name: SourceName
+  - id: ${this}/SourceDirectory
+    name: SourceDirectory
+  - id: ${this}/FileName
+    name: FileName
+  - id: ${this}/FileSize
+    name: FileSize
+  - id: ${this}/LastWriteUtc
+    name: LastWriteUtc
+  - id: ${this}/ProcessedAt
+    name: ProcessedAt

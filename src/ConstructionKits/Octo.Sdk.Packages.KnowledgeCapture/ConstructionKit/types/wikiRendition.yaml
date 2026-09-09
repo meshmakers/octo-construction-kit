@@ -1,0 +1,31 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: WikiRendition
+    derivedFromCkTypeId: ${Basic}/NamedEntity
+    isFinal: true
+    description: >
+      An audience-specific markdown rendering of a verified wiki entry (gold
+      layer). Facts are verified once on the WikiEntry; renditions are cheap,
+      repeatable renderings per audience (Development/Marketing/Architect
+      section schemas). Body is the publishable page. Regenerate renditions
+      when the underlying entry changes.
+    attributes:
+      - id: ${this}/Audience
+        name: Audience
+      - id: ${this}/Body
+        name: Body
+      - id: ${this}/RenderedAt
+        name: RenderedAt
+        isOptional: true
+      - id: ${this}/PromptName
+        name: PromptName
+        isOptional: true
+      - id: ${this}/PromptVersion
+        name: PromptVersion
+        isOptional: true
+      - id: ${this}/ModelId
+        name: ModelId
+        isOptional: true
+    associations:
+      - id: ${this}/RenderOf
+        targetCkTypeId: ${this}/WikiEntry

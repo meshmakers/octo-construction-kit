@@ -1,0 +1,23 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: TemplateVersion
+    valueType: Int
+    description: 'Version of this prompt template. Bump on every change; generated WikiEntry entities record the version used (adaptability + accountability principles).'
+  - id: SystemPrompt
+    valueType: String
+    description: 'System prompt text (role, rules, grounding directives).'
+  - id: UserTemplate
+    valueType: String
+    description: 'User/instruction prompt text. The artifact content is supplied by the pipeline node at runtime; long inputs go before instructions per current prompting guidance.'
+  - id: FewShotExamples
+    valueType: String
+    description: 'Optional few-shot examples (3-5 recommended, wrapped in <example> tags). Add tenant-specific exemplars here once real verified entries exist; use synthetic sources to avoid contaminating prompts with evaluation data.'
+  - id: DefaultModelId
+    valueType: String
+    description: 'Default model identifier this template is tuned for.'
+  - id: Temperature
+    valueType: Double
+    description: 'Default sampling temperature for this template.'
+  - id: MaxTokens
+    valueType: Int
+    description: 'Default maximum output tokens for this template.'

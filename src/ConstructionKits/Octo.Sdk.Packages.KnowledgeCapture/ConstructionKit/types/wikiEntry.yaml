@@ -1,0 +1,55 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: WikiEntry
+    derivedFromCkTypeId: ${Basic}/NamedEntity
+    isFinal: true
+    description: >
+      An audience-neutral, structured wiki entry synthesized from one or more
+      source artifacts (silver layer). Name = entry title. Sections carry the
+      full fact set (summary, decisions with rationale, actions, issues,
+      technical detail); Citations anchor claims to source passages;
+      HallucinationFlags surface unsupported claims for the human reviewer.
+      Created as Draft by generation pipelines and promoted to Verified by a
+      human (human-in-the-loop). Verified once, then rendered per audience as
+      WikiRendition (gold). Run metadata (prompt name/version, model, latency,
+      tokens, cost) realizes the accountability principle.
+    attributes:
+      - id: ${this}/Sections
+        name: Sections
+      - id: ${this}/Citations
+        name: Citations
+        isOptional: true
+      - id: ${this}/HallucinationFlags
+        name: HallucinationFlags
+        isOptional: true
+      - id: ${this}/VerificationStatus
+        name: VerificationStatus
+      - id: ${this}/GenerationMode
+        name: GenerationMode
+      - id: ${this}/PromptName
+        name: PromptName
+        isOptional: true
+      - id: ${this}/PromptVersion
+        name: PromptVersion
+        isOptional: true
+      - id: ${this}/ModelId
+        name: ModelId
+        isOptional: true
+      - id: ${this}/LatencySeconds
+        name: LatencySeconds
+        isOptional: true
+      - id: ${this}/PromptTokens
+        name: PromptTokens
+        isOptional: true
+      - id: ${this}/CompletionTokens
+        name: CompletionTokens
+        isOptional: true
+      - id: ${this}/CostUsd
+        name: CostUsd
+        isOptional: true
+      - id: ${this}/ReviewerIterations
+        name: ReviewerIterations
+        isOptional: true
+    associations:
+      - id: ${this}/GeneratedFrom
+        targetCkTypeId: ${this}/SourceArtifact

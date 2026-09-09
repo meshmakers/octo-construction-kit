@@ -1,0 +1,46 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Sections
+    valueType: RecordArray
+    valueCkRecordId: ${this}/WikiSection
+    description: 'Audience-neutral structured sections (silver layer). Canonical section set: Summary; Decisions (with rationale); Action items; Issues and blockers; Technical detail; Sources.'
+  - id: Citations
+    valueType: RecordArray
+    valueCkRecordId: ${this}/Citation
+    description: 'Source attributions anchoring sections back to exact passages of the source artifact(s).'
+  - id: HallucinationFlags
+    valueType: RecordArray
+    valueCkRecordId: ${this}/HallucinationFlag
+    description: 'Unsupported claims found by the LLM verification pass. Shown to the human reviewer; empty when the verification pass found none.'
+  - id: VerificationStatus
+    valueType: Enum
+    valueCkEnumId: ${this}/VerificationStatus
+    description: 'Human-in-the-loop verification state (Draft/InReview/Verified/Rejected).'
+  - id: GenerationMode
+    valueType: Enum
+    valueCkEnumId: ${this}/GenerationMode
+    description: 'Architecture that generated this entry (Pipeline or Agentic).'
+  - id: PromptName
+    valueType: String
+    description: 'WellKnownName of the PromptTemplate entity whose text was used for generation (audit trail / accountability).'
+  - id: PromptVersion
+    valueType: Int
+    description: 'Version of the prompt template used for generation.'
+  - id: ModelId
+    valueType: String
+    description: 'Model identifier used for generation as resolved at request time, e.g. claude-sonnet-4-6.'
+  - id: LatencySeconds
+    valueType: Double
+    description: 'End-to-end generation latency in seconds (run metadata).'
+  - id: PromptTokens
+    valueType: Int
+    description: 'Prompt token count of the generation run (run metadata).'
+  - id: CompletionTokens
+    valueType: Int
+    description: 'Completion token count of the generation run (run metadata).'
+  - id: CostUsd
+    valueType: Double
+    description: 'Cost of the generation run in USD (run metadata).'
+  - id: ReviewerIterations
+    valueType: Int
+    description: 'Number of self-correction/review iterations performed (agentic mode).'

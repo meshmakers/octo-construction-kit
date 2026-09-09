@@ -1,0 +1,8 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+associationRoles:
+  - id: GeneratedFrom
+    description: Links a wiki entry to the source artifact(s) it was generated from. N:N because silver-layer consolidation may synthesize one entry from several bronze artifacts, and one artifact may feed several entries.
+    inboundName: Generated
+    inboundMultiplicity: N
+    outboundName: GeneratedFrom
+    outboundMultiplicity: N

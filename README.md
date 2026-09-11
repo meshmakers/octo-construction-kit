@@ -51,7 +51,8 @@ System
 octo-construction-kit/
 ├── src/
 │   ├── ConstructionKits/       # All CK implementations
-│   ├── Samples/                # Import scripts and sample data
+│   ├── Blueprints/             # Installable blueprints (locations, samples)
+│   ├── Samples/                # Leftovers that are not installable as a blueprint
 │   └── grafana/                # Grafana dashboard definitions
 ├── tests/                      # System tests
 ├── devops-build/               # Azure Pipelines CI/CD
@@ -139,13 +140,23 @@ dotnet test Octo.ConstructionKit.sln --configuration Release --filter "FullyQual
 
 ## Sample Data
 
-The `src/Samples/` directory contains PowerShell scripts for importing sample data into an OctoMesh instance:
+Sample data ships as blueprints in `src/Blueprints/` — install one instead of
+running an import script:
 
-- `om_importck.ps1` -- Import construction kits
-- `om_create_tenants.ps1` / `om_delete_tenants.ps1` -- Tenant management
-- `om_importrt_sample_*.ps1` -- Import runtime sample data (general, maintenance, simulation, PV)
+```bash
+octo-cli -c InstallBlueprint -b Samples.EnergyEnvironment-1.0.0
+```
 
-Sample data sets cover maintenance, simulator, PV (photovoltaic), and zenon integration scenarios.
+`Samples.PipelineBasics`, `Samples.Maintenance`, `Samples.Photovoltaics`,
+`Samples.Simulator.Energy`, `Samples.Simulator.EnergyCommunity` and
+`Samples.EnergyEnvironment` cover pipeline wiring, maintenance master data,
+photovoltaics, stream-data archives, an energy community and a full
+energy-management dashboard. See [`src/Blueprints/README.md`](src/Blueprints/README.md)
+for what each one seeds, the prerequisites, and the follow-up steps a blueprint
+cannot perform (`DeployDataFlow`, `ActivateArchive`).
+
+The `om_*.ps1` import scripts are gone; `src/Samples/` now holds only material
+that cannot be a blueprint — see [`src/Samples/README.md`](src/Samples/README.md).
 
 ## Build Configurations
 

@@ -48,6 +48,7 @@ octo-construction-kit/
 ├── tests/
 │   ├── Octo.Sdk.Packages.Industry.Basic.old.SystemTests/   # System tests
 │   └── Samples/                                             # Sample projects
+├── src/Blueprints/                                          # Installable blueprints (Locations.Austria, Samples.*)
 ├── devops-build/                                            # CI/CD configuration
 │   ├── azure-pipelines.yml                                 # Main Azure Pipeline
 │   ├── set-version.yml                                     # Version setting

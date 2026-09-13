@@ -243,7 +243,10 @@ entities:
                       attributeValueType: Double
                       valuePath: $.key.consumption
             - type: Flatten@1
-              path: $.x[*].[*]
+              # $.x[*][*] - nested wildcards carry no dot before the bracket.
+              # '$.x[*].[*]' made the node fail at runtime with
+              # "Expected property name after '.' (position 7)".
+              path: $.x[*][*]
               targetPath: $._updateItems
             - type: Project@1
               fields:

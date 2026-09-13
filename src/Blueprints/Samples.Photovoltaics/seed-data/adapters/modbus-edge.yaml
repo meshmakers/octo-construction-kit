@@ -40,10 +40,26 @@ entities:
         value: Modbus PV
       - id: System.Communication/AdapterConfiguration
         value: ""
+      # Without a chart the controller marks the workload Disabled and refuses
+      # every Deploy - see the DeploymentState enum: "workloads missing Helm
+      # chart/version/repository". The edge operator still runs the adapter, so
+      # the symptom is a live adapter that reports Disabled centrally.
+      - id: System.Communication/ChartName
+        value: octo-modbus-plug
+      # Empty on purpose: HelmRunner omits --version and pulls the newest chart
+      # from the linked repository, which is what the edge lane wants.
+      - id: System.Communication/ChartVersion
+        value: ""
     associations:
       - roleId: System.Communication/Manages
         targetRtId: 5fc8fc3d8b2fc75f925e21af
         targetCkTypeId: System.Communication/Pool
+      # meshmakers-public (https://meshmakers.github.io/charts), seeded by
+      # System.Communication.Release. Missing this link fails the deploy with
+      # "no Helm repository is linked".
+      - roleId: System.Communication/HelmRepository
+        targetRtId: '670000000000000000000004'
+        targetCkTypeId: System.Communication/HelmRepositoryConfiguration
         
   # Data pipelines including mesh and edge pipelines
   - rtId: 5fc8fc3d8b2fc75f925e21bb

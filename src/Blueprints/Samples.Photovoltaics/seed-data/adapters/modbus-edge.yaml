@@ -40,26 +40,38 @@ entities:
         value: Modbus PV
       - id: System.Communication/AdapterConfiguration
         value: ""
-      # Without a chart the controller marks the workload Disabled and refuses
+      # Without a chart the controller keeps the workload Disabled and refuses
       # every Deploy - see the DeploymentState enum: "workloads missing Helm
       # chart/version/repository". The edge operator still runs the adapter, so
       # the symptom is a live adapter that reports Disabled centrally.
       - id: System.Communication/ChartName
         value: octo-modbus-plug
       # Empty on purpose: HelmRunner omits --version and pulls the newest chart
-      # from the linked repository, which is what the edge lane wants.
+      # from the repository the operator is wired to.
       - id: System.Communication/ChartVersion
         value: ""
+      # DeploymentState is STORED, not derived: supplying the chart afterwards
+      # does not lift an entity out of Disabled by itself. Verified on
+      # test-2/meshtest - setting ChartName alone left the adapter at Disabled
+      # until the state was written explicitly. Seed it Undeployed, as the
+      # EnergyCommunity.EdaIntegration adapter seed does.
+      - id: System.Communication/DeploymentState
+        value: 0
     associations:
       - roleId: System.Communication/Manages
         targetRtId: 5fc8fc3d8b2fc75f925e21af
         targetCkTypeId: System.Communication/Pool
-      # meshmakers-public (https://meshmakers.github.io/charts), seeded by
-      # System.Communication.Release. Missing this link fails the deploy with
-      # "no Helm repository is linked".
-      - roleId: System.Communication/HelmRepository
-        targetRtId: '670000000000000000000004'
-        targetCkTypeId: System.Communication/HelmRepositoryConfiguration
+      # Deliberately NO HelmRepository association. Those
+      # HelmRepositoryConfiguration entities are seeded by
+      # System.Communication.Release only; on a MainLatest (dev/test) tenant the
+      # rtId does not exist and the blueprint install fails with
+      # "Entity 'System.Communication/HelmRepositoryConfiguration@6700...04'
+      # does not exist". A sample blueprint has to install on both lanes, so it
+      # cannot hard-code either lane's rtId - and it does not need to: the
+      # managed Mesh Adapter runs on test-2 with a chart name, an empty version
+      # and no repository link at all, because the operator carries the repo.
+      # On a Release-lane tenant, link meshmakers-public
+      # (670000000000000000000004) by hand if the deploy asks for it.
         
   # Data pipelines including mesh and edge pipelines
   - rtId: 5fc8fc3d8b2fc75f925e21bb

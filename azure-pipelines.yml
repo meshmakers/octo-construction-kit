@@ -147,7 +147,6 @@ stages:
                 - 'src/Blueprints/Samples.PipelineBasics'
                 - 'src/Blueprints/Samples.Maintenance'
                 - 'src/Blueprints/Samples.Photovoltaics'
-                - 'src/Blueprints/Samples.Simulator.Energy'
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
           - task: DotNetCoreCLI@2
@@ -193,7 +192,6 @@ stages:
                 - 'src/Blueprints/Samples.PipelineBasics'
                 - 'src/Blueprints/Samples.Maintenance'
                 - 'src/Blueprints/Samples.Photovoltaics'
-                - 'src/Blueprints/Samples.Simulator.Energy'
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
           - template: templates/steps/push-nuget-package.yml@pipelineTemplates

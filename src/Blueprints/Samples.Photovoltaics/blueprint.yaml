@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Samples.Photovoltaics-1.0.0
+blueprintId: Samples.Photovoltaics-1.0.1
 description: |
   End-to-end photovoltaic demo: master data for a small PV plant (inverter,
   battery storage, two module strings, two energy meters) plus the two-adapter

@@ -10,9 +10,9 @@ application-specific services or pipelines).
 | `Samples.PipelineBasics` | Pipeline chaining over the event hub and a cron-triggered pipeline. No domain data. |
 | `Samples.Maintenance` | Maintenance master data: one line, three machines with name plates. Data-only. |
 | `Samples.Photovoltaics` | PV plant master data plus the Modbus edge adapter and the two-adapter DataFlow that meters it. |
-| `Samples.Simulator.Energy` | Time-range archive + three chained rollups and the pipeline that generates a synthetic load profile. The reference workload for stream-data work. |
 | `Samples.Simulator.EnergyCommunity` | Energy-community tree on the `OctoSdkDemo` model, signal simulation and an on-demand customer generator. |
 | `Samples.EnergyEnvironment` | Full energy-management demo: assets, load profile, alerts, three saved queries and a Meshboard dashboard. Data-only. |
+| `Monitoring.CkHealth` | Operational watchdog: hourly cron pipeline that polls `{tenantId}/v1/Models/LibraryStatus` for a configurable tenant list and posts Microsoft Teams alerts for `ResolveFailed` CK models, catalog inconsistencies and unreachable tenants. Install into a healthy operations tenant, not into the watched tenants. Uses the `Monitoring` CK model. |
 
 The `Samples.*` blueprints replace the `ImportRt` scripts that used to live in
 [`../Samples`](../Samples). They are for demo and training tenants.

@@ -1,0 +1,5 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
+modelId: Monitoring-1.0.0
+description: Platform monitoring model. Holds configuration entities for operational watchdog pipelines (currently CK model health monitoring with Teams alerting; designed to grow with further monitors).
+dependencies:
+  - System-[2.0,3.0)

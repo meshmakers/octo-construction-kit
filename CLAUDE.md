@@ -42,6 +42,7 @@ octo-construction-kit/
 │   │   ├── Octo.Sdk.Packages.Industry.Manufactoring/       # Manufacturing operations CK
 │   │   ├── Octo.Sdk.Packages.Environment/                  # Environmental data CK
 │   │   ├── Octo.Sdk.Packages.EnergyCommunity/              # Energy community CK
+│   │   ├── Octo.Sdk.Packages.Monitoring/                   # Platform monitoring CK (CK health watchdog config)
 │   │   ├── Octo.Sdk.Demo/                                  # Demo/example CK
 │   │   └── Octo.Energy.Demo/                               # Energy-specific demo
 │   └── Octo.Sdk.Packages.Industry.Basic.old/               # Legacy basic CK
@@ -214,6 +215,7 @@ Construction Kit dependencies are defined in the solution file:
 - **Octo.Sdk.Packages.Industry.Logistics** → depends on Octo.Sdk.Packages.Basic
 - **Octo.Sdk.Packages.Environment** → depends on Octo.Sdk.Packages.Basic
 - **Octo.Sdk.Packages.EnergyCommunity** → depends on Octo.Sdk.Packages.Basic and Octo.Sdk.Packages.Basic.Energy (since EnergyCommunity 4.0.0: community/billing types subtype the Basic.Energy metering-point types; metering data is stream data, no EnergyQuantity entity anymore)
+- **Octo.Sdk.Packages.Monitoring** → depends only on the System model (no other CK package). Config entities for operational watchdog pipelines; consumed by the `src/Blueprints/Monitoring.CkHealth` blueprint (CK model health monitoring with Teams alerting).
 
 ---
 

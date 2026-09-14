@@ -5,7 +5,7 @@ business artifacts (work items, commit histories, chats, transcripts, support
 reports) into structured, human-verified wiki entries. Operationalizes the design
 of *System Designs for GenAI-Based Knowledge Capture in SME Business Processes*
 (Schwaab, 2026) on OctoMesh, using the `LlmQuery@1` / `McpToolCall@1` pipeline
-nodes of octo-mesh-adapter (0.2 line) and System.Communication ≥ 3.34.0
+nodes of octo-mesh-adapter (0.2 line) and System.Communication ≥ 4.0.0
 (`McpConfiguration` with `AuthServiceAccountConfigurationName`).
 
 ## Design
@@ -75,7 +75,7 @@ prompts then keep anonymized identifiers as-is.
      asset services read (`$ROOTPATH/.octo/*` in the octo developer shell).
    - Refresh the blueprint catalog in Studio if it doesn't appear immediately.
 1. Install the blueprint `KnowledgeCapture.MainLatest` (Studio or MCP
-   `install_blueprint`). Requires `System.Communication` ≥ 3.34.0.
+   `install_blueprint`). Requires `System.Communication` ≥ 4.0.0.
 2. Set the secrets. The blueprint seeds the configuration entities with EMPTY
    secrets; the OIDC client itself is not part of the blueprint and must be
    registered in octo-identity-services. `ServiceAccountTokenService` requests

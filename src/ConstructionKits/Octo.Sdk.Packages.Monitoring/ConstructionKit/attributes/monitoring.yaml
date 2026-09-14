@@ -1,0 +1,23 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: TokenUrl
+  description: Absolute URL of the identity service token endpoint (e.g. https://identity.example.com/connect/token).
+  valueType: String
+- id: AssetServicesBaseUrl
+  description: Base URL of the asset repository services WITHOUT a trailing slash (e.g. https://asset.example.com). The CK health check calls {base}/{tenantId}/v1/Models/LibraryStatus.
+  valueType: String
+- id: ClientId
+  description: Client id of the service client used to authenticate (client_credentials grant).
+  valueType: String
+- id: ClientSecret
+  description: Client secret of the service client. Stored as a plain attribute - restrict access to the monitoring tenant accordingly.
+  valueType: String
+- id: Scope
+  description: OAuth scope requested for the token (typically octo_api).
+  valueType: String
+- id: TeamsWebhookUrl
+  description: Microsoft Teams incoming webhook URL that receives the alerts.
+  valueType: String
+- id: TenantId
+  description: Id of a tenant that is monitored.
+  valueType: String

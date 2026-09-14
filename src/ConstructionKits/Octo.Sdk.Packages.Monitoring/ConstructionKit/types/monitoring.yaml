@@ -1,0 +1,36 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: CkHealthMonitorConfig
+  description: Configuration for the CK health monitoring pipeline (endpoints, credentials, Teams webhook). Keep exactly one entity per monitoring tenant.
+  derivedFromCkTypeId: ${System}/Entity-1
+  displayNameRule: "${Name}"
+  attributes:
+  - id: ${System}/Name-1
+    name: Name
+  - id: ${System}/Description-1
+    name: Description
+    isOptional: true
+  - id: ${this}/TokenUrl-1
+    name: TokenUrl
+  - id: ${this}/AssetServicesBaseUrl-1
+    name: AssetServicesBaseUrl
+  - id: ${this}/ClientId-1
+    name: ClientId
+  - id: ${this}/ClientSecret-1
+    name: ClientSecret
+  - id: ${this}/Scope-1
+    name: Scope
+  - id: ${this}/TeamsWebhookUrl-1
+    name: TeamsWebhookUrl
+- typeId: MonitoredTenant
+  description: A tenant watched by monitoring pipelines (e.g. the CK health check). Create one entity per tenant to monitor.
+  derivedFromCkTypeId: ${System}/Entity-1
+  displayNameRule: "${Name}"
+  attributes:
+  - id: ${System}/Name-1
+    name: Name
+  - id: ${System}/Description-1
+    name: Description
+    isOptional: true
+  - id: ${this}/TenantId-1
+    name: TenantId

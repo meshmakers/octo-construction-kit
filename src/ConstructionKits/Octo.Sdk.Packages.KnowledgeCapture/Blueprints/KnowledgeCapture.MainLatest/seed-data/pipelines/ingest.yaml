@@ -1,0 +1,85 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - KnowledgeCapture-1.2.1
+  - System.Communication-4.0.0
+entities:
+  # --------------------------------------------------------------------------
+  # Pipeline 1: generic ingest endpoint (bronze)
+  # POST body: { "title", "artifactType" (int, see ArtifactType enum),
+  #              "sourceSystem", "sourceUri", "content", "contentPreview",
+  #              "isPiiRedacted" (bool), "capturedAt" (ISO 8601) }
+  # --------------------------------------------------------------------------
+  - rtId: '672000000000000000000009'
+    ckTypeId: System.Communication/Pipeline
+    rtWellKnownName: wiki-capture-ingest
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: '672000000000000000000004'
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: '670000000000000000000002'
+        targetCkTypeId: System.Communication/Adapter
+    attributes:
+      - id: System/Name
+        value: Wiki Capture - Ingest Source Artifact
+      - id: System/Description
+        value: >-
+          Generic bronze-layer ingest endpoint. Any webhook, relay or script
+          POSTs a normalized artifact payload; the pipeline persists it
+          unchanged as a SourceArtifact. Point Azure DevOps service hooks,
+          Teams/Graph pollers or export scripts at this endpoint (see package
+          README for source-specific trigger nodes like FromMicrosoftGraph@1).
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/DeploymentState
+        value: 0   # Undeployed
+      - id: System.Communication/IsDebuggingEnabled
+        value: false
+      - id: System.Communication/PipelineDefinition
+        value: |-
+          triggers:
+            - type: FromHttpRequest@1
+              method: POST
+              path: /knowledge-capture/ingest
+              description: Normalized artifact payload (title, artifactType, sourceSystem, sourceUri, content, ...).
+          transformations:
+            - type: CreateUpdateInfo@1
+              description: Create the SourceArtifact (bronze, append-only).
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: INSERT
+              ckTypeId: KnowledgeCapture/SourceArtifact
+              rtIdPath: $.newArtifactRtId
+              generateRtId: true
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.body.title
+                - attributeName: ArtifactType
+                  attributeValueType: Int
+                  valuePath: $.body.artifactType
+                - attributeName: SourceSystem
+                  attributeValueType: String
+                  valuePath: $.body.sourceSystem
+                - attributeName: SourceUri
+                  attributeValueType: String
+                  valuePath: $.body.sourceUri
+                - attributeName: Content
+                  attributeValueType: String
+                  valuePath: $.body.content
+                - attributeName: ContentPreview
+                  attributeValueType: String
+                  valuePath: $.body.contentPreview
+                - attributeName: IsPiiRedacted
+                  attributeValueType: Boolean
+                  valuePath: $.body.isPiiRedacted
+                - attributeName: CapturedAt
+                  attributeValueType: DateTime
+                  valuePath: $.body.capturedAt
+                - attributeName: ExtractionTier
+                  attributeValueType: Int
+                  value: 0   # NativeText
+            - type: ApplyChanges@2
+              description: Persist the source artifact.
+              entityUpdatesPath: $._updateItems

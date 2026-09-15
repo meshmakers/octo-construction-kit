@@ -1,0 +1,135 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - KnowledgeCapture-1.2.1
+  - System.Communication-4.0.0
+entities:
+  # --------------------------------------------------------------------------
+  # Pipeline 4: audience rendition (gold)
+  # POST body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development",
+  #              "audienceKey": 0, "title": "<rendition name>" }
+  # --------------------------------------------------------------------------
+  - rtId: '67200000000000000000000c'
+    ckTypeId: System.Communication/Pipeline
+    rtWellKnownName: wiki-render-audience
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: '672000000000000000000004'
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: '670000000000000000000002'
+        targetCkTypeId: System.Communication/Adapter
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000003'
+        targetCkTypeId: System.Communication/AiConfiguration
+    attributes:
+      - id: System/Name
+        value: Wiki Capture - Audience Rendition
+      - id: System/Description
+        value: >-
+          Gold layer: renders a verified wiki entry as an audience-specific
+          markdown page (development, marketing or architect section schema).
+          Facts are verified once on the entry; renditions are cheap,
+          repeatable renderings. The pipeline enforces the gate itself: the
+          fetch is filtered to VerificationStatus Verified and the model is
+          not called when nothing matched, so a Draft id cannot produce a
+          rendition. Prompt: wiki-prompt-render v1.
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/DeploymentState
+        value: 0   # Undeployed
+      - id: System.Communication/IsDebuggingEnabled
+        value: false
+      - id: System.Communication/PipelineDefinition
+        value: |-
+          triggers:
+            - type: FromHttpRequest@1
+              method: POST
+              path: /knowledge-capture/render
+              description: 'Body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development", "audienceKey": 0, "title": "..." }'
+          transformations:
+            - type: GetRtEntitiesById@1
+              description: Fetch the wiki entry (silver) — Verified entries only, whatever the caller passed.
+              ckTypeId: KnowledgeCapture/WikiEntry
+              rtIdsPath: $.body.wikiEntryRtIds
+              fieldFilters:
+                - attributePath: VerificationStatus
+                  operator: Equals
+                  comparisonValue: 2   # VerificationStatus.Verified
+              targetPath: $.entries
+            - type: If@1
+              description: Render only when a Verified entry was found; an empty fetch must not reach the model.
+              path: $.entries.TotalCount
+              operator: GreaterThan
+              value: 0
+              valueType: Int
+              transformations:
+                - type: LlmQuery@1
+                  description: Render markdown for the requested audience (wiki-prompt-render v1).
+                  provider: Anthropic
+                  apiKeyConfigurationName: wiki-capture-llm
+                  model: claude-sonnet-4-6
+                  temperature: 0.3
+                  maxTokens: 4096
+                  timeoutSeconds: 180
+                  responseFormat: text
+                  path: $.body.audience
+                  dataPaths:
+                    - $.entries
+                  targetPath: $.rendition
+                  systemPrompt: |-
+                    You render verified, audience-neutral wiki entries as audience-specific markdown pages. Use only facts present in the entry; never add or invent content. Output markdown only, starting with a level-1 title heading.
+                  question: |-
+                    The main content is the requested audience name. The additional context contains the verified wiki entry (Sections with headings and content, plus Citations).
+
+                    Render the entry as a markdown page using exactly the audience's section schema:
+                    - development: ## Summary, ## Decisions, ## Action items, ## Blockers and open questions, ## Implementation detail, ## Sources
+                    - marketing: ## Outcome (plain language, no commit or file-level detail), ## Stakeholders involved, ## Business impact, ## Status and next milestone, ## Sources
+                    - architect: ## Summary, ## Decisions (each with its driver and at least one alternative considered), ## Consequences, ## Open questions and risks, ## Sources
+
+                    Preserve source references in the Sources section. If the entry lacks content for a section, keep the heading and write "Nothing recorded.". Output markdown only.
+                - type: CreateUpdateInfo@1
+                  description: Create the WikiRendition (gold).
+                  targetPath: $._updateItems
+                  targetValueKind: Array
+                  targetValueWriteMode: Append
+                  updateKind: INSERT
+                  ckTypeId: KnowledgeCapture/WikiRendition
+                  rtIdPath: $.newRenditionRtId
+                  generateRtId: true
+                  attributeUpdates:
+                    - attributeName: Name
+                      attributeValueType: String
+                      valuePath: $.body.title
+                    - attributeName: Audience
+                      attributeValueType: Int
+                      valuePath: $.body.audienceKey
+                    - attributeName: Body
+                      attributeValueType: String
+                      valuePath: $.rendition
+                    - attributeName: PromptName
+                      attributeValueType: String
+                      value: wiki-prompt-render
+                    - attributeName: PromptVersion
+                      attributeValueType: Int
+                      value: 1
+                    - attributeName: ModelId
+                      attributeValueType: String
+                      value: claude-sonnet-4-6
+                - type: CreateAssociationUpdate@1
+                  description: Link rendition to its wiki entry (RenderOf).
+                  targetPath: $._assocItems
+                  targetValueKind: Array
+                  targetValueWriteMode: Append
+                  updateKind: CREATE
+                  originRtIdPath: $._updateItems[0].RtId
+                  originCkTypeIdPath: $._updateItems[0].CkTypeId
+                  # The entry that was actually fetched (Verified filter applied), not the first
+                  # requested id: a request mixing a Draft and a Verified id renders the Verified
+                  # one and must link the rendition to it.
+                  targetRtIdPath: $.entries.Items[0].RtId
+                  targetCkTypeId: KnowledgeCapture/WikiEntry
+                  associationRoleId: KnowledgeCapture/RenderOf
+                - type: ApplyChanges@2
+                  description: Persist rendition and association.
+                  entityUpdatesPath: $._updateItems
+                  associationUpdatesPath: $._assocItems

@@ -1,0 +1,146 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - KnowledgeCapture-1.2.1
+  - System.Communication-4.0.0
+entities:
+  # --------------------------------------------------------------------------
+  # Prompt templates (governed source of truth; pipeline definitions embed a
+  # copy of this text because LlmQuery@1 takes prompts inline. When editing,
+  # bump TemplateVersion and update the pipeline definition to match.)
+  # --------------------------------------------------------------------------
+  - rtId: '672000000000000000000005'
+    ckTypeId: KnowledgeCapture/PromptTemplate
+    rtWellKnownName: wiki-prompt-structured
+    attributes:
+      - id: System/Name
+        value: Structured generation prompt
+      - id: KnowledgeCapture/GenerationMode
+        value: 0   # Pipeline
+      - id: KnowledgeCapture/TemplateVersion
+        value: 2
+      - id: KnowledgeCapture/DefaultModelId
+        value: claude-sonnet-4-6
+      - id: KnowledgeCapture/Temperature
+        value: 0.3
+      - id: KnowledgeCapture/MaxTokens
+        value: 4096
+      - id: KnowledgeCapture/SystemPrompt
+        value: |-
+          You are a knowledge management assistant for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries.
+
+          Rules:
+          - Ground every claim in the source artifact. Use only the provided artifact content; do not use outside knowledge.
+          - If information is missing or unclear, omit it. Never invent information. A short or empty section is acceptable.
+          - For each section, provide citations: a word-for-word quote from the source that supports it, plus an anchor (commit hash, work item id, timestamp) when one is present in the source.
+          - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
+          - Respond with JSON only, exactly matching the requested schema.
+          CRITICAL: Output must be strictly valid JSON. Escape every double quote inside string values as \" — when quoting source text that contains quotation marks, keep typographic quotes („…") unchanged and escape straight quotes.
+      - id: KnowledgeCapture/UserTemplate
+        value: |-
+          The main content line is the id of the source artifact. The additional context contains the source artifact's raw text.
+
+          Create an audience-neutral structured wiki entry from the artifact content:
+          1. First identify the key facts: decisions (with their rationale), actions taken, issues or blockers encountered, and technical details.
+          2. Then write these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources".
+          3. For every section, add citations with word-for-word source quotes.
+
+          Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+          CRITICAL: Output must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
+
+  - rtId: '672000000000000000000006'
+    ckTypeId: KnowledgeCapture/PromptTemplate
+    rtWellKnownName: wiki-prompt-verification
+    attributes:
+      - id: System/Name
+        value: Verification prompt (evaluator pass)
+      - id: KnowledgeCapture/GenerationMode
+        value: 0   # Pipeline
+      - id: KnowledgeCapture/TemplateVersion
+        value: 2
+      - id: KnowledgeCapture/DefaultModelId
+        value: claude-sonnet-4-6
+      - id: KnowledgeCapture/Temperature
+        value: 0.0
+      - id: KnowledgeCapture/MaxTokens
+        value: 2048
+      - id: KnowledgeCapture/SystemPrompt
+        value: |-
+          You are a meticulous fact-checker. You compare a generated wiki entry draft against its source artifact. Use only the provided data; do not use outside knowledge. Keep output minimal: flags only, no preamble. Output must be strictly valid JSON.
+      - id: KnowledgeCapture/UserTemplate
+        value: |-
+          The additional context contains the source artifact's raw text (ground truth) and the generated draft (title, sections, citations).
+
+          Check every claim in the draft against the source content:
+          - Flag each claim that has no support in the source, with a one-sentence reason.
+          - Verify each citation: if a sourceQuote does not occur verbatim or near-verbatim in the source, flag it.
+          - If everything is supported, return an empty list.
+
+          Return JSON: {"flags": [{"claim": string, "reason": string}]}. Never emit an unescaped double quote inside a string value — use single quotes when quoting.
+
+  - rtId: '672000000000000000000007'
+    ckTypeId: KnowledgeCapture/PromptTemplate
+    rtWellKnownName: wiki-prompt-agentic
+    attributes:
+      - id: System/Name
+        value: Agentic generation prompt
+      - id: KnowledgeCapture/GenerationMode
+        value: 1   # Agentic
+      - id: KnowledgeCapture/TemplateVersion
+        value: 2
+      - id: KnowledgeCapture/DefaultModelId
+        value: claude-sonnet-4-6
+      - id: KnowledgeCapture/Temperature
+        value: 0.3
+      - id: KnowledgeCapture/MaxTokens
+        value: 16384
+      - id: KnowledgeCapture/SystemPrompt
+        value: |-
+          You are a knowledge management agent for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries through a multi-step process:
+
+          1. EXTRACT - Read the artifact and identify every discrete fact: decisions (with rationale), actions taken, issues or blockers, technical details.
+          2. RETRIEVE (only if needed) - Use the available MCP tools (e.g. get_entity_by_id, query_entities) to fetch related context: other SourceArtifact entities from the same source system or existing WikiEntry entities on the same topic. Retrieve only what you need; the tools are read-only.
+          3. DRAFT - Produce the structured wiki entry with sections and citations back to the source.
+          4. REVIEW - Re-read the source and check your draft for missing information (completeness), unsupported claims (hallucinations), and correct attribution. Keep intermediate notes concise: bullet list, at most 150 words; output NONE when no issues are found.
+          5. REVISE - Fix any issues found in the review step.
+
+          Rules:
+          - Ground every claim in the source material. If information is missing or unclear, omit it. Never invent information.
+          - Attribute statements to the people named in the source. If the artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
+          - Your final answer must be JSON only, exactly matching the requested schema.
+          CRITICAL: The final answer must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
+      - id: KnowledgeCapture/UserTemplate
+        value: |-
+          The main content line is the id of the source artifact. The additional context contains the source artifact's raw text.
+
+          Work through EXTRACT, RETRIEVE (if needed), DRAFT, REVIEW, REVISE, then return the final entry with these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources". Every section needs citations with word-for-word source quotes.
+
+          Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string}]}
+          CRITICAL: Output must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
+
+  - rtId: '672000000000000000000008'
+    ckTypeId: KnowledgeCapture/PromptTemplate
+    rtWellKnownName: wiki-prompt-render
+    attributes:
+      - id: System/Name
+        value: Audience rendition prompt
+      - id: KnowledgeCapture/TemplateVersion
+        value: 1
+      - id: KnowledgeCapture/DefaultModelId
+        value: claude-sonnet-4-6
+      - id: KnowledgeCapture/Temperature
+        value: 0.3
+      - id: KnowledgeCapture/MaxTokens
+        value: 4096
+      - id: KnowledgeCapture/SystemPrompt
+        value: |-
+          You render verified, audience-neutral wiki entries as audience-specific markdown pages. Use only facts present in the entry; never add or invent content. Output markdown only, starting with a level-1 title heading.
+      - id: KnowledgeCapture/UserTemplate
+        value: |-
+          The main content is the requested audience name. The additional context contains the verified wiki entry (Sections with headings and content, plus Citations).
+
+          Render the entry as a markdown page using exactly the audience's section schema:
+          - development: ## Summary, ## Decisions, ## Action items, ## Blockers and open questions, ## Implementation detail, ## Sources
+          - marketing: ## Outcome (plain language, no commit or file-level detail), ## Stakeholders involved, ## Business impact, ## Status and next milestone, ## Sources
+          - architect: ## Summary, ## Decisions (each with its driver and at least one alternative considered), ## Consequences, ## Open questions and risks, ## Sources
+
+          Preserve source references in the Sources section. If the entry lacks content for a section, keep the heading and write "Nothing recorded.". Output markdown only.

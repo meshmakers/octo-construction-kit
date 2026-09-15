@@ -20,7 +20,16 @@ ckModelDependencies:
   - KnowledgeCapture-[1.2.1,2.0)
   - System.Communication-[4.0.0,5.0)
 
-seedDataPath: seed-data/entities.yaml
+# One file per concern; the engine merges them into one model before importing, so order is cosmetic.
+seedDataPaths:
+  - seed-data/configurations.yaml
+  - seed-data/data-flow.yaml
+  - seed-data/prompt-templates.yaml
+  - seed-data/pipelines/ingest.yaml
+  - seed-data/pipelines/ingest-pdf.yaml
+  - seed-data/pipelines/generate.yaml
+  - seed-data/pipelines/generate-agentic.yaml
+  - seed-data/pipelines/render.yaml
 
 requires:
   octo.environment:

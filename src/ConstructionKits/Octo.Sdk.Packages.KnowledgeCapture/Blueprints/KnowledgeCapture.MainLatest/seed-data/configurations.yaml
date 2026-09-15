@@ -1,0 +1,63 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - KnowledgeCapture-1.2.1
+  - System.Communication-4.0.0
+entities:
+  # --------------------------------------------------------------------------
+  # Configuration entities
+  # --------------------------------------------------------------------------
+  - rtId: '672000000000000000000001'
+    ckTypeId: System.Communication/ServiceAccountConfiguration
+    rtWellKnownName: wiki-capture-sa
+    # OAuth2 client-credentials account the agentic pipeline uses to call
+    # octo-mcp-service (read-only retrieval by prompt contract; the adapter's token
+    # service requests scope octo_api, so the client must allow it). Register the
+    # client in octo-identity-services and set the ClientSecret before deploying
+    # the agentic pipeline.
+    # IssuerUri and TenantId are left empty on purpose: empty means "this
+    # installation's identity service" and "the adapter's own tenant" (AB#5115),
+    # so the seed carries no environment- or tenant-specific value.
+    # NOTE: Configuration-derived types have no Name/Description attributes;
+    # the rtWellKnownName is the identifier.
+    attributes:
+      - id: System.Communication/IssuerUri
+        value: ""
+      - id: System.Communication/ClientId
+        value: wiki-capture-mcp
+      - id: System.Communication/ClientSecret
+        value: ""
+      - id: System/TenantId
+        value: ""
+
+  - rtId: '672000000000000000000002'
+    ckTypeId: System.Communication/McpConfiguration
+    rtWellKnownName: wiki-capture-mcp
+    # MCP server used by the agentic generation pipeline for read-only
+    # retrieval over already-ingested entities (get_entity_by_id,
+    # query_entities, ...). {tenantId} is substituted by the adapter at
+    # resolution time with the executing tenant. The host is the local dev
+    # default; set it for your environment before deploying (see README,
+    # Setup) — it is install-time configuration like the secrets above.
+    attributes:
+      - id: System.Communication/Url
+        value: https://localhost:5017/{tenantId}/mcp
+      - id: System.Communication/Transport
+        value: 2   # Http
+      - id: System.Communication/AuthServiceAccountConfigurationName
+        value: wiki-capture-sa
+
+  - rtId: '672000000000000000000003'
+    ckTypeId: System.Communication/AiConfiguration
+    rtWellKnownName: wiki-capture-llm
+    # LLM credentials and defaults for the knowledge capture pipelines.
+    # Set the ApiKey before deploying. Model and sampling follow the thesis
+    # constants (claude-sonnet-4-6, temperature 0.3).
+    attributes:
+      - id: System.Communication/ApiKey
+        value: ""
+      - id: System.Communication/AiModel
+        value: claude-sonnet-4-6
+      - id: System.Communication/MaxTokens
+        value: 4096
+      - id: System.Communication/Temperature
+        value: 0.3

@@ -137,11 +137,19 @@ POST https://localhost:5020/meshtest/knowledge-capture/ingest
     "isPiiRedacted": false, "capturedAt": "2026-07-20T12:00:00Z" }
 
 POST https://localhost:5020/meshtest/knowledge-capture/generate
-  { "artifactRtIds": ["<rtId from ingest>"] }
+  { "artifactRtIds": ["<rtId from ingest>", "<another rtId>"] }
+  # one entry from ALL listed artifacts (PDFs, web pages, commits, chats);
+  # every citation names the artifact it quotes (sourceRtId) and the entry is
+  # linked to each artifact (GeneratedFrom). Same body for generate-agentic.
 
 POST https://localhost:5020/meshtest/knowledge-capture/render
   { "wikiEntryRtIds": ["<rtId>"], "audience": "development", "title": "My entry (dev)" }
+  # renders only when the ids resolve to exactly one Verified entry (Draft ids are
+  # filtered out first); any other count renders nothing
 ```
+
+All artifacts of one generate request go into a single model call, so the
+caller keeps the combined content within the model's context window.
 
 ## Ingestion options
 
@@ -179,8 +187,9 @@ systems are reached via adapter trigger nodes, not MCP.
   definitions embed a copy of the `PromptTemplate` text. Templates are the
   governed source of truth; bump `TemplateVersion` and update the pipeline
   definition together. (Future node enhancement: prompt-by-reference.)
-- `GeneratedFrom` association is written for the **first** artifact rtId only;
-  multi-artifact consolidation needs a `ForEach@1` over the association step.
+- Multi-artifact generation sends every artifact in one model call; there is no
+  chunking or per-artifact summarisation for very large source sets. Callers keep
+  the combined content within the model's context window.
 - Run metadata (`LatencySeconds`, tokens, `CostUsd`) is not auto-populated by
   the pipelines; `LlmQuery@1` emits OpenTelemetry metrics instead. Attributes
   are optional and can be filled when the node exposes usage in the document.

@@ -18,6 +18,9 @@ attributes:
   - id: SourceAnchor
     valueType: String
     description: 'Optional precise anchor in the source, e.g. a commit hash, work item id, or message timestamp.'
+  - id: SourceRtId
+    valueType: String
+    description: 'RtId of the SourceArtifact the quote was taken from. Attributes each citation of an entry built from several artifacts to its source.'
   - id: Claim
     valueType: String
     description: 'The claim from the draft that could not be grounded in the source.'

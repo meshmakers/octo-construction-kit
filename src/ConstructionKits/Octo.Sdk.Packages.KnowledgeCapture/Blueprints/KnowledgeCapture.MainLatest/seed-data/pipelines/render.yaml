@@ -1,11 +1,11 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - KnowledgeCapture-1.2.1
+  - KnowledgeCapture-1.3.0
   - System.Communication-4.1.0
 entities:
   # --------------------------------------------------------------------------
   # Pipeline 4: audience rendition (gold)
-  # POST body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development",
+  # POST body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development",   # exactly one entry per request
   #              "title": "<rendition name>" }
   # --------------------------------------------------------------------------
   - rtId: '67200000000000000000000c'
@@ -57,10 +57,10 @@ entities:
                   comparisonValue: 2   # VerificationStatus.Verified
               targetPath: $.entries
             - type: If@1
-              description: Render only when a Verified entry was found; an empty fetch must not reach the model.
+              description: Render only when exactly one Verified entry was found; an empty or multi-entry fetch must not reach the model.
               path: $.entries.TotalCount
-              operator: GreaterThan
-              value: 0
+              operator: Equal
+              value: 1
               valueType: Int
               transformations:
                 - type: LlmQuery@1

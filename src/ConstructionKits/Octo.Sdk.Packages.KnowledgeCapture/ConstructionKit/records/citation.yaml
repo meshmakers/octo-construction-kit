@@ -12,3 +12,6 @@ records:
       - id: ${this}/SourceAnchor
         name: SourceAnchor
         isOptional: true
+      - id: ${this}/SourceRtId
+        name: SourceRtId
+        isOptional: true

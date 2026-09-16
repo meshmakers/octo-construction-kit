@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - KnowledgeCapture-1.2.1
+  - KnowledgeCapture-1.3.0
   - System.Communication-4.1.0
 entities:
   # --------------------------------------------------------------------------

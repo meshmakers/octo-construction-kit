@@ -1,0 +1,171 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - KnowledgeCapture-1.3.0
+  - System.Communication-4.1.0
+entities:
+  # --------------------------------------------------------------------------
+  # Pipeline 2: structured generation (silver, GenerationMode Pipeline)
+  # POST body: { "artifactRtIds": ["<rtId>", "..."] } - one entry from all listed artifacts
+  # --------------------------------------------------------------------------
+  - rtId: '67200000000000000000000a'
+    ckTypeId: System.Communication/Pipeline
+    rtWellKnownName: wiki-capture-structured
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: '672000000000000000000004'
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: '670000000000000000000002'
+        targetCkTypeId: System.Communication/Adapter
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000003'
+        targetCkTypeId: System.Communication/AiConfiguration
+    attributes:
+      - id: System/Name
+        value: Wiki Capture - Structured Generation
+      - id: System/Description
+        value: >-
+          Structured generation: fetches the source artifact, one generation
+          LLM call with server-side JSON schema enforcement, one verification
+          LLM call (fills HallucinationFlags), writes the WikiEntry as Draft
+          for human verification. Prompts: wiki-prompt-structured v2,
+          wiki-prompt-verification v2.
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/DeploymentState
+        value: 0   # Undeployed
+      - id: System.Communication/IsDebuggingEnabled
+        value: false
+      - id: System.Communication/PipelineDefinition
+        value: |-
+          triggers:
+            - type: FromHttpRequest@1
+              method: POST
+              path: /knowledge-capture/generate
+              description: 'Body: { "artifactRtIds": ["<rtId>", "..."] } - one entry built from all listed artifacts'
+          transformations:
+            - type: GetRtEntitiesById@1
+              description: Fetch every source artifact named in the request (bronze).
+              ckTypeId: KnowledgeCapture/SourceArtifact
+              rtIdsPath: $.body.artifactRtIds
+              targetPath: $.artifacts
+            - type: LlmQuery@1
+              description: Single-call generation from all source artifacts (wiki-prompt-structured v3).
+              provider: Anthropic
+              apiKeyConfigurationName: wiki-capture-llm
+              model: claude-sonnet-4-6
+              temperature: 0.3
+              maxTokens: 4096
+              timeoutSeconds: 180
+              responseFormat: json
+              jsonFormatSample: '{"title":"...","sections":[{"heading":"Summary","sectionContent":"...","sortOrder":0}],"citations":[{"sectionRef":"Summary","sourceQuote":"...","sourceAnchor":"","sourceRtId":"<artifact rtId>"}]}'
+              jsonSchema: '{"type":"object","properties":{"title":{"type":"string"},"sections":{"type":"array","minItems":6,"items":{"type":"object","properties":{"heading":{"type":"string"},"sectionContent":{"type":"string"},"sortOrder":{"type":"integer"}},"required":["heading","sectionContent","sortOrder"],"additionalProperties":false}},"citations":{"type":"array","minItems":3,"items":{"type":"object","properties":{"sectionRef":{"type":"string"},"sourceQuote":{"type":"string"},"sourceAnchor":{"type":"string"},"sourceRtId":{"type":"string"}},"required":["sectionRef","sourceQuote","sourceAnchor","sourceRtId"],"additionalProperties":false}}},"required":["title","sections","citations"],"additionalProperties":false}'
+              maxJsonRepairAttempts: 1
+              path: $.artifacts.TotalCount
+              dataPaths:
+                - $.artifacts.Items
+              targetPath: $.draft
+              systemPrompt: |-
+                You are a knowledge management assistant for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries.
+
+                Rules:
+                - Ground every claim in the source artifacts. Use only the provided artifact content; do not use outside knowledge.
+                - The entry may draw on several artifacts (documents, web pages, commits, chats). Combine them into one coherent entry; where sources disagree, say so and cite both.
+                - If information is missing or unclear, omit it. Never invent information. A short or empty section is acceptable.
+                - For each section, provide citations: a word-for-word quote from a source that supports it, the RtId of the artifact it comes from (sourceRtId), plus an anchor (commit hash, work item id, timestamp) when one is present in the source.
+                - Attribute statements to the people named in the sources. If an artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
+                - Respond with JSON only, exactly matching the requested schema.
+                CRITICAL: Output must be strictly valid JSON. Escape every double quote inside string values as \" — when quoting source text that contains quotation marks, keep typographic quotes („…") unchanged and escape straight quotes.
+              question: |-
+                The main content line is the number of source artifacts. The additional context lists every source artifact with its RtId and Attributes (Name, SourceSystem, SourceUri, Content).
+
+                Create one audience-neutral structured wiki entry from all artifacts together:
+                1. First identify the key facts across the sources: decisions (with their rationale), actions taken, issues or blockers encountered, and technical details.
+                2. Then write these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources". In "Sources", list each artifact by Name and SourceUri.
+                3. For every section, add citations with word-for-word source quotes, each carrying the sourceRtId of the artifact quoted.
+
+                Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string, "sourceRtId": string}]}
+                CRITICAL: Output must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
+            - type: LlmQuery@1
+              description: Verification pass against all source artifacts (wiki-prompt-verification v3, evaluator step).
+              provider: Anthropic
+              apiKeyConfigurationName: wiki-capture-llm
+              model: claude-sonnet-4-6
+              temperature: 0.0
+              maxTokens: 2048
+              timeoutSeconds: 180
+              responseFormat: json
+              jsonFormatSample: '{"flags":[{"claim":"...","reason":"..."}]}'
+              jsonSchema: '{"type":"object","properties":{"flags":{"type":"array","items":{"type":"object","properties":{"claim":{"type":"string"},"reason":{"type":"string"}},"required":["claim","reason"],"additionalProperties":false}}},"required":["flags"],"additionalProperties":false}'
+              maxJsonRepairAttempts: 1
+              path: $.artifacts.TotalCount
+              dataPaths:
+                - $.artifacts.Items
+                - $.draft
+              targetPath: $.review
+              systemPrompt: |-
+                You are a meticulous fact-checker. You compare a generated wiki entry draft against its source artifacts. Use only the provided data; do not use outside knowledge. Keep output minimal: flags only, no preamble. Output must be strictly valid JSON.
+              question: |-
+                The additional context lists every source artifact (RtId and Attributes with the raw Content; ground truth) and the generated draft (title, sections, citations).
+
+                Check every claim in the draft against the source content:
+                - Flag each claim that has no support in any source, with a one-sentence reason.
+                - Verify each citation: the sourceQuote must occur verbatim or near-verbatim in the Content of the artifact named by its sourceRtId; flag it otherwise.
+                - If everything is supported, return an empty list.
+
+                Return JSON: {"flags": [{"claim": string, "reason": string}]}. Never emit an unescaped double quote inside a string value — use single quotes when quoting.
+            - type: CreateUpdateInfo@1
+              description: Create the WikiEntry (silver, Draft).
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: INSERT
+              ckTypeId: KnowledgeCapture/WikiEntry
+              rtIdPath: $.newEntryRtId
+              generateRtId: true
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.draft.title
+                - attributeName: Sections
+                  attributeValueType: RecordArray
+                  valuePath: $.draft.sections
+                - attributeName: Citations
+                  attributeValueType: RecordArray
+                  valuePath: $.draft.citations
+                - attributeName: HallucinationFlags
+                  attributeValueType: RecordArray
+                  valuePath: $.review.flags
+                - attributeName: VerificationStatus
+                  attributeValueType: Enum
+                  value: Draft
+                - attributeName: GenerationMode
+                  attributeValueType: Enum
+                  value: Pipeline
+                - attributeName: PromptName
+                  attributeValueType: String
+                  value: wiki-prompt-structured
+                - attributeName: PromptVersion
+                  attributeValueType: Int
+                  value: 3
+                - attributeName: ModelId
+                  attributeValueType: String
+                  value: claude-sonnet-4-6
+            - type: ForEach@1
+              description: Link the entry to every source artifact (GeneratedFrom); one update per artifact, collected in request order.
+              iterationPath: $.artifacts.Items
+              mergePath: $.key.assoc
+              targetPath: $._assocItems
+              transformations:
+                - type: CreateAssociationUpdate@1
+                  targetPath: $.key.assoc
+                  updateKind: CREATE
+                  originRtIdPath: $.full._updateItems[0].RtId
+                  originCkTypeIdPath: $.full._updateItems[0].CkTypeId
+                  targetRtIdPath: $.key.RtId
+                  targetCkTypeId: KnowledgeCapture/SourceArtifact
+                  associationRoleId: KnowledgeCapture/GeneratedFrom
+            - type: ApplyChanges@2
+              description: Persist the entry and its associations.
+              entityUpdatesPath: $._updateItems
+              associationUpdatesPath: $._assocItems

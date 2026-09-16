@@ -1,0 +1,11 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+  - recordId: HallucinationFlag
+    description: A claim in the generated entry that the verification step could not ground in the source artifact. Presented to the human reviewer; an empty list means the verification pass found no unsupported claims.
+    isFinal: true
+    isAbstract: false
+    attributes:
+      - id: ${this}/Claim
+        name: Claim
+      - id: ${this}/Reason
+        name: Reason

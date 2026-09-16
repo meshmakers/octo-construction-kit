@@ -14,11 +14,11 @@ description: |
   wiki-capture-sa ServiceAccountConfiguration (register the OIDC client in
   octo-identity-services with scope octo_api - the adapter requests that scope
   and octo-mcp-service requires it) and the ApiKey on the
-  wiki-capture-llm AiConfiguration. Requires System.Communication 4.0.0+
+  wiki-capture-llm AiConfiguration. Requires System.Communication 4.1.0+
   (McpConfiguration type with AuthServiceAccountConfigurationName).
 ckModelDependencies:
   - KnowledgeCapture-[1.2.1,2.0)
-  - System.Communication-[4.0.0,5.0)
+  - System.Communication-[4.1.0,5.0)
 
 # One file per concern; the engine merges them into one model before importing, so order is cosmetic.
 seedDataPaths:

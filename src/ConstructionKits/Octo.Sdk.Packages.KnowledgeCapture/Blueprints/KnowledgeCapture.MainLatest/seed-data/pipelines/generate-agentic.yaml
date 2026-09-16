@@ -124,11 +124,11 @@ entities:
                   attributeValueType: RecordArray
                   valuePath: $.draft.citations
                 - attributeName: VerificationStatus
-                  attributeValueType: Int
-                  value: 0
+                  attributeValueType: Enum
+                  value: Draft
                 - attributeName: GenerationMode
-                  attributeValueType: Int
-                  value: 1
+                  attributeValueType: Enum
+                  value: Agentic
                 - attributeName: PromptName
                   attributeValueType: String
                   value: wiki-prompt-agentic

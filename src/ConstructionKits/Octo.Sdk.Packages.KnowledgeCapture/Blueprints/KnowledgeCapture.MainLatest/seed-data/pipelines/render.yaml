@@ -6,7 +6,7 @@ entities:
   # --------------------------------------------------------------------------
   # Pipeline 4: audience rendition (gold)
   # POST body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development",
-  #              "audienceKey": 0, "title": "<rendition name>" }
+  #              "title": "<rendition name>" }
   # --------------------------------------------------------------------------
   - rtId: '67200000000000000000000c'
     ckTypeId: System.Communication/Pipeline
@@ -45,7 +45,7 @@ entities:
             - type: FromHttpRequest@1
               method: POST
               path: /knowledge-capture/render
-              description: 'Body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development", "audienceKey": 0, "title": "..." }'
+              description: 'Body: { "wikiEntryRtIds": ["<rtId>"], "audience": "development", "title": "..." }'
           transformations:
             - type: GetRtEntitiesById@1
               description: Fetch the wiki entry (silver) — Verified entries only, whatever the caller passed.
@@ -101,8 +101,8 @@ entities:
                       attributeValueType: String
                       valuePath: $.body.title
                     - attributeName: Audience
-                      attributeValueType: Int
-                      valuePath: $.body.audienceKey
+                      attributeValueType: Enum   # the same value that selected the schema; member name, case-insensitive
+                      valuePath: $.body.audience
                     - attributeName: Body
                       attributeValueType: String
                       valuePath: $.rendition

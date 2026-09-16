@@ -57,7 +57,7 @@ entities:
                   attributeValueType: String
                   valuePath: $.body.title
                 - attributeName: ArtifactType
-                  attributeValueType: Int
+                  attributeValueType: Enum   # member name or key, e.g. SupportReport or 0
                   valuePath: $.body.artifactType
                 - attributeName: SourceSystem
                   attributeValueType: String
@@ -78,8 +78,8 @@ entities:
                   attributeValueType: DateTime
                   valuePath: $.body.capturedAt
                 - attributeName: ExtractionTier
-                  attributeValueType: Int
-                  value: 0   # NativeText
+                  attributeValueType: Enum
+                  value: NativeText
             - type: ApplyChanges@2
               description: Persist the source artifact.
               entityUpdatesPath: $._updateItems

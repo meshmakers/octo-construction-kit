@@ -63,7 +63,8 @@ prompts then keep anonymized identifiers as-is.
      (`OctoPublishCkModel`).
    - Publish with the BlueprintManager tool (`octo-bpm`). Install it once from
      the local feed:
-     `dotnet tool install --global Meshmakers.Octo.BlueprintManager --version 999.0.0 --add-source <repo-root>/nuget`
+     `dotnet tool install --global Meshmakers.Octo.BlueprintManager --version 999.0.0 --add-source "$REPO_ROOT/nuget"`
+     (`REPO_ROOT` is your meshmakers checkout root)
      (or run from source:
      `dotnet run --project octo-construction-kit-engine/src/BlueprintManager -- ...`).
      Then:
@@ -85,7 +86,8 @@ prompts then keep anonymized identifiers as-is.
    Option A — new client with a chosen secret:
 
    ```
-   octo-cli -c AddClientCredentialsClient -id wiki-capture-mcp -n "Wiki Capture MCP" -s <secret>
+   read -rs WIKI_CAPTURE_MCP_SECRET   # typed without echo
+   octo-cli -c AddClientCredentialsClient -id wiki-capture-mcp -n "Wiki Capture MCP" -s "$WIKI_CAPTURE_MCP_SECRET"
    ```
 
    Option B — client already exists: generate a secret server-side and copy
@@ -108,8 +110,9 @@ prompts then keep anonymized identifiers as-is.
    # or `dotnet dev-certs https --export-path dev-cert.crt --format PEM`.
    # The secret is read without echo and handed to curl on stdin (client_secret@-), so it
    # never appears in the argument list, process metadata or the shell history.
+   CA_CERT=~/.aspnet/dev-certs/https/dev-cert.crt   # or the CA of the target environment
    read -rs WIKI_CAPTURE_MCP_SECRET
-   printf '%s' "$WIKI_CAPTURE_MCP_SECRET" | curl --cacert <ca.crt> -X POST https://localhost:5003/connect/token \
+   printf '%s' "$WIKI_CAPTURE_MCP_SECRET" | curl --cacert "$CA_CERT" -X POST https://localhost:5003/connect/token \
      --data-urlencode "grant_type=client_credentials" \
      --data-urlencode "client_id=wiki-capture-mcp" \
      --data-urlencode "client_secret@-" \
@@ -137,8 +140,7 @@ POST https://localhost:5020/meshtest/knowledge-capture/generate
   { "artifactRtIds": ["<rtId from ingest>"] }
 
 POST https://localhost:5020/meshtest/knowledge-capture/render
-  { "wikiEntryRtIds": ["<rtId>"], "audience": "development",
-    "audienceKey": 0, "title": "My entry (dev)" }
+  { "wikiEntryRtIds": ["<rtId>"], "audience": "development", "title": "My entry (dev)" }
 ```
 
 ## Ingestion options

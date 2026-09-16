@@ -69,8 +69,8 @@ entities:
                   attributeValueType: String
                   valuePath: $.files[0].fileName
                 - attributeName: ArtifactType
-                  attributeValueType: Int
-                  value: 0   # SupportReport
+                  attributeValueType: Enum
+                  value: SupportReport
                 - attributeName: SourceSystem
                   attributeValueType: String
                   valuePath: $.formData.sourceSystem
@@ -84,8 +84,8 @@ entities:
                   attributeValueType: Boolean
                   value: false
                 - attributeName: ExtractionTier
-                  attributeValueType: Int
-                  valuePath: $.ExtractionTier   # tier name from PdfOcrExtraction@1, coerced to the enum key
+                  attributeValueType: Enum
+                  valuePath: $.ExtractionTier   # tier member name emitted by PdfOcrExtraction@1
             - type: ApplyChanges@2
               description: Persist the source artifact.
               entityUpdatesPath: $._updateItems

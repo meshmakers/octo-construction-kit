@@ -136,11 +136,11 @@ entities:
                   attributeValueType: RecordArray
                   valuePath: $.review.flags
                 - attributeName: VerificationStatus
-                  attributeValueType: Int
-                  value: 0
+                  attributeValueType: Enum
+                  value: Draft
                 - attributeName: GenerationMode
-                  attributeValueType: Int
-                  value: 0
+                  attributeValueType: Enum
+                  value: Pipeline
                 - attributeName: PromptName
                   attributeValueType: String
                   value: wiki-prompt-structured

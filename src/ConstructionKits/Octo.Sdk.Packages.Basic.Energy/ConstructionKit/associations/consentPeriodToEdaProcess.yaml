@@ -5,4 +5,4 @@ associationRoles:
   inboundName: Consent
   inboundMultiplicity: One
   outboundName: EdaProcess
-  outboundMultiplicity: One
+  outboundMultiplicity: ZeroOrOne

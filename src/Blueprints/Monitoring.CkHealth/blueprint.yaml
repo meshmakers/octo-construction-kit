@@ -83,10 +83,42 @@ description: |
   DataFlow and the trigger appear, System/Enabled is true, LastDeploymentError
   is null - and the pipeline sits at DeploymentState Undeployed forever with
   LastExecutionAt null. That is exactly what happened on test-2 on 2026-09-29
-  (AB#5426): it was installed into `octosystem`, which is the one tenant there
-  with no adapter and no pool, and it never ran once. Check with
-  `octo-cli -c GetAdapters` BEFORE installing; an empty list means the wrong
-  tenant. The system tenant is usually the wrong tenant for this reason.
+  (AB#5426): it was installed into `octosystem`, which at the time had no
+  adapter and no pool, and it never ran once. Check with
+  `octo-cli -c GetAdapters` BEFORE installing; an empty list means the host is
+  not ready.
+
+  Either host tenant works. The system tenant is a perfectly good host once
+  communication is enabled there - `EnableCommunication` creates the pool and
+  the Mesh Adapter with exactly the well-known rtIds 670000000000000000000001
+  and 670000000000000000000002, so the seeded `Executes` association resolves
+  with no rewiring. That is how test-2 was resolved: octosystem stayed the
+  host and gained communication, rather than the monitor moving elsewhere.
+  Deploy the pool by REST FIRST, then the workload - a DeployWorkload fired
+  while the pool is still Undeployed is silently lost.
+
+  AFTER ENABLING COMMUNICATION ON AN ALREADY-INSTALLED HOST, THE PIPELINE IS
+  LEFT AT `Disabled` AND NO DEPLOY WILL CLEAR IT. PoolService recomputes the
+  Disabled rules only from PosUpdateTenant - that is its single call site - and
+  at that moment the Mesh Adapter either does not exist yet or still has no
+  chart version, so rule 3 ("pipelines whose parent adapter is Disabled or
+  missing -> Disabled") marks this pipeline Disabled. The adapter then finishes
+  deploying and reaches Deployed, but nothing recomputes on the way back up.
+  Deploy and Undeploy are rejected on Disabled entities, so DeployDataFlow will
+  not move it.
+
+  Worse, the state can split: a trigger that was already Deployed is skipped by
+  rule 4 (it only flips resting states), so the cron stays live and fires every
+  hour into a Disabled pipeline - executing nothing and reporting nothing. On
+  test-2 this produced Adapter DEPLOYED + Pool DEPLOYED + Trigger DEPLOYED +
+  Pipeline DISABLED, with no error anywhere.
+
+  The recompute is idempotent and fixes it once the adapter is healthy; it just
+  has to be provoked through a tenant post-update (re-running
+  EnableCommunication, ClearCache, or a CK model update on the tenant) rather
+  than through any deploy command. Verify before deploying the data flow:
+      octo-cli -c GetAdapters            -> Mesh Adapter, Online, Deployed
+      GraphQL systemCommunicationPipeline -> deploymentState must NOT be DISABLED
 
   How it reaches the other tenants (changed in 2.1.0): through client
   MIRRORING, the same mechanism the ci-deploy workload pipelines use. A

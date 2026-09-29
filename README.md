@@ -9,7 +9,7 @@ For a comprehensive guide on Construction Kits, see the [official documentation]
 | Package | Model ID | Depends On | Description |
 |---------|----------|------------|-------------|
 | **Basic** | `Basic-2.0.2` | System | Core domain model (Asset, Employee, Document, TreeNode, ...) |
-| **Basic.Accounting** | `Basic.Accounting-1.5.1` | Basic | Accounting and billing domain |
+| **Basic.Accounting** | `Basic.Accounting-1.7.0` | Basic | Accounting and billing domain |
 | **Basic.Energy** | `Basic.Energy-1.2.0` | Basic | Base energy domain types (metering points, EDA, energy measurements) |
 | **Industry.Basic** | `Industry.Basic-2.1.3` | Basic | Extended industrial domain model |
 | **Industry.Energy** | `Industry.Energy-3.1.0` | Industry.Basic | Energy sector specific types |

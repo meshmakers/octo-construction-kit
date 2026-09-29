@@ -1,0 +1,29 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: TransactionExclusionReason
+  description: "Reason why an ignored bank transaction is excluded from matching and category analysis (only meaningful when MatchState = Ignored)"
+  values:
+    - key: 0
+      name: NONE
+      description: "No exclusion reason given"
+    - key: 1
+      name: TRANSFER
+      description: "Transfer between own accounts, including PayPal funding from an own bank account"
+    - key: 2
+      name: SETTLEMENTDUPLICATE
+      description: "Card or PayPal clearing leg; the twin transaction on another own account carries the receipt"
+    - key: 3
+      name: SPLITPARENT
+      description: "Original of a split transaction; the split parts carry the receipts"
+    - key: 4
+      name: FINANCING
+      description: "Shareholder loans or capital contributions (balance sheet, not profit and loss)"
+    - key: 5
+      name: PRIVATE
+      description: "Private spending that is to be reimbursed"
+    - key: 6
+      name: REVERSAL
+      description: "Cancellation or refund pair that nets to zero"
+    - key: 7
+      name: OTHER
+      description: "Other reason; free text in MatchComment is required"

@@ -1,0 +1,14 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: TransactionBookingStatus
+  description: "Booking status of a bank transaction as reported by the bank (camt.053 entry status)"
+  values:
+    - key: 0
+      name: UNKNOWN
+      description: "Booking status not reported by the source system"
+    - key: 1
+      name: BOOKED
+      description: "Entry is booked on the account (camt.053 status BOOK)"
+    - key: 2
+      name: PENDING
+      description: "Entry is pending and not yet booked on the account (camt.053 status PDNG)"

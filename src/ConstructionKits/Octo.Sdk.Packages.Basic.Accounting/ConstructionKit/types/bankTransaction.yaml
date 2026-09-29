@@ -47,11 +47,26 @@ types:
     - id: ${this}/BankTransactionCode
       name: BankTransactionCode
       isOptional: true
+    - id: ${this}/TransactionAccountServicerReference
+      name: AccountServicerReference
+      isOptional: true
+    - id: ${this}/TransactionBookingStatus
+      name: BookingStatus
+      isOptional: true
+    - id: ${this}/TransactionStatementReference
+      name: StatementReference
+      isOptional: true
+    - id: ${this}/TransactionCardTransactionDate
+      name: CardTransactionDate
+      isOptional: true
     - id: ${this}/TransactionMatchState
       name: MatchState
       isOptional: true
     - id: ${this}/TransactionMatchComment
       name: MatchComment
+      isOptional: true
+    - id: ${this}/TransactionExclusionReason
+      name: ExclusionReason
       isOptional: true
     - id: ${this}/TransactionInClarification
       name: InClarification
@@ -79,6 +94,14 @@ types:
       fields:
         - attributePaths:
             - MatchState
+    - indexType: Ascending
+      fields:
+        - attributePaths:
+            - ExclusionReason
+    - indexType: Ascending
+      fields:
+        - attributePaths:
+            - AccountServicerReference
     - indexType: Ascending
       fields:
         - attributePaths:

@@ -16,13 +16,22 @@ entities:
   # RESOLVED when the model is fixed, the same silencing - instead of a second,
   # parallel alerting path that nobody remembers to look at.
   #
-  # Two metrics are emitted:
+  # Four metrics are emitted. The first two are FAULT-ONLY, the last two are
+  # UNCONDITIONAL, and the split is the point: fault-only metrics cannot tell a
+  # repaired fleet from a dead monitor, so the monitor needs a pulse of its own.
   #   octo.ck.library.state    per tenant+library, 1 = catalog inconsistency,
   #                            2 = ResolveFailed. Healthy libraries are NOT emitted:
   #                            a check rule on "> 0" then has nothing to fire on, and
   #                            the series simply ages out once the model is repaired.
   #   octo.ck.tenant.unreachable 1 when a tenant's LibraryStatus could not be read at
-  #                            all. No tenant label - see the comment at that node.
+  #                            all, labelled with that tenant.
+  #   octo.ck.monitor.heartbeat 1 per MONITORED TENANT per run, always, whatever the
+  #                            outcome. "The monitor looked at this tenant" - never
+  #                            "this tenant is healthy". Anchor for the per-tenant
+  #                            dead-man's switch (AB#5425/AB#5426).
+  #   octo.ck.monitor.run      1 per RUN, at the last node, no tenant label. Fires the
+  #                            dead-man's switch when the pipeline itself stops -
+  #                            trigger undeployed, adapter deaf, empty tenant list.
   # Attribute keys arrive as PromQL labels with dots turned into underscores
   # (octo.tenant.id -> octo_tenant_id); verified against test-2 on 2026-09-29.
   # ==========================================================================
@@ -50,7 +59,7 @@ entities:
       - id: System/Name-1
         value: ck-health-check
       - id: System/Description-1
-        value: Queries LibraryStatus of every monitored tenant and emits octo.ck.library.state / octo.ck.tenant.unreachable to Dash0.
+        value: Queries LibraryStatus of every monitored tenant and emits octo.ck.library.state / octo.ck.tenant.unreachable plus the octo.ck.monitor.heartbeat / octo.ck.monitor.run liveness gauges to Dash0.
       - id: System/Enabled-1
         value: true
       - id: System.Communication/DeploymentState-1
@@ -252,7 +261,7 @@ entities:
                               jsonString: |
                                 {"resourceMetrics":[{"resource":{"attributes":[
                                   {"key":"service.name","value":{"stringValue":"octo-ck-health-monitor"}}]},
-                                 "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.1.0"},
+                                 "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.2.0"},
                                   "metrics":[{"name":"octo.ck.library.state","unit":"{state}",
                                    "description":"1 = catalog inconsistency, 2 = ResolveFailed",
                                    "gauge":{"dataPoints":[{"timeUnixNano":"","asInt":"0","attributes":[
@@ -315,6 +324,62 @@ entities:
               targetPath: $.tenantErrorAlerts
               maxDegreeOfParallelism: 1
               transformations:
+                # --- Heartbeat, per monitored tenant, UNCONDITIONAL (AB#5426) ---
+                #
+                # Every other metric in this pipeline is fault-only: a healthy library emits
+                # nothing at all. That is right for the alert rules, and it makes the monitor
+                # itself invisible - a repaired fleet and a dead monitor look exactly the same
+                # from Dash0. On 2026-09-29 the monitor was silent for four hours and nothing
+                # noticed, because there was nothing to notice.
+                #
+                # So: one gauge per monitored tenant per run, value always 1, emitted BEFORE the
+                # unreachable gate and outside every If - it says "the monitor completed a pass
+                # over this tenant in this run", not "this tenant is healthy". A tenant that
+                # could not be read still heartbeats and additionally reports unreachable; the
+                # two answer different questions and must not be merged.
+                #
+                # This is the anchor for the dead-man's-switch rule in AB#5425: presence over a
+                # long window without presence over a short one, grouped by octo_tenant_id. It
+                # is self-arming (a tenant never monitored has no series and cannot fire) and it
+                # ages out on its own when a tenant is deliberately removed from the list.
+                #
+                # A tenant whose FIRST-pass iteration threw is not in $.checkedTenants at all,
+                # so it heartbeats neither - deliberately: that is a genuine gap in coverage and
+                # the dead-man's switch should see it.
+                - type: WriteJson@1
+                  description: OTLP/HTTP metrics envelope, per-tenant heartbeat
+                  jsonString: |
+                    {"resourceMetrics":[{"resource":{"attributes":[
+                      {"key":"service.name","value":{"stringValue":"octo-ck-health-monitor"}}]},
+                     "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.2.0"},
+                      "metrics":[{"name":"octo.ck.monitor.heartbeat","unit":"{run}",
+                       "description":"1 = the monitor completed a pass over this tenant in this run",
+                       "gauge":{"dataPoints":[{"timeUnixNano":"","asInt":"1","attributes":[
+                         {"key":"octo.tenant.id","value":{"stringValue":""}}]}]}}]}]}]}
+                  targetPath: $.key.heartbeat
+                - type: SetPrimitiveValue@1
+                  valuePath: $.full.nowUnixNano
+                  valueType: String
+                  targetPath: $.key.heartbeat.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].timeUnixNano
+                - type: SetPrimitiveValue@1
+                  valuePath: $.key.Attributes.TenantId
+                  valueType: String
+                  targetPath: $.key.heartbeat.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].attributes[0].value.stringValue
+                - type: MakeHttpRequest@1
+                  description: Push the per-tenant heartbeat to Dash0
+                  method: POST
+                  urlPath: $.full.otlpUrl
+                  bodyPath: $.key.heartbeat
+                  bodyContentType: application/json
+                  headerParameters:
+                    - name: Authorization
+                      valuePath: $.full.dash0AuthHeader
+                    - name: Dash0-Dataset
+                      valuePath: $.full.cfg.Items[0].Attributes.Dash0Dataset
+                  onHttpError: Throw
+                  retry:
+                    maxAttempts: 3
+                  targetPath: $.key.heartbeatResponse
                 # A tenant whose check failed is reported separately from the library findings:
                 # conflating the two would let a dead tenant read as a healthy one with no broken
                 # models. The metric is named for the fault and emitted only when it occurs, value
@@ -350,7 +415,7 @@ entities:
                       jsonString: |
                         {"resourceMetrics":[{"resource":{"attributes":[
                           {"key":"service.name","value":{"stringValue":"octo-ck-health-monitor"}}]},
-                         "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.1.0"},
+                         "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.2.0"},
                           "metrics":[{"name":"octo.ck.tenant.unreachable","unit":"{state}",
                            "description":"1 = a monitored tenant's LibraryStatus could not be read",
                            "gauge":{"dataPoints":[{"timeUnixNano":"","asInt":"1","attributes":[
@@ -379,6 +444,47 @@ entities:
                       retry:
                         maxAttempts: 3
                       targetPath: $.key.otlpResponse
+            # --- Run-level heartbeat, UNCONDITIONAL (AB#5426) ---
+            #
+            # The per-tenant heartbeat above lives inside the ForEach and therefore says nothing
+            # when the ForEach itself does not run: an empty MonitoredTenant list, a trigger that
+            # was never deployed, a configuration whose GetRtEntitiesByType returned nothing.
+            # This one is emitted once per run at the very end of the pipeline, so its presence
+            # means the run reached its last node. No tenant label - it is about the monitor,
+            # not about any tenant, and a tenant label here would collide with the per-tenant
+            # series in a `count by (octo_tenant_id)` rule.
+            #
+            # Together the two cover both halves: this one dies when the monitor dies, the
+            # per-tenant one dies when a single tenant silently falls out of the rotation.
+            - type: WriteJson@1
+              description: OTLP/HTTP metrics envelope, run-level heartbeat
+              jsonString: |
+                {"resourceMetrics":[{"resource":{"attributes":[
+                  {"key":"service.name","value":{"stringValue":"octo-ck-health-monitor"}}]},
+                 "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.2.0"},
+                  "metrics":[{"name":"octo.ck.monitor.run","unit":"{run}",
+                   "description":"1 = the ck-health-check pipeline completed a run",
+                   "gauge":{"dataPoints":[{"timeUnixNano":"","asInt":"1"}]}}]}]}]}
+              targetPath: $.runHeartbeat
+            - type: SetPrimitiveValue@1
+              valuePath: $.nowUnixNano
+              valueType: String
+              targetPath: $.runHeartbeat.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].timeUnixNano
+            - type: MakeHttpRequest@1
+              description: Push the run-level heartbeat to Dash0
+              method: POST
+              urlPath: $.otlpUrl
+              bodyPath: $.runHeartbeat
+              bodyContentType: application/json
+              headerParameters:
+                - name: Authorization
+                  valuePath: $.dash0AuthHeader
+                - name: Dash0-Dataset
+                  valuePath: $.cfg.Items[0].Attributes.Dash0Dataset
+              onHttpError: Throw
+              retry:
+                maxAttempts: 3
+              targetPath: $.runHeartbeatResponse
             - type: SetPipelineExecutionResult@1
               description: Persist the per-tenant errors as the execution output
               path: $.tenantErrors

@@ -1,11 +1,11 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Monitoring.CkHealth-2.1.0
+blueprintId: Monitoring.CkHealth-2.2.0
 description: |
   CK model health monitoring, reported to Dash0.
 
   Installs a cron pipeline (hourly) that reads
   {tenantId}/v1/Models/LibraryStatus for every configured MonitoredTenant and
-  pushes OTLP metrics to Dash0. Two gauges:
+  pushes OTLP metrics to Dash0. Four gauges - two fault-only, two unconditional:
 
     octo.ck.library.state{octo.tenant.id, octo.ck.library, octo.ck.version,
                           octo.ck.state}
@@ -33,11 +33,39 @@ description: |
       could not say which tenant it meant. The cost of this shape is that the
       error text stays in the adapter log rather than travelling on the metric.
 
-  Both metrics are named for the fault and emitted only when it occurs, so a
-  check rule alerts on "> 0" and the series ages out once the fault is gone - no
-  all-clear value to get wrong. A gauge holding 0 for "healthy" works too, but it
-  forces a threshold of 0 on the rule and reads the opposite way round from the
-  other metric; it was dropped for that reason, not because it failed.
+  Both metrics above are named for the fault and emitted only when it occurs, so
+  a check rule alerts on "> 0" and the series ages out once the fault is gone -
+  no all-clear value to get wrong. A gauge holding 0 for "healthy" works too, but
+  it forces a threshold of 0 on the rule and reads the opposite way round from
+  the other metric; it was dropped for that reason, not because it failed.
+
+    octo.ck.monitor.heartbeat{octo.tenant.id}
+    octo.ck.monitor.run
+      Liveness, added in 2.2.0 for AB#5426. Both are UNCONDITIONAL and always 1.
+
+      Fault-only metrics have one blind spot and it is total: a fleet with
+      nothing wrong and a monitor that is not running look exactly alike. On
+      2026-09-29 the monitor produced nothing for four hours and no rule could
+      say anything about it, because "no CK findings" is also what a healthy
+      fleet looks like. So the monitor needs a pulse that does not depend on
+      what it found.
+
+      octo.ck.monitor.heartbeat is emitted once per MONITORED TENANT per run,
+      before the unreachable gate and outside every If. It means "the monitor
+      completed a pass over this tenant in this run" - NOT "this tenant is
+      healthy". A tenant that could not be read heartbeats anyway and reports
+      octo.ck.tenant.unreachable in addition; the two answer different questions.
+
+      octo.ck.monitor.run is emitted once per RUN at the pipeline's last node,
+      with no tenant label. It covers what the per-tenant heartbeat cannot: an
+      empty MonitoredTenant list, a trigger that was never deployed, an adapter
+      that stopped executing. Its label set is deliberately disjoint from the
+      per-tenant series so a `count by (octo_tenant_id)` rule does not mix them.
+
+      Both are self-arming for a dead-man's switch (AB#5425): a tenant that was
+      never monitored has no series and cannot fire, and a tenant deliberately
+      removed from the list ages out instead of alerting forever. The rule form
+      is presence over a long window without presence over a short one.
 
   Alerting itself is NOT part of this blueprint: the check rules live with the
   other Dash0 rules in meshmakers-infrastructure, so CK model health shares one
@@ -47,6 +75,18 @@ description: |
 
   Install this blueprint into a HEALTHY operations tenant, not into the
   tenants being watched, so the watchdog does not share fate with its patient.
+
+  THE HOST TENANT MUST HAVE COMMUNICATION ENABLED, with a pool and the seeded
+  Mesh Adapter (rtId 670000000000000000000002). This is not a detail: the
+  pipeline is associated to that adapter by id, and installing into a tenant
+  that has none produces no error at all. The blueprint applies cleanly, the
+  DataFlow and the trigger appear, System/Enabled is true, LastDeploymentError
+  is null - and the pipeline sits at DeploymentState Undeployed forever with
+  LastExecutionAt null. That is exactly what happened on test-2 on 2026-09-29
+  (AB#5426): it was installed into `octosystem`, which is the one tenant there
+  with no adapter and no pool, and it never ran once. Check with
+  `octo-cli -c GetAdapters` BEFORE installing; an empty list means the wrong
+  tenant. The system tenant is usually the wrong tenant for this reason.
 
   How it reaches the other tenants (changed in 2.1.0): through client
   MIRRORING, the same mechanism the ci-deploy workload pipelines use. A
@@ -70,23 +110,66 @@ description: |
        access (scope octo_api or octo_api.read_only), Scope,
        Dash0IngressUrl (base URL, no path - the pipeline appends /v1/metrics),
        Dash0AuthToken (an ingest-only token suffices), Dash0Dataset.
-    2. Mirror that client into the tenants to be watched, from the parent
-       tenant of those tenants:
+    2. Mirror that client into the tenants to be watched - and ONLY into those
+       (AB#5427). Monitoring is opt-in per tenant; not every tenant is meant to
+       be watched, and the mirror is a credential, so it belongs only where it
+       is used:
+       octo-cli -c ProvisionClientInTenant -id <clientId> -ctid <tenantId>
+       once per monitored tenant.
+
+       Do NOT reach for
        octo-cli -c SetClientAutoProvision -id <clientId> -e true
        octo-cli -c ProvisionClientInExistingTenants -id <clientId>
-       The flag alone provisions only tenants created AFTER it is set; the
-       second command backfills the existing ones. A tenant that is not
-       mirrored reports as unreachable rather than breaking the run.
+       unless the intent really is "every tenant, forever". The flag plants the
+       monitor credential in every tenant created from then on, and the backfill
+       plants it in all existing ones - the opposite of opt-in. On test-2 this
+       had produced 20 mirrors where 10 tenants were to be monitored.
+
+       When auditing mirrors, resolve the tenant HIERARCHY rather than reading
+       the mirror list as a tenant list. Mirrors are flat - every one names
+       octosystem as its parent - so a sub-tenant's mirror looks exactly like a
+       mirror for a tenant that no longer exists. On test-2 three of them
+       (ec_subtenant_test, ec_test_attach, energytest) read as stale and are in
+       fact live sub-tenants of energycommunitymanagement; `GetTenants` run
+       against octosystem does not show them, because it lists direct children
+       only. Ask each tenant for its own children instead:
+       GET {assets}/{tenantId}/v1/Tenants
+
+       The mirror list and the MonitoredTenant list are two halves of the same
+       decision and must be changed together, with the MonitoredTenant list the
+       narrower of the two. A tenant that is monitored but not mirrored fails
+       its token call and fires CkHealthTenantUnreachable at CRITICAL - so
+       un-mirror a tenant only after removing its MonitoredTenant entity.
     3. Edit/add "Monitored Tenant" entities (attribute TenantId), one per
-       tenant to watch.
+       tenant to watch. A tenant with no such entity is never iterated, emits
+       nothing, and cannot raise any of these alerts - which is how an
+       intentionally partial coverage stays quiet.
+
+       These entities are the whole opt-in list and they live only in this
+       tenant's database. Hand-created, they are lost by a Clean, a rebuild or
+       a restore, and the monitor then silently watches nothing while still
+       looking healthy (every finding metric is fault-only). Keep the list in
+       version control as an environment-specific ImportRt file with fixed
+       rtIds and apply it with `octo-cli -c ImportRt -f <file> -w`, so a rebuilt
+       tenant gets its coverage back from git rather than from memory. It is
+       deliberately NOT part of this blueprint's seed data: the blueprint is
+       published to a public catalog and must not carry customer tenant names.
     4. Deploy the DataFlow and activate the trigger:
        octo-cli -c DeployDataFlow --identifier 0c4ea1000000000000000001
        octo-cli -c DeployTriggers
     5. Smoke test without waiting for the cron:
        octo-cli -c ExecutePipeline --identifier 0c4ea1000000000000000002
-       Then confirm in Dash0 that the metric arrived - it appears about a minute
-       after ingest, not instantly:
-       {otel_metric_name="octo.ck.library.state"}
+       Then confirm in Dash0 that the metrics arrived - they appear about a
+       minute after ingest, not instantly. Check the HEARTBEAT, not the
+       findings: the findings are fault-only, so a healthy fleet produces
+       nothing and an empty result proves nothing either way.
+       {otel_metric_name="octo.ck.monitor.run"}
+       {otel_metric_name="octo.ck.monitor.heartbeat"}
+    6. Confirm the deployment actually took, rather than assuming it did:
+       octo-cli -c GetDataFlowStatus -id 0c4ea1000000000000000001
+       State must not be 0 (Undeployed) and LastExecutionAt must not be null
+       after the smoke test. An install into a tenant without an adapter leaves
+       both at exactly those values and reports no error anywhere (AB#5426).
 
   Notes: a force re-apply (InstallBlueprint -f) resets the configuration
   entities to their placeholders - reconfigure afterwards. The Dash0 token is

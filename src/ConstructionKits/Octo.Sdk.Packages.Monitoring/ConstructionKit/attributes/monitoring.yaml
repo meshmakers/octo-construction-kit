@@ -40,3 +40,9 @@ attributes:
 - id: TenantId
   description: Id of a tenant that is monitored.
   valueType: String
+- id: BlueprintName
+  description: >-
+    Name of a blueprint WITHOUT the version suffix, as it appears in
+    System/BlueprintInstallation.BlueprintName and in the {tenantId}/v1/blueprints REST routes
+    (e.g. "MeshmakersAccounting", not "MeshmakersAccounting-1.8.2").
+  valueType: String

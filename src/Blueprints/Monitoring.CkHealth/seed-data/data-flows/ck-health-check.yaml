@@ -1,16 +1,30 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
 - System.Communication-[3.1,4.0)
-- Monitoring-[1.0,2.0)
+- Monitoring-[2.0,3.0)
 entities:
   # ==========================================================================
   # CK Health Monitoring
   #
   # Hourly cron pipeline: acquires a client-credentials token, queries
-  # {tenantId}/v1/Models/LibraryStatus for every MonitoredTenant and posts
-  # Teams alerts for ResolveFailed models, catalog inconsistencies and
-  # unreachable tenants. Runs on the Mesh Adapter that System.Communication
-  # seeds (rtId 670000000000000000000002).
+  # {tenantId}/v1/Models/LibraryStatus for every MonitoredTenant and reports the
+  # result to Dash0 as OTLP metrics. Runs on the Mesh Adapter that
+  # System.Communication seeds (rtId 670000000000000000000002).
+  #
+  # Why Dash0 rather than a Teams webhook of its own: alerting then lives in one
+  # place. The same notification channels, the same card that flips from FIRING to
+  # RESOLVED when the model is fixed, the same silencing - instead of a second,
+  # parallel alerting path that nobody remembers to look at.
+  #
+  # Two metrics are emitted:
+  #   octo.ck.library.state    per tenant+library, 1 = catalog inconsistency,
+  #                            2 = ResolveFailed. Healthy libraries are NOT emitted:
+  #                            a check rule on "> 0" then has nothing to fire on, and
+  #                            the series simply ages out once the model is repaired.
+  #   octo.ck.tenant.unreachable 1 when a tenant's LibraryStatus could not be read at
+  #                            all. No tenant label - see the comment at that node.
+  # Attribute keys arrive as PromQL labels with dots turned into underscores
+  # (octo.tenant.id -> octo_tenant_id); verified against test-2 on 2026-09-29.
   # ==========================================================================
 
   # --- DataFlow ---
@@ -20,7 +34,7 @@ entities:
       - id: System/Name-1
         value: CK Health Monitoring
       - id: System/Description-1
-        value: Scheduled check of CK model library health across tenants with Teams alerting.
+        value: Scheduled check of CK model library health across tenants, reported to Dash0 as OTLP metrics.
 
   # --- Pipeline ---
   - rtId: '0c4ea1000000000000000002'
@@ -36,7 +50,7 @@ entities:
       - id: System/Name-1
         value: ck-health-check
       - id: System/Description-1
-        value: Queries LibraryStatus of every monitored tenant and posts Teams alerts for broken CK models.
+        value: Queries LibraryStatus of every monitored tenant and emits octo.ck.library.state / octo.ck.tenant.unreachable to Dash0.
       - id: System/Enabled-1
         value: true
       - id: System.Communication/DeploymentState-1
@@ -81,6 +95,23 @@ entities:
               description: Build Authorization header value
               format: "Bearer {$.token.access_token}"
               targetPath: $.authHeader
+            - type: ExecuteCSharp@1
+              description: >-
+                OTLP wants nanoseconds since the Unix epoch. DateTime@1 offers Now but has no
+                conversion in that direction (only FromUnixTimeMilliseconds, the other way round),
+                so a one-line script is the only way to produce the field. Emitted as a string
+                because that is what the OTLP JSON encoding expects.
+              code: "return (DateTimeOffset.UtcNow.ToUnixTimeMilliseconds() * 1000000L).ToString();"
+              returnType: String
+              targetPath: $.nowUnixNano
+            - type: FormatString@1
+              description: Dash0 OTLP/HTTP metrics endpoint; the configured value carries no path
+              format: "{$.cfg.Items[0].Attributes.Dash0IngressUrl}/v1/metrics"
+              targetPath: $.otlpUrl
+            - type: FormatString@1
+              description: Build the Dash0 Authorization header value
+              format: "Bearer {$.cfg.Items[0].Attributes.Dash0AuthToken}"
+              targetPath: $.dash0AuthHeader
             - type: GetRtEntitiesByType@1
               description: Load monitored tenants
               ckTypeId: Monitoring/MonitoredTenant
@@ -99,13 +130,19 @@ entities:
                   format: "{$.full.cfg.Items[0].Attributes.AssetServicesBaseUrl}/{$.key.Attributes.TenantId}/v1/Models/LibraryStatus"
                   targetPath: $.key.statusUrl
                 - type: MakeHttpRequest@1
-                  description: Query CK model library status
+                  description: >-
+                    Query CK model library status. LogAndStop rather than Throw, deliberately:
+                    the node then logs the failure and returns WITHOUT running the rest of this
+                    iteration, so no exception escapes and the tenant is still collected into
+                    $.checkedTenants - just without a `status`. That is what lets the second pass
+                    below name the tenant. With Throw the iteration aborts and ForEach records
+                    only {index, errorType, message}, so the tenant would be unrecoverable.
                   method: GET
                   urlPath: $.key.statusUrl
                   headerParameters:
                     - name: Authorization
                       valuePath: $.full.authHeader
-                  onHttpError: Throw
+                  onHttpError: LogAndStop
                   retry:
                     maxAttempts: 3
                   targetPath: $.key.status
@@ -122,54 +159,189 @@ entities:
                       operator: NotEquals
                       valueType: String
                       transformations:
-                        - type: If@1
-                          description: Alert on ResolveFailed
-                          path: $.key.modelState
-                          operator: Equals
-                          value: ResolveFailed
+                        # The two failure kinds share one metric and differ only in its value, so
+                        # the severity decision lives in the check rule rather than being split
+                        # across two near-identical emit blocks. State is set to the empty string
+                        # first: a library that is fine must emit nothing at all, otherwise a rule
+                        # on "> 0" would need to know about healthy series.
+                        - type: SetPrimitiveValue@1
+                          description: No finding yet
+                          value: ""
                           valueType: String
-                          transformations:
-                            - type: FormatString@1
-                              format: "🔴 Tenant '{$.full.key.Attributes.TenantId}': CK model '{$.key.name}' ({$.key.installedVersion}) is in state RESOLVE FAILED - its types are not loaded and dependent pipelines will fail. Run octo-cli LibraryStatus/FixAll against this tenant."
-                              targetPath: $.key.alertResolveFailed
-                            - type: ReplyToTeamsChannel@1
-                              webhookUrlPath: $.full.full.cfg.Items[0].Attributes.TeamsWebhookUrl
-                              messageBodyPath: $.key.alertResolveFailed
-                              title: OctoMesh CK Health Alert
-                              themeColor: "CC0000"
-                              continueOnError: false
+                          targetPath: $.key.ckState
                         - type: If@1
-                          description: Alert on catalog inconsistency
+                          description: A catalog inconsistency is a warning - the model cannot be (re)installed as pinned
                           path: $.key.hasCatalogInconsistency
                           operator: Equals
                           value: true
                           valueType: Boolean
                           transformations:
-                            - type: FormatString@1
-                              format: "🟡 Tenant '{$.full.key.Attributes.TenantId}': CK model '{$.key.name}' ({$.key.installedVersion}) has a catalog inconsistency (a pinned dependency version is not published). The model cannot be (re)installed as-is."
-                              targetPath: $.key.alertInconsistency
-                            - type: ReplyToTeamsChannel@1
-                              webhookUrlPath: $.full.full.cfg.Items[0].Attributes.TeamsWebhookUrl
-                              messageBodyPath: $.key.alertInconsistency
-                              title: OctoMesh CK Health Alert
-                              themeColor: "E3A008"
-                              continueOnError: false
+                            - type: SetPrimitiveValue@1
+                              value: CatalogInconsistency
+                              valueType: String
+                              targetPath: $.key.ckState
+                            - type: SetPrimitiveValue@1
+                              value: 1
+                              valueType: Int
+                              targetPath: $.key.ckStateValue
+                        - type: If@1
+                          description: >-
+                            ResolveFailed is the serious one and deliberately checked last so it
+                            wins over an inconsistency on the same library: the types are not
+                            loaded, so every dependent pipeline fails on every execution.
+                          path: $.key.modelState
+                          operator: Equals
+                          value: ResolveFailed
+                          valueType: String
+                          transformations:
+                            - type: SetPrimitiveValue@1
+                              value: ResolveFailed
+                              valueType: String
+                              targetPath: $.key.ckState
+                            - type: SetPrimitiveValue@1
+                              value: 2
+                              valueType: Int
+                              targetPath: $.key.ckStateValue
+                        - type: If@1
+                          description: Emit only when one of the two branches above found something
+                          path: $.key.ckState
+                          operator: NotEquals
+                          value: ""
+                          valueType: String
+                          transformations:
+                            # A dynamic JSON body has to be assembled as an OBJECT: MakeHttpRequest
+                            # serialises whatever BodyPath points at, so a pre-formatted JSON string
+                            # would be sent as a quoted string. The skeleton therefore carries the
+                            # full OTLP shape and the leaves are filled in below.
+                            - type: WriteJson@1
+                              description: OTLP/HTTP metrics envelope for one gauge data point
+                              jsonString: |
+                                {"resourceMetrics":[{"resource":{"attributes":[
+                                  {"key":"service.name","value":{"stringValue":"octo-ck-health-monitor"}}]},
+                                 "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.0.0"},
+                                  "metrics":[{"name":"octo.ck.library.state","unit":"{state}",
+                                   "description":"1 = catalog inconsistency, 2 = ResolveFailed",
+                                   "gauge":{"dataPoints":[{"timeUnixNano":"","asInt":"0","attributes":[
+                                     {"key":"octo.tenant.id","value":{"stringValue":""}},
+                                     {"key":"octo.ck.library","value":{"stringValue":""}},
+                                     {"key":"octo.ck.version","value":{"stringValue":""}},
+                                     {"key":"octo.ck.state","value":{"stringValue":""}}]}]}}]}]}]}
+                              targetPath: $.key.otlp
+                            - type: SetPrimitiveValue@1
+                              valuePath: $.full.full.nowUnixNano
+                              valueType: String
+                              targetPath: $.key.otlp.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].timeUnixNano
+                            - type: SetPrimitiveValue@1
+                              valuePath: $.key.ckStateValue
+                              valueType: String
+                              targetPath: $.key.otlp.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].asInt
+                            - type: SetPrimitiveValue@1
+                              valuePath: $.full.key.Attributes.TenantId
+                              valueType: String
+                              targetPath: $.key.otlp.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].attributes[0].value.stringValue
+                            - type: SetPrimitiveValue@1
+                              valuePath: $.key.name
+                              valueType: String
+                              targetPath: $.key.otlp.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].attributes[1].value.stringValue
+                            - type: SetPrimitiveValue@1
+                              valuePath: $.key.installedVersion
+                              valueType: String
+                              targetPath: $.key.otlp.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].attributes[2].value.stringValue
+                            - type: SetPrimitiveValue@1
+                              valuePath: $.key.ckState
+                              valueType: String
+                              targetPath: $.key.otlp.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].attributes[3].value.stringValue
+                            - type: MakeHttpRequest@1
+                              description: >-
+                                Push to Dash0. Throw on error: a monitor that silently fails to
+                                report is worse than one that fails loudly, and the surrounding
+                                ForEach records the error per tenant.
+                              method: POST
+                              urlPath: $.full.full.otlpUrl
+                              bodyPath: $.key.otlp
+                              bodyContentType: application/json
+                              headerParameters:
+                                - name: Authorization
+                                  valuePath: $.full.full.dash0AuthHeader
+                                - name: Dash0-Dataset
+                                  valuePath: $.full.full.cfg.Items[0].Attributes.Dash0Dataset
+                              onHttpError: Throw
+                              retry:
+                                maxAttempts: 3
+                              targetPath: $.key.otlpResponse
             - type: ForEach@1
-              description: Alert for tenants whose check failed (unreachable, auth error, ...)
+              description: >-
+                Second pass over the tenants that were checked, to report the ones that could not
+                be read. It iterates $.checkedTenants rather than the error list because the
+                collected item still carries the tenant, while a ForEach error entry carries only
+                {index, errorType, message} - which is why the first attempt at this could not name
+                the tenant.
               path: $
-              iterationPath: $.tenantErrors
+              iterationPath: $.checkedTenants
               targetPath: $.tenantErrorAlerts
               maxDegreeOfParallelism: 1
               transformations:
-                - type: FormatString@1
-                  format: "🔴 CK health check could not verify a monitored tenant (LibraryStatus request failed): {$.key.errorType}: {$.key.message}"
-                  targetPath: $.key.alert
-                - type: ReplyToTeamsChannel@1
-                  webhookUrlPath: $.full.cfg.Items[0].Attributes.TeamsWebhookUrl
-                  messageBodyPath: $.key.alert
-                  title: OctoMesh CK Health Alert
-                  themeColor: "CC0000"
-                  continueOnError: false
+                # A tenant whose check failed is reported separately from the library findings:
+                # conflating the two would let a dead tenant read as a healthy one with no broken
+                # models. The metric is named for the fault and emitted only when it occurs, value
+                # 1, the same shape as octo.ck.library.state - so a rule alerts on "> 0", the
+                # series ages out by itself, and no all-clear value exists anywhere to get wrong.
+                # A "reachable" gauge holding 0 with a threshold of 0 does work (measured on
+                # test-2: it fired about three minutes after the metric appeared); this shape was
+                # chosen for consistency across the metrics, not because zero thresholds fail.
+                #
+                # There is deliberately NO octo.tenant.id here, and that is a limitation rather
+                # than an oversight: ForEach@1 records an iteration failure as {index, errorType,
+                # message} only - the failing item itself is not carried over (see
+                # ForEachNode.BuildIterationErrors). Inside the iteration the tenant is in scope
+                # but unusable for this, because onHttpError Throw aborts the iteration and
+                # LogAndStop skips every following node, so neither leaves a path to emit. A label
+                # that always read "unknown" would be worse than none; the index is emitted
+                # instead, and SetPipelineExecutionResult persists $.tenantErrors so the execution
+                # output resolves it to a tenant.
+                # A missing `status` is the signal. If@1 reads an absent path as null and does
+                # not throw, and Equals with no value compares null against null, so this is the
+                # idiomatic "is not set" gate. A tenant that answered has an object here and
+                # falls through.
+                - type: If@1
+                  description: Only tenants whose LibraryStatus never arrived
+                  path: $.key.status
+                  operator: Equals
+                  transformations:
+                    - type: WriteJson@1
+                      description: OTLP/HTTP metrics envelope, tenant-unreachable gauge
+                      jsonString: |
+                        {"resourceMetrics":[{"resource":{"attributes":[
+                          {"key":"service.name","value":{"stringValue":"octo-ck-health-monitor"}}]},
+                         "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.0.0"},
+                          "metrics":[{"name":"octo.ck.tenant.unreachable","unit":"{state}",
+                           "description":"1 = a monitored tenant's LibraryStatus could not be read",
+                           "gauge":{"dataPoints":[{"timeUnixNano":"","asInt":"1","attributes":[
+                             {"key":"octo.tenant.id","value":{"stringValue":""}}]}]}}]}]}]}
+                      targetPath: $.key.otlp
+                    - type: SetPrimitiveValue@1
+                      valuePath: $.full.nowUnixNano
+                      valueType: String
+                      targetPath: $.key.otlp.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].timeUnixNano
+                    - type: SetPrimitiveValue@1
+                      valuePath: $.key.Attributes.TenantId
+                      valueType: String
+                      targetPath: $.key.otlp.resourceMetrics[0].scopeMetrics[0].metrics[0].gauge.dataPoints[0].attributes[0].value.stringValue
+                    - type: MakeHttpRequest@1
+                      description: Push the unreachable-tenant finding to Dash0
+                      method: POST
+                      urlPath: $.full.otlpUrl
+                      bodyPath: $.key.otlp
+                      bodyContentType: application/json
+                      headerParameters:
+                        - name: Authorization
+                          valuePath: $.full.dash0AuthHeader
+                        - name: Dash0-Dataset
+                          valuePath: $.full.cfg.Items[0].Attributes.Dash0Dataset
+                      onHttpError: Throw
+                      retry:
+                        maxAttempts: 3
+                      targetPath: $.key.otlpResponse
             - type: SetPipelineExecutionResult@1
               description: Persist the per-tenant errors as the execution output
               path: $.tenantErrors

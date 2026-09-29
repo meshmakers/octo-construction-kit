@@ -16,7 +16,26 @@ attributes:
   description: OAuth scope requested for the token (typically octo_api).
   valueType: String
 - id: TeamsWebhookUrl
-  description: Microsoft Teams incoming webhook URL that receives the alerts.
+  description: >-
+    DEPRECATED and unused since Monitoring 2.0.0 - the monitor reports to Dash0 instead, so every
+    alert shares one channel, one history and the resolve-on-fix behaviour of the other check rules.
+    Kept as an optional attribute so an existing configuration entity does not become invalid.
+    Note that classic Teams incoming webhooks (Office 365 connectors) were retired in May 2026
+    anyway; only a Power Automate workflow URL ever worked here.
+  valueType: String
+- id: Dash0IngressUrl
+  description: >-
+    Base URL of the Dash0 OTLP/HTTP ingress WITHOUT a path, e.g.
+    https://ingress.europe-west4.gcp.dash0.com - the monitor appends /v1/metrics itself.
+  valueType: String
+- id: Dash0AuthToken
+  description: >-
+    Dash0 auth token used as "Authorization: Bearer <token>". An ingest-only token is enough.
+    Stored as a plain attribute - restrict access to the monitoring tenant accordingly. Note that
+    Dash0 exposes the token's first characters as a dash0_auth_token label on every ingested series.
+  valueType: String
+- id: Dash0Dataset
+  description: Dash0 dataset the measurements are written to, sent as the Dash0-Dataset header (e.g. test-2).
   valueType: String
 - id: TenantId
   description: Id of a tenant that is monitored.

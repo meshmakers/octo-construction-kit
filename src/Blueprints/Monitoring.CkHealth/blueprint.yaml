@@ -1,15 +1,49 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Monitoring.CkHealth-1.0.0
+blueprintId: Monitoring.CkHealth-2.0.0
 description: |
-  CK model health monitoring with Microsoft Teams alerting.
+  CK model health monitoring, reported to Dash0.
 
   Installs a cron pipeline (hourly) that reads
   {tenantId}/v1/Models/LibraryStatus for every configured MonitoredTenant and
-  posts an alert to a Teams incoming webhook when an installed CK model is in
-  state ResolveFailed (its types are not loaded and dependent pipelines fail)
-  or has a catalog inconsistency. Tenants whose check request fails
-  (unreachable, auth error) are alerted too - one dead tenant never hides the
-  others.
+  pushes OTLP metrics to Dash0. Two gauges:
+
+    octo.ck.library.state{octo.tenant.id, octo.ck.library, octo.ck.version,
+                          octo.ck.state}
+      1 = catalog inconsistency (a pinned dependency version is not published,
+          so the model cannot be (re)installed as-is)
+      2 = ResolveFailed (its types are not loaded, so every dependent pipeline
+          fails on every execution)
+      Healthy libraries are deliberately NOT emitted, so a check rule on "> 0"
+      has nothing to fire on and the series ages out once the model is repaired.
+
+    octo.ck.tenant.unreachable{octo.tenant.id}
+      1 when a monitored tenant's LibraryStatus could not be read at all, and
+      emitted only then. Reported separately from the library findings so one
+      dead tenant does not read as a healthy one with no broken models, and does
+      not hide the others.
+
+      Getting the tenant id onto this metric decides the structure of the whole
+      pipeline. The LibraryStatus request therefore uses onHttpError LogAndStop,
+      not Throw: the node logs and returns without running the rest of that
+      iteration, so nothing is thrown, and the tenant is still collected into
+      $.checkedTenants - only without a `status`. A second pass over those
+      collected tenants then reports every one whose status never arrived, with
+      the tenant in scope. With Throw the iteration aborts and ForEach records
+      only {index, errorType, message}, dropping the failing item, and the alert
+      could not say which tenant it meant. The cost of this shape is that the
+      error text stays in the adapter log rather than travelling on the metric.
+
+  Both metrics are named for the fault and emitted only when it occurs, so a
+  check rule alerts on "> 0" and the series ages out once the fault is gone - no
+  all-clear value to get wrong. A gauge holding 0 for "healthy" works too, but it
+  forces a threshold of 0 on the rule and reads the opposite way round from the
+  other metric; it was dropped for that reason, not because it failed.
+
+  Alerting itself is NOT part of this blueprint: the check rules live with the
+  other Dash0 rules in meshmakers-infrastructure, so CK model health shares one
+  notification channel, one history and the same resolve-on-fix card behaviour
+  as every other alert. Earlier versions posted to a Teams webhook of their own;
+  that was a second, parallel alerting path nobody would have watched.
 
   Install this blueprint into a HEALTHY operations tenant, not into the
   tenants being watched, so the watchdog does not share fate with its patient.
@@ -20,7 +54,8 @@ description: |
     1. Edit the "CK Health Monitor Configuration" entity: TokenUrl,
        AssetServicesBaseUrl (no trailing slash), ClientId/ClientSecret of a
        service client with asset read access, Scope (octo_api),
-       TeamsWebhookUrl.
+       Dash0IngressUrl (base URL, no path - the pipeline appends /v1/metrics),
+       Dash0AuthToken (an ingest-only token suffices), Dash0Dataset.
     2. Edit/add "Monitored Tenant" entities (attribute TenantId), one per
        tenant to watch.
     3. Deploy the DataFlow and activate the trigger:
@@ -28,11 +63,17 @@ description: |
        octo-cli -c DeployTriggers
     4. Smoke test without waiting for the cron:
        octo-cli -c ExecutePipeline --identifier 0c4ea1000000000000000002
+       Then confirm in Dash0 that the metric arrived - it appears about a minute
+       after ingest, not instantly:
+       {otel_metric_name="octo.ck.library.state"}
 
   Notes: a force re-apply (InstallBlueprint -f) resets the configuration
-  entities to their placeholders - reconfigure afterwards. Alerts repeat on
-  every run until the condition is fixed (intentional). If the token endpoint
-  itself is down, the execution fails visibly but no Teams alert is sent.
+  entities to their placeholders - reconfigure afterwards. The Dash0 token is
+  stored as a plain attribute, and Dash0 exposes its first characters as a
+  dash0_auth_token label on every ingested series. If the token endpoint or the
+  Dash0 ingress is unreachable the execution fails visibly (onHttpError: Throw)
+  rather than reporting a clean run with nothing sent.
+
 ckModelDependencies:
   # Satisfiability floor only, NOT the install target: System.Communication is
   # service-managed and the install is redirected to the
@@ -40,7 +81,7 @@ ckModelDependencies:
   - System.Communication-[3.22.0,4.0)
   # Floor pinned to the published version (the engine installs the range's
   # lower bound as an exact version).
-  - Monitoring-[1.0.0,2.0)
+  - Monitoring-[2.0.0,3.0)
 seedDataPaths:
   - seed-data/master-data/monitor-config.yaml
   - seed-data/data-flows/ck-health-check.yaml

@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-- Monitoring-[1.0,2.0)
+- Monitoring-[2.0,3.0)
 entities:
   # --- Monitor configuration (edit after install; not blueprint-locked) ---
   - rtId: '0c4ea1000000000000000004'
@@ -20,8 +20,12 @@ entities:
         value: CHANGE-ME-client-secret
       - id: Monitoring/Scope-1
         value: octo_api
-      - id: Monitoring/TeamsWebhookUrl-1
-        value: https://CHANGE-ME.webhook.office.com/webhookb2/...
+      - id: Monitoring/Dash0IngressUrl-1
+        value: https://CHANGE-ME-ingress.europe-west4.gcp.dash0.com
+      - id: Monitoring/Dash0AuthToken-1
+        value: CHANGE-ME-dash0-auth-token
+      - id: Monitoring/Dash0Dataset-1
+        value: CHANGE-ME-dataset
 
   # --- Example monitored tenant (edit/duplicate; not blueprint-locked) ---
   - rtId: '0c4ea1000000000000000005'

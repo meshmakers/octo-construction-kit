@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: CkHealthMonitorConfig
-  description: Configuration for the CK health monitoring pipeline (endpoints, credentials, Teams webhook). Keep exactly one entity per monitoring tenant.
+  description: Configuration for the CK health monitoring pipeline (endpoints, credentials, Dash0 ingress). Keep exactly one entity per monitoring tenant.
   derivedFromCkTypeId: ${System}/Entity-1
   displayNameRule: "${Name}"
   attributes:
@@ -20,8 +20,17 @@ types:
     name: ClientSecret
   - id: ${this}/Scope-1
     name: Scope
+  - id: ${this}/Dash0IngressUrl-1
+    name: Dash0IngressUrl
+  - id: ${this}/Dash0AuthToken-1
+    name: Dash0AuthToken
+  - id: ${this}/Dash0Dataset-1
+    name: Dash0Dataset
+  # Deprecated, see the attribute description. Optional so an entity written against
+  # Monitoring 1.0.0 stays valid.
   - id: ${this}/TeamsWebhookUrl-1
     name: TeamsWebhookUrl
+    isOptional: true
 - typeId: MonitoredTenant
   description: A tenant watched by monitoring pipelines (e.g. the CK health check). Create one entity per tenant to monitor.
   derivedFromCkTypeId: ${System}/Entity-1

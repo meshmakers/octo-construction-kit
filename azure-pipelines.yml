@@ -151,6 +151,7 @@ stages:
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
                 - 'src/Blueprints/Monitoring.CkHealth'
+                - 'src/Blueprints/Monitoring.BlueprintHealth'
           - task: DotNetCoreCLI@2
             retryCountOnTaskFailure: 2
             displayName: 'Build'
@@ -198,6 +199,7 @@ stages:
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
                 - 'src/Blueprints/Monitoring.CkHealth'
+                - 'src/Blueprints/Monitoring.BlueprintHealth'
           - template: templates/steps/push-nuget-package.yml@pipelineTemplates
           # ---- Blueprint publish, TEST LANE ONLY (AB#5139) ----
           # Not a copy of the train's publish: the train owns main/r-tag and

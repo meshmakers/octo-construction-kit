@@ -13,6 +13,7 @@ application-specific services or pipelines).
 | `Samples.Simulator.EnergyCommunity` | Energy-community tree on the `OctoSdkDemo` model, signal simulation and an on-demand customer generator. |
 | `Samples.EnergyEnvironment` | Full energy-management demo: assets, load profile, alerts, three saved queries and a Meshboard dashboard. Data-only. |
 | `Monitoring.CkHealth` | Operational watchdog: hourly cron pipeline that polls `{tenantId}/v1/Models/LibraryStatus` for a configurable tenant list and posts Microsoft Teams alerts for `ResolveFailed` CK models, catalog inconsistencies and unreachable tenants. Install into a healthy operations tenant, not into the watched tenants. Uses the `Monitoring` CK model. |
+| `Monitoring.BlueprintHealth` | Operational watchdog for blueprint installations. Installed INTO each tenant that is meant to be watched (per-tenant opt-in), because `System/BlueprintInstallation` lives in the tenant's own repository and a client-credentials token cannot cross a tenant boundary since AB#5032/AB#5077. Hourly cron pipeline emitting `octo.blueprint.installation.state` (version drift / expected-but-absent / catalog unreadable) plus an unconditional `octo.blueprint.monitor.heartbeat` to Dash0. Uses the `Monitoring` CK model. |
 
 The `Samples.*` blueprints replace the `ImportRt` scripts that used to live in
 [`../Samples`](../Samples). They are for demo and training tenants.

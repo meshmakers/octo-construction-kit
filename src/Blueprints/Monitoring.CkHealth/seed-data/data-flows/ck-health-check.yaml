@@ -65,36 +65,6 @@ entities:
               description: Load monitor configuration
               ckTypeId: Monitoring/CkHealthMonitorConfig
               targetPath: $.cfg
-            - type: WriteJson@1
-              description: Token request body (client_credentials)
-              jsonString: '{"grant_type":"client_credentials"}'
-              targetPath: $.tokenRequest
-            - type: SetPrimitiveValue@1
-              valuePath: $.cfg.Items[0].Attributes.ClientId
-              valueType: String
-              targetPath: $.tokenRequest.client_id
-            - type: SetPrimitiveValue@1
-              valuePath: $.cfg.Items[0].Attributes.ClientSecret
-              valueType: String
-              targetPath: $.tokenRequest.client_secret
-            - type: SetPrimitiveValue@1
-              valuePath: $.cfg.Items[0].Attributes.Scope
-              valueType: String
-              targetPath: $.tokenRequest.scope
-            - type: MakeHttpRequest@1
-              description: Acquire access token
-              method: POST
-              urlPath: $.cfg.Items[0].Attributes.TokenUrl
-              bodyPath: $.tokenRequest
-              bodyContentType: application/x-www-form-urlencoded
-              onHttpError: Throw
-              retry:
-                maxAttempts: 3
-              targetPath: $.token
-            - type: FormatString@1
-              description: Build Authorization header value
-              format: "Bearer {$.token.access_token}"
-              targetPath: $.authHeader
             - type: ExecuteCSharp@1
               description: >-
                 OTLP wants nanoseconds since the Unix epoch. DateTime@1 offers Now but has no
@@ -125,6 +95,70 @@ entities:
               continueOnError: true
               maxDegreeOfParallelism: 1
               transformations:
+                # One token PER TENANT, not one for the run. A client-credentials token is
+                # bound to exactly one tenant: TenantAuthorizationMiddleware matches the route
+                # tenant against the token's `tenant_id` claim, and the old assumption that such
+                # a token may address any tenant died with AB#5032 (the hole) and AB#5077
+                # (Enforce by default). `allowed_tenants` is explicitly NOT consulted on the
+                # service-token path - it is a tenant-SELECTION hint, not an authorization.
+                #
+                # The way through is the one the ci-deploy workload pipelines already take:
+                # the client is MIRRORED into every child tenant (AutoProvisionInChildTenants),
+                # and `acr_values=tenant:{tenantId}` on /connect/token picks which mirror the
+                # token is minted for. OidcTenantResolutionMiddleware reads it, the client is
+                # loaded from that tenant's database, and ClientCredentialsTenantProcessor
+                # stamps tenant_id={tenantId} - so the exact match downstream succeeds without
+                # any cross-tenant exemption. Measured on test-2 2026-09-29: without acr_values
+                # every foreign tenant answers 403, with it 200.
+                #
+                # Do not hoist this back out of the loop. One token for all tenants can only be
+                # made to work by listing the client in CrossTenantServiceClientIds, which the
+                # platform documents as a permanent hole.
+                - type: FormatString@1
+                  description: Tenant selector for the token request
+                  format: "tenant:{$.key.Attributes.TenantId}"
+                  targetPath: $.key.acrValues
+                - type: WriteJson@1
+                  description: Token request body (client_credentials)
+                  jsonString: '{"grant_type":"client_credentials"}'
+                  targetPath: $.key.tokenRequest
+                - type: SetPrimitiveValue@1
+                  valuePath: $.full.cfg.Items[0].Attributes.ClientId
+                  valueType: String
+                  targetPath: $.key.tokenRequest.client_id
+                - type: SetPrimitiveValue@1
+                  valuePath: $.full.cfg.Items[0].Attributes.ClientSecret
+                  valueType: String
+                  targetPath: $.key.tokenRequest.client_secret
+                - type: SetPrimitiveValue@1
+                  valuePath: $.full.cfg.Items[0].Attributes.Scope
+                  valueType: String
+                  targetPath: $.key.tokenRequest.scope
+                - type: SetPrimitiveValue@1
+                  valuePath: $.key.acrValues
+                  valueType: String
+                  targetPath: $.key.tokenRequest.acr_values
+                - type: MakeHttpRequest@1
+                  description: >-
+                    Acquire an access token FOR THIS TENANT. LogAndStop for the same reason as
+                    the LibraryStatus call below: the node returns without running the rest of
+                    this iteration, so the tenant is still collected into $.checkedTenants
+                    without a `status` and the second pass reports it by name. A tenant whose
+                    mirror is missing or whose secret no longer matches therefore shows up as
+                    unreachable instead of killing the whole run, which is what a single
+                    pre-loop token with onHttpError Throw used to do.
+                  method: POST
+                  urlPath: $.full.cfg.Items[0].Attributes.TokenUrl
+                  bodyPath: $.key.tokenRequest
+                  bodyContentType: application/x-www-form-urlencoded
+                  onHttpError: LogAndStop
+                  retry:
+                    maxAttempts: 3
+                  targetPath: $.key.token
+                - type: FormatString@1
+                  description: Build Authorization header value for this tenant
+                  format: "Bearer {$.key.token.access_token}"
+                  targetPath: $.key.authHeader
                 - type: FormatString@1
                   description: Build LibraryStatus URL
                   format: "{$.full.cfg.Items[0].Attributes.AssetServicesBaseUrl}/{$.key.Attributes.TenantId}/v1/Models/LibraryStatus"
@@ -141,7 +175,7 @@ entities:
                   urlPath: $.key.statusUrl
                   headerParameters:
                     - name: Authorization
-                      valuePath: $.full.authHeader
+                      valuePath: $.key.authHeader
                   onHttpError: LogAndStop
                   retry:
                     maxAttempts: 3
@@ -218,7 +252,7 @@ entities:
                               jsonString: |
                                 {"resourceMetrics":[{"resource":{"attributes":[
                                   {"key":"service.name","value":{"stringValue":"octo-ck-health-monitor"}}]},
-                                 "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.0.0"},
+                                 "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.1.0"},
                                   "metrics":[{"name":"octo.ck.library.state","unit":"{state}",
                                    "description":"1 = catalog inconsistency, 2 = ResolveFailed",
                                    "gauge":{"dataPoints":[{"timeUnixNano":"","asInt":"0","attributes":[
@@ -290,15 +324,18 @@ entities:
                 # test-2: it fired about three minutes after the metric appeared); this shape was
                 # chosen for consistency across the metrics, not because zero thresholds fail.
                 #
-                # There is deliberately NO octo.tenant.id here, and that is a limitation rather
-                # than an oversight: ForEach@1 records an iteration failure as {index, errorType,
-                # message} only - the failing item itself is not carried over (see
-                # ForEachNode.BuildIterationErrors). Inside the iteration the tenant is in scope
-                # but unusable for this, because onHttpError Throw aborts the iteration and
-                # LogAndStop skips every following node, so neither leaves a path to emit. A label
-                # that always read "unknown" would be worse than none; the index is emitted
-                # instead, and SetPipelineExecutionResult persists $.tenantErrors so the execution
-                # output resolves it to a tenant.
+                # octo.tenant.id IS emitted here, and getting it there is what decides the
+                # shape of the whole pipeline. ForEach@1 records an iteration failure as
+                # {index, errorType, message} only - the failing item itself is not carried over
+                # (see ForEachNode.BuildIterationErrors), so a tenant whose check THREW would be
+                # unnameable. That is why both risky calls in the first pass run with
+                # onHttpError LogAndStop: the node returns without calling next(), nothing is
+                # thrown, the iteration is not aborted, and the item is still collected - just
+                # without a `status`. This second pass then has the whole tenant in scope.
+                # The price is that the error text stays in the adapter log instead of
+                # travelling on the metric; the tenant is what one needs to decide whether it
+                # matters, and $.tenantErrors is still persisted by
+                # SetPipelineExecutionResult for the rest.
                 # A missing `status` is the signal. If@1 reads an absent path as null and does
                 # not throw, and Equals with no value compares null against null, so this is the
                 # idiomatic "is not set" gate. A tenant that answered has an object here and
@@ -313,7 +350,7 @@ entities:
                       jsonString: |
                         {"resourceMetrics":[{"resource":{"attributes":[
                           {"key":"service.name","value":{"stringValue":"octo-ck-health-monitor"}}]},
-                         "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.0.0"},
+                         "scopeMetrics":[{"scope":{"name":"Monitoring.CkHealth","version":"2.1.0"},
                           "metrics":[{"name":"octo.ck.tenant.unreachable","unit":"{state}",
                            "description":"1 = a monitored tenant's LibraryStatus could not be read",
                            "gauge":{"dataPoints":[{"timeUnixNano":"","asInt":"1","attributes":[

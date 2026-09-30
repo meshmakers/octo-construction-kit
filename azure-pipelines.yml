@@ -134,7 +134,6 @@ stages:
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/ConstructionKit'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/ConstructionKit'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Monitoring/ConstructionKit'
                 - 'src/ConstructionKits/Octo.Sdk.Demo/ConstructionKit'
           # Blueprint version-honesty gate (octo-bpm validateVersion, AB#5021): a
           # blueprint whose content changed without a version bump fails the build —
@@ -150,8 +149,6 @@ stages:
                 - 'src/Blueprints/Samples.Photovoltaics'
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
-                - 'src/Blueprints/Monitoring.CkHealth'
-                - 'src/Blueprints/Monitoring.BlueprintHealth'
           - task: DotNetCoreCLI@2
             retryCountOnTaskFailure: 2
             displayName: 'Build'
@@ -187,7 +184,6 @@ stages:
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Logistics/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Logistics'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Maintenance'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Manufacturing'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Monitoring/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Monitoring'
               # Blueprint sources shipped in the `local` artifact so the catalogs
               # release train publishes them at r-tag time. Same list as the
               # validate-blueprints step above — keep both in sync.
@@ -198,8 +194,6 @@ stages:
                 - 'src/Blueprints/Samples.Photovoltaics'
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
-                - 'src/Blueprints/Monitoring.CkHealth'
-                - 'src/Blueprints/Monitoring.BlueprintHealth'
           - template: templates/steps/push-nuget-package.yml@pipelineTemplates
           # ---- Blueprint publish to the lane's private catalog (AB#5139, AB#5422) ----
           # Not a copy of the train's publish: the train owns the PUBLIC catalog at

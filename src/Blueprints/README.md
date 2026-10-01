@@ -73,7 +73,7 @@ Shared distribution happens in CI through the shared
 `validate-and-publish-blueprints` step of `octo-pipeline-templates`: `main` publishes
 to the private blueprint catalog (`meshmakers/blueprint-libraries-build`), `r*` tags
 to the private **and** the public one, never replacing a published version. The
-`test/0.2-*` lane publishes to `meshmakers/octo-catalog-dev` instead. A content
+test lane (`test/*` branches) publishes to `meshmakers/octo-catalog-dev` instead. A content
 change without a version bump fails the build, so raise the blueprint's version.
 
 ## Seed data layout

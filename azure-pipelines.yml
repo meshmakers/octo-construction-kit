@@ -17,7 +17,7 @@
 #     validate-and-publish-* steps after Test (main -> private catalogs, r* tags ->
 #     private AND public), in dependency order. The catalogs release train
 #     (ADO 203) still publishes this build's `local` artifact at r-tag time.
-#   - The test/0.2-* lane keeps its own blueprint publish into octo-catalog-dev.
+#   - The test lane (test/*) keeps its own blueprint publish into octo-catalog-dev.
 #   - HAS push-nuget — the Meshmakers.Octo.Sdk.Packages.* NuGets
 #   - HAS the CK library outputs of the CK list below (handle-artifacts)
 
@@ -83,7 +83,7 @@ variables:
     value: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/main') }}
   - name: isTest
     value: ${{ startsWith(variables['Build.SourceBranch'], 'refs/heads/test') }}
-  # ---- Dev catalog for the test/0.2-* lane (AB#5139) ----
+  # ---- Dev catalog for the test lane (AB#5139) ----
   # Blueprint publishing per channel:
   #   main        -> private catalog (meshmakers/blueprint-libraries-build), by the
   #                  shared validate-and-publish-blueprints step (AB#5121; before:
@@ -92,7 +92,7 @@ variables:
   #                  release train (ADO 203) publishes the `local` artifact to both
   #                  again at r-tag time, without -f, so whichever comes second is
   #                  an already-published no-op
-  #   test/0.2-*  -> meshmakers/octo-catalog-dev (coordinates here), by the inline
+  #   test/*      -> meshmakers/octo-catalog-dev (coordinates here), by the inline
   #                  step below — the shared step cannot retarget the catalog slot
   - name: devCatalogOwner
     value: 'meshmakers'
@@ -217,22 +217,18 @@ stages:
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
           - template: templates/steps/push-nuget-package.yml@pipelineTemplates
-          # ---- Blueprint publish, test/0.2-* lane only -> octo-catalog-dev (AB#5139) ----
+          # ---- Blueprint publish, test lane (test/*) only -> octo-catalog-dev (AB#5139) ----
           # main and r* tags publish through the shared validate-and-publish-blueprints
           # step above (it took over the main lane this step served under AB#5422).
           # The test lane stays here: the shared step cannot point the private
           # catalog slot at the dev catalog repository, and this lane re-publishes a
-          # 0.2-dev blueprint under the same version while it is worked on (-f).
+          # test-lane blueprint under the same version while it is worked on (-f).
           # The blueprint list is ENUMERATED from disk rather than hardcoded a
           # third time — the shared step and handle-artifacts above already carry
           # the authoritative list, and a third copy would drift.
           - task: PowerShell@2
             displayName: 'Publish blueprints to the dev catalog (test lane)'
-            # The 0.2-dev lane only. isTest is true for EVERY refs/heads/test*
-            # branch (test/will-it-work-on-windows exists), and this step publishes
-            # with -f, so a broader condition would let any test branch overwrite
-            # the versions the 0.2-dev instance installs.
-            condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/test/0.2-'))
+            condition: and(succeeded(), eq(variables.isTest, true))
             inputs:
               targetType: 'inline'
               pwsh: true

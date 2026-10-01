@@ -228,7 +228,11 @@ stages:
           # the authoritative list, and a third copy would drift.
           - task: PowerShell@2
             displayName: 'Publish blueprints to the dev catalog (test lane)'
-            condition: and(succeeded(), eq(variables.isTest, true))
+            # The 0.2-dev lane only. isTest is true for EVERY refs/heads/test*
+            # branch (test/will-it-work-on-windows exists), and this step publishes
+            # with -f, so a broader condition would let any test branch overwrite
+            # the versions the 0.2-dev instance installs.
+            condition: and(succeeded(), startsWith(variables['Build.SourceBranch'], 'refs/heads/test/0.2-'))
             inputs:
               targetType: 'inline'
               pwsh: true

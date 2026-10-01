@@ -2,8 +2,16 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Order
   derivedFromCkTypeId: ${System}/Entity        # transactional (like Industry.Maintenance/order)
-  description: "A logistics order placed by a customer for fulfillment."
+  description: "A logistics order placed by a customer for fulfillment. Identified by Source and OrderNumber; doubles as the export marker of the delivery to the fulfilment partner."
+  indexes:
+  - indexType: "UniqueNotDeleted"
+    fields:
+      - attributePaths:
+        - Source
+        - OrderNumber
   attributes:
+  - id: ${this}/Source
+    name: Source
   - id: ${this}/OrderNumber
     name: OrderNumber
   - id: ${this}/ExternalOrderNumber
@@ -18,11 +26,26 @@ types:
   - id: ${this}/Carrier
     name: Carrier
     isOptional: true
+  - id: ${this}/ShippingMethod
+    name: ShippingMethod
+    isOptional: true
   - id: ${this}/OrderStatus
     name: Status
     isOptional: true
-  - id: ${Basic}/Address
-    name: DeliveryAddress
+  - id: ${this}/Currency
+    name: Currency
+    isOptional: true
+  - id: ${this}/NetAmount
+    name: NetAmount
+    isOptional: true
+  - id: ${this}/GrossAmount
+    name: GrossAmount
+    isOptional: true
+  - id: ${this}/ShipTo
+    name: ShipTo
+    isOptional: true
+  - id: ${this}/BillTo
+    name: BillTo
     isOptional: true
   associations:
   - id: ${this}/OrderCustomer

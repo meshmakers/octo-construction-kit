@@ -1,0 +1,28 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+records:
+- recordId: PostalAddress
+  description: "Delivery or invoice address: company and/or person, street, postal code as text, city, country code, and the contact details a carrier advises to."
+  attributes:
+    - id: ${Basic}/CompanyName
+      name: CompanyName
+      isOptional: true
+    - id: ${Basic}/FirstName
+      name: FirstName
+      isOptional: true
+    - id: ${Basic}/LastName
+      name: LastName
+      isOptional: true
+    - id: ${Basic}/AddressStreet
+      name: Street
+    - id: ${this}/Zipcode
+      name: Zipcode
+    - id: ${Basic}/AddressCityTown
+      name: City
+    - id: ${Basic}/AddressNationalCode
+      name: CountryCode
+    - id: ${Basic}/TelephoneNumber
+      name: Phone
+      isOptional: true
+    - id: ${Basic}/EMailAddress
+      name: Email
+      isOptional: true

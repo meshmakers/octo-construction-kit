@@ -9,6 +9,12 @@ types:
   - id: ${this}/Carrier
     name: Carrier
     isOptional: true
+  - id: ${this}/CarrierToken
+    name: CarrierToken
+    isOptional: true
+  - id: ${this}/TrackingUrl
+    name: TrackingUrl
+    isOptional: true
   - id: ${this}/PackagingType
     name: PackagingType
     isOptional: true

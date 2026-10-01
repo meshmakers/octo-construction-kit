@@ -15,3 +15,36 @@ attributes:
   valueCkEnumId: ${this}/OrderStatus
 - id: PositionNumber
   valueType: Int
+- id: Currency
+  valueType: String
+  description: "ISO 4217 currency code of the order's amounts."
+- id: NetAmount
+  valueType: Double
+  description: "Net amount: of the order on Order, of the LINE on OrderItem (unit prices derive from it)."
+  metaData:
+    - key: Decimals
+      value: 2
+- id: GrossAmount
+  valueType: Double
+  description: "Gross amount: of the order on Order, of the LINE on OrderItem."
+  metaData:
+    - key: Decimals
+      value: 2
+- id: ShippingMethod
+  valueType: String
+  description: "Shipping method as the source system identifies it (a method id or name); the fulfilment partner maps it to its carriers."
+- id: Title
+  valueType: String
+  description: "Line text of an order item as the source system states it (article name, service, shipping cost)."
+- id: TaxRate
+  valueType: Double
+  description: "VAT rate of a line in percent."
+  metaData:
+    - key: Unit
+      value: "%"
+- id: ItemKind
+  valueType: Enum
+  valueCkEnumId: ${this}/OrderItemKind
+  description: "What a line is: an article, the shipping cost, something else."
+  defaultValues:
+    - 0

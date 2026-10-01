@@ -8,18 +8,18 @@
 #   - NO GitSSHGroup / NO InstallSSHKey — no private submodules referenced
 #   - NO download-ca — restores from public NuGet feed only
 #   - submodules: true (NOT recursive) — matches legacy
-#   - Build passes /p:OctoPublishCatalog="$(effectivePublishCatalog)" for the
-#     CK model catalog publish-gating (only main / r* tags publish to GitHub;
-#     feature branches publish to per-run LocalFileSystemCatalog —
-#     incident: Industry.Basic-2.1.1 pinned by downstream packages without
-#     itself being published, breaking every tenant's library-status endpoint)
+#   - Build and Test pass /p:OctoPublishCatalog=LocalFileSystemCatalog: the CK
+#     models depend on each other (Basic.Energy -> Basic, EnergyCommunity ->
+#     Basic.Energy, …), so the build still publishes each one into the run-
+#     isolated local catalog for the next to resolve — and nowhere else.
 #   - SystemTests excluded
-#   - CK SemVer validation gate (validate-ck-versions) runs BEFORE Build:
-#     CK models are published DURING dotnet build, so version honesty must
-#     be enforced first. Validates the 12 published CKs in dependency order.
-#   - HAS push-nuget — 11 Meshmakers.Octo.Sdk.Packages.* NuGets per build
-#   - HAS 12 CK library outputs (the actual Construction Kit YAMLs:
-#     11 Octo.Sdk.Packages.* + Octo.Sdk.Demo)
+#   - CK models and blueprints are validated AND published by the shared
+#     validate-and-publish-* steps after Test (main -> private catalogs, r* tags ->
+#     private AND public), in dependency order. The catalogs release train
+#     (ADO 203) still publishes this build's `local` artifact at r-tag time.
+#   - The test/0.2-* lane keeps its own blueprint publish into octo-catalog-dev.
+#   - HAS push-nuget — the Meshmakers.Octo.Sdk.Packages.* NuGets
+#   - HAS the CK library outputs of the CK list below (handle-artifacts)
 
 name: $(MajorVersion).$(MinorVersion).$(date:yyMM).$(DayOfMonth)$(rev:rrr)-$(Build.SourceBranchName)
 
@@ -53,7 +53,7 @@ resources:
       type: github
       name: meshmakers/octo-pipeline-templates
       endpoint: meshmakers-access-token
-      ref: refs/tags/tpl-v0.5.4
+      ref: refs/tags/tpl-v1.0.0
 
 trigger:
   batch: true
@@ -84,14 +84,16 @@ variables:
   - name: isTest
     value: ${{ startsWith(variables['Build.SourceBranch'], 'refs/heads/test') }}
   # ---- Dev catalog for the test/0.2-* lane (AB#5139) ----
-  # Blueprints of this repo are published to the PUBLIC catalog by the catalogs
-  # release train (ADO pipeline 203) at r-tag time, from the `local` artifact.
-  # The two lane catalogs below that installations actually read between releases
-  # are fed by the publish step further down:
-  #   test/0.2-*  -> meshmakers/octo-catalog-dev          (coordinates here)
-  #   main        -> meshmakers/blueprint-libraries-build (engine DEFAULT, AB#5422)
-  # r-tag stays untouched — the train remains the single publisher of the public
-  # catalog, and it publishes without -f because released versions are immutable.
+  # Blueprint publishing per channel:
+  #   main        -> private catalog (meshmakers/blueprint-libraries-build), by the
+  #                  shared validate-and-publish-blueprints step (AB#5121; before:
+  #                  the inline step below, AB#5422)
+  #   r* tags     -> private AND public catalog, by the shared step; the catalogs
+  #                  release train (ADO 203) publishes the `local` artifact to both
+  #                  again at r-tag time, without -f, so whichever comes second is
+  #                  an already-published no-op
+  #   test/0.2-*  -> meshmakers/octo-catalog-dev (coordinates here), by the inline
+  #                  step below — the shared step cannot retarget the catalog slot
   - name: devCatalogOwner
     value: 'meshmakers'
   - name: devCatalogRepository
@@ -117,12 +119,50 @@ stages:
             clean: true
             submodules: true
           - template: templates/steps/set-version.yml@pipelineTemplates
-          - template: templates/steps/validate-ck-versions.yml@pipelineTemplates
+          # The build still publishes every CK model, but only into the run-isolated
+          # LocalFileSystemCatalog (OctoLocalCatalogRootPath from update-build-number):
+          # the models depend on each other, and a dependent resolves a dependency
+          # bumped in the same commit only from there. The catalog is named
+          # explicitly because CkCompile publishes with isForced hardcoded, and the
+          # exported OctoPublishCatalog would otherwise reach MSBuild from the
+          # environment (PrivateGitHubCatalog on every branch). The shared CK step
+          # after Test is the only publisher to the shared catalogs. The GitHub API
+          # keys keep CkCompile's catalog refresh clear of GitHub's unauthenticated
+          # rate limit.
+          - task: DotNetCoreCLI@2
+            retryCountOnTaskFailure: 2
+            displayName: 'Build'
+            inputs:
+              command: 'build'
+              projects: '$(solutionFile)'
+              arguments: '--configuration $(buildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer) /p:OctoPublishCatalog=LocalFileSystemCatalog /p:OctoPrivateGitHubApiKey=$(GitHubPAT) /p:OctoPublicGitHubApiKey=$(GitHubPAT)'
+              publishWebProjects: false
+              zipAfterPublish: false
+              modifyOutputPath: false
+          - task: DotNetCoreCLI@2
+            retryCountOnTaskFailure: 2
+            displayName: 'Test'
+            inputs:
+              command: 'test'
+              # Pinned like Build: the implicit build re-enters CkCompile, and without a
+              # /p: switch MSBuild takes OctoPublishCatalog from the environment
+              # (PrivateGitHubCatalog on every branch) — the leak AB#5413 fixed in
+              # octo-construction-kit-engine.
+              arguments: '/p:OctoPublishCatalog=LocalFileSystemCatalog'
+              projects: |
+                **/*Tests.csproj
+                !**/*SystemTests.csproj
+              testRunTitle: 'CI'
+          # CK SemVer and schema gate (AB#4420), and since tpl-v1.0.0 also the publish
+          # of the CK models (AB#5121): main -> private catalog, r* tags -> private
+          # AND public, never replacing a published version. It runs after Test so a
+          # run whose build or tests fail never leaves a version in a shared catalog
+          # — a published version cannot be withdrawn. ValidateVersion seeds the
+          # step's local catalog, so a model resolves a dependency bumped in the
+          # same commit. The step compiles the models itself with the pinned
+          # octo-ckc and needs nothing from the build.
+          - template: templates/steps/validate-and-publish-ck-versions.yml@pipelineTemplates
             parameters:
-              # Same 12 published CKs as constructionKitLibraryPaths on the
-              # handle-artifacts step below — keep both lists in sync when
-              # adding/removing a CK. THIS list must additionally stay in
-              # dependency order (dependencies first).
               constructionKitPaths:
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/ConstructionKit'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Basic.Energy/ConstructionKit'
@@ -135,13 +175,14 @@ stages:
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/ConstructionKit'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/ConstructionKit'
                 - 'src/ConstructionKits/Octo.Sdk.Demo/ConstructionKit'
-          # Blueprint version-honesty gate (octo-bpm validateVersion, AB#5021): a
-          # blueprint whose content changed without a version bump fails the build —
-          # published blueprint versions are immutable. Blueprints are published by
-          # the catalogs release train from this build's artifact, not by the build.
-          - template: templates/steps/validate-blueprints.yml@pipelineTemplates
+          # Blueprint version-honesty gate (octo-bpm validateVersion, AB#5021), and
+          # since tpl-v1.0.0 also the publish: main -> private catalog, r* tags ->
+          # private AND public, never replacing a published version. A blueprint
+          # whose content changed without a version bump fails the build. The
+          # catalogs release train publishes the `local` artifact again at r-tag
+          # time, without -f, so the second of the two is an already-published no-op.
+          - template: templates/steps/validate-and-publish-blueprints.yml@pipelineTemplates
             parameters:
-              # Same list as handle-artifacts.blueprintPaths below — keep in sync.
               blueprintPaths:
                 - 'src/Blueprints/Locations.Austria'
                 - 'src/Blueprints/Samples.PipelineBasics'
@@ -149,25 +190,6 @@ stages:
                 - 'src/Blueprints/Samples.Photovoltaics'
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
-          - task: DotNetCoreCLI@2
-            retryCountOnTaskFailure: 2
-            displayName: 'Build'
-            inputs:
-              command: 'build'
-              projects: '$(solutionFile)'
-              arguments: '--configuration $(buildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer) /p:OctoPublishCatalog="$(effectivePublishCatalog)" /p:OctoPrivateGitHubApiKey=$(GitHubPAT) /p:OctoPublicGitHubApiKey=$(GitHubPAT)'
-              publishWebProjects: false
-              zipAfterPublish: false
-              modifyOutputPath: false
-          - task: DotNetCoreCLI@2
-            retryCountOnTaskFailure: 2
-            displayName: 'Test'
-            inputs:
-              command: 'test'
-              projects: |
-                **/*Tests.csproj
-                !**/*SystemTests.csproj
-              testRunTitle: 'CI'
           - template: templates/steps/handle-artifacts.yml@pipelineTemplates
             parameters:
               # Same 12 published CKs as constructionKitPaths on the
@@ -195,31 +217,18 @@ stages:
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
           - template: templates/steps/push-nuget-package.yml@pipelineTemplates
-          # ---- Blueprint publish to the lane's private catalog (AB#5139, AB#5422) ----
-          # Not a copy of the train's publish: the train owns the PUBLIC catalog at
-          # r-tag time. This step feeds the catalog the lane's own installations
-          # read between releases, and the two lanes differ in exactly two points:
-          #
-          #   lane   catalog repository              force  an existing version is
-          #   test   octo-catalog-dev (configured)   -f     overwritten (a 0.2-dev
-          #                                                 blueprint is re-published
-          #                                                 under the same version
-          #                                                 while it is worked on)
-          #   main   blueprint-libraries-build       none   a SKIP, not a failure —
-          #          (engine default, NOT configured)       published versions are
-          #                                                 immutable and most main
-          #                                                 builds bump nothing
-          #
-          # AB#5422: before this, main published no blueprint at all while the same
-          # build DID publish its CK models (MSBuild OctoPublishCatalog above). A
-          # blueprint merged to main was therefore uninstallable until the next
-          # release — that asymmetry is what this step removes.
+          # ---- Blueprint publish, test/0.2-* lane only -> octo-catalog-dev (AB#5139) ----
+          # main and r* tags publish through the shared validate-and-publish-blueprints
+          # step above (it took over the main lane this step served under AB#5422).
+          # The test lane stays here: the shared step cannot point the private
+          # catalog slot at the dev catalog repository, and this lane re-publishes a
+          # 0.2-dev blueprint under the same version while it is worked on (-f).
           # The blueprint list is ENUMERATED from disk rather than hardcoded a
-          # third time — validate-blueprints and handle-artifacts above already
-          # carry the authoritative list, and a third copy would drift.
+          # third time — the shared step and handle-artifacts above already carry
+          # the authoritative list, and a third copy would drift.
           - task: PowerShell@2
-            displayName: 'Publish blueprints to the lane blueprint catalog'
-            condition: and(succeeded(), or(eq(variables.isTest, true), eq(variables.isMain, true)))
+            displayName: 'Publish blueprints to the dev catalog (test lane)'
+            condition: and(succeeded(), eq(variables.isTest, true))
             inputs:
               targetType: 'inline'
               pwsh: true
@@ -272,37 +281,13 @@ stages:
                 $env:USERPROFILE = $bpmHome
                 $bpm = Join-Path $toolPath 'octo-bpm'
 
-                $isTestLane = '$(isTest)' -match '^(?i)true$'
+                # Point the PRIVATE catalog slot at the dev repository, with the LOCAL
+                # blueprint catalog disabled: it outranks the GitHub ones on read, so a
+                # stray local blueprint must never win over what we publish.
+                Write-Host "Pointing octo-bpm's private catalog at $(devCatalogOwner)/$(devCatalogRepository)..."
+                & $bpm -c config -go "$(devCatalogOwner)" -gr "$(devCatalogRepository)" -gb "$(devCatalogBranch)" -gp "$(devCatalogPagesUri)" -gt "$(GitHubPAT)" -lce false
+                if ($LASTEXITCODE -ne 0) { Write-Host "##vso[task.logissue type=error]octo-bpm config failed"; exit 1 }
 
-                # Both lanes disable the LOCAL blueprint catalog: it outranks the
-                # GitHub ones on read, so a stray local blueprint must never win over
-                # what we publish, and an unwarm agent has none to resolve against.
-                if ($isTestLane) {
-                  # Test lane: point the PRIVATE catalog slot at the dev repository.
-                  $targetCatalogRepository = '$(devCatalogRepository)'
-                  Write-Host "Pointing octo-bpm's private catalog at $(devCatalogOwner)/$(devCatalogRepository)..."
-                  & $bpm -c config -go "$(devCatalogOwner)" -gr "$(devCatalogRepository)" -gb "$(devCatalogBranch)" -gp "$(devCatalogPagesUri)" -gt "$(GitHubPAT)" -lce false
-                  if ($LASTEXITCODE -ne 0) { Write-Host "##vso[task.logissue type=error]octo-bpm config failed"; exit 1 }
-                } else {
-                  # Main lane (AB#5422): the private catalog slot keeps the ENGINE
-                  # DEFAULT coordinates (meshmakers/blueprint-libraries-build@main) —
-                  # deliberately NOT `-c config`, so the dev-catalog coordinates above
-                  # can never leak into main. Only the PAT and the local-catalog switch
-                  # are written, via the settings file the train uses for the same
-                  # reason: the settings must exist BEFORE the first tool run.
-                  $targetCatalogRepository = 'blueprint-libraries-build'
-                  $bpmSettingsDir = Join-Path $env:HOME '.octo-bpm'
-                  New-Item -ItemType Directory -Force -Path $bpmSettingsDir | Out-Null
-                  @"
-                {
-                  "PrivateOctoGitHub": { "GitHubApiToken": "$(GitHubPAT)" },
-                  "LocalFileSystemCatalog": { "IsEnabled": false }
-                }
-                "@ | Set-Content -Path (Join-Path $bpmSettingsDir 'settings.json') -Encoding utf8
-                  Write-Host "Publishing to the engine-default private catalog (meshmakers/$targetCatalogRepository@main)."
-                }
-
-                $skipped = 0
                 foreach ($blueprint in $blueprints) {
                   $name = Split-Path $blueprint -Leaf
                   Write-Host ""
@@ -310,38 +295,18 @@ stages:
                   & $bpm -c validate -p "$blueprint"
                   if ($LASTEXITCODE -ne 0) { Write-Host "##vso[task.logissue type=error]blueprint validation failed: $name"; exit 1 }
 
-                  # -f on the test lane only. On main a published version is immutable;
-                  # re-publishing it would rewrite history for every installation that
-                  # already installed it.
-                  if ($isTestLane) {
-                    $out = & $bpm -c publish -p "$blueprint" -c 'PrivateGitHubBlueprintCatalog' -f 2>&1
-                  } else {
-                    $out = & $bpm -c publish -p "$blueprint" -c 'PrivateGitHubBlueprintCatalog' 2>&1
-                  }
+                  $out = & $bpm -c publish -p "$blueprint" -c 'PrivateGitHubBlueprintCatalog' -f 2>&1
                   $out | ForEach-Object { Write-Host $_ }
-                  $joined = $out -join "`n"
                   # octo-bpm can soft-fail with exit 0 (logs the error and returns),
                   # so assert on the output instead of trusting the exit code.
-                  if ($joined -match 'published successfully to catalog') {
-                    Write-Host "##[endgroup]"
-                    continue
+                  if (($out -join "`n") -notmatch 'published successfully to catalog') {
+                    Write-Host "##vso[task.logissue type=error]octo-bpm publish of $name did not report success"
+                    exit 1
                   }
-                  # Without -f an already-published version reports 'already exists in
-                  # catalog' and returns. On main that is the NORMAL case — most builds
-                  # bump no blueprint — so it is a skip, not a failure. Content that
-                  # changed without a version bump is already caught earlier by the
-                  # validate-blueprints gate (AB#5021), so this cannot hide a drift.
-                  if (-not $isTestLane -and $joined -match 'already exists in catalog') {
-                    Write-Host "Version unchanged and already published - skipping $name."
-                    $skipped++
-                    Write-Host "##[endgroup]"
-                    continue
-                  }
-                  Write-Host "##vso[task.logissue type=error]octo-bpm publish of $name did not report success"
-                  exit 1
+                  Write-Host "##[endgroup]"
                 }
                 Write-Host ""
-                Write-Host "Blueprints published to $targetCatalogRepository ($($blueprints.Count - $skipped) published, $skipped already current)."
+                Write-Host "Blueprints published to $(devCatalogRepository) ($($blueprints.Count))."
           - task: PowerShell@2
             displayName: 'Clean up octo tool PAT settings'
             condition: always()

@@ -15,6 +15,9 @@ types:
     - id: ${this}/DataQuality
       name: DataQuality
       isOptional: true
+    - id: ${this}/SourceDocumentDate
+      name: SourceDocumentDate
+      isOptional: true
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/MeteringPoint

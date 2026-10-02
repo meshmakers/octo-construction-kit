@@ -123,9 +123,11 @@ stages:
           # LocalFileSystemCatalog (OctoLocalCatalogRootPath from update-build-number):
           # the models depend on each other, and a dependent resolves a dependency
           # bumped in the same commit only from there. The catalog is named
-          # explicitly because CkCompile publishes with isForced hardcoded, and the
-          # exported OctoPublishCatalog would otherwise reach MSBuild from the
-          # environment (PrivateGitHubCatalog on every branch). The shared CK step
+          # explicitly because CkCompile publishes with isForced hardcoded, and
+          # MSBuild also reads OctoPublishCatalog from the environment:
+          # update-build-number exported PrivateGitHubCatalog on every branch before
+          # tpl-v1.0.0, and the switch keeps any environment value from redirecting
+          # the publish again. The shared CK step
           # after Test is the only publisher to the shared catalogs. The GitHub API
           # keys keep CkCompile's catalog refresh clear of GitHub's unauthenticated
           # rate limit.
@@ -145,9 +147,9 @@ stages:
             inputs:
               command: 'test'
               # Pinned like Build: the implicit build re-enters CkCompile, and without a
-              # /p: switch MSBuild takes OctoPublishCatalog from the environment
-              # (PrivateGitHubCatalog on every branch) — the leak AB#5413 fixed in
-              # octo-construction-kit-engine.
+              # /p: switch MSBuild takes OctoPublishCatalog from the environment — the
+              # leak AB#5413 fixed in octo-construction-kit-engine, when
+              # update-build-number still exported it (before tpl-v1.0.0).
               arguments: '/p:OctoPublishCatalog=LocalFileSystemCatalog'
               projects: |
                 **/*Tests.csproj

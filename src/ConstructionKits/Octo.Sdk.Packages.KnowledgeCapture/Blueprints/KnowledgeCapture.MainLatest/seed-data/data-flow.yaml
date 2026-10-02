@@ -1,0 +1,18 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - KnowledgeCapture-1.3.0
+  - System.Communication-4.1.0
+entities:
+  # --------------------------------------------------------------------------
+  # Data flow (groups the pipelines)
+  # --------------------------------------------------------------------------
+  - rtId: '672000000000000000000004'
+    ckTypeId: System.Communication/DataFlow
+    rtWellKnownName: knowledge-capture
+    attributes:
+      - id: System/Name
+        value: Knowledge Capture
+      - id: System/Description
+        value: >-
+          GenAI wiki-entry capture: ingest (bronze) -> generate + verify
+          (silver) -> render per audience (gold).

@@ -1,0 +1,12 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+  - id: Audience
+    valueType: Enum
+    valueCkEnumId: ${this}/WikiAudience
+    description: 'Target audience whose section schema this rendition follows (Development/Marketing/Architect).'
+  - id: Body
+    valueType: String
+    description: 'Rendered markdown of the wiki entry, tailored to the audience (gold layer). This is the publishable page.'
+  - id: RenderedAt
+    valueType: DateTime
+    description: 'When this rendition was generated.'

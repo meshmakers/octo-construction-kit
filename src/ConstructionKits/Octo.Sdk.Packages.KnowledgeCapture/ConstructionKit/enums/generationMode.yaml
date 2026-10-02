@@ -1,0 +1,12 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+  - enumId: GenerationMode
+    description: 'Which generation architecture produced a wiki entry. Recorded for auditability and architecture comparison.'
+    isExtensible: false
+    values:
+      - key: 0
+        name: Pipeline
+        description: 'Structured pipeline: deterministic control flow, single LLM call with a fixed output schema, optional deterministic verification pass.'
+      - key: 1
+        name: Agentic
+        description: 'Agentic workflow: single agentic LLM call with MCP retrieval tools and an EXTRACT-DRAFT-REVIEW-REVISE self-correction loop.'

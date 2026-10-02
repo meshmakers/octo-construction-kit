@@ -1,0 +1,158 @@
+$schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
+dependencies:
+  - KnowledgeCapture-1.3.0
+  - System.Communication-4.1.0
+entities:
+  # --------------------------------------------------------------------------
+  # Pipeline 3: agentic generation (silver, GenerationMode Agentic)
+  # POST body: { "artifactRtIds": ["<rtId>", "..."] } - one entry from all listed artifacts
+  # --------------------------------------------------------------------------
+  - rtId: '67200000000000000000000b'
+    ckTypeId: System.Communication/Pipeline
+    rtWellKnownName: wiki-capture-agentic
+    associations:
+      - roleId: System/ParentChild
+        targetRtId: '672000000000000000000004'
+        targetCkTypeId: System.Communication/DataFlow
+      - roleId: System.Communication/Executes
+        targetRtId: '670000000000000000000002'
+        targetCkTypeId: System.Communication/Adapter
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000003'
+        targetCkTypeId: System.Communication/AiConfiguration
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000002'
+        targetCkTypeId: System.Communication/McpConfiguration
+      - roleId: System.Communication/Uses
+        targetRtId: '672000000000000000000001'
+        targetCkTypeId: System.Communication/ServiceAccountConfiguration
+    attributes:
+      - id: System/Name
+        value: Wiki Capture - Agentic Generation
+      - id: System/Description
+        value: >-
+          Agentic generation: single LLM call with read-only MCP retrieval
+          tools and an extract-retrieve-draft-review-revise self-correction
+          loop, bounded by maxToolRounds. The entity write happens
+          deterministically outside the agent loop, so the agent stays
+          read-only. Prompt: wiki-prompt-agentic v2.
+      - id: System/Enabled
+        value: true
+      - id: System.Communication/DeploymentState
+        value: 0   # Undeployed
+      - id: System.Communication/IsDebuggingEnabled
+        value: false
+      - id: System.Communication/PipelineDefinition
+        value: |-
+          triggers:
+            - type: FromHttpRequest@1
+              method: POST
+              path: /knowledge-capture/generate-agentic
+              description: 'Body: { "artifactRtIds": ["<rtId>", "..."] } - one entry built from all listed artifacts'
+          transformations:
+            - type: GetRtEntitiesById@1
+              description: Fetch every source artifact named in the request (bronze).
+              ckTypeId: KnowledgeCapture/SourceArtifact
+              rtIdsPath: $.body.artifactRtIds
+              targetPath: $.artifacts
+            - type: LlmQuery@1
+              description: Agentic generation from all source artifacts with MCP retrieval (wiki-prompt-agentic v3).
+              provider: Anthropic
+              apiKeyConfigurationName: wiki-capture-llm
+              model: claude-sonnet-4-6
+              temperature: 0.3
+              maxTokens: 16384
+              timeoutSeconds: 600
+              mcpConfigurationNames:
+                - wiki-capture-mcp
+              # Read-only retrieval allowlist (exact tool names, see LlmQuery@1 mcpToolNames). Without
+              # it every tool of the MCP server is offered - 200 on octo-mcp-service, including write
+              # and admin tools - and each call ships all their schemas (~47k prompt tokens).
+              mcpToolNames:
+                - get_entity_by_id
+                - query_entities
+                - query_entities_simple
+                - search_types
+              maxToolRounds: 8
+              responseFormat: json
+              jsonFormatSample: '{"title":"...","sections":[{"heading":"Summary","sectionContent":"...","sortOrder":0}],"citations":[{"sectionRef":"Summary","sourceQuote":"...","sourceAnchor":"","sourceRtId":"<artifact rtId>"}]}'
+              # No jsonSchema: server-side schema enforcement is unavailable in tools mode;
+              # JSON discipline = prompt + input sanitizing + bounded repair.
+              maxJsonRepairAttempts: 1
+              path: $.artifacts.TotalCount
+              dataPaths:
+                - $.artifacts.Items
+              targetPath: $.draft
+              systemPrompt: |-
+                You are a knowledge management agent for a software company. You convert raw business artifacts into structured, audience-neutral wiki entries through a multi-step process:
+
+                1. EXTRACT - Read every source artifact and identify every discrete fact: decisions (with rationale), actions taken, issues or blockers, technical details.
+                2. RETRIEVE (only if needed) - Use the available MCP tools (e.g. get_entity_by_id, query_entities) to fetch related context: other SourceArtifact entities from the same source system or existing WikiEntry entities on the same topic. Retrieve only what you need; the tools are read-only.
+                3. DRAFT - Produce one structured wiki entry with sections and citations back to the sources, each citation carrying the sourceRtId of the artifact quoted.
+                4. REVIEW - Re-read the sources and check your draft for missing information (completeness), unsupported claims (hallucinations), and correct attribution. Keep intermediate notes concise: bullet list, at most 150 words; output NONE when no issues are found.
+                5. REVISE - Fix any issues found in the review step.
+
+                Rules:
+                - Ground every claim in the source material. If information is missing or unclear, omit it. Never invent information.
+                - Attribute statements to the people named in the sources. If an artifact is marked as PII-redacted, keep the anonymized identifiers as-is.
+                - Your final answer must be JSON only, exactly matching the requested schema.
+                CRITICAL: The final answer must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
+              question: |-
+                The main content line is the number of source artifacts. The additional context lists every source artifact with its RtId and Attributes (Name, SourceSystem, SourceUri, Content).
+
+                Work through EXTRACT, RETRIEVE (if needed), DRAFT, REVIEW, REVISE, then return the final entry with these sections in this order: "Summary", "Decisions", "Action items", "Issues and blockers", "Technical detail", "Sources". Every section needs citations with word-for-word source quotes.
+
+                Return JSON: {"title": string, "sections": [{"heading": string, "sectionContent": string, "sortOrder": number}], "citations": [{"sectionRef": string, "sourceQuote": string, "sourceAnchor": string, "sourceRtId": string}]}
+                CRITICAL: Output must be strictly valid JSON. Never emit an unescaped double quote inside a string value — use single quotes when quoting source text.
+            - type: CreateUpdateInfo@1
+              description: Create the WikiEntry (silver, Draft).
+              targetPath: $._updateItems
+              targetValueKind: Array
+              targetValueWriteMode: Append
+              updateKind: INSERT
+              ckTypeId: KnowledgeCapture/WikiEntry
+              rtIdPath: $.newEntryRtId
+              generateRtId: true
+              attributeUpdates:
+                - attributeName: Name
+                  attributeValueType: String
+                  valuePath: $.draft.title
+                - attributeName: Sections
+                  attributeValueType: RecordArray
+                  valuePath: $.draft.sections
+                - attributeName: Citations
+                  attributeValueType: RecordArray
+                  valuePath: $.draft.citations
+                - attributeName: VerificationStatus
+                  attributeValueType: Enum
+                  value: Draft
+                - attributeName: GenerationMode
+                  attributeValueType: Enum
+                  value: Agentic
+                - attributeName: PromptName
+                  attributeValueType: String
+                  value: wiki-prompt-agentic
+                - attributeName: PromptVersion
+                  attributeValueType: Int
+                  value: 3
+                - attributeName: ModelId
+                  attributeValueType: String
+                  value: claude-sonnet-4-6
+            - type: ForEach@1
+              description: Link the entry to every source artifact (GeneratedFrom); one update per artifact, collected in request order.
+              iterationPath: $.artifacts.Items
+              mergePath: $.key.assoc
+              targetPath: $._assocItems
+              transformations:
+                - type: CreateAssociationUpdate@1
+                  targetPath: $.key.assoc
+                  updateKind: CREATE
+                  originRtIdPath: $.full._updateItems[0].RtId
+                  originCkTypeIdPath: $.full._updateItems[0].CkTypeId
+                  targetRtIdPath: $.key.RtId
+                  targetCkTypeId: KnowledgeCapture/SourceArtifact
+                  associationRoleId: KnowledgeCapture/GeneratedFrom
+            - type: ApplyChanges@2
+              description: Persist the entry and its associations.
+              entityUpdatesPath: $._updateItems
+              associationUpdatesPath: $._assocItems

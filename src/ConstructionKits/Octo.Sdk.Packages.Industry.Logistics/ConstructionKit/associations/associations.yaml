@@ -13,11 +13,11 @@ associationRoles:
   inboundMultiplicity: N
   outboundMultiplicity: One
 - id: OrderItemArticle
-  description: "OrderItem -> Article. Creates OrderItem.Article (one) and Article.OrderItems (many)."
+  description: "OrderItem -> Article. Creates OrderItem.Article (zeroOrOne; a shipping-cost line references no article) and Article.OrderItems (many)."
   inboundName: OrderItems
   outboundName: Article
   inboundMultiplicity: N
-  outboundMultiplicity: One
+  outboundMultiplicity: ZeroOrOne
 # --- Shipping / stock (return path) ---
 - id: ShipmentOrder
   description: "Shipment -> Order. Creates Shipment.Order (one) and Order.Shipments (many)."

@@ -20,3 +20,9 @@ attributes:
 - id: Completeness
   valueType: Enum
   valueCkEnumId: ${this}/Completeness
+- id: CarrierToken
+  valueType: String
+  description: "Carrier reference exactly as the fulfilment partner delivered it (for a shop system: its own carrier id), beside the Carrier enum."
+- id: TrackingUrl
+  valueType: String
+  description: "The carrier's tracking link when the partner delivered one."

@@ -2,14 +2,26 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: OrderItem
   derivedFromCkTypeId: ${System}/Entity
-  description: "A line item of a logistics order."
+  description: "A line item of a logistics order: an article line, or the shipping cost as a line of its own (ItemKind)."
   attributes:
+  - id: ${this}/ItemKind
+    name: ItemKind
   - id: ${this}/PositionNumber
     name: PositionNumber
+    isOptional: true
+  - id: ${this}/Title
+    name: Title
+    isOptional: true
   - id: ${Basic}/Quantity
     name: Quantity
-  - id: ${Basic}/Amount                        # Value + Unit (net unit price)
-    name: UnitPriceNet
+  - id: ${this}/NetAmount
+    name: NetAmount
+    isOptional: true
+  - id: ${this}/GrossAmount
+    name: GrossAmount
+    isOptional: true
+  - id: ${this}/TaxRate
+    name: TaxRate
     isOptional: true
   associations:
   - id: ${this}/OrderItemOrder

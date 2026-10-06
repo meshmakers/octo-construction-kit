@@ -20,7 +20,7 @@ description: |
 ckModelDependencies:
   # Floors pinned to published versions, in dependency order: the engine
   # installs each floor EXACTLY and resolves no transitive CK dependencies.
-  - Basic-[2.3.0,3.0)
+  - Basic-[2.4.0,3.0)
   - OctoSdkDemo-[2.4.0,3.0)
   # Satisfiability floor only - service-managed, see Samples.PipelineBasics.
   - System.Communication-[3.22.0,4.0)

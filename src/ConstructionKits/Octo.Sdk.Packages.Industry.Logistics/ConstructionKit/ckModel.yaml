@@ -9,4 +9,5 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
 # value of an unset Enum attribute is 0, so it must map to a defined member.
 modelId: Industry.Logistics-3.2.0
 dependencies:
-  - Basic-[2.0,3.0)
+  - System-[2.5,3.0)
+  - Basic-[2.4,3.0)

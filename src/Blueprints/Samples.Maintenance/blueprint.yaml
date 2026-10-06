@@ -15,6 +15,6 @@ ckModelDependencies:
   # Floors are pinned to the published versions and listed in dependency order:
   # the blueprint engine installs each floor EXACTLY and does NOT resolve a CK
   # model's own dependencies, so Basic has to be named before Industry.Basic.
-  - Basic-[2.3.0,3.0)
+  - Basic-[2.4.0,3.0)
   - Industry.Basic-[2.5.0,3.0)
 seedDataPath: seed-data/master-data/machines.yaml

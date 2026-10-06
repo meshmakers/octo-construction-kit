@@ -63,7 +63,7 @@ octo-bpm -c validate -p src/Blueprints/Locations.Austria
 octo-bpm -c publish -p src/Blueprints/Locations.Austria --catalog LocalFileSystemBlueprintCatalog -f
 
 # Install on a tenant
-octo-cli -c InstallBlueprint -b Locations.Austria-1.1.0
+octo-cli -c InstallBlueprint -b Locations.Austria-1.2.0
 ```
 
 `validate` lists every seed file a blueprint declares — use it to confirm a

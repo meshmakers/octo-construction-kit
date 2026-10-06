@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Samples.EnergyEnvironment-1.0.0
+blueprintId: Samples.EnergyEnvironment-1.1.0
 description: |
   The largest of the sample blueprints - a complete energy-management demo for
   one industrial site, from assets to dashboard:
@@ -22,11 +22,11 @@ description: |
 ckModelDependencies:
   # Floors pinned to published versions, in dependency order: the engine
   # installs each floor EXACTLY and resolves no transitive CK dependencies.
-  - Basic-[2.0.3,3.0)
-  - Basic.Energy-[1.4.0,2.0)
-  - Industry.Basic-[2.2.0,3.0)
-  - Industry.Energy-[3.2.0,4.0)
-  - Environment-[3.2.0,4.0)
+  - Basic-[2.3.0,3.0)
+  - Basic.Energy-[1.9.0,2.0)
+  - Industry.Basic-[2.5.0,3.0)
+  - Industry.Energy-[3.5.0,4.0)
+  - Environment-[3.5.0,4.0)
   # Satisfiability floors only - service-managed, see Samples.PipelineBasics.
   - System-[2.2.0,3.0)
   - System.Notification-[2.1.0,3.0)

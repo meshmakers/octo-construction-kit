@@ -1,0 +1,20 @@
+$schema: https://schemas.meshmakers.cloud/ck-migration.schema.json
+sourceVersion: "2.2.0"
+targetVersion: "3.0.0"
+description: |
+  Migration from Industry.Logistics 2.x to 3.0.0 (AB#5399). Intentionally empty.
+
+  3.0.0 is a major only because the version gate classifies the new UniqueNotDeleted
+  indexes on (Source, OrderNumber) and (Source, ExportKind, ExportDay) as a major change.
+  Everything else is additive, and the two removed assignments (Order.DeliveryAddress,
+  OrderItem.UnitPriceNet) are written and read by no adapter. The data needs no transform:
+  existing records keep Source = Unknown until an adapter states it, and are relabelled per
+  tenant by the operator (see the AB#5399 commit message).
+
+  Why the script exists at all (AB#4924 / G3): the CK engine now refuses the post-chain
+  schema-only bridge across a major version (CkMigrationMajorVersionGuard). Before this entry
+  the chain ended at 2.0.0, so every tenant on Industry.Logistics 2.x would have been refused
+  on its upgrade to 3.x. This empty step is the explicit statement that 2.x -> 3.0.0 is
+  schema-only, which the guard requires instead of assuming it.
+
+steps: []

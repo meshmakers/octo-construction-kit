@@ -6,3 +6,23 @@ migrations:
     scriptPath: 1.2.0-to-2.0.0.yaml
     description: "Rename ExportDate to ExportDay on ExportRun"
     breaking: true
+
+  # AB#4924 / G3 — 2.x -> 3.0.0 (AB#5399) is schema-only, but the CK engine now refuses a
+  # schema-only bridge across a major (CkMigrationMajorVersionGuard). One entry per released 2.x,
+  # all pointing at the same empty script, so no 2.x tenant sits above the last entry point.
+  # Whoever bumps Industry.Logistics 2.x again (or adds a 3.x major on top) must extend this list.
+  - fromVersion: "2.0.0"
+    toVersion: "3.0.0"
+    scriptPath: 2.2.0-to-3.0.0.yaml
+    description: "Schema-only major (unique indexes on Source, AB#5399) — entry point for 2.0.0"
+    breaking: false
+  - fromVersion: "2.1.0"
+    toVersion: "3.0.0"
+    scriptPath: 2.2.0-to-3.0.0.yaml
+    description: "Schema-only major (unique indexes on Source, AB#5399) — entry point for 2.1.0"
+    breaking: false
+  - fromVersion: "2.2.0"
+    toVersion: "3.0.0"
+    scriptPath: 2.2.0-to-3.0.0.yaml
+    description: "Schema-only major (unique indexes on Source, AB#5399) — entry point for 2.2.0"
+    breaking: false

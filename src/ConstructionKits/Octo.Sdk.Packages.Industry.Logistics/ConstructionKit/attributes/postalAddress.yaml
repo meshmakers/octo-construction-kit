@@ -1,0 +1,13 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: Zipcode
+  valueType: String
+  description: "Postal code as text - leading zeros and letters are part of it."
+- id: ShipTo
+  valueType: Record
+  valueCkRecordId: ${this}/PostalAddress
+  description: "Where the goods go."
+- id: BillTo
+  valueType: Record
+  valueCkRecordId: ${this}/PostalAddress
+  description: "Whom the invoice addresses."

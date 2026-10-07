@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Samples.Photovoltaics-1.0.1
+blueprintId: Samples.Photovoltaics-1.1.0
 description: |
   End-to-end photovoltaic demo: master data for a small PV plant (inverter,
   battery storage, two module strings, two energy meters) plus the two-adapter
@@ -27,9 +27,9 @@ description: |
 ckModelDependencies:
   # Floors pinned to published versions, in dependency order: the engine
   # installs each floor EXACTLY and resolves no transitive CK dependencies.
-  - Basic-[2.0.3,3.0)
-  - Industry.Basic-[2.2.0,3.0)
-  - Industry.Energy-[3.2.0,4.0)
+  - Basic-[2.4.0,3.0)
+  - Industry.Basic-[2.5.0,3.0)
+  - Industry.Energy-[3.5.0,4.0)
   # Satisfiability floor only - service-managed, see Samples.PipelineBasics.
   - System.Communication-[3.22.0,4.0)
 seedDataPaths:

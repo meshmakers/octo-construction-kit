@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Samples.Simulator.EnergyCommunity-1.0.0
+blueprintId: Samples.Simulator.EnergyCommunity-1.1.0
 description: |
   Energy-community demo on the OctoSdkDemo model: a Basic/Tree of Salzburg
   regions carrying operating facilities and their metering points, plus two
@@ -20,8 +20,8 @@ description: |
 ckModelDependencies:
   # Floors pinned to published versions, in dependency order: the engine
   # installs each floor EXACTLY and resolves no transitive CK dependencies.
-  - Basic-[2.0.3,3.0)
-  - OctoSdkDemo-[2.1.0,3.0)
+  - Basic-[2.4.0,3.0)
+  - OctoSdkDemo-[2.4.0,3.0)
   # Satisfiability floor only - service-managed, see Samples.PipelineBasics.
   - System.Communication-[3.22.0,4.0)
 seedDataPaths:

@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - System.Communication-[3.22.0,4.0)
+  - System.Communication-[4.0,5.0)
 
 # Pipeline chaining: a producer pipeline hands its payload to a consumer
 # pipeline through the distributed event hub (ToPipelineDataEvent@1 ->

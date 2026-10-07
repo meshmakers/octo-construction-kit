@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Samples.PipelineBasics-1.0.0
+blueprintId: Samples.PipelineBasics-2.0.0
 description: |
   Two minimal DataFlows that demonstrate how pipelines are wired, without any
   domain data:
@@ -11,7 +11,7 @@ description: |
 
   Both run on the Mesh Adapter that System.Communication seeds
   (rtId 670000000000000000000002, rtWellKnownName MeshAdapter), so no adapter
-  or pool is seeded here. Enable Communication on the tenant first, then deploy
+  or deployment site is seeded here. Enable Communication on the tenant first, then deploy
   the two DataFlows after installing - a seeded pipeline is not registered on
   the adapter until its DataFlow is deployed.
 
@@ -21,7 +21,7 @@ ckModelDependencies:
   # service-managed and the install is redirected to the
   # IServiceManagedCkModelDescriptor version (AB#4294). Same floor the
   # System.Communication.* blueprints declare.
-  - System.Communication-[3.22.0,4.0)
+  - System.Communication-[4.0,5.0)
 seedDataPaths:
   - seed-data/data-flows/pipeline-chaining.yaml
   - seed-data/data-flows/scheduled-trigger.yaml

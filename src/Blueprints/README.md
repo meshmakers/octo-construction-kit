@@ -20,8 +20,9 @@ The `Samples.*` blueprints replace the `ImportRt` scripts that used to live in
 
 ## What a sample blueprint does NOT seed
 
-- **Pool and Mesh Adapter.** `System.Communication.MainLatest` / `.Release` seed
-  the Cloud pool (`670000000000000000000001`) and the Mesh Adapter
+- **Deployment site and Mesh Adapter.** `System.Communication.MainLatest` / `.Release` seed
+  the Cloud deployment site (`670000000000000000000001`, called Pool before
+  System.Communication 4.0.0) and the Mesh Adapter
   (`670000000000000000000002`, `rtWellKnownName: MeshAdapter`), and the
   Communication Controller applies them automatically when Communication is
   enabled. Every sample pipeline points its `Executes` association at that rtId;

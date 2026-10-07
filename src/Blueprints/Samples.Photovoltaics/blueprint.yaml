@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Samples.Photovoltaics-1.1.0
+blueprintId: Samples.Photovoltaics-2.0.0
 description: |
   End-to-end photovoltaic demo: master data for a small PV plant (inverter,
   battery storage, two module strings, two energy meters) plus the two-adapter
@@ -14,7 +14,7 @@ description: |
   this blueprint targets) and Stream Data enabled plus archives configured for
   the metered attributes - SaveStreamDataInArchive@1 needs them.
 
-  The Edge pool and the Modbus adapter ARE seeded here: an edge adapter runs
+  The Edge deployment site and the Modbus adapter ARE seeded here: an edge adapter runs
   next to the hardware and is not provided by the platform. Its pipeline
   service account is provisioned automatically after the apply (AB#5111).
   Point the ReadModbusRegister server address at your own device before
@@ -31,7 +31,7 @@ ckModelDependencies:
   - Industry.Basic-[2.5.0,3.0)
   - Industry.Energy-[3.5.0,4.0)
   # Satisfiability floor only - service-managed, see Samples.PipelineBasics.
-  - System.Communication-[3.22.0,4.0)
+  - System.Communication-[4.0,5.0)
 seedDataPaths:
   - seed-data/master-data/pv-plant.yaml
   - seed-data/adapters/modbus-edge.yaml

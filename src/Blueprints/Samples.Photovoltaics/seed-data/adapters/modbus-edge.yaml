@@ -1,8 +1,8 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - System.Communication-[3.22.0,4.0)
+  - System.Communication-[4.0,5.0)
 
-# Edge side of the photovoltaic demo: an Edge pool, the Modbus adapter that
+# Edge side of the photovoltaic demo: an Edge deployment site, the Modbus adapter that
 # polls the inverter, and the two pipelines of the "PV Firmianstrasse" flow.
 #
 # Split by adapter, as the node prerequisites demand:
@@ -19,16 +19,17 @@ dependencies:
 # seeded here.
 entities:
   - rtId: 5fc8fc3d8b2fc75f925e21af
-    ckTypeId: System.Communication/Pool
+    # DeploymentSite was called Pool before System.Communication 4.0.0.
+    ckTypeId: System.Communication/DeploymentSite
     attributes:
       - id: System/Name
         value: k8sfirmianstrasse
       - id: System/Description
         value: >-
-          Edge pool for the photovoltaic demo. Edge pools are NOT rolled out by
-          the central Communication Operator - the pool operator runs next to
-          the hardware and registers itself.
-      # Mandatory since the workload model; without it the pool defaults to
+          Edge deployment site for the photovoltaic demo. Edge sites are NOT
+          rolled out by the central Communication Operator - the site's operator
+          runs next to the hardware and registers itself.
+      # Mandatory since the workload model; without it the site defaults to
       # Edge silently instead of saying so.
       - id: System.Communication/Environment
         value: 0   # Edge
@@ -58,9 +59,10 @@ entities:
       - id: System.Communication/DeploymentState
         value: 0
     associations:
-      - roleId: System.Communication/Manages
+      # Hosts/HostedBy was called Manages/ManagedBy before 4.0.0.
+      - roleId: System.Communication/Hosts
         targetRtId: 5fc8fc3d8b2fc75f925e21af
-        targetCkTypeId: System.Communication/Pool
+        targetCkTypeId: System.Communication/DeploymentSite
       # Deliberately NO HelmRepository association. Those
       # HelmRepositoryConfiguration entities are seeded by
       # System.Communication.Release only; on a MainLatest (dev/test) tenant the

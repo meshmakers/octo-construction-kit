@@ -21,7 +21,7 @@ ckModelDependencies:
   # service-managed and the install is redirected to the
   # IServiceManagedCkModelDescriptor version (AB#4294). Same floor the
   # System.Communication.* blueprints declare.
-  - System.Communication-[4.0,5.0)
+  - System.Communication-[4.5,5.0)
 seedDataPaths:
   - seed-data/data-flows/pipeline-chaining.yaml
   - seed-data/data-flows/scheduled-trigger.yaml

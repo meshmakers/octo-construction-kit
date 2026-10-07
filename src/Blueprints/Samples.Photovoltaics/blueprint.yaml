@@ -31,7 +31,7 @@ ckModelDependencies:
   - Industry.Basic-[2.5.0,3.0)
   - Industry.Energy-[3.5.0,4.0)
   # Satisfiability floor only - service-managed, see Samples.PipelineBasics.
-  - System.Communication-[4.0,5.0)
+  - System.Communication-[4.5,5.0)
 seedDataPaths:
   - seed-data/master-data/pv-plant.yaml
   - seed-data/adapters/modbus-edge.yaml

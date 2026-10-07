@@ -10,3 +10,6 @@ types:
       - id: ${this}/EnergyProductionCapacity
         name: EnergyProductionCapacity
         isOptional: true
+      - id: ${this}/MeteringDataSource
+        name: MeteringDataSource
+        isOptional: true

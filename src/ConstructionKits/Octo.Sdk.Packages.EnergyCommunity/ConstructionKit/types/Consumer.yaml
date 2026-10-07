@@ -10,3 +10,9 @@ types:
       - id: ${this}/EnergyConsumption
         name: EnergyConsumption
         isOptional: true
+      - id: ${this}/MeteringDataSource
+        name: MeteringDataSource
+        isOptional: true
+      - id: ${this}/LoadProfile
+        name: LoadProfile
+        isOptional: true

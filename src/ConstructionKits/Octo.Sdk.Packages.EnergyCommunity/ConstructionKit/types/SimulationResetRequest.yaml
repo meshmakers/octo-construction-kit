@@ -1,0 +1,27 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: SimulationResetRequest
+    derivedFromCkTypeId: ${System}/Entity
+    description: "A request to reset the simulated data of the energy community. The request is only recorded here; an operator tool executes it and writes state and report back."
+    attributes:
+      - id: ${this}/SimulationResetMode
+        name: Mode
+      - id: ${this}/BackfillDays
+        name: Days
+        isOptional: true
+      - id: ${this}/DiscardReported
+        name: DiscardReported
+        isOptional: true
+      - id: ${this}/SimulationResetState
+        name: State
+      - id: ${this}/RequestedAt
+        name: RequestedAt
+      - id: ${this}/RequestedBy
+        name: RequestedBy
+        isOptional: true
+      - id: ${this}/CompletedAt
+        name: CompletedAt
+        isOptional: true
+      - id: ${System}/Description
+        name: Message
+        isOptional: true

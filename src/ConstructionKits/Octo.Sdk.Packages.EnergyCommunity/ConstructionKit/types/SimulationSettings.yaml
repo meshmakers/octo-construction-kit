@@ -41,12 +41,6 @@ types:
       - id: ${this}/NearRealTime
         name: NearRealTime
         isOptional: true
-      - id: ${this}/AllocationCutoff
-        name: AllocationCutoff
-        isOptional: true
-      - id: ${this}/AllocationKey
-        name: AllocationKey
-        isOptional: true
       - id: ${this}/SupersededByReset
         name: SupersededByReset
         isOptional: true

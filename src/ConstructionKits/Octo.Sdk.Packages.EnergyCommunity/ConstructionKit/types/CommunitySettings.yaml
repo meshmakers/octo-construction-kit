@@ -1,0 +1,15 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: CommunitySettings
+    derivedFromCkTypeId: ${System}/Entity
+    description: "Product settings of the energy community as a whole (one entity per tenant; real and simulated communities alike). Readers take the first entity and fall back to the documented defaults when none exists or a value is empty."
+    attributes:
+      - id: ${this}/AllocationCutOffTime
+        name: AllocationCutOffTime
+        isOptional: true
+      - id: ${this}/AllocationKey
+        name: AllocationKey
+        isOptional: true
+      - id: ${System}/Description
+        name: Comment
+        isOptional: true

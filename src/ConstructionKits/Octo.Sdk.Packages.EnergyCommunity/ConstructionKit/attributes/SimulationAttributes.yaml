@@ -45,9 +45,9 @@ attributes:
   - id: NearRealTime
     valueType: Boolean
     description: "Generate values every 15 minutes instead of once per day (planned)"
-  - id: AllocationCutoff
+  - id: AllocationCutOffTime
     valueType: String
-    description: "Local time (HH:mm, Europe/Vienna) on day D+1 after which the allocation of day D is frozen (default 06:00)"
+    description: "Local time (HH:mm, Europe/Vienna) on day D+1 after which the allocation of day D is final and frozen; empty means 06:00"
   - id: AllocationKey
     valueType: Enum
     valueCkEnumId: ${this}/AllocationKey

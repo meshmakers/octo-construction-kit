@@ -127,6 +127,9 @@ dotnet test Octo.ConstructionKit.sln --configuration Release --filter "FullyQual
    - `Meshmakers.Octo.Runtime.Contracts`
    - `Meshmakers.Octo.ConstructionKit.SourceGeneration` (analyzer)
    - `Meshmakers.Octo.ConstructionKit.MsBuildTasks`
+   - a `<ProjectReference>` to every sibling CK model project listed in `ckModel.yaml` `dependencies`
+     (directly or transitively) — otherwise parallel builds can resolve the dependency against a stale
+     local catalog
 3. Create a `ConstructionKit/` directory with a `ckModel.yaml`:
    ```yaml
    $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json

@@ -251,8 +251,20 @@ entities:
             - type: Project@1
               fields:
                 - path: $.x
+            # One node per archive: each archive only takes rows of its own
+            # TargetCkTypeId, the others are skipped (seed-data/archives).
             - type: SaveStreamDataInArchive@1
+              description: archive module PeakPower
               path: $._updateItems
+              archiveRtId: 5fc8fda18b2fc75f925e21d1
+            - type: SaveStreamDataInArchive@1
+              description: archive battery Power and SoC
+              path: $._updateItems
+              archiveRtId: 5fc8fda18b2fc75f925e21d2
+            - type: SaveStreamDataInArchive@1
+              description: archive meter Power
+              path: $._updateItems
+              archiveRtId: 5fc8fda18b2fc75f925e21d3
             - type: FilterLatestUpdateInfo@1
               path: $._updateItems
               targetPath: $._updateItems

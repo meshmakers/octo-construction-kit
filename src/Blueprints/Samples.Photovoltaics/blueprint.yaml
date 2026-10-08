@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Samples.Photovoltaics-2.0.0
+blueprintId: Samples.Photovoltaics-2.0.1
 description: |
   End-to-end photovoltaic demo: master data for a small PV plant (inverter,
   battery storage, two module strings, two energy meters) plus the two-adapter
@@ -11,8 +11,11 @@ description: |
                      applies the latest value to the entities.
 
   Prerequisites on the tenant: Communication enabled (supplies the Mesh Adapter
-  this blueprint targets) and Stream Data enabled plus archives configured for
-  the metered attributes - SaveStreamDataInArchive@1 needs them.
+  this blueprint targets) and Stream Data enabled. The three raw archives the
+  Mesh Pipeline writes to (modules, battery storage, energy meters) are seeded
+  here, but a blueprint does not activate archives: run ActivateArchive for
+  5fc8fda18b2fc75f925e21d1, 5fc8fda18b2fc75f925e21d2 and
+  5fc8fda18b2fc75f925e21d3 before deploying the DataFlow.
 
   The Edge deployment site and the Modbus adapter ARE seeded here: an edge adapter runs
   next to the hardware and is not provided by the platform. Its pipeline
@@ -35,3 +38,4 @@ ckModelDependencies:
 seedDataPaths:
   - seed-data/master-data/pv-plant.yaml
   - seed-data/adapters/modbus-edge.yaml
+  - seed-data/archives/pv-archives.yaml

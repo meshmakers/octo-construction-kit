@@ -1,0 +1,49 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+  - typeId: SimulationSettings
+    derivedFromCkTypeId: ${System}/Entity
+    description: "One revision of the simulation settings of an energy community. For a day D the non-superseded revision with the greatest effective date <= D applies; the effective date is max(EffectiveFrom, creation date), except for the base revision written by a reset. Unset values fall back to the simulation defaults."
+    attributes:
+      - id: ${this}/SimulationPreset
+        name: Preset
+      - id: ${this}/EffectiveFrom
+        name: EffectiveFrom
+      - id: ${this}/SimulationSeed
+        name: Seed
+        isOptional: true
+      - id: ${this}/ConsumptionFactor
+        name: ConsumptionFactor
+        isOptional: true
+      - id: ${this}/PvCapacityFactor
+        name: PvCapacityFactor
+        isOptional: true
+      - id: ${this}/PvSpecificYield
+        name: PvSpecificYield
+        isOptional: true
+      - id: ${this}/MemberSpread
+        name: MemberSpread
+        isOptional: true
+      - id: ${this}/SimulationNoiseLevel
+        name: Noise
+        isOptional: true
+      - id: ${this}/SimulationWeatherMode
+        name: Weather
+        isOptional: true
+      - id: ${this}/MemberScale
+        name: MemberScale
+        isOptional: true
+      - id: ${this}/BackfillDays
+        name: BackfillDays
+        isOptional: true
+      - id: ${this}/DailyRun
+        name: DailyRun
+        isOptional: true
+      - id: ${this}/NearRealTime
+        name: NearRealTime
+        isOptional: true
+      - id: ${this}/SupersededByReset
+        name: SupersededByReset
+        isOptional: true
+      - id: ${System}/Description
+        name: Comment
+        isOptional: true

@@ -70,8 +70,12 @@ octo-cli -c InstallBlueprint -b Locations.Austria-1.2.0
 `validate` lists every seed file a blueprint declares — use it to confirm a
 `seedDataPaths` list is complete after adding or renaming a file.
 
-Shared distribution happens via the GitHub blueprint catalog
-(`meshmakers/blueprint-libraries-build`), published with `octo-bpm -c publish`.
+Shared distribution happens in CI through the shared
+`validate-and-publish-blueprints` step of `octo-pipeline-templates`: `main` publishes
+to the private blueprint catalog (`meshmakers/blueprint-libraries-build`), `r*` tags
+to the private **and** the public one, never replacing a published version. The
+test lane (`test/*` branches) publishes to `meshmakers/octo-catalog-dev` instead. A content
+change without a version bump fails the build, so raise the blueprint's version.
 
 ## Seed data layout
 

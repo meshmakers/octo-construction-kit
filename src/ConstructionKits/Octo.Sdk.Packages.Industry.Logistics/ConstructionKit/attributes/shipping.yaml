@@ -2,27 +2,37 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: ShipmentNumber
   valueType: String
+  ownership: SeedOwned
   description: "Dispatch / forwarding number"
 - id: ShipmentDate
   valueType: DateTime
+  ownership: SeedOwned
 - id: TrackingNumber
   valueType: String
+  ownership: SeedOwned
   description: "Parcel / tracking number"
 - id: PackagingType
   valueType: String
+  ownership: SeedOwned
 - id: ServiceType
   valueType: String
+  ownership: SeedOwned
 - id: ParcelCount
   valueType: Int
+  ownership: SeedOwned
 - id: Carrier
   valueType: Enum
   valueCkEnumId: ${this}/Carrier
+  ownership: SeedOwned
 - id: Completeness
   valueType: Enum
   valueCkEnumId: ${this}/Completeness
+  ownership: SeedOwned
 - id: CarrierToken
   valueType: String
+  ownership: SeedOwned
   description: "Carrier reference exactly as the fulfilment partner delivered it (for a shop system: its own carrier id), beside the Carrier enum."
 - id: TrackingUrl
   valueType: String
+  ownership: SeedOwned
   description: "The carrier's tracking link when the partner delivered one."

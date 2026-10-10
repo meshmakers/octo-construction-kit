@@ -2,19 +2,24 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: CertificateIssuer
   valueType: String
+  ownership: SeedOwned
   description: "Issuer of the certificate of origin (e.g. HKN-Austria)"
 - id: CertificateValidFrom
   valueType: DateTime
+  ownership: SeedOwned
   description: "Start of the certificate validity period"
 - id: CertificateValidTo
   valueType: DateTime
+  ownership: SeedOwned
   description: "End of the certificate validity period"
 - id: EnergySource
   valueType: Enum
   valueCkEnumId: ${this}/EnergySource
+  ownership: SeedOwned
   description: "Type of renewable energy source"
 - id: CertifiedAmount
   valueType: Double
+  ownership: SeedOwned
   description: "Amount of certified renewable energy"
   metaData:
     - key: Unit
@@ -23,4 +28,5 @@ attributes:
       value: 2
 - id: IsVerified
   valueType: Boolean
+  ownership: SeedOwned
   description: "Whether the certificate has been verified"

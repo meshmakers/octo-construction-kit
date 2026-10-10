@@ -2,9 +2,11 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: BudgetYear
   valueType: Int
+  ownership: SeedOwned
   description: "Year of the carbon budget"
 - id: BudgetTotal
   valueType: Double
+  ownership: SeedOwned
   description: "Total carbon budget for the year"
   metaData:
     - key: Unit
@@ -13,6 +15,7 @@ attributes:
       value: 1
 - id: BudgetConsumed
   valueType: Double
+  ownership: SeedOwned
   description: "Carbon budget consumed so far"
   metaData:
     - key: Unit
@@ -21,6 +24,7 @@ attributes:
       value: 1
 - id: TargetFulfillment
   valueType: Double
+  ownership: SeedOwned
   description: "Percentage of target fulfillment"
   metaData:
     - key: Unit
@@ -29,6 +33,7 @@ attributes:
       value: 1
 - id: DailyEmissions
   valueType: Double
+  ownership: SeedOwned
   description: "Carbon emissions for the current day"
   metaData:
     - key: Unit
@@ -37,6 +42,7 @@ attributes:
       value: 1
 - id: MonthlyEmissions
   valueType: Double
+  ownership: SeedOwned
   description: "Carbon emissions for the current month"
   metaData:
     - key: Unit

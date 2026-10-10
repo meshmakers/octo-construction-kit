@@ -2,11 +2,14 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: From
     valueType: DateTime
+    ownership: SeedOwned
     description: "From date within a time range"
   - id: To
     valueType: DateTime
+    ownership: SeedOwned
     description: "To date within a time range"
   - id: TimeRange
     valueType: Record
     description: "A time range with a start and end date"
     valueCkRecordId: ${this}/TimeRange
+    ownership: SeedOwned

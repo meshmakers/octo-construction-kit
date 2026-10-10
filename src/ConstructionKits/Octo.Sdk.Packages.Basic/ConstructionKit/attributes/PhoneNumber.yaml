@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: TelephoneNumber
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO136#002"
@@ -9,6 +10,7 @@ attributes:
   - id: TypeOfTelephoneEnhanced
     valueType: Enum
     valueCkEnumId: ${this}/TypeOfTelephoneEnhanced
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO137#003"
@@ -17,6 +19,7 @@ attributes:
   - id: TypeOfTelephoneBasic
     valueType: Enum
     valueCkEnumId: ${this}/TypeOfTelephoneBasic
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO196#003"

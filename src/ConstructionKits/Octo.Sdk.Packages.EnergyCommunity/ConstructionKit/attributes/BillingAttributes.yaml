@@ -3,45 +3,59 @@ attributes:
   - id: BillingDocumentState
     valueType: Enum
     valueCkEnumId: ${this}/BillingDocumentState
+    ownership: SeedOwned
     description: "The state of the billing document"
   - id: BillingType
     valueType: Enum
     valueCkEnumId: ${this}/BillingType
+    ownership: SeedOwned
     description: "The type of the billing document or billing item"
   - id: GrossAmount
     valueType: Double
+    ownership: SeedOwned
     description: "The gross amount of the billing document"
   - id: NetAmount
     valueType: Double
+    ownership: SeedOwned
     description: "The net amount of the billing document"
   - id: TaxAmount
     valueType: Double
+    ownership: SeedOwned
     description: "The tax amount of the billing document"
   - id: TaxRate
     valueType: Double
+    ownership: SeedOwned
     description: "The tax rate of the billing document"
   - id: UnitPrice
     valueType: Double
+    ownership: SeedOwned
     description: "The unit price of the billing document"
   - id: GrossTotal
     valueType: Double
+    ownership: SeedOwned
     description: "The gross total of the billing document"
   - id: TaxProcedureCreditNote
     valueType: Enum
     valueCkEnumId: ${this}/TaxProcedureCreditNote
+    ownership: SeedOwned
     description: "The tax procedure credit notes associated with the billing document"
   - id: IntervalCount
     valueType: Int
+    ownership: SeedOwned
     description: "Total number of stream-data intervals aggregated into the billed quantity"
   - id: IntervalCountL1
     valueType: Int
+    ownership: SeedOwned
     description: "Number of billed intervals with data quality L1 (metered values)"
   - id: IntervalCountL2
     valueType: Int
+    ownership: SeedOwned
     description: "Number of billed intervals with data quality L2 (interpolated values)"
   - id: IntervalCountL3
     valueType: Int
+    ownership: SeedOwned
     description: "Number of billed intervals with data quality L3 (estimated values)"
   - id: IntervalCountUnknown
     valueType: Int
+    ownership: SeedOwned
     description: "Number of billed intervals with unknown data quality"

@@ -2,80 +2,105 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: TransactionId
     valueType: String
+    ownership: SeedOwned
     description: "Unique identifier of the transaction from the source system"
   - id: Amount
     valueType: Double
+    ownership: SeedOwned
     description: "Transaction amount (positive for credit, negative for debit)"
   - id: TransactionCurrency
     valueType: String
+    ownership: SeedOwned
     description: "ISO 4217 currency code of the transaction"
   - id: BookingDate
     valueType: DateTime
+    ownership: SeedOwned
     description: "Date when the transaction was booked"
   - id: ValueDate
     valueType: DateTime
+    ownership: SeedOwned
     description: "Value date of the transaction"
   - id: Purpose
     valueType: String
+    ownership: SeedOwned
     description: "Purpose or reference text of the transaction"
   - id: TransactionText
     valueType: String
+    ownership: SeedOwned
     description: "Descriptive text of the transaction from the bank statement"
   - id: PaymentReference
     valueType: String
+    ownership: SeedOwned
     description: "Payment reference of the transaction"
   - id: CounterpartName
     valueType: String
+    ownership: SeedOwned
     description: "Name of the counterpart (sender or receiver)"
   - id: CounterpartIban
     valueType: String
+    ownership: SeedOwned
     description: "IBAN of the counterpart"
   - id: CounterpartBic
     valueType: String
+    ownership: SeedOwned
     description: "BIC/SWIFT code of the counterpart's bank"
   - id: TransactionDirection
     valueType: Enum
     valueCkEnumId: ${this}/TransactionDirection
+    ownership: SeedOwned
     description: "Direction of the transaction (Credit or Debit)"
   - id: EndToEndReference
     valueType: String
+    ownership: SeedOwned
     description: "End-to-end reference of the transaction"
   - id: MandateReference
     valueType: String
+    ownership: SeedOwned
     description: "SEPA mandate reference for direct debits"
   - id: CreditorId
     valueType: String
+    ownership: SeedOwned
     description: "SEPA creditor identifier for direct debits"
   - id: BankTransactionCode
     valueType: String
+    ownership: SeedOwned
     description: "Bank transaction code classifying the transaction type"
   - id: TransactionAccountServicerReference
     valueType: String
+    ownership: SeedOwned
     description: "The bank's own booking reference of the entry (camt.053 AcctSvcrRef); together with the account's IBAN the stable deduplication key for statement imports"
   - id: TransactionBookingStatus
     valueType: Enum
     valueCkEnumId: ${this}/TransactionBookingStatus
+    ownership: SeedOwned
     description: "Booking status of the entry as reported by the bank (Booked or Pending)"
   - id: TransactionStatementReference
     valueType: String
+    ownership: SeedOwned
     description: "Identifier of the bank statement the entry came from (camt.053 Stmt/Id, plus the legal sequence number where the bank provides one, e.g. 2026-00042); used for completeness checks over the statement chain"
   - id: TransactionCardTransactionDate
     valueType: DateTime
+    ownership: SeedOwned
     description: "Date the card purchase happened, as printed in the purpose line of card bookings (the booking date is days later); persisted by the importers so the matcher can use it as a key instead of re-parsing the purpose"
   - id: TransactionMatchState
     valueType: Enum
     valueCkEnumId: ${this}/TransactionMatchState
+    ownership: SeedOwned
     description: "Reconciliation state of the transaction against accounting documents"
   - id: TransactionMatchComment
     valueType: String
+    ownership: SeedOwned
     description: "Comment on the reconciliation state, e.g. why a transaction is ignored"
   - id: TransactionExclusionReason
     valueType: Enum
     valueCkEnumId: ${this}/TransactionExclusionReason
+    ownership: SeedOwned
     description: "Why an Ignored transaction is excluded from matching and category analysis (only meaningful when MatchState = Ignored)"
   - id: TransactionInClarification
     valueType: Boolean
+    ownership: SeedOwned
     description: "Marks the transaction as under clarification (open question / needs review). Orthogonal to the reconciliation MatchState; used to surface open clarification cases in an overview and list filter."
   - id: TransactionClarificationNote
     valueType: String
+    ownership: SeedOwned
     description: "Free-text note describing what needs to be clarified about the transaction."

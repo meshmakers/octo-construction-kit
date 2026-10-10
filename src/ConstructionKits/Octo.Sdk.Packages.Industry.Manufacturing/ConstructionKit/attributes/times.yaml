@@ -3,6 +3,8 @@ attributes:
   - id: ProductionStartDateTime
     description: "Date and time when production actually started"
     valueType: DateTime
+    ownership: SeedOwned
   - id: ProductionEndDateTime
     description: "Date and time when production actually ended"
     valueType: DateTime
+    ownership: SeedOwned

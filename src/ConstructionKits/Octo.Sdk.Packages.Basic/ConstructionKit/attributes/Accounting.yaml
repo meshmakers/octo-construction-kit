@@ -2,23 +2,30 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: Iban
     valueType: String
+    ownership: SeedOwned
     description: "International Bank Account Number"
   - id: SwiftCode
     valueType: String
+    ownership: SeedOwned
     description: "Bank Identifier Code"
   - id: BankName
     valueType: String
+    ownership: SeedOwned
     description: "Name of the bank"
   - id: AccountHolder
     valueType: String
+    ownership: SeedOwned
     description: "Name of the account holder"
   - id: BankAccount
     valueType: Record
     description: "Bank account information"
     valueCkRecordId: ${this}/BankAccount
+    ownership: SeedOwned
   - id: TaxIdentificationNumber
     valueType: String
+    ownership: SeedOwned
     description: "Tax identification number of a entity"
   - id: CompanyRegisterNumber
     valueType: String
+    ownership: SeedOwned
     description: "Public registry number for the legal identification of the company"

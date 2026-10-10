@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: Voltage
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "V"
@@ -9,6 +10,7 @@ attributes:
       value: 2
 - id: DCVoltage
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "V"
@@ -16,6 +18,7 @@ attributes:
       value: 2      
 - id: Ampere
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "A"
@@ -23,6 +26,7 @@ attributes:
       value: 2
 - id: DCAmpere
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "A"
@@ -30,6 +34,7 @@ attributes:
       value: 2 
 - id: MaximumPower
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "kW"
@@ -37,6 +42,7 @@ attributes:
       value: 2    
 - id: PeakPower
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "kW"
@@ -44,6 +50,7 @@ attributes:
       value: 2
 - id: ReactivePower
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "kVAr"
@@ -51,6 +58,7 @@ attributes:
       value: 2
 - id: ApparentPower
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "kVA"
@@ -58,6 +66,7 @@ attributes:
       value: 2
 - id: Frequency
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "Hz"
@@ -65,6 +74,7 @@ attributes:
       value: 2
 - id: ExportedEnergy
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "kWh"

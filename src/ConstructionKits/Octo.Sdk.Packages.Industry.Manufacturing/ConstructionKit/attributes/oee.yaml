@@ -3,17 +3,22 @@ attributes:
 - id: Total
   description: "Overall Equipment Effectiveness (OEE) total percentage (0.0 - 1.0)"
   valueType: Double
+  ownership: SeedOwned
 - id: Availability
   description: "OEE Availability metric - percentage of planned production time that operation is available (0.0 - 1.0)"
   valueType: Double
+  ownership: SeedOwned
 - id: Performance
   description: "OEE Performance metric - speed at which work center runs as percentage of designed speed (0.0 - 1.0)"
   valueType: Double
+  ownership: SeedOwned
 - id: Quality
   description: "OEE Quality metric - percentage of good parts out of total parts produced (0.0 - 1.0)"
   valueType: Double
+  ownership: SeedOwned
 - id: OeeStatistics
   description: "Complete OEE statistics bundle containing Total, Availability, Performance, and Quality metrics"
   valueType: Record
   valueCkRecordId: ${this}/OeeStatistics
+  ownership: SeedOwned
   

@@ -2,24 +2,28 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: SoC
   valueType: Int
+  ownership: SeedOwned
   description: "State of Charge"
   metaData:
     - key: Unit
       value: "%"
 - id: SoH
   valueType: Int
+  ownership: SeedOwned
   description: "State of Health"
   metaData:
     - key: Unit
       value: "%"
 - id: NumOfCycles
   valueType: Int
+  ownership: SeedOwned
   description: "Number of full loading cycles since production"
   metaData:
     - key: Unit
       value: ""
 - id: Capacity
   valueType: Double
+  ownership: SeedOwned
   description: "Total Capacity which the battery can store"
   metaData:
     - key: Unit

@@ -3,16 +3,19 @@ attributes:
   - id: NamePlate
     valueType: Record
     valueCkRecordId: ${this}/NamePlate
+    ownership: SeedOwned
     
         
   - id: NamePlate.ManufacturerName
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO677#002"
         description: "legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation"
   - id: NamePlate.ManufacturerProductDesignation
     valueType: String
+    ownership: SeedOwned
     description: "Manufacturer Product Description"
     metaData:
       - key: semanticId
@@ -21,24 +24,28 @@ attributes:
   - id: NamePlate.Address
     valueType: Record
     valueCkRecordId: ${this}/Address
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAQ832#005"
         description: "Address information of a business partner"
   - id: NamePlate.ManufacturerProductFamily
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAU731#001"
         description: "2nd level of a 3 level manufacturer specific product hierarchy"
   - id: NamePlate.SerialNumber
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAM556#002"
         description: "unique combination of numbers and letters used to identify the device once it has been manufactured"
   - id: NamePlate.YearOfConstruction
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAP906#001"
@@ -46,6 +53,7 @@ attributes:
   - id: NamePlate.Markings
     valueType: RecordArray
     valueCkRecordId: ${this}/Marking
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: ""
@@ -53,6 +61,7 @@ attributes:
   - id: NamePlate.AssetSpecificProperties
     valueType: RecordArray
     valueCkRecordId: ${this}/Marking
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO856#002"

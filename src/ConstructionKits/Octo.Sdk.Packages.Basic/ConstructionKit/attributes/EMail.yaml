@@ -2,12 +2,14 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: EMailAddress
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO198#002"
         description: "electronic mail address of a business partner"
   - id: EMailPublicKey
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO200#002"
@@ -15,12 +17,14 @@ attributes:
   - id: EMailTypeOfEmailAddress
     valueType: Enum
     valueCkEnumId: ${this}/TypeOfTelephoneBasic
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO199#003"
         description: "characterization of an e-mail address according to its location or usage"
   - id: EMailTypeOfPublicKey
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO201#002"

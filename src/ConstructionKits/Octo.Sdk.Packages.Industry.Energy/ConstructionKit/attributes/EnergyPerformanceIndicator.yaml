@@ -2,10 +2,13 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: IndicatorValue
   valueType: Double
+  ownership: SeedOwned
   description: "Current value of the energy performance indicator"
 - id: IndicatorUnit
   valueType: String
+  ownership: SeedOwned
   description: "Unit of the energy performance indicator (e.g. kWh/Stk, kWh/m2)"
 - id: ReferenceValue
   valueType: Double
+  ownership: SeedOwned
   description: "Reference or baseline value for comparison"

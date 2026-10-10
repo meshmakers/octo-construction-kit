@@ -3,6 +3,7 @@ attributes:
   - id: State
     valueType: Enum
     valueCkEnumId: ${this}/State
+    ownership: SeedOwned
     description: "The state of an object"
     defaultValues:
       - 1

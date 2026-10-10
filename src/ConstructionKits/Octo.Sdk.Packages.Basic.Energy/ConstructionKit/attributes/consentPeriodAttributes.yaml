@@ -3,15 +3,20 @@ attributes:
   - id: ConsentId
     description: "Identifier for the consent associated with the metering point"
     valueType: String
+    ownership: SeedOwned
   - id: ConsentActive
     description: "Indicates whether the consent is currently active"
     valueType: Boolean
+    ownership: SeedOwned
   - id: ConsentUri
     description: "URI pointing to the consent site of the network operator"
     valueType: String
+    ownership: SeedOwned
   - id: ConsentEmailSent
     description: "Indicates whether an email has been sent to the customer regarding the consent"
     valueType: Boolean
+    ownership: SeedOwned
   - id: ConsentEmailSentSuccess
     description: "Indicates whether the email sent to the customer was successful"
     valueType: Boolean
+    ownership: SeedOwned

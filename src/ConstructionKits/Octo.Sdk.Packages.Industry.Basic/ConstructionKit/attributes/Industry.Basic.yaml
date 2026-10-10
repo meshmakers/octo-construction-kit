@@ -2,18 +2,22 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: OperatingHoursCounter
   valueType: Int
+  ownership: SeedOwned
 
 - id: StandStillCounter
   valueType: Int
+  ownership: SeedOwned
 
 - id: MachineState
   valueType: Enum
   valueCkEnumId: ${this}/MachineState
+  ownership: SeedOwned
   defaultValues:
     - 2
 
 - id: Power
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "kW"
@@ -21,6 +25,7 @@ attributes:
       value: 2
 - id: ImportedEnergy
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "kWh"
@@ -30,10 +35,12 @@ attributes:
 - id: MachineCapabilities
   valueType: Enum
   valueCkEnumId: ${this}/MachineCapabilities
+  ownership: SeedOwned
   defaultValues:
     - 0
 
 - id: IsSimulated
   valueType: Boolean
+  ownership: SeedOwned
   defaultValues:
     - false

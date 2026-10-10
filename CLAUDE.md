@@ -155,7 +155,8 @@ dotnet build Octo.ConstructionKit.sln --configuration DebugL
 Version is controlled via:
 
 1. **OctoVersion** property in `Directory.Build.props`
-   - Default: `3.2.*` (Release), `0.1.*` (NuGet private server), `999.0.0` (DebugL)
+   - `999.0.0` (DebugL), `0.1.*` (NuGet private server); otherwise it comes only from the pipeline
+     (AB#6297) — a Release build without `-p:OctoVersion=X.Y.Z` fails fast with `OCTO0001`
    
 2. **Configuration-based override**:
    - DebugL: Forces `999.0.0`

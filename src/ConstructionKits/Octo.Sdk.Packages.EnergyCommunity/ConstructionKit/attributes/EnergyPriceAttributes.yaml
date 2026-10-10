@@ -2,7 +2,9 @@
 attributes:
   - id: Price
     valueType: Double
+    ownership: SeedOwned
     description: "The price of a given unit of energy"
   - id: Currency
     valueType: String
+    ownership: SeedOwned
     description: "The ISO 4217 representation of the used currency"

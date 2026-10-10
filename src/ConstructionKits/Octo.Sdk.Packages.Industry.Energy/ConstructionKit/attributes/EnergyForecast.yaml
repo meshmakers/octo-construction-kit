@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: PredictedLoad
   valueType: Double
+  ownership: SeedOwned
   description: "Predicted load from AI forecast model"
   metaData:
     - key: Unit
@@ -10,6 +11,7 @@ attributes:
       value: 2
 - id: Confidence
   valueType: Double
+  ownership: SeedOwned
   description: "Confidence level of the forecast prediction"
   metaData:
     - key: Unit
@@ -18,4 +20,5 @@ attributes:
       value: 1
 - id: ForecastModel
   valueType: String
+  ownership: SeedOwned
   description: "Name or identifier of the AI forecast model used"

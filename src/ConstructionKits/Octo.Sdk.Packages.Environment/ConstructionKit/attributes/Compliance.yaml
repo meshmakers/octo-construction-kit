@@ -3,17 +3,22 @@ attributes:
 - id: ComplianceCategory
   valueType: Enum
   valueCkEnumId: ${this}/ComplianceCategory
+  ownership: SeedOwned
   description: "Category of the compliance standard"
 - id: ComplianceStatus
   valueType: Enum
   valueCkEnumId: ${this}/ComplianceStatus
+  ownership: SeedOwned
   description: "Current status of compliance"
 - id: DueDate
   valueType: DateTime
+  ownership: SeedOwned
   description: "Due date for the compliance requirement"
 - id: AuditDate
   valueType: DateTime
+  ownership: SeedOwned
   description: "Date of the last audit"
 - id: ComplianceNotes
   valueType: String
+  ownership: SeedOwned
   description: "Additional notes or remarks"

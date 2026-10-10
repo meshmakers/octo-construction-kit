@@ -3,12 +3,16 @@ attributes:
   - id: PhaseInfoL1
     valueType: Record
     valueCkRecordId: ${this}/PhaseInfo
+    ownership: SeedOwned
   - id: PhaseInfoL2
     valueType: Record
     valueCkRecordId: ${this}/PhaseInfo
+    ownership: SeedOwned
   - id: PhaseInfoL3
     valueType: Record
     valueCkRecordId: ${this}/PhaseInfo      
+    ownership: SeedOwned
   - id: NumOfModules
     valueType: Int
+    ownership: SeedOwned
     

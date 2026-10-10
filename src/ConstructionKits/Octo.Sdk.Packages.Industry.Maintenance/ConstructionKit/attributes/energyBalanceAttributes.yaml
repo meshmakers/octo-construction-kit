@@ -3,10 +3,13 @@ attributes:
   - id: EnergyBalanceGroup
     valueType: Enum
     valueCkEnumId: ${this}/EnergyBalanceGroup
+    ownership: SeedOwned
   - id: EnergyBalanceProduct
     valueType: Enum
     valueCkEnumId: ${this}/EnergyBalanceProduct
+    ownership: SeedOwned
   - id: EnergyBalanceUnit
     valueType: Enum
     valueCkEnumId: ${this}/EnergyBalanceUnit
+    ownership: SeedOwned
   

@@ -2,16 +2,22 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: AccountNumber
   valueType: String
+  ownership: SeedOwned
 - id: ServiceType
   valueType: Enum
   valueCkEnumId: ${this}/ServiceType  
+  ownership: SeedOwned
 - id: OrderType
   valueType: Enum
   valueCkEnumId: ${this}/OrderType
+  ownership: SeedOwned
 - id: CreatedAt
   valueType: DateTime
+  ownership: SeedOwned
 - id: OrderText
   valueType: String
+  ownership: SeedOwned
 - id: JournalValue
   valueType: Double  
+  ownership: SeedOwned
   

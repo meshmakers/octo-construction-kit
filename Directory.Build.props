@@ -52,6 +52,17 @@
         <RestoreSources Condition="'$(OctoNugetPrivateServer)'!=''">$(OctoNugetPrivateServer)</RestoreSources>
         <RestoreSources Condition="'$(Configuration)'=='DebugL'">$(OctoRepoRootPath)../nuget;$(RestoreSources)</RestoreSources>
     </PropertyGroup>
+    <PropertyGroup>
+        <!-- AB#6327: every attribute in src/ConstructionKits/*/ConstructionKit/attributes/*.yaml declares
+             its ownership (SeedOwned / TenantOwned / RuntimeState / Secret, or the older isRuntimeState),
+             reviewed against the seed ownership audit AB#6317. The CkLintRuntimeStateMarkers task is armed
+             for every CK project of this repository (it only runs where a ConstructionKitFolder is set, and
+             a new CK project is covered automatically): a new attribute without a marker FAILS the build
+             (OCTO-CK001) instead of silently defaulting to seed-owned, where the next blueprint update would
+             overwrite a value the tenant entered. Review question for every new attribute: could an operator
+             or user type this value in the product? -->
+        <OctoEnforceRuntimeStateMarkers>true</OctoEnforceRuntimeStateMarkers>
+    </PropertyGroup>
     <ItemGroup>
         <None Include="$([System.IO.Path]::Combine('$(OctoRepoRootPath)','README.md'))" Pack="True" PackagePath="" Visible="false" />
     </ItemGroup>

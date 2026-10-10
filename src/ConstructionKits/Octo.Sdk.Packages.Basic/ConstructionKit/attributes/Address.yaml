@@ -2,66 +2,77 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: AddressDepartment
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO127#003"
         description: "administrative section within an organisation where a business partner is located"
   - id: AddressStreet
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO128#002"
         description: "street name and house number"
   - id: AddressZipcode
     valueType: Int
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO129#002"
         description: "ZIP code of address"
   - id: AddressPOBox
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO130#002"
         description: "P.O. box number"
   - id: AddressZipOfPOBox
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO131#002"
         description: "ZIP code of P.O. box address"
   - id: AddressCityTown
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO132#002"
         description: "town or city"
   - id: AddressStateCounty
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO133#002"
         description: "federal state a part of a state"
   - id:  AddressNationalCode
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO134#002"
         description: "code of a country Note: Country codes defined accord. to DIN EN ISO 3166-1"
   - id: AddressVATnumber
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO135#002"
         description: "VAT identification number of the business partner"
   - id: AddressRemarks
     valueType: StringArray
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAO202#003"
         description: "plain text characterizing address information for which there is no property"
   - id: AddressOfAdditionalLink
     valueType: String
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAQ326#002"
@@ -69,6 +80,7 @@ attributes:
   - id: AddressPhone
     valueType: Record
     valueCkRecordId: ${this}/PhoneNumber
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAQ833#005"
@@ -76,6 +88,7 @@ attributes:
   - id: AddressFax
     valueType: Record
     valueCkRecordId: ${this}/FaxNumber
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAQ834#005"
@@ -83,6 +96,7 @@ attributes:
   - id: AddressEMail
     valueType: Record
     valueCkRecordId: ${this}/EMail
+    ownership: SeedOwned
     metaData:
       - key: semanticId
         value: "0173-1#02-AAQ836#005"
@@ -90,4 +104,5 @@ attributes:
   - id: Address
     valueType: Record
     valueCkRecordId: ${this}/Address
+    ownership: SeedOwned
     description: "Record containing address information"

@@ -2,22 +2,29 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: Bic
     valueType: String
+    ownership: SeedOwned
     description: "Bank Identifier Code (BIC/SWIFT)"
   - id: BankCode
     valueType: String
+    ownership: SeedOwned
     description: "National bank code (e.g. BLZ in Germany/Austria) or finAPI bank ID"
   - id: BankConnectionExternalId
     valueType: String
+    ownership: SeedOwned
     description: "Identifier of the bank connection in the external system"
   - id: AccountIds
     valueType: IntArray
+    ownership: SeedOwned
     description: "List of finAPI account IDs associated with this bank connection"
   - id: LastSuccessfulSync
     valueType: DateTime
+    ownership: SeedOwned
     description: "Timestamp of the last successful synchronization"
   - id: SyncStatus
     valueType: String
+    ownership: SeedOwned
     description: "Current synchronization status"
   - id: ConsentExpiresAt
     valueType: DateTime
+    ownership: SeedOwned
     description: "Expiry of the bank's AIS consent; after this date a re-consent (web form) is required before further synchronization"

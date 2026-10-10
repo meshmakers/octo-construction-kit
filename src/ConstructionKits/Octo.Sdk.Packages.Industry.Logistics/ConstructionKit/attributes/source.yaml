@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: Source
   valueType: String
+  ownership: SeedOwned
   description: "Name of the source system a record originates from (e.g. the shop or ERP the adapter reads); part of the identity of orders and export runs when one tenant is fed by more than one source. Unknown until an adapter states it."
   defaultValues:
     - "Unknown"

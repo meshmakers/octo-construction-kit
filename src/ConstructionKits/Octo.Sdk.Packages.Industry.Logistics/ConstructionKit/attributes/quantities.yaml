@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: Weight
   valueType: Double
+  ownership: SeedOwned
   metaData:
     - key: Unit
       value: "kg"
@@ -9,6 +10,8 @@ attributes:
       value: 3
 - id: DeliveredQuantity
   valueType: Double
+  ownership: SeedOwned
 - id: OpenQuantity
   valueType: Double
+  ownership: SeedOwned
   description: "Undelivered quantity; negative = over-delivery"

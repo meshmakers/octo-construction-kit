@@ -2,7 +2,9 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: ExportKind
   valueType: String
+  ownership: SeedOwned
   description: "Kind of export/delivery run (e.g. article master export); the adapter supplies the value."
 - id: ExportDay
   valueType: String
+  ownership: SeedOwned
   description: "Calendar day (yyyy-MM-dd) in the delivery time zone — bucket key of the dedup marker, not a timestamp."

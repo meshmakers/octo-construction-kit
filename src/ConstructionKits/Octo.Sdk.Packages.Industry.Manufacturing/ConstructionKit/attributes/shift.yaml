@@ -3,6 +3,8 @@ attributes:
 - id: StartDateTime
   description: "Date and time when the shift starts (actual or planned)"
   valueType: DateTime
+  ownership: SeedOwned
 - id: EndDateTime
   description: "Date and time when the shift ends (actual or planned)"
   valueType: DateTime
+  ownership: SeedOwned

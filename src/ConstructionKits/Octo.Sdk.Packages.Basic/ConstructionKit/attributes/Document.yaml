@@ -2,7 +2,9 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: DocumentNumber
     valueType: String
+    ownership: SeedOwned
     description: "Identifying number of a document"
   - id: DocumentDate
     valueType: DateTime
+    ownership: SeedOwned
     description: "Date of a document"

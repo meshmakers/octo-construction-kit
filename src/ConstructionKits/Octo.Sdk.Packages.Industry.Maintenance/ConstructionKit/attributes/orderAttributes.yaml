@@ -2,40 +2,56 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: OrderNumber
     valueType: String
+    ownership: SeedOwned
   - id: CostCategory
     valueType: Enum
     valueCkEnumId: ${this}/CostCategory
+    ownership: SeedOwned
   - id: OrderPriority
     valueType: Enum
     valueCkEnumId: ${this}/OrderPriority
+    ownership: SeedOwned
     defaultValues:
       - 0
   - id: PlannedCosts
     valueType: Double
+    ownership: SeedOwned
   - id: ActualCosts
     valueType: Double
+    ownership: SeedOwned
   - id: ProjectNumber
     valueType: String
+    ownership: SeedOwned
   - id: TotalCosts
     valueType: Double
+    ownership: SeedOwned
   - id: InternalCosts
     valueType: Double
+    ownership: SeedOwned
   - id: ExternalCosts
     valueType: Double
+    ownership: SeedOwned
   - id: MaterialCosts
     valueType: Double
+    ownership: SeedOwned
   - id: AggregationType
     valueType: Enum
     valueCkEnumId: ${this}/AggregationType  
+    ownership: SeedOwned
   - id: AggregationDate
     valueType: DateTime
+    ownership: SeedOwned
   - id: FeedbackNumber
     valueType: String
+    ownership: SeedOwned
   - id: StartDateTime
     valueType: DateTime
+    ownership: SeedOwned
   - id: EndDateTime
     valueType: DateTime
+    ownership: SeedOwned
   - id: OrderState
     valueType: Enum
     valueCkEnumId: ${this}/OrderState
+    ownership: SeedOwned
   

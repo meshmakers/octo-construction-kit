@@ -3,29 +3,37 @@ attributes:
   - id: Salutation
     valueType: Enum
     valueCkEnumId: ${this}/Salutation
+    ownership: SeedOwned
     description: "Salutation associated with the contact"
   - id: LegalEntityType
     valueType: Enum
     valueCkEnumId: ${this}/LegalEntityType
+    ownership: SeedOwned
     description: "The legal entity type of the contact"
     defaultValues:
       - 0 # Default to 'NaturalPerson'
   - id: FirstName
     valueType: String
+    ownership: SeedOwned
     description: "The users first name(s)"
   - id: LastName
     valueType: String
+    ownership: SeedOwned
     description: "The users last name(s)"
   - id: AcademicTitleSuffix
     valueType: String
+    ownership: SeedOwned
     description: "Academic title suffix associated with the contact"
   - id: AcademicTitlePrefix
     valueType: String
+    ownership: SeedOwned
     description: "Academic title prefix associated with the contact"
   - id: CompanyName
     valueType: String
+    ownership: SeedOwned
     description: "Associated company name"
   - id: Contact
     valueType: Record
     description: "Contact data with name and address"
     valueCkRecordId: ${this}/Contact
+    ownership: SeedOwned

@@ -2,17 +2,22 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: MeteringPointNumber
     valueType: String
+    ownership: SeedOwned
     description: "Number identifying the metering point"
   - id: PartitionFactor
     valueType: Int
+    ownership: SeedOwned
     description: "Partition factor of the metering point within an energy community (percentage share, EDA process EC_PRTFACT_CHANGE)"
   - id: IsProducer
     valueType: Boolean
+    ownership: SeedOwned
     description: "Indicates if the new metering point is a producer"
   - id: CarrierType
     valueType: Enum
     valueCkEnumId: ${this}/CarrierType
+    ownership: SeedOwned
     description: "Type of energy carrier (e.g., electricity, gas)"
   - id: NotificationContactEmail
     valueType: String
+    ownership: SeedOwned
     description: "Email address for notifications related to the metering point"

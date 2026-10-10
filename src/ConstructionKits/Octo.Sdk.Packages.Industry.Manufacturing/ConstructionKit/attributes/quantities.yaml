@@ -3,12 +3,16 @@ attributes:
   - id: PlannedQuantity
     description: "Total number of pieces planned to be produced for this order item"
     valueType: Int
+    ownership: SeedOwned
   - id: QuantityGood
     description: "Number of good/acceptable parts produced"
     valueType: Int
+    ownership: SeedOwned
   - id: QuantityPoor
     description: "Number of defective/rejected parts produced"
     valueType: Int
+    ownership: SeedOwned
   - id: QuantityTestParts
     description: "Number of test parts produced during setup or quality checks"
     valueType: Int
+    ownership: SeedOwned

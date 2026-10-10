@@ -3,32 +3,40 @@ attributes:
 - id: IecDataType
   valueType: Enum
   valueCkEnumId: ${this}/IecDataType
+  ownership: SeedOwned
   description: "The IEC 61131-3 data type of the runtime variable in the SCADA system"
 
 - id: IntValue
   valueType: Int
+  ownership: SeedOwned
   description: "Integer value of the runtime variable"
 
 - id: DoubleValue
   valueType: Double
+  ownership: SeedOwned
   description: "Double precision floating point value of the runtime variable"
 
 - id: StringValue
   valueType: String
+  ownership: SeedOwned
   description: "String value of the runtime variable"
 
 - id: BooleanValue
   valueType: Boolean
+  ownership: SeedOwned
   description: "Boolean value of the runtime variable"
 
 - id: DateTimeValue
   valueType: DateTime
+  ownership: SeedOwned
   description: "DateTime value of the runtime variable"
 
 - id: Int64Value
   valueType: Int64
+  ownership: SeedOwned
   description: "64-bit integer value of the runtime variable"
 
 - id: TimeSpanValue
   valueType: TimeSpan
+  ownership: SeedOwned
   description: "TimeSpan value of the runtime variable"

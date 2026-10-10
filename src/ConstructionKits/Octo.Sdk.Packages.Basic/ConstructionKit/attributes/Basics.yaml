@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: Temperature
     valueType: Double
+    ownership: SeedOwned
     metaData:
       - key: Unit
         value: "°C"
@@ -9,6 +10,7 @@ attributes:
         value: Current
   - id: MinTemperature
     valueType: Double
+    ownership: SeedOwned
     metaData:
       - key: Unit
         value: "°C"
@@ -16,6 +18,7 @@ attributes:
         value: Minimum
   - id: MaxTemperature
     valueType: Double
+    ownership: SeedOwned
     metaData:
       - key: Unit
         value: "°C"
@@ -23,6 +26,7 @@ attributes:
         value: Maximum
   - id: AvgTemperature
     valueType: Double
+    ownership: SeedOwned
     metaData:
       - key: Unit
         value: "°C"
@@ -30,8 +34,11 @@ attributes:
         value: Average
   - id: File
     valueType: BinaryLinked
+    ownership: SeedOwned
   - id: Time
     valueType: DateTime
+    ownership: SeedOwned
   - id: Comment
     valueType: String
+    ownership: SeedOwned
     description: "Optional Comment on the user"

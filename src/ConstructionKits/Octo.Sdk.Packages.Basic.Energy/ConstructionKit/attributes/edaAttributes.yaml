@@ -2,29 +2,42 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: EdaMessageId
   valueType: String
+  ownership: SeedOwned
 - id: EdaConversationId
   valueType: String
+  ownership: SeedOwned
 - id: EdaProcessFinished
   valueType: Boolean
+  ownership: SeedOwned
 - id: EdaSenderId
   valueType: String
+  ownership: SeedOwned
 - id: EdaReceiverId
   valueType: String
+  ownership: SeedOwned
 - id: EdaRawMessage
   valueType: String
+  ownership: SeedOwned
 - id: EdaMessageType
   valueType: String
+  ownership: SeedOwned
 - id: EdaMessageProcessed
   valueType: Boolean
+  ownership: SeedOwned
 - id: EdaProcessSuccess
   valueType: Boolean
+  ownership: SeedOwned
 - id: EdaProcessInfo
   valueType: String
+  ownership: SeedOwned
 - id: EdaResponseCode
   valueType: String
+  ownership: SeedOwned
 - id: EdaProcessPlanned
   valueType: Boolean
+  ownership: SeedOwned
   defaultValues:
     - false
 - id: EdaProcessData
   valueType: String
+  ownership: SeedOwned

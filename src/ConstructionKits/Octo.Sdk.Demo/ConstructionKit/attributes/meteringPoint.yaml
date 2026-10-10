@@ -2,13 +2,18 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
   - id: MeteringPointNumber
     valueType: String      
+    ownership: SeedOwned
   - id: MeterReading
     valueType: Int
+    ownership: SeedOwned
   - id: OperatingStatus
     valueCkEnumId: ${this}/OperatingStatus
     valueType: Enum
+    ownership: SeedOwned
   - id: NetworkOperator
     valueCkEnumId: ${this}/NetworkOperator
     valueType: Enum
+    ownership: SeedOwned
   - id: DataTransmissionInterval
     valueType: TimeSpan
+    ownership: SeedOwned

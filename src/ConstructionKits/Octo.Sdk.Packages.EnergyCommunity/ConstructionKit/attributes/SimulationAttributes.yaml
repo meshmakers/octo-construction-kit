@@ -3,83 +3,107 @@ attributes:
   - id: SimulationPreset
     valueType: Enum
     valueCkEnumId: ${this}/SimulationPreset
+    ownership: SeedOwned
     description: "Composition preset of the simulated community; changing it takes effect only through a full reset"
   - id: EffectiveFrom
     valueType: DateTime
+    ownership: SeedOwned
     description: "First day (Europe/Vienna) the settings revision applies to; never earlier than the day the revision was created, unless it is the base revision of a reset"
   - id: SimulationSeed
     valueType: Int
+    ownership: SeedOwned
     description: "Seed of all random values of the simulation; same settings and seed give identical data"
   - id: ConsumptionFactor
     valueType: Double
+    ownership: SeedOwned
     description: "Multiplier on the annual consumption of all simulated consumers (default 1.0, sensible range 0.5-2)"
   - id: PvCapacityFactor
     valueType: Double
+    ownership: SeedOwned
     description: "Multiplier on the installed capacity of all simulated PV producers (default 1.0, sensible range 0-3)"
   - id: PvSpecificYield
     valueType: Double
+    ownership: SeedOwned
     description: "Annual PV yield in kWh per kWp under clear sky (default 1050, Salzburg)"
     metaData:
       - key: Unit
         value: "kWh/kWp"
   - id: MemberSpread
     valueType: Double
+    ownership: SeedOwned
     description: "Relative seeded spread of the size of each simulated member around its nominal value (0 = none, 0.25 = +/-25 %)"
   - id: SimulationNoiseLevel
     valueType: Enum
     valueCkEnumId: ${this}/SimulationNoiseLevel
+    ownership: SeedOwned
     description: "Seeded noise on simulated values (default Off)"
   - id: SimulationWeatherMode
     valueType: Enum
     valueCkEnumId: ${this}/SimulationWeatherMode
+    ownership: SeedOwned
     description: "Daily weather model for PV (default ClearSky)"
   - id: MemberScale
     valueType: Double
+    ownership: SeedOwned
     description: "Multiplier on the number of members of the preset; takes effect only through a full reset (default 1.0)"
   - id: BackfillDays
     valueType: Int
+    ownership: SeedOwned
     description: "Number of days a reset simulates backwards from today (default 730)"
   - id: DailyRun
     valueType: Boolean
+    ownership: SeedOwned
     description: "Whether the daily simulation run generates values for this community (default true)"
   - id: NearRealTime
     valueType: Boolean
+    ownership: SeedOwned
     description: "Generate values every 15 minutes instead of once per day (planned)"
   - id: AllocationCutOffTime
     valueType: String
+    ownership: SeedOwned
     description: "Local time (HH:mm, Europe/Vienna) on day D+1 after which the allocation of day D is final and frozen; empty means 06:00"
   - id: AllocationKey
     valueType: Enum
     valueCkEnumId: ${this}/AllocationKey
+    ownership: SeedOwned
     description: "Allocation key of the community (default Dynamic)"
   - id: SupersededByReset
     valueType: Boolean
+    ownership: SeedOwned
     description: "Set by a reset on all earlier settings revisions; superseded revisions no longer apply"
   - id: SimulationResetMode
     valueType: Enum
     valueCkEnumId: ${this}/SimulationResetMode
+    ownership: SeedOwned
     description: "Requested reset mode"
   - id: DiscardReported
     valueType: Boolean
+    ownership: SeedOwned
     description: "Allow a full reset to discard the values of self-reported metering points"
   - id: SimulationResetState
     valueType: Enum
     valueCkEnumId: ${this}/SimulationResetState
+    ownership: SeedOwned
     description: "Processing state of the reset request"
   - id: RequestedAt
     valueType: DateTime
+    ownership: SeedOwned
     description: "When the reset was requested"
   - id: RequestedBy
     valueType: String
+    ownership: SeedOwned
     description: "Who requested the reset (user or client id)"
   - id: CompletedAt
     valueType: DateTime
+    ownership: SeedOwned
     description: "When the reset runner finished the request"
   - id: MeteringDataSource
     valueType: Enum
     valueCkEnumId: ${this}/MeteringDataSource
+    ownership: SeedOwned
     description: "Origin of the metering values; the simulation only writes metering points marked Simulated"
   - id: LoadProfile
     valueType: Enum
     valueCkEnumId: ${this}/LoadProfile
+    ownership: SeedOwned
     description: "Standard load profile used to simulate the consumption (default H0)"

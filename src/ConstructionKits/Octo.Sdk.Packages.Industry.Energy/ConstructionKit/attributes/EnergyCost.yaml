@@ -2,6 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: CostAmount
   valueType: Double
+  ownership: SeedOwned
   description: "Energy cost amount"
   metaData:
     - key: Unit
@@ -10,6 +11,7 @@ attributes:
       value: 2
 - id: ForecastAmount
   valueType: Double
+  ownership: SeedOwned
   description: "Forecasted energy cost amount"
   metaData:
     - key: Unit
@@ -19,3 +21,4 @@ attributes:
 - id: TariffType
   valueType: Enum
   valueCkEnumId: ${this}/TariffType
+  ownership: SeedOwned

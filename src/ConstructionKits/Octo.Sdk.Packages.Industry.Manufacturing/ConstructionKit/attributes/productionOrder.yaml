@@ -3,23 +3,30 @@ attributes:
 - id: OrderNumber
   description: "Unique identifier for the production order"
   valueType: String
+  ownership: SeedOwned
 - id: ProductionOrderState
   description: "Current lifecycle state of the production order"
   valueType: Enum
   valueCkEnumId: ${this}/ProductionOrderState
+  ownership: SeedOwned
 - id: ProductionOrderItemState
   description: "Current lifecycle and execution state of the production order item"
   valueType: Enum
   valueCkEnumId: ${this}/ProductionOrderItemState
+  ownership: SeedOwned
 - id: ItemNumber
   description: "Position/line number of the item within the production order"
   valueType: Int
+  ownership: SeedOwned
 - id: ArticleNumber
   description: "SKU or article identifier of the product to be manufactured"
   valueType: String
+  ownership: SeedOwned
 - id: ArticleText
   description: "Descriptive name or text for the article"
   valueType: String
+  ownership: SeedOwned
 - id: CycleTimeForOnePiece
   description: "Cycle time required to produce one piece, in seconds"
   valueType: Int
+  ownership: SeedOwned

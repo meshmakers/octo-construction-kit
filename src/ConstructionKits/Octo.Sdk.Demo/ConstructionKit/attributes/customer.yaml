@@ -2,31 +2,43 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
 - id: EMailAddress
   valueType: String
+  ownership: SeedOwned
 - id: DateOfBirth
   valueType: DateTime  
+  ownership: SeedOwned
 - id: PhoneNumberMobile
   valueType: String    
+  ownership: SeedOwned
 - id: PhoneNumberLandLine
   valueType: String
+  ownership: SeedOwned
 - id: CustomerStatus
   valueType: Enum
   valueCkEnumId: ${this}/CustomerStatus
+  ownership: SeedOwned
 # RecordArray for customer notes
 - id: CustomerNotes
   valueType: RecordArray
   valueCkRecordId: ${this}/CustomerNote
+  ownership: SeedOwned
 # Binary for profile picture (stored inline)
 - id: ProfilePicture
   valueType: Binary
+  ownership: SeedOwned
 # BinaryLinked for contract documents (stored as reference)
 - id: ContractDocument
   valueType: BinaryLinked
+  ownership: SeedOwned
 # Additional note attributes
 - id: NoteDate
   valueType: DateTime
+  ownership: SeedOwned
 - id: NoteText
   valueType: String
+  ownership: SeedOwned
 - id: NoteAuthor
   valueType: String
+  ownership: SeedOwned
 - id: NoteCategory
   valueType: String
+  ownership: SeedOwned

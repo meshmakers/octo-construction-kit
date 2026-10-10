@@ -8,20 +8,21 @@
 #   - NO GitSSHGroup / NO InstallSSHKey — no private submodules referenced
 #   - NO download-ca — restores from public NuGet feed only
 #   - submodules: true (NOT recursive) — matches legacy
-#   - Build passes /p:OctoPublishCatalog="$(effectivePublishCatalog)" for the
-#     CK model catalog publish-gating (only main / r* tags publish to GitHub;
-#     feature branches publish to per-run LocalFileSystemCatalog —
-#     incident: Industry.Basic-2.1.1 pinned by downstream packages without
-#     itself being published, breaking every tenant's library-status endpoint)
+#   - Build passes /p:OctoPublishCatalog=LocalFileSystemCatalog: the CK models of this
+#     solution depend on each other, so they resolve each other through the run-isolated
+#     local catalog (OctoLocalCatalogRootPath). Since tpl-v1.0.0 NO build publishes to a
+#     shared catalog; validate-and-publish-ck-versions does, after build and tests (main ->
+#     private, r* tags -> private and public; incident: Industry.Basic-2.1.1 pinned by
+#     downstream packages without itself being published)
 #   - SystemTests excluded
-#   - CK SemVer validation gate (validate-ck-versions) runs BEFORE Build:
-#     CK models are published DURING dotnet build, so version honesty must
-#     be enforced first. Validates the 12 published CKs in dependency order.
+#   - CK SemVer validation gate and publish (validate-and-publish-ck-versions) runs AFTER
+#     Test: version honesty is enforced before anything is published. Validates the 12
+#     published CKs in dependency order.
 #   - HAS push-nuget — 11 Meshmakers.Octo.Sdk.Packages.* NuGets per build
-#   - CK v2 publish guard (AB#6277, operating rule O1, tpl-v0.6.8 ck-o1-guard.yml)
-#     runs in source mode BEFORE Build (models are published during the build) and
+#   - CK v2 publish guard (AB#6277, operating rule O1, ck-o1-guard.yml; built into both
+#     validate-and-publish templates since tpl-v1.2.0) additionally runs in source mode BEFORE Build and
 #     on the blueprint directories before the lane blueprint publish; test/* publishes
-#     to octo-catalog-dev, which may take CK v2 models (dev-catalog exception, tpl-v0.6.9)
+#     to octo-catalog-dev, which may take CK v2 models (dev-catalog exception, tpl-v1.2.1)
 #   - HAS 12 CK library outputs (the actual Construction Kit YAMLs:
 #     11 Octo.Sdk.Packages.* + Octo.Sdk.Demo)
 
@@ -57,7 +58,7 @@ resources:
       type: github
       name: meshmakers/octo-pipeline-templates
       endpoint: meshmakers-access-token
-      ref: refs/tags/tpl-v0.6.9
+      ref: refs/tags/tpl-v1.3.1
 
 trigger:
   batch: true
@@ -130,42 +131,10 @@ stages:
             clean: true
             submodules: true
           - template: templates/steps/set-version.yml@pipelineTemplates
-          - template: templates/steps/validate-ck-versions.yml@pipelineTemplates
-            parameters:
-              # Same 12 published CKs as constructionKitLibraryPaths on the
-              # handle-artifacts step below — keep both lists in sync when
-              # adding/removing a CK. THIS list must additionally stay in
-              # dependency order (dependencies first).
-              constructionKitPaths:
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Basic.Energy/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.EnergyCommunity/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Environment/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Basic/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Logistics/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Energy/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/ConstructionKit'
-                - 'src/ConstructionKits/Octo.Sdk.Demo/ConstructionKit'
-          # Blueprint version-honesty gate (octo-bpm validateVersion, AB#5021): a
-          # blueprint whose content changed without a version bump fails the build —
-          # published blueprint versions are immutable. Blueprints are published by
-          # the catalogs release train from this build's artifact, not by the build.
-          - template: templates/steps/validate-blueprints.yml@pipelineTemplates
-            parameters:
-              # Same list as handle-artifacts.blueprintPaths below — keep in sync.
-              blueprintPaths:
-                - 'src/Blueprints/Locations.Austria'
-                - 'src/Blueprints/Samples.PipelineBasics'
-                - 'src/Blueprints/Samples.Maintenance'
-                - 'src/Blueprints/Samples.Photovoltaics'
-                - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
-                - 'src/Blueprints/Samples.EnergyEnvironment'
           # ---- CK v2 publish guard (AB#6277, operating rule O1) ----
-          # This repo publishes its CK models DURING dotnet build (MSBuild CkCompile,
-          # OctoPublishCatalog above) and its blueprints with its own step below, so the
-          # guard runs in source mode before the build and on the blueprint directories
+          # The CK models are published after the tests by validate-and-publish-ck-versions (with its
+          # own O1 guard) and the lane blueprints by the step below, so this source-mode
+          # guard runs before the build and on the blueprint directories
           # before that step. Both lists are enumerated from disk (every CK project the
           # solution builds, every blueprint the publish step enumerates), not copied.
           # The guard refuses ckLanguage 2 / range retention (OctoCkRangeRetention) and
@@ -187,7 +156,7 @@ stages:
                 Write-Host "##vso[task.setvariable variable=OctoO1CkSources]$($ck -join ';')"
                 Write-Host "##vso[task.setvariable variable=OctoO1Blueprints]$($bp -join ';')"
                 # Target of the blueprint publish below: the dev catalog on test/*, the
-                # shared private blueprint catalog on main (dev-catalog exception, tpl-v0.6.9).
+                # shared private blueprint catalog on main (dev-catalog exception, tpl-v1.2.1).
                 $bpTarget = if ('$(isTest)' -match '^(?i)true$') { '$(devCatalogRepository)' } else { 'blueprint-libraries-build' }
                 Write-Host "##vso[task.setvariable variable=OctoO1BlueprintTarget]$bpTarget"
           - template: templates/steps/ck-o1-guard.yml@pipelineTemplates
@@ -196,14 +165,14 @@ stages:
               # Empty on main / r-tags (shared catalogs); octo-catalog-dev on an opted-in lane.
               targetCatalogs: '$(OctoPrivateGitHubCatalogRepositoryName)'
               lane: 'CK models published by dotnet build'
-              condition: and(succeeded(), ne(variables.effectivePublishCatalog, 'LocalFileSystemCatalog'))
+              condition: and(succeeded(), or(eq(variables.isMain, true), eq(variables.isRelease, true), eq(variables['OctoPublishCkToLaneCatalog'], 'true')))
           - task: DotNetCoreCLI@2
             retryCountOnTaskFailure: 2
             displayName: 'Build'
             inputs:
               command: 'build'
               projects: '$(solutionFile)'
-              arguments: '--configuration $(buildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer) /p:OctoPublishCatalog="$(effectivePublishCatalog)" /p:OctoPrivateGitHubApiKey=$(GitHubPAT) /p:OctoPublicGitHubApiKey=$(GitHubPAT)'
+              arguments: '--configuration $(buildConfiguration) /p:OctoNugetPrivateServer=$(nugetPrivateServer) /p:OctoPublishCatalog=LocalFileSystemCatalog /p:OctoPrivateGitHubApiKey=$(GitHubPAT) /p:OctoPublicGitHubApiKey=$(GitHubPAT)'
               publishWebProjects: false
               zipAfterPublish: false
               modifyOutputPath: false
@@ -216,10 +185,50 @@ stages:
                 **/*Tests.csproj
                 !**/*SystemTests.csproj
               testRunTitle: 'CI'
+          # CK SemVer honesty gate AND publish (tpl-v1.0.0, AB#5121): after build and tests the
+          # 12 CK models are validated against their last published version, compiled and, on
+          # main and r* tags, published to the shared catalogs (never replacing a published
+          # version). The build above publishes to the run-isolated LocalFileSystemCatalog only —
+          # the exception the template documents for solutions whose CKs depend on each other.
+          - template: templates/steps/validate-and-publish-ck-versions.yml@pipelineTemplates
+            parameters:
+              # Same 12 published CKs as constructionKitLibraryPaths on the
+              # handle-artifacts step below — keep both lists in sync when
+              # adding/removing a CK. THIS list must additionally stay in
+              # dependency order (dependencies first).
+              constructionKitPaths:
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Basic.Energy/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.EnergyCommunity/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Environment/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Basic/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Logistics/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Energy/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Fluid/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Maintenance/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/ConstructionKit'
+                - 'src/ConstructionKits/Octo.Sdk.Demo/ConstructionKit'
+          # Blueprint version-honesty gate AND publish (octo-bpm validateVersion, AB#5021,
+          # tpl-v1.0.0): a blueprint whose content changed without a version bump fails the
+          # build — published blueprint versions are immutable. After a clean validation the
+          # blueprints are published to the catalogs of the channel (main -> private,
+          # r* tags -> private and public; an already published version is a no-op), so the
+          # catalogs release train finds them published. The lane blueprint publish step
+          # further below stays for the test/* lane catalog.
+          - template: templates/steps/validate-and-publish-blueprints.yml@pipelineTemplates
+            parameters:
+              # Same list as handle-artifacts.blueprintPaths below — keep in sync.
+              blueprintPaths:
+                - 'src/Blueprints/Locations.Austria'
+                - 'src/Blueprints/Samples.PipelineBasics'
+                - 'src/Blueprints/Samples.Maintenance'
+                - 'src/Blueprints/Samples.Photovoltaics'
+                - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
+                - 'src/Blueprints/Samples.EnergyEnvironment'
           - template: templates/steps/handle-artifacts.yml@pipelineTemplates
             parameters:
               # Same 12 published CKs as constructionKitPaths on the
-              # validate-ck-versions step above — keep both lists in sync.
+              # validate-and-publish-ck-versions step — keep both lists in sync.
               constructionKitLibraryPaths:
                 - 'src/ConstructionKits/Octo.Sdk.Demo/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Demo'
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Basic/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Basic'
@@ -234,7 +243,7 @@ stages:
                 - 'src/ConstructionKits/Octo.Sdk.Packages.Industry.Manufacturing/bin/$(buildConfiguration)/$(artifactsFrameworkVersion)/octo-ck-libraries/Octo.Sdk.Packages.Industry.Manufacturing'
               # Blueprint sources shipped in the `local` artifact so the catalogs
               # release train publishes them at r-tag time. Same list as the
-              # validate-blueprints step above — keep both in sync.
+              # validate-and-publish-blueprints step — keep both in sync.
               blueprintPaths:
                 - 'src/Blueprints/Locations.Austria'
                 - 'src/Blueprints/Samples.PipelineBasics'
@@ -263,7 +272,7 @@ stages:
           # blueprint merged to main was therefore uninstallable until the next
           # release — that asymmetry is what this step removes.
           # The blueprint list is ENUMERATED from disk rather than hardcoded a
-          # third time — validate-blueprints and handle-artifacts above already
+          # third time — validate-and-publish-blueprints and handle-artifacts already
           # carry the authoritative list, and a third copy would drift.
           - template: templates/steps/ck-o1-guard.yml@pipelineTemplates
             parameters:
@@ -384,7 +393,7 @@ stages:
                   # catalog' and returns. On main that is the NORMAL case — most builds
                   # bump no blueprint — so it is a skip, not a failure. Content that
                   # changed without a version bump is already caught earlier by the
-                  # validate-blueprints gate (AB#5021), so this cannot hide a drift.
+                  # validate-and-publish-blueprints gate (AB#5021), so this cannot hide a drift.
                   if (-not $isTestLane -and $joined -match 'already exists in catalog') {
                     Write-Host "Version unchanged and already published - skipping $name."
                     $skipped++

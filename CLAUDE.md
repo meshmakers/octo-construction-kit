@@ -230,7 +230,7 @@ A transitive reference is sufficient (e.g. Industry.Energy → Industry.Basic �
 
 ### Azure Pipelines Configuration
 
-**File**: `azure-pipelines.yml` (repo root; templates from octo-pipeline-templates `tpl-v0.6.9`)
+**File**: `azure-pipelines.yml` (repo root; templates from octo-pipeline-templates `tpl-v1.3.1`)
 
 **Triggers**:
 - Branches: `dev/*`, `test/*`, `main`
@@ -242,13 +242,19 @@ A transitive reference is sufficient (e.g. Industry.Energy → Industry.Basic �
    - Updates build number
    - Sets version information
    - CK v2 publish guard (AB#6277, operating rule O1, `ck-o1-guard.yml`): before the build
-     on main / r-tags (the build publishes the CK models) it refuses `ckLanguage: 2` in any
+     on main / r-tags (source mode; the publish itself follows after the tests) it refuses `ckLanguage: 2` in any
      `ckModel.yaml` and range retention (`OctoCkRangeRetention=true`); before the blueprint
      publish step it refuses a blueprint whose dependency floor is a CK v2 model. Lifted only
      by the variable `OctoCkO1Lifted` (group `OctoDefault`) through AB#6279. Exception: publishes to the dev catalog `octo-catalog-dev`
-     (test/* lane) may carry CK v2 models (tpl-v0.6.9)
-   - Builds solution: `dotnet build --configuration Release`
+     (test/* lane) may carry CK v2 models (tpl-v1.2.1)
+   - Builds solution: `dotnet build --configuration Release` with `/p:OctoPublishCatalog=LocalFileSystemCatalog`
+     (the CKs depend on each other and resolve through the run-isolated local catalog; no build publishes
+     to a shared catalog since `tpl-v1.0.0`)
    - Runs tests: `dotnet test` (excluding SystemTests)
+   - `validate-and-publish-ck-versions` (12 CKs, dependency order): SemVer gate, compile, publish to the
+     catalogs of the channel (main → private, r* tags → private and public; never replaces a version)
+   - `validate-and-publish-blueprints`: blueprint version gate and publish to the catalogs of the channel
+     (an already published version is a no-op; the lane blueprint step below stays for `test/*`)
    - Processes artifacts
    - Pushes NuGet packages
 

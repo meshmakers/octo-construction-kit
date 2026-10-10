@@ -20,7 +20,8 @@
 #   - HAS push-nuget — 11 Meshmakers.Octo.Sdk.Packages.* NuGets per build
 #   - CK v2 publish guard (AB#6277, operating rule O1, tpl-v0.6.8 ck-o1-guard.yml)
 #     runs in source mode BEFORE Build (models are published during the build) and
-#     on the blueprint directories before the lane blueprint publish
+#     on the blueprint directories before the lane blueprint publish; test/* publishes
+#     to octo-catalog-dev, which may take CK v2 models (dev-catalog exception, tpl-v0.6.9)
 #   - HAS 12 CK library outputs (the actual Construction Kit YAMLs:
 #     11 Octo.Sdk.Packages.* + Octo.Sdk.Demo)
 
@@ -56,7 +57,7 @@ resources:
       type: github
       name: meshmakers/octo-pipeline-templates
       endpoint: meshmakers-access-token
-      ref: refs/tags/tpl-v0.6.8
+      ref: refs/tags/tpl-v0.6.9
 
 trigger:
   batch: true
@@ -185,9 +186,15 @@ stages:
                 Write-Host "$($ck.Count) CK source(s), $($bp.Count) blueprint(s)"
                 Write-Host "##vso[task.setvariable variable=OctoO1CkSources]$($ck -join ';')"
                 Write-Host "##vso[task.setvariable variable=OctoO1Blueprints]$($bp -join ';')"
+                # Target of the blueprint publish below: the dev catalog on test/*, the
+                # shared private blueprint catalog on main (dev-catalog exception, tpl-v0.6.9).
+                $bpTarget = if ('$(isTest)' -match '^(?i)true$') { '$(devCatalogRepository)' } else { 'blueprint-libraries-build' }
+                Write-Host "##vso[task.setvariable variable=OctoO1BlueprintTarget]$bpTarget"
           - template: templates/steps/ck-o1-guard.yml@pipelineTemplates
             parameters:
               ckSourcePaths: '$(OctoO1CkSources)'
+              # Empty on main / r-tags (shared catalogs); octo-catalog-dev on an opted-in lane.
+              targetCatalogs: '$(OctoPrivateGitHubCatalogRepositoryName)'
               lane: 'CK models published by dotnet build'
               condition: and(succeeded(), ne(variables.effectivePublishCatalog, 'LocalFileSystemCatalog'))
           - task: DotNetCoreCLI@2
@@ -261,6 +268,7 @@ stages:
           - template: templates/steps/ck-o1-guard.yml@pipelineTemplates
             parameters:
               blueprintPaths: '$(OctoO1Blueprints)'
+              targetCatalogs: '$(OctoO1BlueprintTarget)'
               lane: 'blueprint publish to the lane blueprint catalog'
               condition: and(succeeded(), or(eq(variables.isTest, true), eq(variables.isMain, true)))
           - task: PowerShell@2

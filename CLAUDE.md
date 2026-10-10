@@ -229,7 +229,7 @@ A transitive reference is sufficient (e.g. Industry.Energy â†’ Industry.Basic â†
 
 ### Azure Pipelines Configuration
 
-**File**: `azure-pipelines.yml` (repo root; templates from octo-pipeline-templates `tpl-v0.6.8`)
+**File**: `azure-pipelines.yml` (repo root; templates from octo-pipeline-templates `tpl-v0.6.9`)
 
 **Triggers**:
 - Branches: `dev/*`, `test/*`, `main`
@@ -244,7 +244,8 @@ A transitive reference is sufficient (e.g. Industry.Energy â†’ Industry.Basic â†
      on main / r-tags (the build publishes the CK models) it refuses `ckLanguage: 2` in any
      `ckModel.yaml` and range retention (`OctoCkRangeRetention=true`); before the blueprint
      publish step it refuses a blueprint whose dependency floor is a CK v2 model. Lifted only
-     by the variable `OctoCkO1Lifted` (group `OctoDefault`) through AB#6279
+     by the variable `OctoCkO1Lifted` (group `OctoDefault`) through AB#6279. Exception: publishes to the dev catalog `octo-catalog-dev`
+     (test/* lane) may carry CK v2 models (tpl-v0.6.9)
    - Builds solution: `dotnet build --configuration Release`
    - Runs tests: `dotnet test` (excluding SystemTests)
    - Processes artifacts

@@ -18,6 +18,9 @@
 #     CK models are published DURING dotnet build, so version honesty must
 #     be enforced first. Validates the 12 published CKs in dependency order.
 #   - HAS push-nuget — 11 Meshmakers.Octo.Sdk.Packages.* NuGets per build
+#   - CK v2 publish guard (AB#6277, operating rule O1, tpl-v0.6.8 ck-o1-guard.yml)
+#     runs in source mode BEFORE Build (models are published during the build) and
+#     on the blueprint directories before the lane blueprint publish
 #   - HAS 12 CK library outputs (the actual Construction Kit YAMLs:
 #     11 Octo.Sdk.Packages.* + Octo.Sdk.Demo)
 
@@ -53,7 +56,7 @@ resources:
       type: github
       name: meshmakers/octo-pipeline-templates
       endpoint: meshmakers-access-token
-      ref: refs/tags/tpl-v0.6.7
+      ref: refs/tags/tpl-v0.6.8
 
 trigger:
   batch: true
@@ -158,6 +161,35 @@ stages:
                 - 'src/Blueprints/Samples.Photovoltaics'
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
+          # ---- CK v2 publish guard (AB#6277, operating rule O1) ----
+          # This repo publishes its CK models DURING dotnet build (MSBuild CkCompile,
+          # OctoPublishCatalog above) and its blueprints with its own step below, so the
+          # guard runs in source mode before the build and on the blueprint directories
+          # before that step. Both lists are enumerated from disk (every CK project the
+          # solution builds, every blueprint the publish step enumerates), not copied.
+          # The guard refuses ckLanguage 2 / range retention (OctoCkRangeRetention) and
+          # blueprints whose dependency floor is a CK v2 model until the variable
+          # OctoCkO1Lifted (variable group OctoDefault) is true.
+          - task: PowerShell@2
+            displayName: 'Enumerate CK sources and blueprints for the O1 guard'
+            inputs:
+              targetType: 'inline'
+              pwsh: true
+              script: |
+                $ck = @(Get-ChildItem 'src/ConstructionKits' -Recurse -Filter 'ckModel.yaml' -File |
+                  Where-Object { $_.FullName -notmatch '[\\/](bin|obj)[\\/]' } |
+                  ForEach-Object { $_.DirectoryName })
+                $bp = @(Get-ChildItem 'src/Blueprints' -Directory |
+                  Where-Object { Test-Path (Join-Path $_.FullName 'blueprint.yaml') } |
+                  ForEach-Object { $_.FullName })
+                Write-Host "$($ck.Count) CK source(s), $($bp.Count) blueprint(s)"
+                Write-Host "##vso[task.setvariable variable=OctoO1CkSources]$($ck -join ';')"
+                Write-Host "##vso[task.setvariable variable=OctoO1Blueprints]$($bp -join ';')"
+          - template: templates/steps/ck-o1-guard.yml@pipelineTemplates
+            parameters:
+              ckSourcePaths: '$(OctoO1CkSources)'
+              lane: 'CK models published by dotnet build'
+              condition: and(succeeded(), ne(variables.effectivePublishCatalog, 'LocalFileSystemCatalog'))
           - task: DotNetCoreCLI@2
             retryCountOnTaskFailure: 2
             displayName: 'Build'
@@ -226,6 +258,11 @@ stages:
           # The blueprint list is ENUMERATED from disk rather than hardcoded a
           # third time — validate-blueprints and handle-artifacts above already
           # carry the authoritative list, and a third copy would drift.
+          - template: templates/steps/ck-o1-guard.yml@pipelineTemplates
+            parameters:
+              blueprintPaths: '$(OctoO1Blueprints)'
+              lane: 'blueprint publish to the lane blueprint catalog'
+              condition: and(succeeded(), or(eq(variables.isTest, true), eq(variables.isMain, true)))
           - task: PowerShell@2
             displayName: 'Publish blueprints to the lane blueprint catalog'
             condition: and(succeeded(), or(eq(variables.isTest, true), eq(variables.isMain, true)))

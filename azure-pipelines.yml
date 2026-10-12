@@ -279,10 +279,10 @@ stages:
               blueprintPaths: '$(OctoO1Blueprints)'
               targetCatalogs: '$(OctoO1BlueprintTarget)'
               lane: 'blueprint publish to the lane blueprint catalog'
-              condition: and(succeeded(), or(eq(variables.isTest, true), eq(variables.isMain, true)))
+              condition: and(succeeded(), eq(variables.isTest, true))
           - task: PowerShell@2
             displayName: 'Publish blueprints to the lane blueprint catalog'
-            condition: and(succeeded(), or(eq(variables.isTest, true), eq(variables.isMain, true)))
+            condition: and(succeeded(), eq(variables.isTest, true))
             inputs:
               targetType: 'inline'
               pwsh: true

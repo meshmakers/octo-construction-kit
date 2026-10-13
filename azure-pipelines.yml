@@ -59,7 +59,7 @@ resources:
       type: github
       name: meshmakers/octo-pipeline-templates
       endpoint: meshmakers-access-token
-      ref: 'refs/heads/arek/AB#5645_lane_validate_private'
+      ref: refs/tags/tpl-v1.6.1
 
 trigger:
   batch: true

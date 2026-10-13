@@ -20,9 +20,10 @@
 #     published CKs in dependency order.
 #   - HAS push-nuget — 11 Meshmakers.Octo.Sdk.Packages.* NuGets per build
 #   - CK v2 publish guard (AB#6277, operating rule O1, ck-o1-guard.yml; built into both
-#     validate-and-publish templates since tpl-v1.2.0) additionally runs in source mode BEFORE Build and
-#     on the blueprint directories before the lane blueprint publish; test/* publishes
-#     to octo-catalog-dev, which may take CK v2 models (dev-catalog exception, tpl-v1.2.1)
+#     validate-and-publish templates since tpl-v1.2.0) additionally runs in source mode BEFORE Build
+#   - test/* publishes the blueprints to octo-catalog-dev with -f through the shared step
+#     (publishBlueprintsToLaneCatalog, tpl-v1.6.1); the dev catalog may take CK v2 models
+#     (dev-catalog exception, tpl-v1.2.1)
 #   - HAS 12 CK library outputs (the actual Construction Kit YAMLs:
 #     11 Octo.Sdk.Packages.* + Octo.Sdk.Demo)
 
@@ -58,7 +59,7 @@ resources:
       type: github
       name: meshmakers/octo-pipeline-templates
       endpoint: meshmakers-access-token
-      ref: refs/tags/tpl-v1.5.1
+      ref: refs/tags/tpl-v1.6.1
 
 trigger:
   batch: true
@@ -97,23 +98,6 @@ variables:
     value: ${{ eq(variables['Build.SourceBranch'], 'refs/heads/main') }}
   - name: isTest
     value: ${{ startsWith(variables['Build.SourceBranch'], 'refs/heads/test') }}
-  # ---- Dev catalog for the test/0.2-* lane (AB#5139) ----
-  # Blueprints of this repo are published to the PUBLIC catalog by the catalogs
-  # release train (ADO pipeline 203) at r-tag time, from the `local` artifact.
-  # The two lane catalogs below that installations actually read between releases
-  # are fed by the publish step further down:
-  #   test/0.2-*  -> meshmakers/octo-catalog-dev          (coordinates here)
-  #   main        -> meshmakers/blueprint-libraries-build (engine DEFAULT, AB#5422)
-  # r-tag stays untouched — the train remains the single publisher of the public
-  # catalog, and it publishes without -f because released versions are immutable.
-  - name: devCatalogOwner
-    value: 'meshmakers'
-  - name: devCatalogRepository
-    value: 'octo-catalog-dev'
-  - name: devCatalogBranch
-    value: 'main'
-  - name: devCatalogPagesUri
-    value: 'https://meshmakers.github.io/octo-catalog-dev/'
 
 stages:
   - stage: Build
@@ -127,21 +111,20 @@ stages:
             parameters:
               octoCoreLibVersionOverride: ${{ replace(parameters.octoCoreLibVersion, 'auto', '') }}
               octoCommVersionOverride: ${{ replace(parameters.octoCommVersion, 'auto', '') }}
+              publishBlueprintsToLaneCatalog: true
           - checkout: self
             clean: true
             submodules: true
           - template: templates/steps/set-version.yml@pipelineTemplates
           # ---- CK v2 publish guard (AB#6277, operating rule O1) ----
           # The CK models are published after the tests by validate-and-publish-ck-versions (with its
-          # own O1 guard) and the lane blueprints by the step below, so this source-mode
-          # guard runs before the build and on the blueprint directories
-          # before that step. Both lists are enumerated from disk (every CK project the
-          # solution builds, every blueprint the publish step enumerates), not copied.
+          # own O1 guard), so this source-mode guard runs before the build. The list is
+          # enumerated from disk (every CK project the solution builds), not copied.
           # The guard refuses ckLanguage 2 / range retention (OctoCkRangeRetention) and
           # blueprints whose dependency floor is a CK v2 model until the variable
           # OctoCkO1Lifted (variable group OctoDefault) is true.
           - task: PowerShell@2
-            displayName: 'Enumerate CK sources and blueprints for the O1 guard'
+            displayName: 'Enumerate CK sources for the O1 guard'
             inputs:
               targetType: 'inline'
               pwsh: true
@@ -149,16 +132,8 @@ stages:
                 $ck = @(Get-ChildItem 'src/ConstructionKits' -Recurse -Filter 'ckModel.yaml' -File |
                   Where-Object { $_.FullName -notmatch '[\\/](bin|obj)[\\/]' } |
                   ForEach-Object { $_.DirectoryName })
-                $bp = @(Get-ChildItem 'src/Blueprints' -Directory |
-                  Where-Object { Test-Path (Join-Path $_.FullName 'blueprint.yaml') } |
-                  ForEach-Object { $_.FullName })
-                Write-Host "$($ck.Count) CK source(s), $($bp.Count) blueprint(s)"
+                Write-Host "$($ck.Count) CK source(s)"
                 Write-Host "##vso[task.setvariable variable=OctoO1CkSources]$($ck -join ';')"
-                Write-Host "##vso[task.setvariable variable=OctoO1Blueprints]$($bp -join ';')"
-                # Target of the blueprint publish below: the dev catalog on test/*, the
-                # shared private blueprint catalog on main (dev-catalog exception, tpl-v1.2.1).
-                $bpTarget = if ('$(isTest)' -match '^(?i)true$') { '$(devCatalogRepository)' } else { 'blueprint-libraries-build' }
-                Write-Host "##vso[task.setvariable variable=OctoO1BlueprintTarget]$bpTarget"
           - template: templates/steps/ck-o1-guard.yml@pipelineTemplates
             parameters:
               ckSourcePaths: '$(OctoO1CkSources)'
@@ -213,8 +188,8 @@ stages:
           # build — published blueprint versions are immutable. After a clean validation the
           # blueprints are published to the catalogs of the channel (main -> private,
           # r* tags -> private and public; an already published version is a no-op), so the
-          # catalogs release train finds them published. The lane blueprint publish step
-          # further below stays for the test/* lane catalog.
+          # catalogs release train finds them published. On test/* they go to octo-catalog-dev
+          # with -f (publishBlueprintsToLaneCatalog above).
           - template: templates/steps/validate-and-publish-blueprints.yml@pipelineTemplates
             parameters:
               # Same list as handle-artifacts.blueprintPaths below — keep in sync.
@@ -252,159 +227,6 @@ stages:
                 - 'src/Blueprints/Samples.Simulator.EnergyCommunity'
                 - 'src/Blueprints/Samples.EnergyEnvironment'
           - template: templates/steps/push-nuget-package.yml@pipelineTemplates
-          # ---- Blueprint publish to the lane's private catalog (AB#5139, AB#5422) ----
-          # Not a copy of the train's publish: the train owns the PUBLIC catalog at
-          # r-tag time. This step feeds the catalog the lane's own installations
-          # read between releases, and the two lanes differ in exactly two points:
-          #
-          #   lane   catalog repository              force  an existing version is
-          #   test   octo-catalog-dev (configured)   -f     overwritten (a 0.2-dev
-          #                                                 blueprint is re-published
-          #                                                 under the same version
-          #                                                 while it is worked on)
-          #   main   blueprint-libraries-build       none   a SKIP, not a failure —
-          #          (engine default, NOT configured)       published versions are
-          #                                                 immutable and most main
-          #                                                 builds bump nothing
-          #
-          # AB#5422: before this, main published no blueprint at all while the same
-          # build DID publish its CK models (MSBuild OctoPublishCatalog above). A
-          # blueprint merged to main was therefore uninstallable until the next
-          # release — that asymmetry is what this step removes.
-          # The blueprint list is ENUMERATED from disk rather than hardcoded a
-          # third time — validate-and-publish-blueprints and handle-artifacts already
-          # carry the authoritative list, and a third copy would drift.
-          - template: templates/steps/ck-o1-guard.yml@pipelineTemplates
-            parameters:
-              blueprintPaths: '$(OctoO1Blueprints)'
-              targetCatalogs: '$(OctoO1BlueprintTarget)'
-              lane: 'blueprint publish to the lane blueprint catalog'
-              condition: and(succeeded(), eq(variables.isTest, true))
-          - task: PowerShell@2
-            displayName: 'Publish blueprints to the lane blueprint catalog'
-            condition: and(succeeded(), eq(variables.isTest, true))
-            inputs:
-              targetType: 'inline'
-              pwsh: true
-              script: |
-                $ErrorActionPreference = 'Stop'
-                $toolPath = Join-Path "$(Agent.TempDirectory)" 'octo-tools'
-
-                $blueprints = Get-ChildItem 'src/Blueprints' -Directory |
-                  Where-Object { Test-Path (Join-Path $_.FullName 'blueprint.yaml') } |
-                  ForEach-Object { $_.FullName }
-                if ($blueprints.Count -eq 0) {
-                  Write-Host "##vso[task.logissue type=error]No blueprint directory found under src/Blueprints."
-                  exit 1
-                }
-                Write-Host "Found $($blueprints.Count) blueprint(s) to publish."
-
-                # Lane tooling from the PRIVATE feed, not the released 3.x from
-                # nuget.org: an older octo-bpm can fail validation on — or silently
-                # DROP — properties only the newer schema knows. seedDataPaths
-                # (AB#4758) is exactly such a property, and dropping it publishes a
-                # blueprint that installs an empty seed and still reports success.
-                $nugetSource = '$(nugetPrivateServer)'
-                $toolVersion = "$(MajorVersion).$(MinorVersion).*"
-                $nugetConfig = Join-Path "$(Agent.TempDirectory)" 'octo-bpm-nuget.config'
-                Set-Content -Path $nugetConfig -Encoding utf8 -Value @(
-                  '<?xml version="1.0" encoding="utf-8"?>',
-                  '<configuration>',
-                  '  <packageSources>',
-                  '    <clear />',
-                  '    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />',
-                  ('    <add key="octo-private" value="' + $nugetSource + '" />'),
-                  '  </packageSources>',
-                  '</configuration>'
-                )
-
-                Write-Host "Installing octo-bpm $toolVersion from $nugetSource..."
-                dotnet tool install Meshmakers.Octo.BlueprintManager --version "$toolVersion" --tool-path "$toolPath" --configfile "$nugetConfig"
-                if ($LASTEXITCODE -ne 0) {
-                  Write-Host "##vso[task.logissue type=error]octo-bpm tool install failed - does Meshmakers.Octo.BlueprintManager $toolVersion exist on $nugetSource? Has the engine CI built this version line yet?"
-                  exit 1
-                }
-
-                # Isolate the tool's user profile: `config` persists the PAT to
-                # <home>/.octo-bpm/settings.json and caches catalogs under <home>/.octo,
-                # and on these self-hosted agents the real HOME outlives the job.
-                # After the install so the NuGet cache stays warm.
-                $bpmHome = Join-Path "$(Agent.TempDirectory)" 'octo-bpm-home'
-                New-Item -ItemType Directory -Force -Path $bpmHome | Out-Null
-                $env:HOME = $bpmHome
-                $env:USERPROFILE = $bpmHome
-                $bpm = Join-Path $toolPath 'octo-bpm'
-
-                $isTestLane = '$(isTest)' -match '^(?i)true$'
-
-                # Both lanes disable the LOCAL blueprint catalog: it outranks the
-                # GitHub ones on read, so a stray local blueprint must never win over
-                # what we publish, and an unwarm agent has none to resolve against.
-                if ($isTestLane) {
-                  # Test lane: point the PRIVATE catalog slot at the dev repository.
-                  $targetCatalogRepository = '$(devCatalogRepository)'
-                  Write-Host "Pointing octo-bpm's private catalog at $(devCatalogOwner)/$(devCatalogRepository)..."
-                  & $bpm -c config -go "$(devCatalogOwner)" -gr "$(devCatalogRepository)" -gb "$(devCatalogBranch)" -gp "$(devCatalogPagesUri)" -gt "$(GitHubPAT)" -lce false
-                  if ($LASTEXITCODE -ne 0) { Write-Host "##vso[task.logissue type=error]octo-bpm config failed"; exit 1 }
-                } else {
-                  # Main lane (AB#5422): the private catalog slot keeps the ENGINE
-                  # DEFAULT coordinates (meshmakers/blueprint-libraries-build@main) —
-                  # deliberately NOT `-c config`, so the dev-catalog coordinates above
-                  # can never leak into main. Only the PAT and the local-catalog switch
-                  # are written, via the settings file the train uses for the same
-                  # reason: the settings must exist BEFORE the first tool run.
-                  $targetCatalogRepository = 'blueprint-libraries-build'
-                  $bpmSettingsDir = Join-Path $env:HOME '.octo-bpm'
-                  New-Item -ItemType Directory -Force -Path $bpmSettingsDir | Out-Null
-                  @"
-                {
-                  "PrivateOctoGitHub": { "GitHubApiToken": "$(GitHubPAT)" },
-                  "LocalFileSystemCatalog": { "IsEnabled": false }
-                }
-                "@ | Set-Content -Path (Join-Path $bpmSettingsDir 'settings.json') -Encoding utf8
-                  Write-Host "Publishing to the engine-default private catalog (meshmakers/$targetCatalogRepository@main)."
-                }
-
-                $skipped = 0
-                foreach ($blueprint in $blueprints) {
-                  $name = Split-Path $blueprint -Leaf
-                  Write-Host ""
-                  Write-Host "##[group]Blueprint $name"
-                  & $bpm -c validate -p "$blueprint"
-                  if ($LASTEXITCODE -ne 0) { Write-Host "##vso[task.logissue type=error]blueprint validation failed: $name"; exit 1 }
-
-                  # -f on the test lane only. On main a published version is immutable;
-                  # re-publishing it would rewrite history for every installation that
-                  # already installed it.
-                  if ($isTestLane) {
-                    $out = & $bpm -c publish -p "$blueprint" -c 'PrivateGitHubBlueprintCatalog' -f 2>&1
-                  } else {
-                    $out = & $bpm -c publish -p "$blueprint" -c 'PrivateGitHubBlueprintCatalog' 2>&1
-                  }
-                  $out | ForEach-Object { Write-Host $_ }
-                  $joined = $out -join "`n"
-                  # octo-bpm can soft-fail with exit 0 (logs the error and returns),
-                  # so assert on the output instead of trusting the exit code.
-                  if ($joined -match 'published successfully to catalog') {
-                    Write-Host "##[endgroup]"
-                    continue
-                  }
-                  # Without -f an already-published version reports 'already exists in
-                  # catalog' and returns. On main that is the NORMAL case — most builds
-                  # bump no blueprint — so it is a skip, not a failure. Content that
-                  # changed without a version bump is already caught earlier by the
-                  # validate-and-publish-blueprints gate (AB#5021), so this cannot hide a drift.
-                  if (-not $isTestLane -and $joined -match 'already exists in catalog') {
-                    Write-Host "Version unchanged and already published - skipping $name."
-                    $skipped++
-                    Write-Host "##[endgroup]"
-                    continue
-                  }
-                  Write-Host "##vso[task.logissue type=error]octo-bpm publish of $name did not report success"
-                  exit 1
-                }
-                Write-Host ""
-                Write-Host "Blueprints published to $targetCatalogRepository ($($blueprints.Count - $skipped) published, $skipped already current)."
           - task: PowerShell@2
             displayName: 'Clean up octo tool PAT settings'
             condition: always()
@@ -413,9 +235,8 @@ stages:
               pwsh: true
               script: |
                 # `config` persists the PAT into the tool's user settings file and the
-                # agents are shared. The step above points HOME at Agent.TempDirectory
-                # before configuring, which already covers it — this is the safety net
-                # for a build that predates the isolation or skips that step.
+                # agents are shared. The shared steps point HOME at Agent.TempDirectory
+                # before configuring, which already covers it — this is the safety net.
                 foreach ($settings in @((Join-Path $HOME '.octo-bpm/settings.json'), (Join-Path $HOME '.octo-ckc/settings.json'))) {
                   if (Test-Path $settings) { Remove-Item -Force $settings }
                 }

@@ -271,6 +271,11 @@ A transitive reference is sufficient (e.g. Industry.Energy → Industry.Basic �
    - Runs tests: `dotnet test` (excluding SystemTests)
    - `validate-and-publish-ck-versions` (12 CKs, dependency order): SemVer gate, compile, publish to the
      catalogs of the channel (main → private, r* tags → private and public; never replaces a version)
+     The 12 published models are listed identically in `constructionKitPaths` (this step, dependency order) and in
+     `constructionKitLibraryPaths` (handle-artifacts): Basic, Basic.Accounting, Basic.Energy, EnergyCommunity,
+     Environment, Industry.{Basic,Logistics,Energy,Fluid,Maintenance,Manufacturing}, OctoSdkDemo. Basic.Accounting was
+     missing from both lists until AB#6721 (1.10.0 was never published). `Monitoring` is deliberately not published
+     (dropped in r3.4.137); `Octo.Energy.Demo` is a sample. A new publishable CK must be added to both lists.
    - `validate-and-publish-blueprints`: blueprint version gate and publish to the catalogs of the channel
      (an already published version is a no-op; the lane blueprint step below stays for `test/*`)
    - Processes artifacts

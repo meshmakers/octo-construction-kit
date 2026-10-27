@@ -28,3 +28,23 @@ attributes:
     valueType: DateTime
     ownership: SeedOwned
     description: "Expiry of the bank's AIS consent; after this date a re-consent (web form) is required before further synchronization"
+  - id: SyncStatusReason
+    valueType: String
+    ownership: SeedOwned
+    description: "Stable code that says why SyncStatus is not Connected (UserActionRequired, ConsentExpired, ConsentMissing, UpdateFailed, NoRecentUpdate, NeverUpdated, NoInterface). Empty while the connection is healthy. Written by the finAPI sync; clients map the code to text"
+  - id: SyncStatusInterface
+    valueType: String
+    ownership: SeedOwned
+    description: "Banking interface the sync status was judged on (XS2A, FINTS_SERVER, WEB_SCRAPER): the interface that most recently delivered data"
+  - id: SyncStatusDetail
+    valueType: String
+    ownership: SeedOwned
+    description: "Plain-text detail behind SyncStatusReason as reported by the bank data provider (update result and error message). Never contains tokens or credentials. Empty while the connection is healthy"
+  - id: LastSyncAttemptAt
+    valueType: DateTime
+    ownership: SeedOwned
+    description: "Time of the last attempt to refresh the connection at the bank data provider, successful or not (LastSuccessfulSync keeps the time of the last success)"
+  - id: LastSyncAttemptResult
+    valueType: String
+    ownership: SeedOwned
+    description: "Outcome of the last refresh attempt: COMPLETED, WEB_FORM_REQUIRED (the bank asks for a login), COMPLETED_WITH_ERROR or TIMEOUT"

@@ -1,11 +1,8 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 enums:
   - enumId: DataQuality
-    description: "Defines the quality of the metering data"
+    description: "Defines the quality of the metering data. Only real qualities: whether a value was entered manually is recorded as the origin of the archive row, not as a quality."
     values:
-      - key: 0
-        name: Unknown
-        description: "The data quality is unknown"
       - key: 1
         name: L1
         description: "The data is accurate to 15 minute meter readings"
@@ -15,6 +12,3 @@ enums:
       - key: 3
         name: L3
         description: "The data is an estimate"
-      - key: 4
-        name: Manual
-        description: "The value was entered or corrected manually by a user"

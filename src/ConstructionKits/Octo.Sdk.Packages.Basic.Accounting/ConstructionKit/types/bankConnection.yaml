@@ -28,6 +28,21 @@ types:
     - id: ${this}/ConsentExpiresAt
       name: ConsentExpiresAt
       isOptional: true
+    - id: ${this}/SyncStatusReason
+      name: SyncStatusReason
+      isOptional: true
+    - id: ${this}/SyncStatusInterface
+      name: SyncStatusInterface
+      isOptional: true
+    - id: ${this}/SyncStatusDetail
+      name: SyncStatusDetail
+      isOptional: true
+    - id: ${this}/LastSyncAttemptAt
+      name: LastSyncAttemptAt
+      isOptional: true
+    - id: ${this}/LastSyncAttemptResult
+      name: LastSyncAttemptResult
+      isOptional: true
   associations:
     - id: ${this}/ConnectionToAccount
       targetCkTypeId: ${this}/BankAccount

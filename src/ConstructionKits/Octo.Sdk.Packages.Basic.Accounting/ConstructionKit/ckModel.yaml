@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
-modelId: Basic.Accounting-1.10.0
+modelId: Basic.Accounting-1.11.0
 dependencies:
   - System-[2.5,3.0)
   - Basic-[2.4,3.0)

@@ -1,5 +1,5 @@
 $schema: https://schemas.meshmakers.cloud/blueprint-meta.schema.json
-blueprintId: Samples.EnergyEnvironment-1.1.0
+blueprintId: Samples.EnergyEnvironment-2.0.0
 description: |
   The largest of the sample blueprints - a complete energy-management demo for
   one industrial site, from assets to dashboard:
@@ -19,11 +19,14 @@ description: |
   "energy-environment" dashboard.
 
   Demo and training tenants only.
+
+  2.0.0 moves to Basic.Energy 2.x (DataQuality without Unknown/Manual, AB#7623);
+  no seed data change. Tenants still on Basic.Energy 1.x install 1.1.0.
 ckModelDependencies:
   # Floors pinned to published versions, in dependency order: the engine
   # installs each floor EXACTLY and resolves no transitive CK dependencies.
   - Basic-[2.4.0,3.0)
-  - Basic.Energy-[1.9.0,2.0)
+  - Basic.Energy-[2.0.0,3.0)
   - Industry.Basic-[2.5.0,3.0)
   - Industry.Energy-[3.5.0,4.0)
   - Environment-[3.5.0,4.0)

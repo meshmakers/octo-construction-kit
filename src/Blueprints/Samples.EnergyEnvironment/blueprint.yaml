@@ -21,15 +21,19 @@ description: |
   Demo and training tenants only.
 
   2.0.0 moves to Basic.Energy 2.x (DataQuality without Unknown/Manual, AB#7623);
-  no seed data change. Tenants still on Basic.Energy 1.x install 1.1.0.
+  floors raised to the range-retaining CK generation; no seed data change.
+  Tenants still on Basic.Energy 1.x install 1.1.0.
 ckModelDependencies:
   # Floors pinned to published versions, in dependency order: the engine
   # installs each floor EXACTLY and resolves no transitive CK dependencies.
-  - Basic-[2.4.0,3.0)
+  # 2.0.0 floors are the range-retaining generation (Basic 2.5.0 and its
+  # dependents): the older floors (Basic 2.4.0 ...) pin System-2.5.0 exactly and
+  # cannot be installed on a tenant that already runs a newer System.
+  - Basic-[2.5.0,3.0)
   - Basic.Energy-[2.0.0,3.0)
-  - Industry.Basic-[2.5.0,3.0)
-  - Industry.Energy-[3.5.0,4.0)
-  - Environment-[3.5.0,4.0)
+  - Industry.Basic-[2.6.0,3.0)
+  - Industry.Energy-[3.6.0,4.0)
+  - Environment-[3.6.0,4.0)
   # Satisfiability floors only - service-managed, see Samples.PipelineBasics.
   - System-[2.2.0,3.0)
   - System.Notification-[2.1.0,3.0)

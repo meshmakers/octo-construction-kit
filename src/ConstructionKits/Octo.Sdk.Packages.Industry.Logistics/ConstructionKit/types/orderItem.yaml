@@ -2,12 +2,15 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: OrderItem
   derivedFromCkTypeId: ${System}/Entity
-  description: "A line item of a logistics order: an article line, or the shipping cost as a line of its own (ItemKind)."
+  description: "A line item of a logistics order: an article line, or the shipping cost as a line of its own (ItemKind). The article number as the source states it is kept on the line (ArticleNumber), so a line without an article link (an article the CK does not know) stays identifiable."
   attributes:
   - id: ${this}/ItemKind
     name: ItemKind
   - id: ${this}/PositionNumber
     name: PositionNumber
+    isOptional: true
+  - id: ${this}/ArticleNumber
+    name: ArticleNumber
     isOptional: true
   - id: ${this}/Title
     name: Title

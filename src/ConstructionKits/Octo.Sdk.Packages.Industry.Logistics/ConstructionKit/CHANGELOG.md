@@ -38,6 +38,7 @@ _Required bump level: minor._
 - Type attribute 'Order-1/TaxRate' added (Industry.Logistics/TaxRate-1) _(minor — purely additive optional attribute)_
 - Type attribute 'Order-1/CarrierToken' added (Industry.Logistics/CarrierToken-1) _(minor — purely additive optional attribute)_
 - Type attribute 'Order-1/ShipmentDate' added (Industry.Logistics/ShipmentDate-1) _(minor — purely additive optional attribute)_
+- Type attribute 'OrderItem-1/ArticleNumber' added (Industry.Logistics/ArticleNumber-1) _(minor — purely additive optional attribute)_
 - Type attribute 'OrderItem-1/Discount' added (Industry.Logistics/Discount-1) _(minor — purely additive optional attribute)_
 - Type attribute 'OrderItem-1/SerialNumber' added (Industry.Logistics/SerialNumber-1) _(minor — purely additive optional attribute)_
 - Type attribute 'Parcel-1/PositionNumber' added (Industry.Logistics/PositionNumber-1) _(minor — purely additive optional attribute)_
@@ -94,6 +95,7 @@ _Required bump level: minor._
 
 - Dependency 'System': version changed '2.5.0' → '2.7.0' _(none — resolved dependency System moved 2.5.0 -> 2.7.0 inside its declared range [2.5,3.0) of a range-retaining model; the closure is compiler-set metadata and the model itself is unchanged, no bump needed (row D8))_
 - Type 'Order-1': description changed 'A logistics order placed by a customer for fulfillment. Identified by Source and OrderNumber; doubles as the export marker of the delivery to the fulfilment partner.' → 'A logistics order placed by a customer for fulfillment. Identified by Source and OrderNumber; TransferState records its handover to the fulfilment partner.' _(patch — purely documentational change)_
+- Type 'OrderItem-1': description changed 'A line item of a logistics order: an article line, or the shipping cost as a line of its own (ItemKind).' → 'A line item of a logistics order: an article line, or the shipping cost as a line of its own (ItemKind). The article number as the source states it is kept on the line (ArticleNumber), so a line without an article link (an article the CK does not know) stays identifiable.' _(patch — purely documentational change)_
 - Type attribute 'Parcel-1/TrackingNumber': isOptional changed 'false' → 'true' _(minor — relaxation, attribute changed from required to optional)_
 - Type 'Shipment-1': description changed 'A dispatch / order feedback for an order; carries totals and completeness.' → 'A dispatch / order feedback for an order; carries totals and completeness. TransferState records its handover back to the source.' _(patch — purely documentational change)_
 - Type attribute 'Shipment-1/ShipmentNumber': isOptional changed 'false' → 'true' _(minor — relaxation, attribute changed from required to optional)_

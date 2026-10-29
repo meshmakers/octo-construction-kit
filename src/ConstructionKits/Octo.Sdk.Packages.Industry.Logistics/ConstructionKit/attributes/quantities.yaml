@@ -18,21 +18,21 @@ attributes:
 - id: Length
   valueType: Double
   ownership: SeedOwned
-  description: "Length of the article as the source system states it."
+  description: "Length of the article in centimetres; the adapter converts the source's unit."
   metaData:
     - key: Unit
       value: "cm"
 - id: Width
   valueType: Double
   ownership: SeedOwned
-  description: "Width of the article as the source system states it."
+  description: "Width of the article in centimetres; the adapter converts the source's unit."
   metaData:
     - key: Unit
       value: "cm"
 - id: Height
   valueType: Double
   ownership: SeedOwned
-  description: "Height of the article as the source system states it."
+  description: "Height of the article in centimetres; the adapter converts the source's unit."
   metaData:
     - key: Unit
       value: "cm"

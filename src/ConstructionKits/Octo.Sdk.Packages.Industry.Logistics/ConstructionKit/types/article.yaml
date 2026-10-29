@@ -33,6 +33,9 @@ types:
   - id: ${this}/PurchasePrice
     name: PurchasePrice
     isOptional: true
+  - id: ${this}/Currency
+    name: Currency
+    isOptional: true
   - id: ${this}/Discontinued
     name: Discontinued
     isOptional: true
@@ -66,8 +69,8 @@ types:
   - id: ${this}/SourceProductType
     name: SourceProductType
     isOptional: true
-  - id: ${this}/VatIndex
-    name: VatIndex
+  - id: ${this}/VatCategory
+    name: VatCategory
     isOptional: true
   - id: ${this}/TitleEnglish
     name: TitleEnglish

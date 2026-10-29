@@ -2,7 +2,7 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Order
   derivedFromCkTypeId: ${System}/Entity        # transactional (like Industry.Maintenance/order)
-  description: "A logistics order placed by a customer for fulfillment. Identified by Source and OrderNumber; TransferState records its handover to the fulfilment partner."
+  description: "A logistics order placed by a customer for fulfillment. Identified by Source and OrderNumber; TransferState records its handover to the fulfilment partner; Unknown means the order predates the handover state or its source does not use it (e.g. a source that writes the order only once it has delivered it, so the instance itself marks the export)."
   indexes:
   - indexType: "UniqueNotDeleted"
     fields:

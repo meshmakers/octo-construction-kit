@@ -24,7 +24,7 @@ attributes:
 - id: Currency
   valueType: String
   ownership: SeedOwned
-  description: "ISO 4217 currency code of the order's amounts."
+  description: "ISO 4217 currency code: of the order's amounts on Order, of the purchase price on Article."
 - id: NetAmount
   valueType: Double
   ownership: SeedOwned

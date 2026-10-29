@@ -21,7 +21,7 @@ attributes:
 - id: PurchasePrice
   valueType: Double
   ownership: SeedOwned
-  description: "Purchase price of the article as the source system states it, in the source's currency (the model carries no currency for it); empty = no price known."
+  description: "Purchase price of the article as the source system states it, in the currency stated by Currency on the article (empty Currency = the source's currency); empty = no price known."
 - id: Discontinued
   valueType: Boolean
   ownership: SeedOwned
@@ -46,10 +46,11 @@ attributes:
   valueType: String
   ownership: SeedOwned
   description: "Product type as the source system states it (e.g. a shop's product type code), beside the ArticleType enum."
-- id: VatIndex
-  valueType: Int
+- id: VatCategory
+  valueType: Enum
+  valueCkEnumId: ${this}/VatCategory
   ownership: SeedOwned
-  description: "Index of the VAT rate the source system assigns to the article, in the source's own numbering."
+  description: "VAT category of the article; the adapter maps the source's own VAT code or index to it."
 - id: TitleEnglish
   valueType: String
   ownership: SeedOwned

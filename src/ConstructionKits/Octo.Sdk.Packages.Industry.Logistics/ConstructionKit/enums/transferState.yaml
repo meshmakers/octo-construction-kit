@@ -7,7 +7,7 @@ enums:
   values:
   - key: 0
     name: Unknown
-    description: "No handover state stated (also the value of an instance that predates the handover)."
+    description: "No handover state: the instance predates the handover state, or its source does not use it (e.g. a source that writes an order only once it has delivered it, so the instance itself marks the export)."
   - key: 1
     name: Pending
     description: "Waiting for the consumer to transfer it."

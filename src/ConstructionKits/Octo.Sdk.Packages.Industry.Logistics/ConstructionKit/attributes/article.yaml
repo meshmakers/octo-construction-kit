@@ -17,11 +17,11 @@ attributes:
 - id: Unit
   valueType: String
   ownership: SeedOwned
-  description: "Stock-keeping unit of the article as the source system states it (a unit name or code)."
+  description: "Unit of measure the article is stocked and sold in (e.g. piece, box), as the source system states it (a unit name or code)."
 - id: PurchasePrice
   valueType: Double
   ownership: SeedOwned
-  description: "Purchase price of the article as the source system states it; empty = no price known."
+  description: "Purchase price of the article as the source system states it, in the source's currency (the model carries no currency for it); empty = no price known."
 - id: Discontinued
   valueType: Boolean
   ownership: SeedOwned

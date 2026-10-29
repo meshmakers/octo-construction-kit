@@ -7,6 +7,7 @@ enums:
   values:
   - key: 0
     name: Unknown
+    description: "No VAT category stated."
   - key: 1
     name: Standard
     description: "Standard VAT rate."

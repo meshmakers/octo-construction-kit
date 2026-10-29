@@ -1,7 +1,12 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 attributes:
-# Handover state: the consumer of an instance writes it while the instance stays in the tenant, so a
-# re-import (blueprint, ImportRt -r, migration writes) keeps it; ExportRt leaves it out.
+- id: Reference
+  valueType: String
+  ownership: SeedOwned
+  description: "Reference of the report the instance was read from, as the reporting system names it (e.g. the name of a shipment or stock report file)."
+# TransferState, TransferredAt and TransferError are handover state: the consumer of an instance writes
+# them while the instance stays in the tenant. A blueprint re-apply or ImportRt -r keeps them and ExportRt
+# leaves them out; a CK migration Update action is the sanctioned way to change them.
 - id: TransferState
   valueType: Enum
   valueCkEnumId: ${this}/TransferState
@@ -15,7 +20,3 @@ attributes:
   valueType: String
   ownership: RuntimeState
   description: "Reason the consumer rejected the instance because of a data error (TransferState Rejected); names the affected record and field, never the field content."
-- id: Reference
-  valueType: String
-  ownership: SeedOwned
-  description: "Reference of the report the instance was read from, as the reporting system names it (e.g. the name of a shipment or stock report file)."

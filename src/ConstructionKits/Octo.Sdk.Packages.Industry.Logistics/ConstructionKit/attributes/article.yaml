@@ -37,11 +37,11 @@ attributes:
 - id: Category1
   valueType: String
   ownership: SeedOwned
-  description: "Name of the first category the source system assigns to the article. The legacy Billbee connector (r0.10.4) passed the category object, not its name, into its export file; that file format is measured against its golden file."
+  description: "Name of the first category the source system assigns to the article."
 - id: Category2
   valueType: String
   ownership: SeedOwned
-  description: "Name of the second category the source system assigns to the article. The legacy Billbee connector (r0.10.4) passed the category object, not its name, into its export file; that file format is measured against its golden file."
+  description: "Name of the second category the source system assigns to the article."
 - id: SourceProductType
   valueType: String
   ownership: SeedOwned
@@ -57,7 +57,7 @@ attributes:
 - id: BasicAttributes
   valueType: String
   ownership: SeedOwned
-  description: "Basic attributes text of the article (its short characteristics) in the primary language: German, or the first language the source states when it has no German text."
+  description: "Basic attributes text of the article (its short characteristics) in the primary language of the source; the adapter decides which language is primary and what it falls back to."
 - id: BasicAttributesEnglish
   valueType: String
   ownership: SeedOwned

@@ -38,11 +38,11 @@ associationRoles:
   inboundMultiplicity: N
   outboundMultiplicity: One
 - id: ShipmentItemArticle
-  description: "ShipmentItem -> Article. Creates ShipmentItem.Article (one) and Article.ShipmentItems (many)."
+  description: "ShipmentItem -> Article. Creates ShipmentItem.Article (zeroOrOne; a shipping-cost line or an article the CK does not know references no article) and Article.ShipmentItems (many)."
   inboundName: ShipmentItems
   outboundName: Article
   inboundMultiplicity: N
-  outboundMultiplicity: One
+  outboundMultiplicity: ZeroOrOne
 - id: ShipmentItemParcel
   description: "ShipmentItem -> Parcel. Creates ShipmentItem.Parcel (zeroOrOne) and Parcel.ShipmentItems (many)."
   inboundName: ShipmentItems

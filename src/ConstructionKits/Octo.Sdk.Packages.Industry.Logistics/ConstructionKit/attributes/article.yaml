@@ -10,3 +10,19 @@ attributes:
   valueType: Enum
   valueCkEnumId: ${this}/ArticleType
   ownership: SeedOwned
+- id: ExternalArticleNumber
+  valueType: String
+  ownership: SeedOwned
+  description: "Article number as the source system presents it to people (e.g. the merchant's article number or SKU), when ArticleNumber carries a source-internal identifier."
+- id: Unit
+  valueType: String
+  ownership: SeedOwned
+  description: "Stock-keeping unit of the article as the source system states it (a unit name or code)."
+- id: PurchasePrice
+  valueType: Double
+  ownership: SeedOwned
+  description: "Purchase price of the article as the source system states it; empty = no price known."
+- id: Discontinued
+  valueType: Boolean
+  ownership: SeedOwned
+  description: "True when the source system no longer delivers the article; the instance stays for the orders, shipments and stock lines that reference it."

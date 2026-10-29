@@ -3,6 +3,10 @@ attributes:
 - id: Source
   valueType: String
   ownership: SeedOwned
-  description: "Name of the source system a record originates from (e.g. the shop or ERP the adapter reads); part of the identity of orders and export runs when one tenant is fed by more than one source. Unknown until an adapter states it."
+  description: "Name of the source system a record originates from (e.g. the shop or ERP the adapter reads); part of the identity of orders, export runs and import runs, and the scope of articles, customers, shipments and stock lines when one tenant is fed by more than one source. Unknown until an adapter states it; the default applies to newly created instances only."
   defaultValues:
     - "Unknown"
+- id: SourceVersion
+  valueType: String
+  ownership: SeedOwned
+  description: "Change state of the record in the source system (e.g. the source's version counter) when it was taken over; a different value in the source shows that the record changed there since."

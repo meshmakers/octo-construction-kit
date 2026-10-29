@@ -1,0 +1,21 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+# Handover state: the consumer of an instance writes it while the instance stays in the tenant, so a
+# re-import (blueprint, ImportRt -r, migration writes) keeps it; ExportRt leaves it out.
+- id: TransferState
+  valueType: Enum
+  valueCkEnumId: ${this}/TransferState
+  ownership: RuntimeState
+  description: "Handover state of the instance towards the system that consumes it; the consumer writes it."
+- id: TransferredAt
+  valueType: DateTime
+  ownership: RuntimeState
+  description: "Point in time the consumer recorded the current TransferState."
+- id: TransferError
+  valueType: String
+  ownership: RuntimeState
+  description: "Reason the consumer rejected the instance because of a data error (TransferState Rejected); names the affected record and field, never the field content."
+- id: Reference
+  valueType: String
+  ownership: SeedOwned
+  description: "Reference of the report the instance was read from, as the reporting system names it (e.g. the name of a shipment or stock report file)."

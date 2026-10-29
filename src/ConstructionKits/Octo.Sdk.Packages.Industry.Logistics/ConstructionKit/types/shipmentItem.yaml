@@ -6,6 +6,7 @@ types:
   attributes:
   - id: ${this}/PositionNumber
     name: PositionNumber
+    isOptional: true
   # ${Basic}/Quantity can only be referenced once per type (attribute ids are unique),
   # so delivered/open quantities are deliberately dedicated attributes.
   - id: ${this}/DeliveredQuantity

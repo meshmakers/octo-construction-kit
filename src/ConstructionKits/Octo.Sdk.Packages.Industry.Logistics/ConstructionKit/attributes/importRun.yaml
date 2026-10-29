@@ -1,0 +1,10 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+attributes:
+- id: ImportKind
+  valueType: String
+  ownership: SeedOwned
+  description: "Kind of inbound import run (e.g. the article mirror); the adapter supplies the value."
+- id: CompletedAt
+  valueType: DateTime
+  ownership: SeedOwned
+  description: "Point in time the last complete import run of this source and kind finished."

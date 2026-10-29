@@ -3,7 +3,16 @@ types:
 - typeId: Article
   derivedFromCkTypeId: ${Basic}/NamedEntity   # inherits Name + Description
   description: "An article / product master record."
+  indexes:
+  # Not unique on purpose: a unique index on an existing type is a major change.
+  - indexType: "Ascending"
+    fields:
+      - attributePaths:
+        - Source
+        - ArticleNumber
   attributes:
+  - id: ${this}/Source
+    name: Source
   - id: ${this}/ArticleNumber
     name: ArticleNumber
   - id: ${this}/Ean
@@ -14,4 +23,16 @@ types:
     isOptional: true
   - id: ${this}/ArticleType
     name: ArticleType
+    isOptional: true
+  - id: ${this}/ExternalArticleNumber
+    name: ExternalArticleNumber
+    isOptional: true
+  - id: ${this}/Unit
+    name: Unit
+    isOptional: true
+  - id: ${this}/PurchasePrice
+    name: PurchasePrice
+    isOptional: true
+  - id: ${this}/Discontinued
+    name: Discontinued
     isOptional: true

@@ -14,7 +14,7 @@ For a comprehensive guide on Construction Kits, see the [official documentation]
 | **Industry.Basic** | `Industry.Basic-2.6.0` | Basic | Extended industrial domain model |
 | **Industry.Energy** | `Industry.Energy-3.6.0` | Industry.Basic | Energy sector specific types |
 | **Industry.Fluid** | `Industry.Fluid-2.5.0` | Industry.Basic | Fluid system management |
-| **Industry.Logistics** | `Industry.Logistics-3.3.0` | Basic | Logistics/fulfillment orders, shipments and stock |
+| **Industry.Logistics** | `Industry.Logistics-3.4.0` | Basic | Logistics/fulfillment orders, shipments and stock |
 | **Industry.Maintenance** | `Industry.Maintenance-2.5.0` | Industry.Basic | Maintenance operations and scheduling |
 | **Industry.Manufacturing** | `Industry.Manufacturing-2.6.0` | Industry.Basic | Production orders and manufacturing |
 | **Environment** | `Environment-3.6.0` | Basic | Environmental data and monitoring |

@@ -46,6 +46,8 @@ _Required bump level: minor._
 - Type attribute 'Shipment-1/TransferState' added (Industry.Logistics/TransferState-1) _(minor — purely additive optional attribute)_
 - Type attribute 'Shipment-1/TransferredAt' added (Industry.Logistics/TransferredAt-1) _(minor — purely additive optional attribute)_
 - Type attribute 'Shipment-1/TransferError' added (Industry.Logistics/TransferError-1) _(minor — purely additive optional attribute)_
+- Type attribute 'ShipmentItem-1/ArticleNumber' added (Industry.Logistics/ArticleNumber-1) _(minor — purely additive optional attribute)_
+- Type attribute 'ShipmentItem-1/ItemKind' added (Industry.Logistics/ItemKind-1) _(minor — purely additive optional attribute)_
 - Type attribute 'Stock-1/Source' added (Industry.Logistics/Source-1) _(minor — additive required attribute, existing data can be filled from default values)_
 - Type attribute 'Stock-1/Reference' added (Industry.Logistics/Reference-1) _(minor — purely additive optional attribute)_
 - Type attribute 'Stock-1/TransferState' added (Industry.Logistics/TransferState-1) _(minor — purely additive optional attribute)_
@@ -95,6 +97,7 @@ _Required bump level: minor._
 - Type attribute 'Parcel-1/TrackingNumber': isOptional changed 'false' → 'true' _(minor — relaxation, attribute changed from required to optional)_
 - Type 'Shipment-1': description changed 'A dispatch / order feedback for an order; carries totals and completeness.' → 'A dispatch / order feedback for an order; carries totals and completeness. TransferState records its handover back to the source.' _(patch — purely documentational change)_
 - Type attribute 'Shipment-1/ShipmentNumber': isOptional changed 'false' → 'true' _(minor — relaxation, attribute changed from required to optional)_
+- Type 'ShipmentItem-1': description changed 'A dispatched line within a shipment.' → 'A dispatched line within a shipment. The article number as the reporting system states it is kept on the line (ArticleNumber), so a line without an article link (an article the CK does not know, a shipping cost) stays identifiable; ItemKind marks shipping-cost lines as on OrderItem.' _(patch — purely documentational change)_
 - Type attribute 'ShipmentItem-1/PositionNumber': isOptional changed 'false' → 'true' _(minor — relaxation, attribute changed from required to optional)_
 - Type 'Stock-1': description changed 'Stock level of an article (stock overview).' → 'One stock line of a stock report: the stock level of an article as reported (Reference names the report). TransferState records its handover back to the source.' _(patch — purely documentational change)_
 - Attribute 'CarrierToken-1': description changed 'Carrier reference exactly as the fulfilment partner delivered it (for a shop system: its own carrier id), beside the Carrier enum.' → 'Carrier reference exactly as the delivering system states it, beside the Carrier enum: on Parcel as the fulfilment partner delivered it (for a shop system: its own carrier id), on Order as the source system identifies the shipping provider (e.g. its provider id).' _(patch — purely documentational change)_

@@ -15,6 +15,9 @@ types:
     name: Source
   - id: ${this}/CustomerNumber
     name: CustomerNumber
-  - id: ${Basic}/Contact                       # Contact record (CompanyName/First/LastName/Email/Address)
+  - id: ${this}/ExternalCustomerId
+    name: ExternalCustomerId
+    isOptional: true
+  - id: ${Basic}/Contact                      # Contact record (CompanyName/First/LastName/Email/Address)
     name: Contact                              # full contact (company/person/email) instead of Address only
     isOptional: true

@@ -3,3 +3,7 @@ attributes:
 - id: CustomerNumber
   valueType: String
   ownership: SeedOwned
+- id: ExternalCustomerId
+  valueType: String
+  ownership: SeedOwned
+  description: "Identifier of the customer in the source system (e.g. a shop's internal customer id), beside CustomerNumber."

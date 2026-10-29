@@ -23,6 +23,12 @@ types:
   - id: ${this}/TaxRate
     name: TaxRate
     isOptional: true
+  - id: ${this}/Discount
+    name: Discount
+    isOptional: true
+  - id: ${this}/SerialNumber
+    name: SerialNumber
+    isOptional: true
   associations:
   - id: ${this}/OrderItemOrder
     targetCkTypeId: ${this}/Order

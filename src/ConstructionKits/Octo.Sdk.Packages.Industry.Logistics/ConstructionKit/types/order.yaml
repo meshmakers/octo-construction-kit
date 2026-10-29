@@ -64,6 +64,24 @@ types:
   - id: ${this}/TransferError
     name: TransferError
     isOptional: true
+  - id: ${this}/InvoiceNumber
+    name: InvoiceNumber
+    isOptional: true
+  - id: ${Basic}/AddressVATnumber
+    name: VatId
+    isOptional: true
+  - id: ${this}/Weight
+    name: TotalWeight
+    isOptional: true
+  - id: ${this}/TaxRate
+    name: TaxRate
+    isOptional: true
+  - id: ${this}/CarrierToken
+    name: CarrierToken
+    isOptional: true
+  - id: ${this}/ShipmentDate
+    name: ShipmentDate
+    isOptional: true
   associations:
   - id: ${this}/OrderCustomer
     targetCkTypeId: ${this}/Customer

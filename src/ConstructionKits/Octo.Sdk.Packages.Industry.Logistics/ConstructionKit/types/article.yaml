@@ -36,3 +36,45 @@ types:
   - id: ${this}/Discontinued
     name: Discontinued
     isOptional: true
+  - id: ${this}/Length
+    name: Length
+    isOptional: true
+  - id: ${this}/Width
+    name: Width
+    isOptional: true
+  - id: ${this}/Height
+    name: Height
+    isOptional: true
+  - id: ${this}/CountryOfOrigin
+    name: CountryOfOrigin
+    isOptional: true
+  - id: ${this}/CustomsTariffNumber
+    name: CustomsTariffNumber
+    isOptional: true
+  - id: ${this}/UnitsPerItem
+    name: UnitsPerItem
+    isOptional: true
+  - id: ${this}/DesiredStock
+    name: DesiredStock
+    isOptional: true
+  - id: ${this}/Category1
+    name: Category1
+    isOptional: true
+  - id: ${this}/Category2
+    name: Category2
+    isOptional: true
+  - id: ${this}/SourceProductType
+    name: SourceProductType
+    isOptional: true
+  - id: ${this}/VatIndex
+    name: VatIndex
+    isOptional: true
+  - id: ${this}/TitleEnglish
+    name: TitleEnglish
+    isOptional: true
+  - id: ${this}/BasicAttributes
+    name: BasicAttributes
+    isOptional: true
+  - id: ${this}/BasicAttributesEnglish
+    name: BasicAttributesEnglish
+    isOptional: true

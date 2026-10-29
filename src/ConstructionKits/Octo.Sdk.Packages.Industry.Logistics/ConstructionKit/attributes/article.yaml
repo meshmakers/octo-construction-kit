@@ -26,3 +26,39 @@ attributes:
   valueType: Boolean
   ownership: SeedOwned
   description: "True when the source system no longer delivers the article; the instance stays for the orders, shipments and stock lines that reference it."
+- id: CountryOfOrigin
+  valueType: String
+  ownership: SeedOwned
+  description: "Country of origin of the article as the source system states it."
+- id: CustomsTariffNumber
+  valueType: String
+  ownership: SeedOwned
+  description: "Customs tariff number of the article (e.g. a TARIC code) as the source system states it."
+- id: Category1
+  valueType: String
+  ownership: SeedOwned
+  description: "Name of the first category the source system assigns to the article. The legacy Billbee connector (r0.10.4) passed the category object, not its name, into its export file; that file format is measured against its golden file."
+- id: Category2
+  valueType: String
+  ownership: SeedOwned
+  description: "Name of the second category the source system assigns to the article. The legacy Billbee connector (r0.10.4) passed the category object, not its name, into its export file; that file format is measured against its golden file."
+- id: SourceProductType
+  valueType: String
+  ownership: SeedOwned
+  description: "Product type as the source system states it (e.g. a shop's product type code), beside the ArticleType enum."
+- id: VatIndex
+  valueType: Int
+  ownership: SeedOwned
+  description: "Index of the VAT rate the source system assigns to the article, in the source's own numbering."
+- id: TitleEnglish
+  valueType: String
+  ownership: SeedOwned
+  description: "English title of the article as the source system states it; empty when the source has none. The primary title is Name."
+- id: BasicAttributes
+  valueType: String
+  ownership: SeedOwned
+  description: "Basic attributes text of the article (its short characteristics) in the primary language: German, or the first language the source states when it has no German text."
+- id: BasicAttributesEnglish
+  valueType: String
+  ownership: SeedOwned
+  description: "Basic attributes text of the article (its short characteristics) in English; empty when the source has none."

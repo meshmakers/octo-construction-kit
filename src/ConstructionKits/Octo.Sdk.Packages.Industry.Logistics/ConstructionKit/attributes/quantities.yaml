@@ -15,3 +15,32 @@ attributes:
   valueType: Double
   ownership: SeedOwned
   description: "Undelivered quantity; negative = over-delivery"
+- id: Length
+  valueType: Double
+  ownership: SeedOwned
+  description: "Length of the article as the source system states it."
+  metaData:
+    - key: Unit
+      value: "cm"
+- id: Width
+  valueType: Double
+  ownership: SeedOwned
+  description: "Width of the article as the source system states it."
+  metaData:
+    - key: Unit
+      value: "cm"
+- id: Height
+  valueType: Double
+  ownership: SeedOwned
+  description: "Height of the article as the source system states it."
+  metaData:
+    - key: Unit
+      value: "cm"
+- id: UnitsPerItem
+  valueType: Double
+  ownership: SeedOwned
+  description: "Number of units one item of the article contains, as the source system states it."
+- id: DesiredStock
+  valueType: Double
+  ownership: SeedOwned
+  description: "Stock level the source system aims to keep for the article."

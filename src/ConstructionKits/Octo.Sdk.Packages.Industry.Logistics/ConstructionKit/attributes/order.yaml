@@ -50,7 +50,7 @@ attributes:
 - id: TaxRate
   valueType: Double
   ownership: SeedOwned
-  description: "VAT rate of a line in percent."
+  description: "VAT rate in percent: of a line on OrderItem; the regular VAT rate of the order on Order."
   metaData:
     - key: Unit
       value: "%"
@@ -61,3 +61,18 @@ attributes:
   description: "What a line is: an article, the shipping cost, something else."
   defaultValues:
     - 0
+- id: InvoiceNumber
+  valueType: String
+  ownership: SeedOwned
+  description: "Invoice number of the order as the source system shows it; the adapter composes it where the source keeps prefix, number and suffix apart."
+- id: Discount
+  valueType: Double
+  ownership: SeedOwned
+  description: "Discount of a line in percent as the source system states it."
+  metaData:
+    - key: Unit
+      value: "%"
+- id: SerialNumber
+  valueType: String
+  ownership: SeedOwned
+  description: "Serial number of the article on a line as the source system states it."

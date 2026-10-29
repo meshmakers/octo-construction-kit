@@ -6,7 +6,7 @@ attributes:
   description: "Reference of the report the instance was read from, as the reporting system names it (e.g. the name of a shipment or stock report file)."
 # TransferState, TransferredAt and TransferError are handover state: the consumer of an instance writes
 # them while the instance stays in the tenant. A blueprint re-apply or ImportRt -r keeps them and ExportRt
-# leaves them out; a CK migration Update action is the sanctioned way to change them.
+# leaves them out; a GraphQL update changes them.
 - id: TransferState
   valueType: Enum
   valueCkEnumId: ${this}/TransferState

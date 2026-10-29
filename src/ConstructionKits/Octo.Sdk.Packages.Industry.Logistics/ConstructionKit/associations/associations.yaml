@@ -13,7 +13,7 @@ associationRoles:
   inboundMultiplicity: N
   outboundMultiplicity: One
 - id: OrderItemArticle
-  description: "OrderItem -> Article. Creates OrderItem.Article (zeroOrOne; a shipping-cost line references no article) and Article.OrderItems (many)."
+  description: "OrderItem -> Article. Creates OrderItem.Article (zeroOrOne; a shipping-cost line or an article the CK does not know references no article) and Article.OrderItems (many)."
   inboundName: OrderItems
   outboundName: Article
   inboundMultiplicity: N

@@ -15,7 +15,7 @@ attributes:
 - id: HouseNumber
   valueType: String
   ownership: SeedOwned
-  description: "House number when the source system states it apart from the street; such a source writes only the street name into Street."
+  description: "House number when the source system states it apart from the street; Street still carries the complete street line including the number."
 - id: ShipTo
   valueType: Record
   valueCkRecordId: ${this}/PostalAddress

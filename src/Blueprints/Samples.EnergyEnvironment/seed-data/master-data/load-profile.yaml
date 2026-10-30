@@ -1,6 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/runtime-model.schema.json
 dependencies:
-  - Basic.Energy-[1.4.0,2.0)
+  - Basic.Energy-[2.0.0,3.0)
   - Industry.Energy-[3.2.0,4.0)
 
 # Quarter-hour load profile (Lastgang) as Basic.Energy/EnergyMeasurement

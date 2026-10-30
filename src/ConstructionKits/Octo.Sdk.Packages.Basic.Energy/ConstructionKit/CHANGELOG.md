@@ -4,7 +4,7 @@
 
 _Required bump level: major._
 
-**Breaking (AB#5356, decided by Reimar Klammer 2026-10-27):** DataQuality knows only the real qualities L1, L2 and L3. `Unknown` (0) and `Manual` (4) are removed: whether a value was entered by hand is recorded as the origin of the archive row (`$Origin`), not as a quality. Release gate: before 2.0.0 reaches a tenant, verify that the tenant stores no DataQuality 0 or 4; fix such rows first (origin manual plus a real quality). There is deliberately no migration that maps 0/4 to a quality.
+**Breaking (AB#5356, decided by Reimar Klammer 2026-10-27):** DataQuality knows only the real qualities L1, L2 and L3. `Unknown` (0) and `Manual` (4) are removed: whether a value was entered by hand is recorded as the origin of the archive row (`$Origin`), not as a quality. Release gate: before 2.0.0 reaches a tenant, verify that the tenant stores no DataQuality 0 or 4; fix such rows first: rows with Manual (4) get origin manual plus a real quality; rows with Unknown (0) came from automated deliveries, so they keep origin automated and get a real quality (or are requested again). There is deliberately no migration that maps 0/4 to a quality.
 
 ### Breaking
 

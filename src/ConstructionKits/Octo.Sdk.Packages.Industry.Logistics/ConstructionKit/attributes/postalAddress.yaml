@@ -4,6 +4,18 @@ attributes:
   valueType: String
   ownership: SeedOwned
   description: "Postal code as text - leading zeros and letters are part of it."
+- id: AddressLine2
+  valueType: String
+  ownership: SeedOwned
+  description: "Second address line as the source system states it."
+- id: NameAddition
+  valueType: String
+  ownership: SeedOwned
+  description: "Addition to the addressee's name as the source system states it."
+- id: HouseNumber
+  valueType: String
+  ownership: SeedOwned
+  description: "House number when the source system states it apart from the street; Street still carries the complete street line including the number."
 - id: ShipTo
   valueType: Record
   valueCkRecordId: ${this}/PostalAddress

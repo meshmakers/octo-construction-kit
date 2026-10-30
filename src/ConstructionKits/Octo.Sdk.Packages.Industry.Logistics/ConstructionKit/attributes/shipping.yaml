@@ -7,6 +7,7 @@ attributes:
 - id: ShipmentDate
   valueType: DateTime
   ownership: SeedOwned
+  description: "Point in time the goods were shipped: on Shipment as the fulfilment partner reports it, on Order as the source system states it."
 - id: TrackingNumber
   valueType: String
   ownership: SeedOwned
@@ -31,7 +32,7 @@ attributes:
 - id: CarrierToken
   valueType: String
   ownership: SeedOwned
-  description: "Carrier reference exactly as the fulfilment partner delivered it (for a shop system: its own carrier id), beside the Carrier enum."
+  description: "Carrier reference exactly as the delivering system states it, beside the Carrier enum: on Parcel as the fulfilment partner delivered it (for a shop system: its own carrier id), on Order as the source system identifies the shipping provider (e.g. its provider id)."
 - id: TrackingUrl
   valueType: String
   ownership: SeedOwned

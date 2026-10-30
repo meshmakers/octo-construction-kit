@@ -1,0 +1,18 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: ImportRun
+  derivedFromCkTypeId: ${System}/Entity        # inbound import/mirror log
+  description: "The last complete inbound import run of a dataset (e.g. the article mirror), keyed by source and kind; the inbound counterpart of ExportRun. A consumer reads CompletedAt to tell whether the data comes from a fresh mirror."
+  indexes:
+  - indexType: "UniqueNotDeleted"
+    fields:
+      - attributePaths:
+        - Source
+        - ImportKind
+  attributes:
+  - id: ${this}/Source
+    name: Source
+  - id: ${this}/ImportKind
+    name: ImportKind
+  - id: ${this}/CompletedAt
+    name: CompletedAt

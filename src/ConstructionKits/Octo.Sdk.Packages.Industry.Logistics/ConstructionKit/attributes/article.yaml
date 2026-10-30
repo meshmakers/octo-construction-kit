@@ -10,3 +10,56 @@ attributes:
   valueType: Enum
   valueCkEnumId: ${this}/ArticleType
   ownership: SeedOwned
+- id: ExternalArticleNumber
+  valueType: String
+  ownership: SeedOwned
+  description: "Article number as the source system presents it to people (e.g. the merchant's article number or SKU), when ArticleNumber carries a source-internal identifier."
+- id: Unit
+  valueType: String
+  ownership: SeedOwned
+  description: "Unit of measure the article is stocked and sold in (e.g. piece, box), as the source system states it (a unit name or code)."
+- id: PurchasePrice
+  valueType: Double
+  ownership: SeedOwned
+  description: "Purchase price of the article as the source system states it, in the currency stated by Currency on the article (empty Currency = the source's currency); empty = no price known."
+- id: Discontinued
+  valueType: Boolean
+  ownership: SeedOwned
+  description: "True when the source system no longer delivers the article; the instance stays for the orders, shipments and stock lines that reference it."
+- id: CountryOfOrigin
+  valueType: String
+  ownership: SeedOwned
+  description: "Country of origin of the article as the source system states it."
+- id: CustomsTariffNumber
+  valueType: String
+  ownership: SeedOwned
+  description: "Customs tariff number of the article (e.g. a TARIC code) as the source system states it."
+- id: Category1
+  valueType: String
+  ownership: SeedOwned
+  description: "Name of the first category the source system assigns to the article."
+- id: Category2
+  valueType: String
+  ownership: SeedOwned
+  description: "Name of the second category the source system assigns to the article."
+- id: SourceProductType
+  valueType: String
+  ownership: SeedOwned
+  description: "Product type as the source system states it (e.g. a shop's product type code), beside the ArticleType enum."
+- id: VatCategory
+  valueType: Enum
+  valueCkEnumId: ${this}/VatCategory
+  ownership: SeedOwned
+  description: "VAT category of the article; the adapter maps the source's own VAT code or index to it."
+- id: TitleEnglish
+  valueType: String
+  ownership: SeedOwned
+  description: "English title of the article as the source system states it; empty when the source has none. The primary title is Name."
+- id: BasicAttributes
+  valueType: String
+  ownership: SeedOwned
+  description: "Basic attributes text of the article (its short characteristics) in the primary language of the source; the adapter decides which language is primary and what it falls back to."
+- id: BasicAttributesEnglish
+  valueType: String
+  ownership: SeedOwned
+  description: "Basic attributes text of the article (its short characteristics) in English; empty when the source has none."

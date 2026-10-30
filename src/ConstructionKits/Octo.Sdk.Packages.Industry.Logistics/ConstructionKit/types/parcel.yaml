@@ -6,6 +6,10 @@ types:
   attributes:
   - id: ${this}/TrackingNumber
     name: TrackingNumber
+    isOptional: true
+  - id: ${this}/PositionNumber
+    name: PositionNumber
+    isOptional: true
   - id: ${this}/Carrier
     name: Carrier
     isOptional: true

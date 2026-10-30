@@ -1,0 +1,25 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: TransferState
+  description: "Handover state of an instance towards the system that consumes it (an order towards the fulfilment partner, a shipment or stock line back towards its source). The consumer writes it."
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 0
+    name: Unknown
+    description: "No handover state: the instance predates the handover state, or its source does not use it (e.g. a source that writes an order only once it has delivered it, so the instance itself marks the export)."
+  - key: 1
+    name: Pending
+    description: "Waiting for the consumer to transfer it."
+  - key: 2
+    name: Transferred
+    description: "The consumer transferred it."
+  - key: 3
+    name: Rejected
+    description: "The consumer rejected it because of a data error; TransferError states the reason."
+  - key: 4
+    name: Checked
+    description: "The consumer checked it in check mode, without external effect."
+  - key: 5
+    name: Superseded
+    description: "Overtaken by a newer report before it was transferred (stock lines)."

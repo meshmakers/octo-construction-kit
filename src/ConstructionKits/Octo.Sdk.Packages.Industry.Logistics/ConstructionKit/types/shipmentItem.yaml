@@ -2,10 +2,17 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: ShipmentItem
   derivedFromCkTypeId: ${System}/Entity        # AR item / packing-list record (P*/L*)
-  description: "A dispatched line within a shipment."
+  description: "A dispatched line within a shipment. The article number as the reporting system states it is kept on the line (ArticleNumber), so a line without an article link (an article the CK does not know, a shipping cost) stays identifiable; ItemKind marks shipping-cost lines as on OrderItem."
   attributes:
   - id: ${this}/PositionNumber
     name: PositionNumber
+    isOptional: true
+  - id: ${this}/ArticleNumber
+    name: ArticleNumber
+    isOptional: true
+  - id: ${this}/ItemKind
+    name: ItemKind
+    isOptional: true
   # ${Basic}/Quantity can only be referenced once per type (attribute ids are unique),
   # so delivered/open quantities are deliberately dedicated attributes.
   - id: ${this}/DeliveredQuantity

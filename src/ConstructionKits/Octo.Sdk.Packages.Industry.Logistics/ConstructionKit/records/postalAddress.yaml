@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: PostalAddress
-  description: "Delivery or invoice address: company and/or person, street, postal code as text, city, country code, and the contact details a carrier advises to."
+  description: "Delivery or invoice address: company and/or person, street, postal code as text, city, country code, and the contact details a carrier advises to. A source that states the house number apart from the street writes the complete street line into Street - the street name and, only when the house number is not empty, one blank and the house number - exactly like a source with a combined street field, and the number alone into HouseNumber."
   attributes:
     - id: ${Basic}/CompanyName
       name: CompanyName
@@ -25,4 +25,13 @@ records:
       isOptional: true
     - id: ${Basic}/EMailAddress
       name: Email
+      isOptional: true
+    - id: ${this}/AddressLine2
+      name: Line2
+      isOptional: true
+    - id: ${this}/NameAddition
+      name: NameAddition
+      isOptional: true
+    - id: ${this}/HouseNumber
+      name: HouseNumber
       isOptional: true

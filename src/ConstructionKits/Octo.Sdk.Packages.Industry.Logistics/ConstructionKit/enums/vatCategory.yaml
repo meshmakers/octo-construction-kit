@@ -1,0 +1,19 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+enums:
+- enumId: VatCategory
+  description: "VAT category of an article; the adapter maps the source's own VAT code or index to it."
+  useFlags: false
+  isExtensible: true
+  values:
+  - key: 0
+    name: Unknown
+    description: "No VAT category stated."
+  - key: 1
+    name: Standard
+    description: "Standard VAT rate."
+  - key: 2
+    name: Reduced
+    description: "Reduced VAT rate."
+  - key: 3
+    name: Exempt
+    description: "Exempt from VAT."

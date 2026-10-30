@@ -2,12 +2,32 @@ $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Stock
   derivedFromCkTypeId: ${System}/Entity        # stock report (return path)
-  description: "Stock level of an article (stock overview)."
+  description: "One stock line of a stock report: the stock level of an article as reported (Reference names the report). TransferState records its handover back to the source."
+  indexes:
+  - indexType: "Ascending"
+    fields:
+      - attributePaths:
+        - Source
+        - TransferState
   attributes:
+  - id: ${this}/Source
+    name: Source
   - id: ${Basic}/Quantity
     name: Quantity
   - id: ${this}/StockStatus
     name: Status
+    isOptional: true
+  - id: ${this}/Reference
+    name: Reference
+    isOptional: true
+  - id: ${this}/TransferState
+    name: TransferState
+    isOptional: true
+  - id: ${this}/TransferredAt
+    name: TransferredAt
+    isOptional: true
+  - id: ${this}/TransferError
+    name: TransferError
     isOptional: true
   associations:
   - id: ${this}/StockArticle

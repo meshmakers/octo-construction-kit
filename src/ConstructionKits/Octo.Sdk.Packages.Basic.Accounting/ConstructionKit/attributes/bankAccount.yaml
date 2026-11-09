@@ -9,6 +9,18 @@ attributes:
     valueCkEnumId: ${this}/BankAccountType
     ownership: SeedOwned
     description: "Type of the bank account"
+  - id: SettlementCreditorId
+    valueType: String
+    ownership: TenantOwned
+    description: "Credit card accounts only: SEPA creditor identifier the card issuer uses to collect the monthly settlement from another own account (e.g. AT..ZZZ...). A debit with this creditor id is a transfer between own accounts. Empty = not used for recognition"
+  - id: SettlementMandateReference
+    valueType: String
+    ownership: TenantOwned
+    description: "Credit card accounts only: SEPA mandate reference of the settlement direct debit. A debit with this mandate reference is a transfer between own accounts. Empty = not used for recognition"
+  - id: SettlementNamePattern
+    valueType: String
+    ownership: TenantOwned
+    description: "Credit card accounts only: case-insensitive text that the counterpart name or the purpose of the settlement debit contains (e.g. PAYLIFE). Fallback when the import carries no creditor id or mandate reference. Empty = not used for recognition"
   - id: Balance
     valueType: Double
     ownership: SeedOwned

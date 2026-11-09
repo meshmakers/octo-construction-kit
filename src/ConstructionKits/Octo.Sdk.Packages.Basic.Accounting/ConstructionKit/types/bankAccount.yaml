@@ -25,6 +25,18 @@ types:
       isOptional: true
     - id: ${this}/Currency
       name: Currency
+    # Since 1.13.0 (AB#8643): how the monthly settlement of a credit card
+    # account is recognised on another own account (issuer collects by SEPA
+    # direct debit with its own creditor IBAN, not the card account's IBAN).
+    - id: ${this}/SettlementCreditorId
+      name: SettlementCreditorId
+      isOptional: true
+    - id: ${this}/SettlementMandateReference
+      name: SettlementMandateReference
+      isOptional: true
+    - id: ${this}/SettlementNamePattern
+      name: SettlementNamePattern
+      isOptional: true
     - id: ${this}/BalanceDate
       name: BalanceDate
       isOptional: true

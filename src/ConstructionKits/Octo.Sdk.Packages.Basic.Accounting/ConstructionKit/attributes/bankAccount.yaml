@@ -33,3 +33,7 @@ attributes:
     valueType: String
     ownership: SeedOwned
     description: "Identifier of the account in the external system (e.g. finAPI account ID)"
+  - id: BankAccountClosedAt
+    valueType: DateTime
+    ownership: TenantOwned
+    description: "Date the account was closed at the bank. Set by the user; a closed account keeps its transactions and matches but is no longer synchronized and raises no warnings. Empty while the account is open"

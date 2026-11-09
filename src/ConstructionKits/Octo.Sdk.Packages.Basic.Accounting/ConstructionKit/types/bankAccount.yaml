@@ -37,6 +37,10 @@ types:
     - id: ${this}/BankAccountExternalId
       name: ExternalId
       isOptional: true
+    # Since 1.12.0 (AB#8645): a closed account keeps its data but stops syncing.
+    - id: ${this}/BankAccountClosedAt
+      name: ClosedAt
+      isOptional: true
   # No unique IBAN index since 1.4.0 — IBAN is optional (credit card / PayPal)
   # and multiple IBAN-less accounts would collide on a unique index. Sync
   # pipelines deduplicate via ExternalId lookups instead.

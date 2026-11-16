@@ -3,6 +3,8 @@ types:
 - typeId: TreeNode
   derivable: Any
   derivedFromCkTypeId: ${this}/NamedEntity
+  implements:
+    - ${System}/Hierarchical-1
   associations:
     - id: ${System}/ParentChild
       targetCkTypeId: ${this}/Tree

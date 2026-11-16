@@ -230,7 +230,7 @@ Basic (since 2.6.0) is the first package of this repository on `ckLanguage: 2` (
 other domain package followed (AB#8869: Industry.Basic 2.7.0, Industry.Energy 3.7.0, Industry.Fluid 2.6.0,
 Industry.Logistics 3.5.0, Industry.Maintenance 2.6.0, Industry.Manufacturing 2.7.0, Environment 3.7.0; AB#8870:
 Basic.Energy 2.1.0, Basic.Accounting 1.14.0, EnergyCommunity 5.1.0), each with `derivable: Any` on every type and record
-and with all dependency ranges and floors unchanged (gate: MINOR per package, the only row is the language change).
+and with all dependency ranges and floors unchanged (gate: MINOR per package, the only bump-relevant row is the language change).
 The demo packages (`OctoSdkDemo`, `OctoEnergyDemo`) stay on ckLanguage 1. Every compiled ckLanguage 2 model carries
 `minEngineVersion` 3.5.1 and is published under `ck-models/v3/` only.
 
@@ -261,8 +261,8 @@ package that implements an interface of another CK model:
   (`global::Meshmakers.Octo.ConstructionKit.Models.System.Generated.System.v2.IRtNamed`) and implements their
   members explicitly; interfaces of the own model keep the short name `IRt<Name>`.
 - Dependents need no change: they inherit the interfaces through their base types and get the System package
-  transitively through Basic's package. Their Basic floor stays `2.4`/`2.5` (every published dependent resolved
-  Basic 2.5.0, so a floor of 2.7 would be a Major, row D1); the inherited interfaces therefore appear on a tenant only
+  transitively through Basic's package. Their Basic floor stays 2.4 (Industry.Basic floor 2.5 for the
+  Industry packages; every published dependent resolved Basic 2.5.0, so a floor of 2.7 would be a Major, row D1); the inherited interfaces therefore appear on a tenant only
   once it runs Basic 2.7.0 or later.
 - **Floors of the dependents (AB#8869, AB#8870).** Before a package raises its System or Basic floor (for example to
   implement an interface itself), check which versions its newest *published* release resolved

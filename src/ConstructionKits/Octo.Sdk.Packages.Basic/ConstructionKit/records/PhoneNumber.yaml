@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: PhoneNumber
+  derivable: Any
   attributes:
     - id: ${this}/TelephoneNumber
       name: Number
@@ -9,6 +10,7 @@ records:
       isOptional: true
 
 - recordId: FaxNumber
+  derivable: Any
   attributes:
     - id: ${this}/TelephoneNumber
       name: Number

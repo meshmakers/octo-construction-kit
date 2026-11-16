@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: TimeRange
+  derivable: Any
   description: "A time range with a start and end date"
   attributes:
     - id: ${this}/From

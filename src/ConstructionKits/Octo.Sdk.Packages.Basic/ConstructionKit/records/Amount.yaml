@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: Amount
+  derivable: Any
   description: "A measured amount with value and unit"
   attributes:
     - id: ${this}/AmountValue

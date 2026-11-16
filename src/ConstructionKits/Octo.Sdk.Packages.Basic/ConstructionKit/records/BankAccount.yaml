@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 records:
 - recordId: BankAccount
+  derivable: Any
   description: "A bank account with its details"
   attributes:
     - id: ${this}/Iban

@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Document
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity
   isAbstract: true
   description: "A document that can be used in the system."

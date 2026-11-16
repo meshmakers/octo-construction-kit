@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Employee
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity
   attributes:
     - id: ${this}/FirstName

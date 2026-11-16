@@ -224,6 +224,35 @@ TenantOwned` (or `Secret` for a credential); a service, pipeline or adapter writ
 corrects it → `SeedOwned`. Changing an existing attribute to a preserving marker is a behaviour change and needs a minor bump
 of the model (and a rebuild of its dependents, see below).
 
+### CK language 2: Basic and `derivable: Any` (AB#8868)
+
+Basic (since 2.6.0) is the first package of this repository on `ckLanguage: 2` (Epic AB#5584, Feature F4.4). All other
+packages stay on ckLanguage 1 and compile unchanged against it; the compiled Basic carries `minEngineVersion` 3.5.1 and
+is published under `ck-models/v3/` only.
+
+**Rule for every model that moves to ckLanguage 2:** in ckLanguage 2 an omitted `derivable` means `Model` (only the
+declaring model may derive), in ckLanguage 1 it means `Any`. Raising the language without `derivable: Any` on every
+type and record is therefore a **Major** per element (semver row T6), and every subtype in another model fails with
+message 113 (`CkElementNotDerivable`). Basic declares `derivable: Any` on all its types and records. The four hot bases
+(`Basic/NamedEntity`, `Basic/TreeNode`, `Basic/Asset`, and `Industry.Basic/Machine` once Industry.Basic moves) stay
+`derivable: Any` on purpose: each has subtypes in other packages (33 cross-package subtypes in 11 packages of this
+repository, counted 2026-11-16, plus `Basic/Document` for EnergyCommunity), so `Model` would break them. The same
+reason made the System model declare `derivable: Any` everywhere.
+
+**Interfaces come in a second release.** Letting `NamedEntity` implement `System/Named-1` and `System/Describable-1` and
+`TreeNode` implement `System/Hierarchical-1` needs the System floor `[2.7,3.0)` (the interfaces exist from System 2.7.0;
+the compiler refuses an `implements` that the range floor cannot resolve). Raising the floor beyond the System version
+the previously published Basic resolved is a Major (row D1): Basic 2.5.0 resolved System 2.5.0. Basic 2.6.0 resolves
+System 2.8.0, so the floor raise is a Minor in the release after 2.6.0. That step also waits for an engine fix (the source
+generator does not resolve interfaces of another model yet, CS0246 on `IRtNamed`).
+
+Gate commands (local, isolated catalog):
+
+```bash
+octo-ckc -c ValidateVersion -p src/ConstructionKits/Octo.Sdk.Packages.Basic/ConstructionKit \
+  -cn PrivateGitHubCatalog -rf -lcr <empty dir>
+```
+
 ### Project Dependencies
 
 CK model dependencies are declared in each `ckModel.yaml` **and** mirrored as a `<ProjectReference>` to the

@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: TreeNode
+  derivable: Any
   derivedFromCkTypeId: ${this}/NamedEntity
   associations:
     - id: ${System}/ParentChild

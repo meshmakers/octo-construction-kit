@@ -1,6 +1,7 @@
 ﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: City
+    derivable: Any
     derivedFromCkTypeId: ${this}/TreeNode
     attributes:
       - id: ${this}/AddressZipcode

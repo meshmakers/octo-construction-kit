@@ -261,15 +261,19 @@ package that implements an interface of another CK model:
   (`global::Meshmakers.Octo.ConstructionKit.Models.System.Generated.System.v2.IRtNamed`) and implements their
   members explicitly; interfaces of the own model keep the short name `IRt<Name>`.
 - Dependents need no change: they inherit the interfaces through their base types and get the System package
-  transitively through Basic's package. Their Basic floor stays 2.4 (Industry.Basic floor 2.5 for the
-  Industry packages; every published dependent resolved Basic 2.5.0, so a floor of 2.7 would be a Major, row D1); the inherited interfaces therefore appear on a tenant only
-  once it runs Basic 2.7.0 or later.
+  transitively through Basic's package. Their Basic floor stays 2.4 (Industry.Energy, Fluid, Maintenance and
+  Manufacturing depend on Industry.Basic with floor 2.5); every published dependent resolved Basic 2.5.0, so a floor
+  of 2.7 would be a Major (row D1). The inherited interfaces therefore appear on a tenant only once it runs Basic
+  2.7.0 or later.
 - **Floors of the dependents (AB#8869, AB#8870).** Before a package raises its System or Basic floor (for example to
   implement an interface itself), check which versions its newest *published* release resolved
   (`dependencies` in the catalog JSON): a floor above that is a Major (row D1). The way out is two releases: first the
-  language change with the floors unchanged (it resolves the newest dependency versions), then the floor raise with the
-  `implements` (Minor). `Industry.Maintenance/EnergyBalance` -> `System/Describable-1` follows this pattern in the
-  release after Industry.Maintenance 2.6.0. EnergyCommunity's `CommunitySettings`, `SimulationSettings`
+  language change with the floors unchanged, then the floor raise with the `implements` (Minor). Precondition: the
+  first release resolves only the dependency versions its build can see (the catalog, or a sibling built in the same
+  run), so the dependency release (e.g. Basic 2.7.0) must be published, or built in the same run, before the first
+  release; otherwise it resolves the older version and the later floor raise is a Major again.
+  `Industry.Maintenance/EnergyBalance` -> `System/Describable-1` follows this pattern in the release after
+  Industry.Maintenance 2.6.0. EnergyCommunity's `CommunitySettings`, `SimulationSettings`
   (`System/Description` named `Comment`) and `SimulationResetRequest` (named `Message`) cannot implement
   `Describable-1` without a breaking rename (message 98) and stay without it.
 

@@ -1,5 +1,19 @@
 # Changelog
 
+## 3.6.0 - 2026-11-16
+
+_Required bump level: minor._
+
+**Inbound file failure state (AB#9158, prerequisite of AB#8111):** new type `InboundFileFailure` keeps, across pipeline runs, why and since when an inbound file fails, so an adapter can set a failing file aside after a configured time and report it once without deleting it. One instance per failing file, unique on `FileKey` (UniqueNotDeleted). It reuses the file identity attributes of `InboundFile` unchanged (`FileKey`, `SourceName`, `SourceDirectory`, `FileName`, `FileSize`, `LastWriteUtc`, all SeedOwned) and adds four optional attributes, all `ownership: RuntimeState` (the adapter writes them; a blueprint re-apply or `ImportRt -r` keeps them, `ExportRt` leaves them out): `FirstFailedAt` (DateTime), `LastFailedAt` (DateTime), `FailureReason` (String; never the field content, and names the affected record and field where the failure concerns one) and `ReportedAt` (DateTime; empty while the adapter still retries the file). They are optional because `ExportRt` leaves RuntimeState out: an instance imported from a runtime export into a tenant that does not hold it carries none of them, and a required attribute without a value fails its non-null GraphQL field and with it every list query of the type that selects it. An adapter is expected to treat an instance without `FirstFailedAt` as the start of a new failure window, to delete the instance in the same write as the file's marker when the file succeeds, and to process the file again once someone deletes the instance. `InboundFile` and every other type are unchanged; dependency ranges and floors are unchanged.
+
+### Added
+
+- Type 'InboundFileFailure-1' added _(minor — purely additive element)_
+- Attribute 'FailureReason-1' added _(minor — purely additive element)_
+- Attribute 'FirstFailedAt-1' added _(minor — purely additive element)_
+- Attribute 'LastFailedAt-1' added _(minor — purely additive element)_
+- Attribute 'ReportedAt-1' added _(minor — purely additive element)_
+
 ## 3.5.0 - 2026-11-16
 
 _Required bump level: minor._

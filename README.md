@@ -14,13 +14,13 @@ For a comprehensive guide on Construction Kits, see the [official documentation]
 | **Industry.Basic** | `Industry.Basic-2.7.0` | Basic | Extended industrial domain model |
 | **Industry.Energy** | `Industry.Energy-3.7.0` | Industry.Basic | Energy sector specific types |
 | **Industry.Fluid** | `Industry.Fluid-2.6.0` | Industry.Basic | Fluid system management |
-| **Industry.Logistics** | `Industry.Logistics-3.5.0` | Basic | Logistics/fulfillment orders, shipments and stock |
+| **Industry.Logistics** | `Industry.Logistics-3.6.0` | Basic | Logistics/fulfillment orders, shipments and stock, inbound file markers and failure state |
 | **Industry.Maintenance** | `Industry.Maintenance-2.7.0` | Industry.Basic | Maintenance operations and scheduling |
 | **Industry.Manufacturing** | `Industry.Manufacturing-2.7.0` | Industry.Basic | Production orders and manufacturing |
 | **Environment** | `Environment-3.7.0` | Basic | Environmental data and monitoring |
 | **EnergyCommunity** | `EnergyCommunity-5.1.0` | Basic, Basic.Energy | Energy community management (community/billing types on top of Basic.Energy; metering data lives in stream-data archives since 4.0.0) |
 
-Every package in this table is a CK language 2 model (`ckLanguage: 2`, `derivable: Any` on every type and record; Basic since 2.6.0, the others since the versions above, AB#8868/AB#8869/AB#8870). The demo packages stay on CK language 1.
+Every package in this table is a CK language 2 model (`ckLanguage: 2`, `derivable: Any` on every type and record; Basic since 2.6.0 (AB#8868), the others since their AB#8869/AB#8870 releases). The demo packages stay on CK language 1.
 
 ### Demo Packages
 

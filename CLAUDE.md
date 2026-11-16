@@ -237,21 +237,20 @@ message 113 (`CkElementNotDerivable`). Basic declares `derivable: Any` on all it
 (`Basic/NamedEntity`, `Basic/TreeNode`, `Basic/Asset`, and `Industry.Basic/Machine` once Industry.Basic moves) stay
 `derivable: Any` on purpose: each has subtypes in other packages (33 cross-package subtypes in 11 packages of this
 repository, counted 2026-11-16, including `Basic/Document` for EnergyCommunity, plus models in other repositories), so
-`Model` would break them. The same
-reason made the System model declare `derivable: Any` everywhere.
+`Model` would break them. The same reason made the System model declare `derivable: Any` everywhere.
 
 **Interfaces come in a second release.** Letting `NamedEntity` implement `System/Named-1` and `System/Describable-1` and
 `TreeNode` implement `System/Hierarchical-1` needs the System floor `[2.7,3.0)` (the interfaces exist from System 2.7.0;
 the compiler refuses an `implements` that the range floor cannot resolve). Raising the floor beyond the System version
 the previously published Basic resolved is a Major (row D1): Basic 2.5.0 resolved System 2.5.0. Basic 2.6.0 resolves
-System 2.8.0, so the floor raise is a Minor in the release after 2.6.0. That step also waits for an engine fix (the source
-generator does not resolve interfaces of another model yet, CS0246 on `IRtNamed`).
+System 2.8.0, so the floor raise is a Minor in the release after 2.6.0.
 
-Gate command (local, isolated catalog):
+Gate command (local; `-lcr` points at a new, empty directory, so no stale local catalog entry takes part in the
+resolution and nothing is written into the shared local catalog):
 
 ```bash
 octo-ckc -c ValidateVersion -p src/ConstructionKits/Octo.Sdk.Packages.Basic/ConstructionKit \
-  -cn PrivateGitHubCatalog -rf -lcr <empty dir>
+  -cn PrivateGitHubCatalog -rf -lcr "$(mktemp -d)"
 ```
 
 ### Project Dependencies

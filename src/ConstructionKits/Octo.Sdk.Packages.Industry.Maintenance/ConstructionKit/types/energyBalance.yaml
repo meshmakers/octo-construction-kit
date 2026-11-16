@@ -3,6 +3,8 @@ types:
   - typeId: EnergyBalance
     derivable: Any
     derivedFromCkTypeId: ${System}/Entity
+    implements:
+      - ${System}/Describable-1
     description: Describes an energy balance with a balance number.
     attributes:
       - id: ${this}/EnergyBalanceGroup

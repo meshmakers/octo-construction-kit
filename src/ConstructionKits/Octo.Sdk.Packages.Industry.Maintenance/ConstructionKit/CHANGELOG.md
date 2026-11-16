@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.7.0 - 2026-11-16
+
+_Required bump level: minor._
+
+**EnergyBalance implements System/Describable-1 (AB#9146, Feature F4.4):** `EnergyBalance` implements `System/Describable-1`, so `runtime.byInterface(System/Describable-1)` also returns energy balances. The member matches exactly: the optional `System/Description` attribute is already assigned under the name `Description`. The System range floor rises to `[2.7,3.0)`, because the interface exists from System 2.7.0. Against Industry.Maintenance 2.6.0 (which resolved System 2.8.0) the floor raise is a Minor (row D1); the Industry.Basic range is unchanged and nothing is renamed or retargeted. No other package of this repository depends on Industry.Maintenance.
+
+The generated `RtEnergyBalance` implements `global::Meshmakers.Octo.ConstructionKit.Models.System.Generated.System.v2.IRtDescribable`. The project needs no own reference to `Meshmakers.Octo.ConstructionKit.Models.System`: it receives that package transitively through Industry.Basic and Basic (Basic references it since 2.7.0), so the source generator finds the interface (no `OM1006`).
+
+### Changed
+
+- Dependency range 'System': floor changed '2.5.0' → '2.7.0', range '[2.5,3.0)' → '[2.7,3.0)' _(minor — dependency floor raised, tenants need System 2.7.0 or later (row D1))_
+- Type 'EnergyBalance': implements 'System@2/Describable-1' _(minor — type implements an additional interface)_
+
 ## 2.6.0 - 2026-11-16
 
 _Required bump level: minor._

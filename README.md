@@ -15,7 +15,7 @@ For a comprehensive guide on Construction Kits, see the [official documentation]
 | **Industry.Energy** | `Industry.Energy-3.7.0` | Industry.Basic | Energy sector specific types |
 | **Industry.Fluid** | `Industry.Fluid-2.6.0` | Industry.Basic | Fluid system management |
 | **Industry.Logistics** | `Industry.Logistics-3.5.0` | Basic | Logistics/fulfillment orders, shipments and stock |
-| **Industry.Maintenance** | `Industry.Maintenance-2.6.0` | Industry.Basic | Maintenance operations and scheduling |
+| **Industry.Maintenance** | `Industry.Maintenance-2.7.0` | Industry.Basic | Maintenance operations and scheduling |
 | **Industry.Manufacturing** | `Industry.Manufacturing-2.7.0` | Industry.Basic | Production orders and manufacturing |
 | **Environment** | `Environment-3.7.0` | Basic | Environmental data and monitoring |
 | **EnergyCommunity** | `EnergyCommunity-5.1.0` | Basic, Basic.Energy | Energy community management (community/billing types on top of Basic.Energy; metering data lives in stream-data archives since 4.0.0) |

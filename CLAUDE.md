@@ -239,11 +239,25 @@ message 113 (`CkElementNotDerivable`). Basic declares `derivable: Any` on all it
 repository, counted 2026-11-16, including `Basic/Document` for EnergyCommunity, plus models in other repositories), so
 `Model` would break them. The same reason made the System model declare `derivable: Any` everywhere.
 
-**Interfaces come in a second release.** Letting `NamedEntity` implement `System/Named-1` and `System/Describable-1` and
+**Interfaces came in a second release (Basic 2.7.0).** Letting `NamedEntity` implement `System/Named-1` and `System/Describable-1` and
 `TreeNode` implement `System/Hierarchical-1` needs the System floor `[2.7,3.0)` (the interfaces exist from System 2.7.0;
 the compiler refuses an `implements` that the range floor cannot resolve). Raising the floor beyond the System version
 the previously published Basic resolved is a Major (row D1): Basic 2.5.0 resolved System 2.5.0. Basic 2.6.0 resolves
-System 2.8.0, so the floor raise is a Minor in the release after 2.6.0.
+System 2.8.0, so the floor raise was a Minor in the release after it, Basic 2.7.0 (AB#9097).
+
+**Basic 2.7.0 implements System interfaces (AB#9097).** `NamedEntity` implements `System/Named-1` and
+`System/Describable-1`, `TreeNode` implements `System/Hierarchical-1`; System floor `[2.7,3.0)`. Rules for every
+package that implements an interface of another CK model:
+
+- The project needs a `<PackageReference>` to the C# package of the model that declares the interface
+  (for System: `Meshmakers.Octo.ConstructionKit.Models.System`, `Version="$(OctoCoreLibVersion)"`). Without it the
+  source generator reports `OM1006` ("no referenced assembly declares the generated interface"); with two
+  assemblies that declare it, `OM1006` asks to keep only one reference. It needs the engine generator fix of AB#9096.
+- The generated class lists foreign interfaces fully qualified
+  (`global::Meshmakers.Octo.ConstructionKit.Models.System.Generated.System.v2.IRtNamed`) and implements their
+  members explicitly; interfaces of the own model keep the short name `IRt<Name>`.
+- Dependents need no change: they stay on ckLanguage 1, inherit the interfaces through their base types and get the
+  System package transitively through Basic's package.
 
 Gate command (local; `-lcr` points at a new, empty directory, so no stale local catalog entry takes part in the
 resolution and nothing is written into the shared local catalog):

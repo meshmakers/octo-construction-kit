@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.7.0 - 2026-11-16
+
+_Required bump level: minor._
+
+**Basic implements the System interfaces (AB#9097, Feature F4.4):** `NamedEntity` implements `System/Named-1` and `System/Describable-1`, and `TreeNode` implements `System/Hierarchical-1`. Every subtype inherits them (`Asset`, `Tree`, `Employee`, `Document`, ... and the subtypes in other packages), so queries such as `runtime.byInterface(System/Hierarchical-1)` address Basic entities by interface. The members match exactly (`System/Name`, `System/Description`; of the two `System/ParentChild` associations of `TreeNode` (targets `Tree` and `TreeNode`), the one to `TreeNode` meets the required member of `Hierarchical-1`). The System range floor rises to `[2.7,3.0)`, because the interfaces exist from System 2.7.0. Against Basic 2.6.0 (which resolved System 2.8.0) the floor raise is a Minor (row D1); nothing is renamed or retargeted. Every dependent model of this repository compiles unchanged (required level none) and keeps ckLanguage 1.
+
+The generated C# of `RtNamedEntity` and `RtTreeNode` implements `IRtNamed`, `IRtDescribable` and `IRtHierarchical` of the System model's package (fully qualified, `global::Meshmakers.Octo.ConstructionKit.Models.System.Generated.System.v2.IRt...`). The project therefore references `Meshmakers.Octo.ConstructionKit.Models.System`; without that reference the source generator reports `OM1006`. The C# package of Basic now depends on it (it needs a source generator that contains the AB#9096 fix, engine packages from 2026-11-16 on).
+
+### Changed
+
+- Dependency range 'System': floor changed '2.5.0' → '2.7.0', range '[2.5,3.0)' → '[2.7,3.0)' _(minor — dependency floor raised, tenants need System 2.7.0 or later (row D1))_
+- Type 'NamedEntity': implements 'System@2/Named-1' and 'System@2/Describable-1' _(minor — type implements an additional interface)_
+- Type 'TreeNode': implements 'System@2/Hierarchical-1' _(minor — type implements an additional interface)_
+
 ## 2.6.0 - 2026-11-16
 
 _Required bump level: minor._

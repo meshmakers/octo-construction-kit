@@ -4,6 +4,9 @@ types:
   derivable: Any
   derivedFromCkTypeId: ${System}/Entity
   isAbstract: true
+  implements:
+    - ${System}/Named-1
+    - ${System}/Describable-1
   displayNameRule: "${Name}"
   displayDescriptionRule: "${Description}"
   attributes:

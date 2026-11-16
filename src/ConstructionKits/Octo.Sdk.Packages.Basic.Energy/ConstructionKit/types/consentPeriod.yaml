@@ -1,6 +1,7 @@
 ﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: ConsentPeriod
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity
   description: "The period for a consent, with a start date and an optional end date"
   attributes:

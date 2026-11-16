@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: CommunitySettings
+    derivable: Any
     derivedFromCkTypeId: ${System}/Entity
     description: "Product settings of the energy community as a whole (one entity per tenant; real and simulated communities alike). Readers take the first entity and fall back to the documented defaults when none exists or a value is empty."
     attributes:

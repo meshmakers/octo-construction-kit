@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: SimulationResetRequest
+    derivable: Any
     derivedFromCkTypeId: ${System}/Entity
     description: "A request to reset the simulated data of the energy community. The request is only recorded here; an operator tool executes it and writes state and report back."
     attributes:

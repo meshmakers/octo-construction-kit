@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: PartialFeedback
+  derivable: Any
   description: "Intermediate or final production report capturing quantities (good/bad/test parts) created by an employee. Provides real-time production progress updates."
   derivedFromCkTypeId: ${System}/Entity
   attributes:

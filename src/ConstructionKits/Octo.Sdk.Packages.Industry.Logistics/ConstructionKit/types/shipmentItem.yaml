@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: ShipmentItem
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity        # AR item / packing-list record (P*/L*)
   description: "A dispatched line within a shipment. The article number as the reporting system states it is kept on the line (ArticleNumber), so a line without an article link (an article the CK does not know, a shipping cost) stays identifiable; ItemKind marks shipping-cost lines as on OrderItem."
   attributes:

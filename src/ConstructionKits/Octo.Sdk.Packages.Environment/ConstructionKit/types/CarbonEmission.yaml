@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: CarbonEmission
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity
   description: "Time-series data for CO2 emissions by scope (GHG Protocol Scope 1, 2, 3)"
   attributes:

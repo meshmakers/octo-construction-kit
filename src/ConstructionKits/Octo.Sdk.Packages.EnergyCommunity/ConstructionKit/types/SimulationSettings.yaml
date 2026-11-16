@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: SimulationSettings
+    derivable: Any
     derivedFromCkTypeId: ${System}/Entity
     description: "One revision of the simulation settings of an energy community. For a day D the non-superseded revision with the greatest effective date <= D applies; the effective date is max(EffectiveFrom, creation date), except for the base revision written by a reset. Unset values fall back to the simulation defaults."
     attributes:

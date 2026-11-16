@@ -1,5 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Workplace
+  derivable: Any
   derivedFromCkTypeId: ${Basic}/Asset
 

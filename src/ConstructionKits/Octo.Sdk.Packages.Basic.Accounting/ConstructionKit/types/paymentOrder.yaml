@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: PaymentOrder
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity
   description: "A payment order (e.g. SEPA credit transfer)"
   attributes:

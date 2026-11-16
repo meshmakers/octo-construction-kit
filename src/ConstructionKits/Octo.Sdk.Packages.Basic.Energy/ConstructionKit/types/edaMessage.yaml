@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: EdaMessage
+    derivable: Any
     derivedFromCkTypeId: ${System}/Entity
     description: "Store messages sent and received from EDA."
     attributes:

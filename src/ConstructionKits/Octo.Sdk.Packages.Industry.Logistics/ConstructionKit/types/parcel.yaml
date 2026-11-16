@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Parcel
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity        # AR parcel record (C*)
   description: "A parcel / colli within a shipment; carries tracking and carrier."
   attributes:

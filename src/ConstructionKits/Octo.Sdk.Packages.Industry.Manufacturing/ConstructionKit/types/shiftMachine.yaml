@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: ShiftMachine
+  derivable: Any
   description: "Machine assignment to a shift, tracking which machines are active and their OEE performance. Supports many-to-many relationship with employees."
   derivedFromCkTypeId: ${System}/Entity
   attributes:

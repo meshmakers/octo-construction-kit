@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: EnergyForecast
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity
   description: "AI-generated load forecast data for energy consumption prediction"
   attributes:

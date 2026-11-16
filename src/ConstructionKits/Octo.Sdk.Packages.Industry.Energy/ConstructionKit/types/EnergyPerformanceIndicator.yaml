@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: EnergyPerformanceIndicator
+  derivable: Any
   derivedFromCkTypeId: ${Basic}/NamedEntity
   description: "Energy Performance Indicator (EnPI) for tracking energy efficiency metrics like kWh/unit"
   attributes:

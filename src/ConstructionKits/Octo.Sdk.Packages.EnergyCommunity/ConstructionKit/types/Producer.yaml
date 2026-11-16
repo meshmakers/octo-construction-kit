@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: Producer
+    derivable: Any
     derivedFromCkTypeId: ${Basic.Energy}/Producer
     description: "A producer metering point participating in an energy community"
     attributes:

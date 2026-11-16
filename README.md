@@ -9,22 +9,24 @@ For a comprehensive guide on Construction Kits, see the [official documentation]
 | Package | Model ID | Depends On | Description |
 |---------|----------|------------|-------------|
 | **Basic** | `Basic-2.7.0` | System | Core domain model (Asset, Employee, Document, TreeNode, ...) |
-| **Basic.Accounting** | `Basic.Accounting-1.13.0` | Basic | Accounting and billing domain |
-| **Basic.Energy** | `Basic.Energy-2.0.0` | Basic | Base energy domain types (metering points, EDA, energy measurements) |
-| **Industry.Basic** | `Industry.Basic-2.6.0` | Basic | Extended industrial domain model |
-| **Industry.Energy** | `Industry.Energy-3.6.0` | Industry.Basic | Energy sector specific types |
-| **Industry.Fluid** | `Industry.Fluid-2.5.0` | Industry.Basic | Fluid system management |
-| **Industry.Logistics** | `Industry.Logistics-3.4.0` | Basic | Logistics/fulfillment orders, shipments and stock |
-| **Industry.Maintenance** | `Industry.Maintenance-2.5.0` | Industry.Basic | Maintenance operations and scheduling |
-| **Industry.Manufacturing** | `Industry.Manufacturing-2.6.0` | Industry.Basic | Production orders and manufacturing |
-| **Environment** | `Environment-3.6.0` | Basic | Environmental data and monitoring |
-| **EnergyCommunity** | `EnergyCommunity-4.10.0` | Basic, Basic.Energy | Energy community management (community/billing types on top of Basic.Energy; metering data lives in stream-data archives since 4.0.0) |
+| **Basic.Accounting** | `Basic.Accounting-1.14.0` | Basic | Accounting and billing domain |
+| **Basic.Energy** | `Basic.Energy-2.1.0` | Basic | Base energy domain types (metering points, EDA, energy measurements) |
+| **Industry.Basic** | `Industry.Basic-2.7.0` | Basic | Extended industrial domain model |
+| **Industry.Energy** | `Industry.Energy-3.7.0` | Industry.Basic | Energy sector specific types |
+| **Industry.Fluid** | `Industry.Fluid-2.6.0` | Industry.Basic | Fluid system management |
+| **Industry.Logistics** | `Industry.Logistics-3.5.0` | Basic | Logistics/fulfillment orders, shipments and stock |
+| **Industry.Maintenance** | `Industry.Maintenance-2.6.0` | Industry.Basic | Maintenance operations and scheduling |
+| **Industry.Manufacturing** | `Industry.Manufacturing-2.7.0` | Industry.Basic | Production orders and manufacturing |
+| **Environment** | `Environment-3.7.0` | Basic | Environmental data and monitoring |
+| **EnergyCommunity** | `EnergyCommunity-5.1.0` | Basic, Basic.Energy | Energy community management (community/billing types on top of Basic.Energy; metering data lives in stream-data archives since 4.0.0) |
+
+Every package in this table is a CK language 2 model (`ckLanguage: 2`, `derivable: Any` on every type and record; Basic since 2.6.0, the others since the versions above, AB#8868/AB#8869/AB#8870). The demo packages stay on CK language 1.
 
 ### Demo Packages
 
 | Package | Model ID | Description |
 |---------|----------|-------------|
-| **Octo.Sdk.Demo** | `OctoSdkDemo-2.4.0` | General SDK demo |
+| **Octo.Sdk.Demo** | `OctoSdkDemo-2.5.0` | General SDK demo |
 | **Octo.Energy.Demo** | `OctoEnergyDemo` | Energy domain demo |
 
 ### Dependency Graph

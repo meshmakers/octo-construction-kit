@@ -1,5 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: CostCenter
+  derivable: Any
   derivedFromCkTypeId: ${Basic}/Asset
   description: Describes a cost center with a cost center number.

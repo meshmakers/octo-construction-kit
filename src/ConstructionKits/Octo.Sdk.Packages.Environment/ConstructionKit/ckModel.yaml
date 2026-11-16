@@ -1,5 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
-modelId: Environment-3.6.0
+modelId: Environment-3.7.0
+ckLanguage: 2
 dependencies:
   - System-[2.5,3.0)
   - Basic-[2.4,3.0)

@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Event
+  derivable: Any
   derivedFromCkTypeId: ${Basic}/NamedEntity
   description: "An industrial event"
   attributes:
@@ -19,6 +20,7 @@ types:
       targetCkTypeId: ${Basic}/Asset
 
 - typeId: Alarm
+  derivable: Any
   derivedFromCkTypeId: ${this}/Event
   description: "An industrial alarm event"
   attributes:

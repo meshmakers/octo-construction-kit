@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: DemandResponseEvent
+  derivable: Any
   derivedFromCkTypeId: ${Basic}/NamedEntity
   description: "A demand response event representing participation in energy flexibility markets"
   attributes:

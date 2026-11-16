@@ -1,5 +1,6 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
-modelId: EnergyCommunity-5.0.0
+modelId: EnergyCommunity-5.1.0
+ckLanguage: 2
 dependencies:
   - System-[2.5,3.0)
   - Basic-[2.4,3.0)

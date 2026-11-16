@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: EnvironmentalGoal
+    derivable: Any
     derivedFromCkTypeId: ${Basic}/NamedEntity
     attributes:
       - id: ${this}/GoalText

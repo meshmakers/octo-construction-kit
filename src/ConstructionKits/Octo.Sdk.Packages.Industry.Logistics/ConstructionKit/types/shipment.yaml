@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Shipment
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity        # DILOS order feedback ("Auftragsrueckmeldung", AR) header
   description: "A dispatch / order feedback for an order; carries totals and completeness. TransferState records its handover back to the source."
   indexes:

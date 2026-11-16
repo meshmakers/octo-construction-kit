@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: ProductionOrder
+  derivable: Any
   description: "Top-level manufacturing order containing one or more order items to be produced. Tracks overall order lifecycle and production timeframes."
   derivedFromCkTypeId: ${System}/Entity
   attributes:

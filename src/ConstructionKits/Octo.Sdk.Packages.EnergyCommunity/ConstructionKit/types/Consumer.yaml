@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: Consumer
+    derivable: Any
     derivedFromCkTypeId: ${Basic.Energy}/Consumer
     description: "A consumer metering point participating in an energy community"
     attributes:

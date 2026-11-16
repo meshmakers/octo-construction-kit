@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: EnergyBalance
+    derivable: Any
     derivedFromCkTypeId: ${System}/Entity
     description: Describes an energy balance with a balance number.
     attributes:

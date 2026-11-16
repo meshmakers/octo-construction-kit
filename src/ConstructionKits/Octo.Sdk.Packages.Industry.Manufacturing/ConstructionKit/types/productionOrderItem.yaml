@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: ProductionOrderItem
+  derivable: Any
   description: "Individual line item within a production order specifying article, quantity, and machine assignment. Can span multiple shifts via ShiftOrderItems."
   derivedFromCkTypeId: ${System}/Entity
   attributes:

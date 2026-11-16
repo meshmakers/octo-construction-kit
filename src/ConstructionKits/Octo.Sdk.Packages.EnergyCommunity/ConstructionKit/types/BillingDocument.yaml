@@ -1,6 +1,7 @@
 ﻿$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
   - typeId: BillingDocument
+    derivable: Any
     derivedFromCkTypeId: ${Basic}/Document
     description: "A billing document entity that contains accounting information."
     attributes:

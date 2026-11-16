@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: ShiftOrderItem
+  derivable: Any
   description: "Production tracking per shift for an order item. Created when production spans multiple shifts to track per-shift progress, quantities produced, and OEE metrics."
   derivedFromCkTypeId: ${System}/Entity
   attributes:

@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: Stock
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity        # stock report (return path)
   description: "One stock line of a stock report: the stock level of an article as reported (Reference names the report). TransferState records its handover back to the source."
   indexes:

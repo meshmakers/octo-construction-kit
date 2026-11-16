@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: EnergyConsumer
+  derivable: Any
   derivedFromCkTypeId: ${Industry.Basic}/Machine
   description: "Energy consuming equipment with nominal power and load tracking"
   attributes:

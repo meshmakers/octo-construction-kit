@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: BankAccount
+  derivable: Any
   derivedFromCkTypeId: ${Basic}/NamedEntity
   description: "A bank account with balance and account details"
   attributes:

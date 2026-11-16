@@ -1,6 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 types:
 - typeId: OrderFeedback
+  derivable: Any
   derivedFromCkTypeId: ${System}/Entity
   attributes:
     - id: ${this}/FeedbackNumber

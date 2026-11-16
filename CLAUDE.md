@@ -236,7 +236,8 @@ type and record is therefore a **Major** per element (semver row T6), and every 
 message 113 (`CkElementNotDerivable`). Basic declares `derivable: Any` on all its types and records. The four hot bases
 (`Basic/NamedEntity`, `Basic/TreeNode`, `Basic/Asset`, and `Industry.Basic/Machine` once Industry.Basic moves) stay
 `derivable: Any` on purpose: each has subtypes in other packages (33 cross-package subtypes in 11 packages of this
-repository, counted 2026-11-16, plus `Basic/Document` for EnergyCommunity), so `Model` would break them. The same
+repository, counted 2026-11-16, including `Basic/Document` for EnergyCommunity, plus models in other repositories), so
+`Model` would break them. The same
 reason made the System model declare `derivable: Any` everywhere.
 
 **Interfaces come in a second release.** Letting `NamedEntity` implement `System/Named-1` and `System/Describable-1` and
@@ -246,7 +247,7 @@ the previously published Basic resolved is a Major (row D1): Basic 2.5.0 resolve
 System 2.8.0, so the floor raise is a Minor in the release after 2.6.0. That step also waits for an engine fix (the source
 generator does not resolve interfaces of another model yet, CS0246 on `IRtNamed`).
 
-Gate commands (local, isolated catalog):
+Gate command (local, isolated catalog):
 
 ```bash
 octo-ckc -c ValidateVersion -p src/ConstructionKits/Octo.Sdk.Packages.Basic/ConstructionKit \

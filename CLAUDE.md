@@ -262,9 +262,11 @@ package that implements an interface of another CK model:
   members explicitly; interfaces of the own model keep the short name `IRt<Name>`.
 - Dependents need no change: they inherit the interfaces through their base types and get the System package
   transitively through Basic's package. Their Basic floor stays 2.4 (Industry.Energy, Fluid, Maintenance and
-  Manufacturing depend on Industry.Basic with floor 2.5); every published dependent resolved Basic 2.5.0, so a floor
-  of 2.7 would be a Major (row D1). The inherited interfaces therefore appear on a tenant only once it runs Basic
-  2.7.0 or later.
+  Manufacturing depend on Industry.Basic with floor 2.5). The releases published before this migration all resolved
+  Basic 2.5.0, so raising their floor to 2.7 in this migration would have been a Major (row D1); the ckLanguage 2
+  releases of AB#8869/AB#8870 resolve Basic 2.7.0, so after they are published a Basic floor of 2.7 no longer exceeds
+  the newest published resolution and is a Minor. Because the floors stay unchanged in this migration, the inherited
+  interfaces appear on a tenant only once it runs Basic 2.7.0 or later.
 - **Floors of the dependents (AB#8869, AB#8870).** Before a package raises its System or Basic floor (for example to
   implement an interface itself), check which versions its newest *published* release resolved
   (`dependencies` in the catalog JSON): a floor above that is a Major (row D1). The way out is two releases: first the

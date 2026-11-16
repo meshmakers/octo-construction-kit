@@ -274,8 +274,10 @@ package that implements an interface of another CK model:
   first release resolves only the dependency versions its build can see (the catalog, or a sibling built in the same
   run), so the dependency release (e.g. Basic 2.7.0) must be published, or built in the same run, before the first
   release; otherwise it resolves the older version and the later floor raise is a Major again.
-  `Industry.Maintenance/EnergyBalance` -> `System/Describable-1` follows this pattern in the release after
-  Industry.Maintenance 2.6.0. EnergyCommunity's `CommunitySettings`, `SimulationSettings`
+  `Industry.Maintenance/EnergyBalance` -> `System/Describable-1` followed this pattern: Industry.Maintenance 2.6.0
+  (language change, resolved System 2.8.0), then 2.7.0 (AB#9146: System floor `[2.7,3.0)` plus `implements`, Minor).
+  A dependent that implements a System interface gets the System C# package transitively through Basic's package and
+  needs no own `<PackageReference>` (Industry.Maintenance has none; its build reports no `OM1006`). EnergyCommunity's `CommunitySettings`, `SimulationSettings`
   (`System/Description` named `Comment`) and `SimulationResetRequest` (named `Message`) cannot implement
   `Describable-1` without a breaking rename (message 98) and stay without it.
 

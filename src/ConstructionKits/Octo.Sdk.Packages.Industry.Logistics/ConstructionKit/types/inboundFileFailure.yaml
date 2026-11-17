@@ -1,0 +1,36 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+types:
+- typeId: InboundFileFailure
+  derivable: Any
+  derivedFromCkTypeId: ${System}/Entity        # inbound file failure state
+  description: "One inbound file whose processing failed, keyed by FileKey. An adapter that sets failing files aside is expected to update it on every failing run, set ReportedAt when it stops processing the file and reports it once, and delete it in the same write as the file's InboundFile marker when the file succeeds; deleting the instance makes such an adapter process the file again. A changed file has a new FileKey and starts a new failure window; the instance of the old key stays until someone deletes it. Independent of InboundFile."
+  indexes:
+  - indexType: "UniqueNotDeleted"
+    fields:
+      - attributePaths:
+        - FileKey
+  attributes:
+  - id: ${this}/FileKey
+    name: FileKey
+  - id: ${this}/SourceName
+    name: SourceName
+  - id: ${this}/SourceDirectory
+    name: SourceDirectory
+  - id: ${this}/FileName
+    name: FileName
+  - id: ${this}/FileSize
+    name: FileSize
+  - id: ${this}/LastWriteUtc
+    name: LastWriteUtc
+  - id: ${this}/FirstFailedAt
+    name: FirstFailedAt
+    isOptional: true
+  - id: ${this}/LastFailedAt
+    name: LastFailedAt
+    isOptional: true
+  - id: ${this}/FailureReason
+    name: FailureReason
+    isOptional: true
+  - id: ${this}/ReportedAt
+    name: ReportedAt
+    isOptional: true

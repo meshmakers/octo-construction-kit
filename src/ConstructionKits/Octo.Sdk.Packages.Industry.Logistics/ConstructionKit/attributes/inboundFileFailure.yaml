@@ -1,0 +1,23 @@
+$schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
+# FirstFailedAt, LastFailedAt, FailureReason and ReportedAt are failure state: the adapter writes them on its own
+# runs while the instance stays in the tenant. A blueprint re-apply or ImportRt -r keeps them and ExportRt leaves
+# them out; deleting the instance resets them. InboundFileFailure declares all four optional: an instance imported
+# from a runtime export into a tenant that does not hold it carries none of them, and a required attribute without
+# a value fails its non-null GraphQL field and with it every list query of the type that selects it.
+attributes:
+- id: FirstFailedAt
+  valueType: DateTime
+  ownership: RuntimeState
+  description: "Point in time (UTC) the adapter first failed to process the file; start of the failure window after which the adapter sets the file aside. An adapter is expected to treat an instance without it as the start of a new failure window."
+- id: LastFailedAt
+  valueType: DateTime
+  ownership: RuntimeState
+  description: "Point in time (UTC) of the adapter's latest failed processing attempt; the adapter writes it on every failing run."
+- id: FailureReason
+  valueType: String
+  ownership: RuntimeState
+  description: "Reason the adapter records for its latest failed processing attempt; never the field content, and names the affected record and field where the failure concerns one."
+- id: ReportedAt
+  valueType: DateTime
+  ownership: RuntimeState
+  description: "Point in time (UTC) the adapter stopped processing the file and reported it once; empty while the adapter still retries the file."

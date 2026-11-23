@@ -64,10 +64,10 @@ package that implements an interface of another CK model:
   `SimulationResetRequest` (named `Message`) cannot implement `Describable-1` without a breaking rename (message 98)
   and stay without it.
 
-Gate command (local; `-lcr` points at a new, empty directory, so no stale local catalog entry takes part in the
+Gate command (local; replace `<ChangedModelProject>` with the project of the changed model; `-lcr` points at a new, empty directory, so no stale local catalog entry takes part in the
 resolution and nothing is written into the shared local catalog):
 
 ```bash
-octo-ckc -c ValidateVersion -p src/ConstructionKits/Octo.Sdk.Packages.Basic/ConstructionKit \
+octo-ckc -c ValidateVersion -p src/ConstructionKits/<ChangedModelProject>/ConstructionKit \
   -cn PrivateGitHubCatalog -rf -lcr "$(mktemp -d)"
 ```

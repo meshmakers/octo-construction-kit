@@ -17,7 +17,7 @@ background: true
 
 **Version conflicts in dependencies**
 - Check the dependency versions in `ckModel.yaml`.
-- Run: `dotnet clean && dotnet build --configuration DebugL`.
+- Run: `dotnet clean --configuration DebugL && dotnet build --configuration DebugL`.
 
 **YAML validation errors**
 - Validate the schema URL in the YAML files (correct `$schema` directive).

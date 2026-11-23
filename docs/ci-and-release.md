@@ -19,7 +19,8 @@ applies_to: azure-pipelines.yml
    - Updates build number
    - Sets version information
    - CK v2 publish guard (operating rule O1, `ck-o1-guard.yml`): before the build
-     on main / r-tags (source mode; the publish itself follows after the tests) it refuses `ckLanguage: 2` in any
+     on main / r-tags and on an opted-in lane (`OctoPublishCkToLaneCatalog` is `'true'`) (source mode; the publish
+     itself follows after the tests) it refuses `ckLanguage: 2` in any
      `ckModel.yaml` and range retention (`OctoCkRangeRetention=true`); before the blueprint
      publish step it refuses a blueprint whose dependency floor is a CK v2 model. Lifted only
      by the variable `OctoCkO1Lifted` (group `OctoDefault`). Exception: publishes to the dev catalog `octo-catalog-dev`

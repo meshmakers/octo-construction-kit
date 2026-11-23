@@ -66,16 +66,17 @@ These rules bind new and changed models.
 - **This repository is public.** No internal hostnames, customer or tenant names, or secrets in the documentation, CK
   YAML, blueprints and in new or changed code comments and test names; no work item ids there either (work item ids
   stay in `CHANGELOG.md` entries). Remove an existing one when you touch its line.
-- **A new or changed attribute declares its `ownership`; the build fails with `OCTO-CK001`.** Ask: could an operator or
-  user type this value in the product? Yes: `TenantOwned` (`Secret` for a credential). A service, pipeline or adapter
-  writes it: `RuntimeState`. The product ships and corrects it: `SeedOwned`. Changing an existing attribute to a
-  preserving marker is a behaviour change and needs a minor bump
+- **A new or changed attribute declares its `ownership`; the build fails with `OCTO-CK001`.** The lint also accepts
+  the deprecated `isRuntimeState` and skips `Octo.Energy.Demo`, so declare `ownership` yourself in both cases. Ask:
+  could an operator or user type this value in the product? Yes: `TenantOwned` (`Secret` for a credential). A service,
+  pipeline or adapter writes it: `RuntimeState`. The product ships and corrects it: `SeedOwned`. Changing an existing
+  attribute to a preserving marker is a behaviour change and needs a minor bump
   ([docs/ck-ownership-markers.md](docs/ck-ownership-markers.md)).
 - **Versions are honest.** A change to a CK model bumps the version in its `ConstructionKit/ckModel.yaml`
-  (`modelId: <Name>-<version>`) by the semver rules that `octo-ckc ValidateVersion` checks; raising a dependency floor
-  above the newest published resolution is a Major. A merge to `main` publishes to the private catalog and a version is
-  never replaced, so a published version is never edited
-  ([docs/ck-language-2.md](docs/ck-language-2.md), [docs/ci-and-release.md](docs/ci-and-release.md)).
+  (`modelId: <Name>-<version>`; `Octo.Energy.Demo` carries no version) by the semver rules that
+  `octo-ckc ValidateVersion` checks; raising a dependency floor above the newest published resolution is a Major. A
+  merge to `main` publishes to the private catalog and a version is never replaced, so a published version is never
+  edited ([docs/ck-language-2.md](docs/ck-language-2.md), [docs/ci-and-release.md](docs/ci-and-release.md)).
 - **CK language 2 models declare `derivable`.** A new type or record in a `ckLanguage: 2` model states `derivable`
   explicitly, `Any` where subtypes in other models are expected ([docs/ck-language-2.md](docs/ck-language-2.md)).
 - **Dependencies are declared twice.** A new dependency on a model of this repository in `ckModel.yaml` is mirrored as a

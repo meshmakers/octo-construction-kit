@@ -68,7 +68,9 @@ background: true
 ## Modifying Existing CKs
 
 1. Edit the YAML files in the `ConstructionKit/` subfolders.
-2. Build locally: `dotnet build Octo.ConstructionKit.sln --configuration DebugL`.
+2. Build locally: `dotnet build Octo.ConstructionKit.sln --configuration DebugL` (DebugL restores the Octo packages at
+   `999.0.0` from the local `../nuget` folder, which must exist; see
+   [nuget-packages.md](nuget-packages.md#nuget-server-configuration)).
 3. Check the build output for validation errors.
 4. Bump the model version honestly and add the `CHANGELOG.md` entry of the model ([ck-language-2.md](ck-language-2.md)).
 5. Update the version in the table of `README.md`.

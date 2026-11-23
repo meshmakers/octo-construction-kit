@@ -1,0 +1,77 @@
+---
+description: Step-by-step workflow for a new Construction Kit project and for changing an existing one.
+background: true
+---
+
+# Adding and modifying Construction Kits
+
+## Adding a New Construction Kit
+
+1. Create the project folder `src/ConstructionKits/Octo.Sdk.Packages.XXX/`.
+
+2. Create the `.csproj` file (copy the one of an existing CK such as `Octo.Sdk.Packages.Industry.Energy` and adapt names):
+   ```xml
+   <Project Sdk="Microsoft.NET.Sdk">
+       <PropertyGroup>
+           <AssemblyName>Meshmakers.Octo.Sdk.Packages.XXX</AssemblyName>
+           <RootNamespace>Meshmakers.Octo.Sdk.Packages.XXX</RootNamespace>
+           <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+           <Configurations>Debug;Release;DebugL</Configurations>
+           <Platforms>AnyCPU</Platforms>
+           <OctoPublishCkModel Condition="'$(TargetFramework)' == 'net10.0'">true</OctoPublishCkModel>
+           <OctoGenerateCkDocumentation Condition="'$(TargetFramework)' == 'net10.0'">true</OctoGenerateCkDocumentation>
+       </PropertyGroup>
+       <ItemGroup>
+           <PackageReference Include="Meshmakers.Octo.Runtime.Contracts" Version="$(OctoCoreLibVersion)" />
+           <PackageReference Include="Meshmakers.Octo.ConstructionKit.SourceGeneration" OutputItemType="Analyzer" ReferenceOutputAssembly="false" Version="$(OctoCoreLibVersion)" />
+           <PackageReference Include="Meshmakers.Octo.ConstructionKit.MsBuildTasks" Version="$(OctoCoreLibVersion)" PrivateAssets="all" />
+       </ItemGroup>
+       <ItemGroup>
+           <ConstructionKitFolder Visible="false" Include="$(MSBuildProjectDirectory)\ConstructionKit"/>
+       </ItemGroup>
+       <ItemGroup>
+           <None Include="..\..\..\assets\meshmakers64.png">
+               <Pack>True</Pack>
+               <PackagePath />
+               <Link>meshmakers64.png</Link>
+           </None>
+           <None Include="..\..\..\LICENSE">
+               <Pack>True</Pack>
+               <PackagePath />
+               <Link>LICENSE</Link>
+           </None>
+       </ItemGroup>
+   </Project>
+   ```
+   A `<ProjectReference>` to every sibling model project it depends on is added as well
+   ([ck-dependencies.md](ck-dependencies.md)).
+
+3. Create the `ConstructionKit/` directory with the subfolders `types/`, `records/`, `attributes/`, `enums/` and
+   `associations/`.
+
+4. Add `ckModel.yaml`:
+   ```yaml
+   $schema: https://schemas.meshmakers.cloud/construction-kit-meta.schema.json
+   modelId: YourModelId-1.0.0
+   ckLanguage: 2
+   dependencies:
+     - DependentCK-[1.0,2.0)
+   ```
+
+5. Define the model elements in YAML files and add the model's `CHANGELOG.md` next to `ckModel.yaml`.
+
+6. Add the project to `Octo.ConstructionKit.sln`.
+
+7. Add the model to `constructionKitPaths` (dependency order) and `constructionKitLibraryPaths` in
+   `azure-pipelines.yml` ([ci-and-release.md](ci-and-release.md)) and to the table in `README.md`. A new blueprint goes into both `blueprintPaths` lists of the same file.
+
+## Modifying Existing CKs
+
+1. Edit the YAML files in the `ConstructionKit/` subfolders.
+2. Build locally: `dotnet build Octo.ConstructionKit.sln --configuration DebugL` (DebugL restores the Octo packages at
+   `999.0.0` from the local `../nuget` folder, which must exist; see
+   [nuget-packages.md](nuget-packages.md#nuget-server-configuration)).
+3. Check the build output for validation errors.
+4. Bump the model version honestly and add the `CHANGELOG.md` entry of the model ([ck-language-2.md](ck-language-2.md)).
+5. Update the version in the table of `README.md`.
+6. Check the generated documentation in the build output.

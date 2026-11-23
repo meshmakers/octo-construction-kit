@@ -50,38 +50,33 @@ dotnet build Octo.ConstructionKit.sln --configuration Release -p:OctoVersion=X.Y
 ## Before you commit
 
 - The solution builds in `DebugL` without errors.
-- A change to a CK model (types, records, attributes, enums, associations) bumps the version in that model's
-  `ConstructionKit/ckModel.yaml` (`modelId: <Name>-<version>`) honestly, adds the entry to the
-  `CHANGELOG.md` next to it and updates the version in the table of `README.md` (the two demo models have no
-  changelog, and `Octo.Energy.Demo` carries no version); the gate is
-  `octo-ckc ValidateVersion` ([docs/ck-language-2.md](docs/ck-language-2.md)). Models that depend on it are rebuilt
+- A change to a CK model (types, records, attributes, enums, associations) bumps the version as the **Versions** rule
+  below says, adds the entry to the `CHANGELOG.md` next to it and updates the version in the table of `README.md` (the
+  two demo models have no changelog, and `Octo.Energy.Demo` carries no version). Models that depend on it are rebuilt
   ([docs/ck-dependencies.md](docs/ck-dependencies.md)).
 - A new publishable model, and a new blueprint, is added to the path lists of `azure-pipelines.yml`
   ([docs/ci-and-release.md](docs/ci-and-release.md)).
 - Run `Test-OctoAgentDocs` (octo-tools) after changing `AGENTS.md` or `docs/`; `Test-OctoAgentDocs -Fix` regenerates
   the routing table. The shim file for Claude Code is generated: edit this file, not the shim.
-- This repository is public: no internal hostnames, customer or tenant names, or secrets in `AGENTS.md`, `docs/`, CK
-  YAML or blueprints.
 
 ## Rules
 
 These rules bind new and changed models.
 
-- **Every new attribute declares its ownership.** An attribute in a model's `attributes/*.yaml` without `ownership`
-  fails the build (`OCTO-CK001`; the deprecated `isRuntimeState` also satisfies it). `Octo.Energy.Demo` is not
-  in the solution and is not linted. Ask: could an operator or user type this value in the product? Yes: `TenantOwned`
-  (`Secret` for a credential). A service, pipeline or adapter writes it: `RuntimeState`. The product ships and corrects
-  it: `SeedOwned`. Changing an existing attribute to a preserving marker is a behaviour change and needs a minor bump
+- **This repository is public.** No internal hostnames, customer or tenant names, or secrets in the documentation, CK
+  YAML, blueprints and in new or changed code comments and test names; no work item ids there either (work item ids
+  stay in `CHANGELOG.md` entries). Remove an existing one when you touch its line.
+- **A new or changed attribute declares its `ownership`; the build fails with `OCTO-CK001`.** Ask: could an operator or
+  user type this value in the product? Yes: `TenantOwned` (`Secret` for a credential). A service, pipeline or adapter
+  writes it: `RuntimeState`. The product ships and corrects it: `SeedOwned`. Changing an existing attribute to a
+  preserving marker is a behaviour change and needs a minor bump
   ([docs/ck-ownership-markers.md](docs/ck-ownership-markers.md)).
-- **Versions are honest.** The model version in `ckModel.yaml` follows the semver rules that `octo-ckc ValidateVersion`
-  checks; raising a dependency floor above what the newest published release resolved is a Major
-  ([docs/ck-language-2.md](docs/ck-language-2.md)).
+- **Versions are honest.** A change to a CK model bumps the version in its `ConstructionKit/ckModel.yaml`
+  (`modelId: <Name>-<version>`) by the semver rules that `octo-ckc ValidateVersion` checks; raising a dependency floor
+  above the newest published resolution is a Major. A merge to `main` publishes to the private catalog and a version is
+  never replaced, so a published version is never edited
+  ([docs/ck-language-2.md](docs/ck-language-2.md), [docs/ci-and-release.md](docs/ci-and-release.md)).
 - **CK language 2 models declare `derivable`.** A new type or record in a `ckLanguage: 2` model states `derivable`
   explicitly, `Any` where subtypes in other models are expected ([docs/ck-language-2.md](docs/ck-language-2.md)).
 - **Dependencies are declared twice.** A new dependency on a model of this repository in `ckModel.yaml` is mirrored as a
   `<ProjectReference>` to that project, directly or transitively ([docs/ck-dependencies.md](docs/ck-dependencies.md)).
-- **A model that implements an interface of another model references its C# package.** Add the `<PackageReference>` of
-  the declaring model unless it comes in transitively ([docs/ck-language-2.md](docs/ck-language-2.md)).
-- **New and changed YAML files carry the `$schema` directive** and use `${this}/` for types of the same model.
-  Known exceptions: `Octo.Energy.Demo` (older one-element-per-file format) and the `migrations/*.yaml` files, which use
-  full ids ([docs/ck-models.md](docs/ck-models.md)).

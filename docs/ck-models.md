@@ -36,6 +36,12 @@ types:
   derivedFromCkTypeId: ${this}/TreeNode
 ```
 
+## YAML conventions
+
+Every CK YAML file starts with the `$schema` directive of its kind (`construction-kit-meta`, `construction-kit-elements`,
+and so on), as the examples above show. Types of the same model are referenced as `${this}/<Name>`. Exceptions:
+`Octo.Energy.Demo` (older one-element-per-file format) and the `migrations/*.yaml` files use full ids instead of `${this}/`.
+
 ## Build-Time Processing
 
 During `dotnet build`, MSBuild tasks:

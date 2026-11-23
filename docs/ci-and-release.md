@@ -12,6 +12,10 @@ applies_to: azure-pipelines.yml
 **Triggers**:
 - Branches: `dev/*`, `test/*`, `main`
 - Tags do not trigger the pipeline; paths of `*.md`, `docs/` and `.claude/` are excluded
+- `r*` tag runs are queued by the release train (`release-services-train`, `azure-pipelines.yml` lines 33-36), not by a
+  tag trigger
+- Pipeline resource: a run of `octo-common-services-CI` on `main` starts this pipeline (`azure-pipelines.yml` lines
+  50-56)
 
 **Stages**:
 
@@ -35,7 +39,9 @@ applies_to: azure-pipelines.yml
      `constructionKitLibraryPaths` (handle-artifacts): Basic, Basic.Accounting, Basic.Energy, EnergyCommunity,
      Environment, Industry.{Basic,Logistics,Energy,Fluid,Maintenance,Manufacturing}, OctoSdkDemo. `Octo.Energy.Demo` is a sample and is not published. A new publishable CK must be added to both lists.
    - `validate-and-publish-blueprints`: blueprint version gate and publish to the catalogs of the channel
-     (an already published version is a no-op; the lane blueprint step below stays for `test/*`)
+     (on `main` and `r*` tags an already published version is a no-op; on `test/*` the same step publishes the
+     blueprints by opt-in, `publishBlueprintsToLaneCatalog`, with `-f` to `octo-catalog-dev` and replaces an existing
+     version there)
    - Processes artifacts
    - Pushes NuGet packages
 

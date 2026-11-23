@@ -10,7 +10,7 @@ applies_to: src/ConstructionKits/*/*.csproj, src/ConstructionKits/**/Constructio
 CK model dependencies are declared in each `ckModel.yaml` **and** mirrored as a `<ProjectReference>` to the
 sibling model project in the `.csproj`. The ProjectReference is mandatory: without it a parallel build can
 compile a model before its sibling dependency has been published to the local catalog
-(`../.octo/local-catalog`), so the dependency resolves against a stale catalog entry (AB#5661 race class).
+(`../.octo/local-catalog`), so the dependency resolves against a stale catalog entry (a build race).
 A transitive reference is sufficient (e.g. Industry.Energy → Industry.Basic → Basic).
 
 - **Octo.Sdk.Packages.Basic.Accounting** → depends on Octo.Sdk.Packages.Basic

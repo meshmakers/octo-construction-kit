@@ -1,13 +1,15 @@
 # AGENTS.md
 
-Instructions for coding agents in this repository. Detail lives in `docs/`; read the matching file before changing the code it covers.
+Instructions for coding agents in this repository. Detail lives in `docs/`; read the matching file before changing the
+code it covers.
 
 ## What this repo is
 
-**Octo Construction Kit** is a .NET-based project that implements a modular data mesh SDK framework. The project provides multiple industry-specific "Construction Kits" (CKs) that define domain models using YAML-based schema definitions.
-
-**Repository**: https://github.com/meshmakers/octo-construction-kit  
-**License**: MIT (Copyright 2025 meshmakers.io)
+The Octo Construction Kit repository holds the public Construction Kit (CK) libraries of the OctoMesh platform: domain
+models written as YAML (types, records, attributes, enums, associations), one project per model under
+`src/ConstructionKits`. Each project builds a NuGet package, and the pipeline validates and publishes the compiled model
+to the CK catalogs. Installable blueprints that seed tenants with these models live in `src/Blueprints`. The repository
+is MIT licensed.
 
 ## Read before you change
 
@@ -23,120 +25,60 @@ Instructions for coding agents in this repository. Detail lives in `docs/`; read
 | `Octo.ConstructionKit.sln`, `Directory.Build.props`, `src/ConstructionKits/*/*.csproj` | `docs/repository-structure.md` |
 <!-- <<< end generated: routing -->
 
+Background, no path trigger: [docs/adding-and-modifying-cks.md](docs/adding-and-modifying-cks.md) (new CK project,
+changing an existing one) and [docs/troubleshooting.md](docs/troubleshooting.md) (common build and validation failures).
+
 ## Build & test
 
-### Build
-
 ```bash
-# Build the entire solution
-dotnet build Octo.ConstructionKit.sln --configuration Release
-
-# Build with custom NuGet server
-dotnet build Octo.ConstructionKit.sln \
-  --configuration Release \
-  /p:OctoNugetPrivateServer=https://your-nuget-server
-```
-
-### Test
-
-```bash
-# Run all tests (excluding system tests)
-dotnet test Octo.ConstructionKit.sln \
-  --configuration Release \
-  --filter "FullyQualifiedName!~SystemTests"
-
-# Run specific test project
-dotnet test tests/Octo.Sdk.Packages.Industry.Basic.old.SystemTests \
-  --configuration Release
-```
-
-### Package
-
-```bash
-# Build and generate NuGet packages automatically
-# (GeneratePackageOnBuild is set to true in csproj files)
-dotnet build Octo.ConstructionKit.sln --configuration Release
-
-# Packages are output to: bin/Release/net10.0/*.nupkg
-```
-
-### Build Configurations
-
-The solution supports three build configurations:
-
-- **Debug** - Development build with optimizations disabled
-- **Release** - Production build with optimizations
-- **DebugL** - Local debug build (uses 999.0.0 version, includes local nuget folder)
-
-```bash
-# Build with DebugL configuration
+# Local build against the DebugL package chain (version 999.0.0, packages from ../nuget)
 dotnet build Octo.ConstructionKit.sln --configuration DebugL
+
+# Build against a private feed (version range 0.1.*)
+dotnet build Octo.ConstructionKit.sln --configuration Release /p:OctoNugetPrivateServer=<feed-url>
+
+# Build against a published release (version must be passed)
+dotnet build Octo.ConstructionKit.sln --configuration Release -p:OctoVersion=X.Y.Z
 ```
 
-### Version Management
-
-Version is controlled via:
-
-1. **OctoVersion** property in `Directory.Build.props`
-   - `999.0.0` (DebugL), `0.1.*` (NuGet private server); otherwise it comes only from the pipeline
-     (AB#6297) — a Release build without `-p:OctoVersion=X.Y.Z` fails fast with `OCTO0001`
-   
-2. **Configuration-based override**:
-   - DebugL: Forces `999.0.0`
-   
-3. **Azure Pipelines**: Dynamically sets version during CI/CD
-
-### Test Framework
-
-- **Framework**: xUnit
-- **Mocking**: FakeItEasy
-- **Code Coverage**: coverlet.collector
-- **Configuration**: `appsettings.test.json` per test project
-
-### Running Tests
-
-```bash
-# All unit tests
-dotnet test Octo.ConstructionKit.sln --configuration Release
-
-# Specific test project
-dotnet test tests/Octo.Sdk.Packages.Industry.Basic.old.SystemTests --configuration Release
-
-# With coverage
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
-```
-
-### Test Project Structure
-
-System tests are in `tests/Octo.Sdk.Packages.Industry.Basic.old.SystemTests/`:
-- Uses `appsettings.test.json` for test configuration
-- References corresponding SDK package
-- Tests actual SDK client integration
+- The version comes only from the pipeline: a Debug or Release build with neither `-p:OctoVersion` nor a private feed
+  fails fast with MSBuild error `OCTO0001`. `GeneratePackageOnBuild` is on, so a build also packs the NuGet packages.
+- There are no test projects in this repository. The build is the check: schema validation, source generation and the
+  ownership marker lint (`OCTO-CK001`) run in it. Check a version bump with the gate command in
+  [docs/ck-language-2.md](docs/ck-language-2.md).
 
 ## Before you commit
 
+- The solution builds in `DebugL` without errors.
+- A change to a CK model (types, records, attributes, enums, associations) bumps the version in that model's
+  `ConstructionKit/ckModel.yaml` (`modelId: <Name>-<version>`) honestly, adds the entry to the
+  `CHANGELOG.md` next to it and updates the version in the table of `README.md`; the gate is
+  `octo-ckc ValidateVersion` ([docs/ck-language-2.md](docs/ck-language-2.md)). Models that depend on it are rebuilt
+  ([docs/ck-dependencies.md](docs/ck-dependencies.md)).
+- A new publishable model is added to both path lists of `azure-pipelines.yml`
+  ([docs/ci-and-release.md](docs/ci-and-release.md)).
+- Run `Test-OctoAgentDocs` (octo-tools) after changing `AGENTS.md` or `docs/`; `Test-OctoAgentDocs -Fix` regenerates
+  the routing table. The shim file for Claude Code is generated: edit this file, not the shim.
+- This repository is public: no internal hostnames, customer or tenant names, or secrets in `AGENTS.md`, `docs/`, CK
+  YAML or blueprints.
+
 ## Rules
 
-### C# Code Style
+These rules bind new and changed models.
 
-From `Directory.Build.props`:
-
-- **Language Version**: Latest major (C# 12+)
-- **Nullable Reference Types**: Enabled (`<Nullable>enable</Nullable>`)
-- **Implicit Usings**: Enabled (global imports)
-- **Warnings as Errors**: Enabled
-- **Target Framework**: .NET 9.0
-
-### YAML Model Definitions
-
-- Use JSON schema validation: `$schema` directive required
-- Follow naming conventions from existing models
-- Use relative references with `${this}/` for same-package types
-- Document complex types with descriptions
-
-### Project Organization
-
-- Separate concerns: types, records, attributes, enums, associations
-- Clear naming: `typeName.yaml`, `enumName.yaml`, etc.
-- One definition per file (generally)
-- Use consistent YAML formatting
+- **Every new attribute declares its ownership.** An attribute in a model's `attributes/*.yaml` without `ownership`
+  fails the build (`OCTO-CK001`). Ask: could an operator or user type this value in the product? Yes: `TenantOwned`
+  (`Secret` for a credential). A service, pipeline or adapter writes it: `RuntimeState`. The product ships and corrects
+  it: `SeedOwned`. Changing an existing attribute to a preserving marker is a behaviour change and needs a minor bump
+  ([docs/ck-ownership-markers.md](docs/ck-ownership-markers.md)).
+- **Versions are honest.** The model version in `ckModel.yaml` follows the semver rules that `octo-ckc ValidateVersion`
+  checks; raising a dependency floor above what the newest published release resolved is a Major
+  ([docs/ck-language-2.md](docs/ck-language-2.md)).
+- **CK language 2 models declare `derivable`.** A new type or record in a `ckLanguage: 2` model states `derivable`
+  explicitly, `Any` where subtypes in other models are expected ([docs/ck-language-2.md](docs/ck-language-2.md)).
+- **Dependencies are declared twice.** A model dependency in `ckModel.yaml` is mirrored as a `<ProjectReference>` to the
+  sibling project ([docs/ck-dependencies.md](docs/ck-dependencies.md)).
+- **A model that implements an interface of another model references its C# package.** Add the `<PackageReference>` of
+  the declaring model unless it comes in transitively ([docs/ck-language-2.md](docs/ck-language-2.md)).
+- **YAML files carry the `$schema` directive** and use `${this}/` for types of the same model
+  ([docs/ck-models.md](docs/ck-models.md)).

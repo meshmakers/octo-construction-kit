@@ -9,10 +9,11 @@ applies_to: Directory.Build.props, src/ConstructionKits/*/*.csproj
 
 Each Construction Kit generates a NuGet package on build:
 
-- **Location**: `bin/<configuration>/net10.0/*.nupkg`
+- **Location**: `bin/<Configuration>/*.nupkg`
 - **Assembly Name**: `Meshmakers.Octo.Sdk.Packages.XXX`
-- **Metadata** (`Directory.Build.props`): icon `meshmakers64.png`, the `LICENSE` file, project URL
-  https://www.meshmakers.io, the repository URL and the tags "Octo data mesh iot"
+- **Metadata** (`Directory.Build.props`): icon name `meshmakers64.png`, the `LICENSE` file, project URL
+  https://www.meshmakers.io, the repository URL and the tags "Octo data mesh iot". Each csproj packs the icon and the
+  `LICENSE` file itself; `Directory.Build.props` packs the root `README.md` into every package.
 
 ## NuGet Server Configuration
 

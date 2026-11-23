@@ -19,6 +19,8 @@ A transitive reference is sufficient (e.g. Industry.Energy → Industry.Basic �
 - **Octo.Sdk.Packages.Industry.Energy** → depends on Octo.Sdk.Packages.Industry.Basic
 - **Octo.Sdk.Packages.Industry.Fluid** → depends on Octo.Sdk.Packages.Industry.Basic
 - **Octo.Sdk.Packages.Industry.Logistics** → depends on Octo.Sdk.Packages.Basic
-- **Octo.Sdk.Packages.Environment** → depends on Octo.Sdk.Packages.Basic
+- **Octo.Sdk.Packages.Industry.Maintenance** → depends on Octo.Sdk.Packages.Industry.Basic
+- **Octo.Sdk.Packages.Industry.Manufacturing** → depends on Octo.Sdk.Packages.Industry.Basic
+- **Octo.Sdk.Packages.Environment** → depends on Octo.Sdk.Packages.Basic (the project references Industry.Basic, which reaches Basic)
+- **Octo.Sdk.Demo** and **Octo.Energy.Demo** → depend on Octo.Sdk.Packages.Basic
 - **Octo.Sdk.Packages.EnergyCommunity** → depends on Octo.Sdk.Packages.Basic and Octo.Sdk.Packages.Basic.Energy (since EnergyCommunity 4.0.0: community/billing types subtype the Basic.Energy metering-point types; metering data is stream data, no EnergyQuantity entity anymore)
-- **Octo.Sdk.Packages.Monitoring** → depends only on the System model (no other CK package). Config entities for operational watchdog pipelines; consumed by the `src/Blueprints/Monitoring.CkHealth` blueprint (CK model health monitoring with Teams alerting).

@@ -13,7 +13,7 @@ applies_to: Octo.ConstructionKit.sln, Directory.Build.props, src/ConstructionKit
 - **CI/CD**: Azure Pipelines (`azure-pipelines.yml`)
 - **Package Management**: NuGet (private server option available)
 
-**Key Dependencies** (referenced by every CK project, version `$(OctoCoreLibVersion)`):
+**Key Dependencies** (referenced by the CK projects, version `$(OctoCoreLibVersion)`; `SourceGeneration` is missing in Basic.Accounting, Basic.Energy and EnergyCommunity):
 - `Meshmakers.Octo.Runtime.Contracts` - Runtime contracts for the SDK
 - `Meshmakers.Octo.ConstructionKit.SourceGeneration` - Code generation analyzer
 - `Meshmakers.Octo.ConstructionKit.MsBuildTasks` - Build-time task execution
@@ -36,7 +36,7 @@ octo-construction-kit/
 │   │   ├── Octo.Sdk.Packages.Environment/
 │   │   ├── Octo.Sdk.Packages.EnergyCommunity/
 │   │   ├── Octo.Sdk.Demo/                      # Demo/example CK
-│   │   └── Octo.Energy.Demo/                   # Energy-specific demo
+│   │   └── Octo.Energy.Demo/                   # Energy-specific demo (not in the solution)
 │   ├── Blueprints/                             # Installable blueprints (Locations.Austria, Samples.*)
 │   ├── Samples/                                # GraphQL sample
 │   └── grafana/                                # Monitoring/visualization
@@ -57,7 +57,8 @@ Each Construction Kit follows this internal structure:
 Octo.Sdk.Packages.XXX/
 ├── ConstructionKit/                    # Model definitions
 │   ├── ckModel.yaml                   # CK metadata and dependencies
-│   ├── CHANGELOG.md                   # Release notes per model version
+│   ├── CHANGELOG.md                   # Release notes per model version (not in the two demo models)
+│   ├── migrations/                    # Only where a model ships migrations (Industry.Basic, Industry.Logistics)
 │   ├── types/                         # Type definitions
 │   ├── records/                       # Record/struct definitions
 │   ├── attributes/                    # Attribute specifications

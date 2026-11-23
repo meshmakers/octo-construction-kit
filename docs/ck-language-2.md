@@ -1,6 +1,6 @@
 ---
 description: Rules for models on ckLanguage 2: derivable Any, System interface implementation, dependency floors and the ValidateVersion gate.
-applies_to: src/ConstructionKits/**/ConstructionKit/ckModel.yaml, src/ConstructionKits/**/ConstructionKit/types/**
+applies_to: src/ConstructionKits/**/ConstructionKit/ckModel.yaml, src/ConstructionKits/**/ConstructionKit/{types,records}/**
 ---
 
 # CK language 2, derivable and interface implementation
@@ -37,17 +37,17 @@ package that implements an interface of another CK model:
 - The project needs a `<PackageReference>` to the C# package of the model that declares the interface
   (for System: `Meshmakers.Octo.ConstructionKit.Models.System`, `Version="$(OctoCoreLibVersion)"`). Without it the
   source generator reports `OM1006` ("no referenced assembly declares the generated interface"); with two
-  assemblies that declare it, `OM1006` asks to keep only one reference. It needs the matching engine generator fix.
+  assemblies that declare it, `OM1006` asks to keep only one reference.
 - The generated class lists foreign interfaces fully qualified
   (`global::Meshmakers.Octo.ConstructionKit.Models.System.Generated.System.v2.IRtNamed`) and implements their
   members explicitly; interfaces of the own model keep the short name `IRt<Name>`.
 - Dependents need no change: they inherit the interfaces through their base types and get the System package
   transitively through Basic's package (Industry.Maintenance 2.7.0 additionally implements one itself, see below).
   Their Basic floor stays 2.4 (Industry.Energy, Fluid, Maintenance and Manufacturing depend on Industry.Basic with
-  floor 2.5). The releases published before this migration all resolved
-  Basic 2.5.0, so raising their floor to 2.7 in this migration would have been a Major (row D1); the ckLanguage 2
-  releases resolve Basic 2.7.0, so after they are published a Basic floor of 2.7 no longer exceeds
-  the newest published resolution and is a Minor. Because the floors stay unchanged in this migration, the inherited
+  floor 2.5). The releases published before the ckLanguage 2 move all resolved
+  Basic 2.5.0, so raising their floor to 2.7 then would have been a Major (row D1); the ckLanguage 2
+  releases resolve Basic 2.7.0, so a Basic floor of 2.7 no longer exceeds
+  the newest published resolution and is a Minor. Because the floors stayed unchanged in those releases, the inherited
   interfaces appear on a tenant only once it runs Basic 2.7.0 or later.
 - **Floors of the dependents.** Before a package raises its System or Basic floor (for example to
   implement an interface itself), check which versions its newest *published* release resolved

@@ -29,6 +29,18 @@ background: true
        <ItemGroup>
            <ConstructionKitFolder Visible="false" Include="$(MSBuildProjectDirectory)\ConstructionKit"/>
        </ItemGroup>
+       <ItemGroup>
+           <None Include="..\..\..\assets\meshmakers64.png">
+               <Pack>True</Pack>
+               <PackagePath />
+               <Link>meshmakers64.png</Link>
+           </None>
+           <None Include="..\..\..\LICENSE">
+               <Pack>True</Pack>
+               <PackagePath />
+               <Link>LICENSE</Link>
+           </None>
+       </ItemGroup>
    </Project>
    ```
    A `<ProjectReference>` to every sibling model project it depends on is added as well
@@ -43,15 +55,15 @@ background: true
    modelId: YourModelId-1.0.0
    ckLanguage: 2
    dependencies:
-     - DependentCK-[version,)
+     - DependentCK-[1.0,2.0)
    ```
 
-5. Define the model elements in YAML files.
+5. Define the model elements in YAML files and add the model's `CHANGELOG.md` next to `ckModel.yaml`.
 
 6. Add the project to `Octo.ConstructionKit.sln`.
 
 7. Add the model to `constructionKitPaths` (dependency order) and `constructionKitLibraryPaths` in
-   `azure-pipelines.yml` ([ci-and-release.md](ci-and-release.md)) and to the table in `README.md`.
+   `azure-pipelines.yml` ([ci-and-release.md](ci-and-release.md)) and to the table in `README.md`. A new blueprint goes into both `blueprintPaths` lists of the same file.
 
 ## Modifying Existing CKs
 
@@ -59,4 +71,5 @@ background: true
 2. Build locally: `dotnet build Octo.ConstructionKit.sln --configuration DebugL`.
 3. Check the build output for validation errors.
 4. Bump the model version honestly and add the `CHANGELOG.md` entry of the model ([ck-language-2.md](ck-language-2.md)).
-5. Check the generated documentation in the build output.
+5. Update the version in the table of `README.md`.
+6. Check the generated documentation in the build output.

@@ -35,8 +35,7 @@ octo-construction-kit/
 │   │   ├── Octo.Sdk.Packages.Industry.Manufacturing/
 │   │   ├── Octo.Sdk.Packages.Environment/
 │   │   ├── Octo.Sdk.Packages.EnergyCommunity/
-│   │   ├── Octo.Sdk.Demo/                      # Demo/example CK
-│   │   └── Octo.Energy.Demo/                   # Energy-specific demo (not in the solution)
+│   │   └── Octo.Sdk.Demo/                      # Demo/example CK
 │   ├── Blueprints/                             # Installable blueprints (Locations.Austria, Samples.*)
 │   ├── Samples/                                # GraphQL sample
 │   └── grafana/                                # Monitoring/visualization
@@ -57,7 +56,7 @@ Each Construction Kit follows this internal structure:
 Octo.Sdk.Packages.XXX/
 ├── ConstructionKit/                    # Model definitions
 │   ├── ckModel.yaml                   # CK metadata and dependencies
-│   ├── CHANGELOG.md                   # Release notes per model version (not in the two demo models)
+│   ├── CHANGELOG.md                   # Release notes per model version (not in the demo model)
 │   ├── migrations/                    # Only where a model ships migrations (Industry.Basic, Industry.Logistics)
 │   ├── types/                         # Type definitions
 │   ├── records/                       # Record/struct definitions

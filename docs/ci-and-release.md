@@ -37,7 +37,7 @@ applies_to: azure-pipelines.yml
      catalogs of the channel (main → private, r* tags → private and public; never replaces a version)
      The 12 published models are listed identically in `constructionKitPaths` (this step, dependency order) and in
      `constructionKitLibraryPaths` (handle-artifacts): Basic, Basic.Accounting, Basic.Energy, EnergyCommunity,
-     Environment, Industry.{Basic,Logistics,Energy,Fluid,Maintenance,Manufacturing}, OctoSdkDemo. `Octo.Energy.Demo` is a sample and is not published. A new publishable CK must be added to both lists.
+     Environment, Industry.{Basic,Logistics,Energy,Fluid,Maintenance,Manufacturing}, OctoSdkDemo. A new publishable CK must be added to both lists.
    - `validate-and-publish-blueprints`: blueprint version gate and publish to the catalogs of the channel
      (on `main` and `r*` tags an already published version is a no-op; on `test/*` the same step publishes the
      blueprints by opt-in, `publishBlueprintsToLaneCatalog`, with `-f` to `octo-catalog-dev` and replaces an existing

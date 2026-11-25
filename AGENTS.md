@@ -52,7 +52,7 @@ dotnet build Octo.ConstructionKit.sln --configuration Release -p:OctoVersion=X.Y
 - The solution builds in `DebugL` without errors.
 - A change to a CK model (types, records, attributes, enums, associations) bumps the version as the **Versions** rule
   below says, adds the entry to the `CHANGELOG.md` next to it and updates the version in the table of `README.md` (the
-  two demo models have no changelog, and `Octo.Energy.Demo` carries no version). Models that depend on it are rebuilt
+  demo model `Octo.Sdk.Demo` has no changelog). Models that depend on it are rebuilt
   ([docs/ck-dependencies.md](docs/ck-dependencies.md)).
 - A new publishable model, and a new blueprint, is added to the path lists of `azure-pipelines.yml`
   ([docs/ci-and-release.md](docs/ci-and-release.md)).
@@ -67,13 +67,13 @@ These rules bind new and changed models.
   YAML, blueprints and in new or changed code comments and test names; no work item ids there either (work item ids
   stay in `CHANGELOG.md` entries). Remove an existing one when you touch its line.
 - **A new or changed attribute declares its `ownership`; the build fails with `OCTO-CK001`.** The lint also accepts
-  the deprecated `isRuntimeState` and skips `Octo.Energy.Demo`, so declare `ownership` yourself in both cases. Ask:
+  the deprecated `isRuntimeState`, so declare `ownership` yourself. Ask:
   could an operator or user type this value in the product? Yes: `TenantOwned` (`Secret` for a credential). A service,
   pipeline or adapter writes it: `RuntimeState`. The product ships and corrects it: `SeedOwned`. Changing an existing
   attribute to a preserving marker is a behaviour change and needs a minor bump
   ([docs/ck-ownership-markers.md](docs/ck-ownership-markers.md)).
 - **Versions are honest.** A change to a CK model bumps the version in its `ConstructionKit/ckModel.yaml`
-  (`modelId: <Name>-<version>`; `Octo.Energy.Demo` carries no version) by the semver rules that
+  (`modelId: <Name>-<version>`) by the semver rules that
   `octo-ckc ValidateVersion` checks; raising a dependency floor above the newest published resolution is a Major. A
   merge to `main` publishes to the private catalog and a version is never replaced, so a published version is never
   edited ([docs/ck-language-2.md](docs/ck-language-2.md), [docs/ci-and-release.md](docs/ci-and-release.md)).

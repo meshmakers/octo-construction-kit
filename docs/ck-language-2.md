@@ -12,7 +12,7 @@ other domain package followed (Industry.Basic 2.7.0, Industry.Energy 3.7.0, Indu
 Industry.Logistics 3.5.0, Industry.Maintenance 2.6.0 (2.7.0, below), Industry.Manufacturing 2.7.0, Environment 3.7.0,
 Basic.Energy 2.1.0, Basic.Accounting 1.14.0, EnergyCommunity 5.1.0), each with `derivable: Any` on every type and record
 and with all dependency ranges and floors unchanged (gate: MINOR per package, the only bump-relevant row is the language change).
-The demo packages (`OctoSdkDemo`, `OctoEnergyDemo`) stay on ckLanguage 1. Every compiled ckLanguage 2 model carries
+The demo package `OctoSdkDemo` stays on ckLanguage 1. Every compiled ckLanguage 2 model carries
 `minEngineVersion` 3.5.1 and is published under `ck-models/v3/` only.
 
 **Rule for every model that moves to ckLanguage 2:** in ckLanguage 2 an omitted `derivable` means `Model` (only the

@@ -31,6 +31,9 @@ types:
   - id: ${this}/Reference
     name: Reference
     isOptional: true
+  - id: ${this}/PartnerReportedAt
+    name: PartnerReportedAt
+    isOptional: true
   - id: ${this}/TransferState
     name: TransferState
     isOptional: true

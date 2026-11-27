@@ -4,19 +4,29 @@ attributes:
   valueType: String
   ownership: SeedOwned
   description: "Reference of the report the instance was read from, as the reporting system names it (e.g. the name of a shipment or stock report file)."
-# TransferState, TransferredAt and TransferError are handover state: the consumer of an instance writes
-# them while the instance stays in the tenant. A blueprint re-apply or ImportRt -r keeps them and ExportRt
-# leaves them out; a GraphQL update changes them.
+# PartnerReportedAt is data of the partner's report, like Reference and ShipmentDate: the adapter that imports the
+# report writes it once with the instance. It is SeedOwned, so ExportRt carries it; as RuntimeState an export would
+# leave it out.
+- id: PartnerReportedAt
+  valueType: DateTime
+  ownership: SeedOwned
+  description: "Point in time (UTC) the fulfilment partner reported the shipment or the stock level; the adapter that imports the report determines it and converts it to UTC. For a shipment it is the time of the report, not of the dispatch (ShipmentDate). Not set when the source or the adapter that wrote the instance provides none."
+# TransferState, TransferredAt and TransferError are handover state. The system that writes an instance sets its first
+# TransferState; after that the consumer writes the three while the instance stays in the tenant. An adapter that
+# rejects an instance it imports, for example a shipment, writes Rejected, TransferredAt and TransferError itself.
+# Where a system outside the tenant carries out the handover instead of the consumer, the system that wrote the
+# instance records the outcome. A blueprint re-apply or ImportRt -r keeps them and ExportRt leaves them out; a
+# GraphQL update changes them.
 - id: TransferState
   valueType: Enum
   valueCkEnumId: ${this}/TransferState
   ownership: RuntimeState
-  description: "Handover state of the instance towards the system that consumes it; the consumer writes it."
+  description: "Handover state of the instance towards the system that consumes it. The system that writes the instance sets the first state and the consumer the outcome of the handover; an adapter that rejects an instance it imports, for example a shipment, writes Rejected itself (TransferError states the reason). Where a system outside the tenant carries out the handover instead of the consumer, the system that wrote the instance records the outcome."
 - id: TransferredAt
   valueType: DateTime
   ownership: RuntimeState
-  description: "Point in time the consumer recorded the current TransferState."
+  description: "Point in time the system that set the current TransferState recorded it, for example the time the adapter that imported a shipment rejected it. Not set when that system records no time."
 - id: TransferError
   valueType: String
   ownership: RuntimeState
-  description: "Reason the consumer rejected the instance because of a data error (TransferState Rejected); names the affected record and field, never the field content."
+  description: "Reason the instance was rejected because of a data error (TransferState Rejected), by the consumer or by the adapter that imported it (for example a shipment); names the affected record and field, never the field content."

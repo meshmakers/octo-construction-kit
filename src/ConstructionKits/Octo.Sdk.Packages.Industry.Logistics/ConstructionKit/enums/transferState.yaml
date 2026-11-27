@@ -1,7 +1,7 @@
 $schema: https://schemas.meshmakers.cloud/construction-kit-elements.schema.json
 enums:
 - enumId: TransferState
-  description: "Handover state of an instance towards the system that consumes it (an order towards the fulfilment partner, a shipment or stock line back towards its source). The consumer writes it."
+  description: "Handover state of an instance towards the system that consumes it (an order towards the fulfilment partner, a shipment or stock line back towards its source). The system that writes the instance sets the first state and the consumer the outcome of the handover; an adapter that rejects an instance it imports, for example a shipment, writes Rejected itself. Where a system outside the tenant carries out the handover instead of the consumer, the system that wrote the instance records the outcome."
   useFlags: false
   isExtensible: true
   values:
@@ -16,7 +16,7 @@ enums:
     description: "The consumer transferred it."
   - key: 3
     name: Rejected
-    description: "The consumer rejected it because of a data error; TransferError states the reason."
+    description: "The consumer, or the adapter that imported the instance (for example a shipment), rejected it because of a data error; TransferError states the reason."
   - key: 4
     name: Checked
     description: "The consumer checked it in check mode, without external effect."

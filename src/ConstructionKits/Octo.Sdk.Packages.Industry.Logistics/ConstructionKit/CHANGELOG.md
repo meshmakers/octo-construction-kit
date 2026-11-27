@@ -1,5 +1,25 @@
 # Changelog
 
+## 3.7.0 - 2026-11-27
+
+_Required bump level: minor._
+
+**Partner report time (AB#9492, Feature AB#9474):** new attribute `PartnerReportedAt` (DateTime) records the point in time the fulfilment partner reported a shipment or a stock level, so a consumer can work with that time (for example the deadline of a shipment whose booking is deferred, or which shipments were reported before a stock report) without knowing the files or entry names of the adapter that imported the report. One attribute definition, used as an optional attribute on `Shipment` and on `Stock`. It is `ownership: SeedOwned` like `Reference` and `ShipmentDate`: it is data of the partner's report, written once with the instance, and `ExportRt` carries it (as `RuntimeState` an export would leave it out). The descriptions of the handover state (`TransferState`, `TransferredAt`, `TransferError`, the enum `TransferState` and its value `Rejected`) now name who writes it: the system that writes an instance sets the first state, the consumer the outcome of the handover, and an adapter that rejects an instance it imports, for example a shipment, writes `Rejected`, `TransferredAt` and `TransferError` itself; where a system outside the tenant carries out the handover instead of the consumer, the system that wrote the instance records the outcome. No enum key or name changes; dependency ranges and floors are unchanged.
+
+### Added
+
+- Type attribute 'Shipment-1/PartnerReportedAt' added (Industry.Logistics/PartnerReportedAt-1) _(minor — purely additive optional attribute)_
+- Type attribute 'Stock-1/PartnerReportedAt' added (Industry.Logistics/PartnerReportedAt-1) _(minor — purely additive optional attribute)_
+- Attribute 'PartnerReportedAt-1' added _(minor — purely additive element)_
+
+### Changed
+
+- Attribute 'TransferError-1': description changed 'Reason the consumer rejected the instance because of a data error (TransferState Rejected); names the affected record and field, never the field content.' → 'Reason the instance was rejected because of a data error (TransferState Rejected), by the consumer or by the adapter that imported it (for example a shipment); names the affected record and field, never the field content.' _(patch — purely documentational change)_
+- Attribute 'TransferState-1': description changed 'Handover state of the instance towards the system that consumes it; the consumer writes it.' → 'Handover state of the instance towards the system that consumes it. The system that writes the instance sets the first state and the consumer the outcome of the handover; an adapter that rejects an instance it imports, for example a shipment, writes Rejected itself (TransferError states the reason). Where a system outside the tenant carries out the handover instead of the consumer, the system that wrote the instance records the outcome.' _(patch — purely documentational change)_
+- Attribute 'TransferredAt-1': description changed 'Point in time the consumer recorded the current TransferState.' → 'Point in time the system that set the current TransferState recorded it, for example the time the adapter that imported a shipment rejected it. Not set when that system records no time.' _(patch — purely documentational change)_
+- Enum 'TransferState-1': description changed 'Handover state of an instance towards the system that consumes it (an order towards the fulfilment partner, a shipment or stock line back towards its source). The consumer writes it.' → 'Handover state of an instance towards the system that consumes it (an order towards the fulfilment partner, a shipment or stock line back towards its source). The system that writes the instance sets the first state and the consumer the outcome of the handover; an adapter that rejects an instance it imports, for example a shipment, writes Rejected itself. Where a system outside the tenant carries out the handover instead of the consumer, the system that wrote the instance records the outcome.' _(patch — purely documentational change)_
+- Enum value 'TransferState-1/Rejected': description changed 'The consumer rejected it because of a data error; TransferError states the reason.' → 'The consumer, or the adapter that imported the instance (for example a shipment), rejected it because of a data error; TransferError states the reason.' _(patch — purely documentational change)_
+
 ## 3.6.0 - 2026-11-16
 
 _Required bump level: minor._
